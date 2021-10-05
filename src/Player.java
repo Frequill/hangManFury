@@ -19,7 +19,7 @@ public class Player {
         output.println(usersInput);
         output.close();
         File usernames = new File("src/username.txt");
-        // Make while loop that prints every line from placeholder.txt to username.txt
+        // Create a while loop that forward every line of text in "placeholder.txt" to username.txt
         while (){
 
         }
