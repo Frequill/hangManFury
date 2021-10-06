@@ -4,18 +4,19 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class Player {
+class Player {
     public static void main(String[] args) throws Exception {
-        readUsername();
+
+
     }
 
 
 
     /**
-    This method stores different usernames in a textile for later use
+     This method stores different usernames in a textile for later use
      */
 
-    static void writeUsername() throws Exception {
+    static String writeUsername() throws Exception {
         Scanner in = new Scanner(System.in);
         System.out.println("Please enter your username: (NO SPACES!!)");
         String usersInput = in.nextLine();
@@ -35,10 +36,12 @@ public class Player {
         readPlaceholder.close();
 
         for(int i = 0; i < newUsername.length(); i++){
-        PrintWriter out = new PrintWriter ("src/username.txt");
-        out.println( usernameSaver + " " + newUsername );
-        out.close();
+            PrintWriter out = new PrintWriter ("src/username.txt");
+            out.println( usernameSaver + " " + newUsername );
+            out.close();
         }
+        //This selects the new user immediately
+        return usersInput;
     }
 
 
@@ -64,8 +67,8 @@ public class Player {
             }
             readUsernames.close();
 
-            for (int i = 0; i < aList.size(); i++){
-                System.out.println(aList.get(i));
+            for (int i = 1; i < aList.size(); i++){
+                System.out.println(i +") "+ aList.get(i));
             }
 
             int pickUser = input.nextInt();
