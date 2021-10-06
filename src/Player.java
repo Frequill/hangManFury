@@ -1,5 +1,6 @@
 import java.io.File;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -16,7 +17,7 @@ public class Player {
 
     static void writeUsername() throws Exception {
         Scanner in = new Scanner(System.in);
-        System.out.println("Please enter your username: ");
+        System.out.println("Please enter your username: (NO SPACES!!)");
         String usersInput = in.nextLine();
 
         File toPlaceholder = new File("src/thePlaceholder.txt");
@@ -35,7 +36,7 @@ public class Player {
 
         for(int i = 0; i < newUsername.length(); i++){
         PrintWriter out = new PrintWriter ("src/username.txt");
-        out.println( newUsername  +  " " + usernameSaver );
+        out.println( usernameSaver + " " + newUsername );
         out.close();
         }
     }
@@ -46,7 +47,7 @@ public class Player {
      This method shows the user all available usernames and allows user to select an already existing username
      */
 
-    static void readUsername() throws Exception {
+    static String readUsername() throws Exception {
         System.out.println("Please choose: \n1) Existing users\n2) Create new user");
         Scanner input = new Scanner(System.in);
         int userChoice = input.nextInt();
@@ -55,11 +56,24 @@ public class Player {
             File usernames = new File("src/username.txt");
             Scanner readUsernames = new Scanner(usernames);
 
+            //This arraylist saves all usernames from username.txt
+            ArrayList<String> aList = new ArrayList<>();
 
-            while (readUsernames.hasNextLine()){
-                String linePrinter = readUsernames.nextLine();
-                System.out.println("\n" + linePrinter);
+            while (readUsernames.hasNext()){
+                aList.add(readUsernames.next());
             }
+            readUsernames.close();
+
+            for (int i = 0; i < aList.size(); i++){
+                System.out.println(aList.get(i));
+            }
+
+            int pickUser = input.nextInt();
+            String user = aList.get(pickUser);
+            System.out.println("You have selected the " + user + " profile!");
+
+            return user;
+
         }
         else if (userChoice == 2){
             writeUsername();
@@ -68,6 +82,7 @@ public class Player {
             System.out.println("VAFAN GÖRRU???");
         }
 
+        return null;
 
     }
 }
