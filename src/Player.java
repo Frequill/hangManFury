@@ -13,27 +13,36 @@ public class Player {
     }
     static void writeUsername() throws Exception {
         Scanner in = new Scanner(System.in);
-        String usersInput= in.nextLine();
+        System.out.println("Please enter username ");
+        String usersInput = in.nextLine();
         File toPlaceholder = new File("src/thePlaceholder.txt");
         PrintWriter output = new PrintWriter(toPlaceholder);
         output.println(usersInput);
         output.close();
         File usernames = new File("src/username.txt");
 
-        // Create a while loop that forward every line of text in "placeholder.txt" to username.txt
-
         Scanner scanner = new Scanner(new File("src/thePlaceholder.txt"));
+        Scanner scanner2 = new Scanner(new File("src/username.txt"));
+        String words = scanner.nextLine();
+        String toUsername = scanner2.nextLine();
 
-        while (scanner.hasNextLine()){
-            String words = scanner.nextLine();
-            System.out.println(words);
-        }
+       // while (scanner.hasNextLine()){
+
+         //   System.out.println(words);
+      //  }
         scanner.close();
+
+        for(int i = 0; i < words.length(); i++){
+        PrintWriter out = new PrintWriter ("src/username.txt");
+        out.println(  words  +  " " + toUsername );
+        out.close();
+        }
+
+
     }
 
-
     static void readUsername() throws Exception {
-        System.out.println("Welcome!\nPlease input username\nOr select existing user: ");
+        System.out.println("Welcome!\nPlease add new user\nOr select existing user: ");
         File usernames = new File("src/username.txt");
         Scanner readUsernames = new Scanner(usernames);
 
