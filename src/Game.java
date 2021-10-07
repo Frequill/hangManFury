@@ -4,18 +4,23 @@ import java.util.Scanner;
 
 public class Game {
     public static void main(String[] args) {
+
         boolean victory = false;
         int playerLife = 10;
+        String placeholder = "Newton".toLowerCase();
+        ArrayList<Character> allLetters = new ArrayList<>(placeholder.length());
         Scanner in = new Scanner(System.in);
-        while(victory == false||playerLife == 0){
+        System.out.println("Welcome to Hang Man guess the word that is " + placeholder.length() + " letters long!");
 
-            String placeholder = "Newton".toLowerCase();
-            System.out.println("Welcome to Hang Man guess the word that is " + placeholder.length() + " letters long!");
+
+        for(int i=0; i < placeholder.length();i++) {
+            System.out.print("_");
+            allLetters.add(i, '_');
+        }
+
+        while(victory == false||playerLife == 0){
             boolean guessCorrect = false;
             boolean guessIncorrect = false;
-            for(int i=0; i < placeholder.length();i++){
-                System.out.print("_ ");
-            }
 
             String letter = in.next().toLowerCase();
 
@@ -32,16 +37,12 @@ public class Game {
             }
 
             if(guessCorrect) {
-
-                /* String result = */ correctLetter(letter, placeholder);
-              // System.out.println(result);
+                correctLetter(letter, placeholder, allLetters);
             }
             else if(guessIncorrect){
                 lifeTaker(playerLife);
             }
-
-            victory = true; // placeholder
-
+          //  victory = true; // placeholder
         }
     }
 
@@ -51,17 +52,18 @@ public class Game {
         return playerLife;
     }
 
-    public static void correctLetter (String letter, String placeholder){
+    public static void correctLetter (String letter, String placeholder, ArrayList<Character> allLetters){
         char guess = letter.charAt(0);
-        for(int i=0; i < placeholder.length(); i++){
-            if(guess == placeholder.charAt(i)) {
-                System.out.print(guess + " ");
-            }
-            else if(guess != placeholder.charAt(i)) {
-                System.out.print("_ ");
+
+        for(int i=0; i < placeholder.length(); i++) {
+            if (guess == placeholder.charAt(i)) {
+                allLetters.set(i, guess);
+                //System.out.print(allLetters.get(i));
             }
         }
-
+            for(int j = 0; j < allLetters.size(); j++) {
+                System.out.print(allLetters.get(j));
+            }
+        }
     }
 
-}
