@@ -15,15 +15,32 @@ public class Game {
 
             for(int i = 0; i<placeholder.length(); i++){
                 if(letter.charAt(0) == placeholder.charAt(i)){
-                    System.out.println("Correct");
+                    System.out.println(letter);
+                }
+                else if(letter.charAt(0) != placeholder.charAt(i)){
+                    System.out.println("_");
+                    lifeTaker(playerLife);
+                    victory = true;
                 }
                 else{
-                    System.out.println("Incorrect");
+                    System.out.println("BLÖ");
+
                 }
             }
-            victory = true; // placeholder
+            //victory = true; // placeholder
 
         }
+    }
+
+
+
+
+
+
+    public static int lifeTaker(int playerLife){
+        playerLife = playerLife -1;
+        System.out.println("Incorrect guess! You have lost one life!" + "\n(" + playerLife + " lives remaining)");
+        return playerLife;
     }
 
 }
