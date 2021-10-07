@@ -11,8 +11,8 @@ public class Game {
 
             String placeholder = "Newton".toLowerCase();
             System.out.println("Welcome to Hang Man guess the word that is " + placeholder.length() + " letters long!");
-           boolean guessCorrect = false;
-           boolean guessIncorrect = false;
+            boolean guessCorrect = false;
+            boolean guessIncorrect = false;
             for(int i=0; i < placeholder.length();i++){
                 System.out.print("_ ");
             }
@@ -28,13 +28,13 @@ public class Game {
                 }
                 else{
                     System.out.println("BLÖ");
-
                 }
             }
+
             if(guessCorrect) {
 
-                String result = correctLetter(letter, placeholder);
-                System.out.println(result);
+                /* String result = */ correctLetter(letter, placeholder);
+              // System.out.println(result);
             }
             else if(guessIncorrect){
                 lifeTaker(playerLife);
@@ -50,21 +50,17 @@ public class Game {
         System.out.println("Incorrect guess! You have lost one life!" + "\n(" + playerLife + " lives remaining)");
         return playerLife;
     }
-    public static String correctLetter (String letter, String placeholder){
 
-        for(int i=0; i < placeholder.length();i++){
-            if(letter.charAt(i) == placeholder.charAt(i)){
-
-                return letter;
+    public static void correctLetter (String letter, String placeholder){
+        char guess = letter.charAt(0);
+        for(int i=0; i < placeholder.length(); i++){
+            if(guess == placeholder.charAt(i)) {
+                System.out.print(guess + " ");
             }
-            else if(letter.charAt(i) != placeholder.charAt(i)){
-                return letter;
+            else if(guess != placeholder.charAt(i)) {
+                System.out.print("_ ");
             }
-
         }
-
-
-        return null;
 
     }
 
