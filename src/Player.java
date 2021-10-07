@@ -79,7 +79,8 @@ class Player {
 
         }
         else if (userChoice == 2){
-            writeUsername();
+            String username = writeUsername();
+            return username;
         }
         else {
             System.out.println("VAFAN GÖRRU???");
