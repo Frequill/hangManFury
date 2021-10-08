@@ -18,7 +18,7 @@ public class Game {
             allLetters.add(i, '_');
         }
 
-        while(victory == false||playerLife == 0){
+        while(victory == false&&playerLife > 0){
             boolean guessCorrect = false;
             boolean guessIncorrect = false;
 
@@ -40,20 +40,17 @@ public class Game {
                 correctLetter(letter, placeholder, allLetters);
             }
             else if(guessIncorrect){
-                lifeTaker(playerLife);
+                //lifeTaker(playerLife);
+                playerLife = playerLife - 1;
+                System.out.println("Incorrect guess! You have lost one life!" + "\n(" + playerLife + " lives remaining)");
             }
           //  victory = true; // placeholder
         }
     }
 
-    public static int lifeTaker(int playerLife){
-        playerLife = playerLife -1;
-        System.out.println("Incorrect guess! You have lost one life!" + "\n(" + playerLife + " lives remaining)");
-        return playerLife;
-    }
-
     public static void correctLetter (String letter, String placeholder, ArrayList<Character> allLetters){
         char guess = letter.charAt(0);
+
 
         for(int i=0; i < placeholder.length(); i++) {
             if (guess == placeholder.charAt(i)) {
@@ -64,6 +61,15 @@ public class Game {
             for(int j = 0; j < allLetters.size(); j++) {
                 System.out.print(allLetters.get(j));
             }
+            char underscore = '_';
+        for(int i = 0; i < placeholder.length(); i++)
+            if (allLetters.get(i) == underscore){
+
+            }else{
+                System.out.println("Victory ");
+                System.exit(0);
+            }
+
         }
     }
 
