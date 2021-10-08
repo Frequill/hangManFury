@@ -10,7 +10,8 @@ public class Game {
         String placeholder = "Newton".toLowerCase();
         ArrayList<Character> allLetters = new ArrayList<>(placeholder.length());
         Scanner in = new Scanner(System.in);
-        System.out.println("Welcome to Hang Man guess the word that is " + placeholder.length() + " letters long!");
+        Player userName = new Player();
+        System.out.println("Welcome " +userName.userToGame() + " guess the word that is  " + placeholder.length() + " letters long!");
 
 
         for (int i = 0; i < placeholder.length(); i++) {

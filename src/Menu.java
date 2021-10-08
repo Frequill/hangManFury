@@ -14,10 +14,11 @@ class Menu{
             switch (choice) {
                 case 1:
                     user = Player.readUsername();
-                    System.out.println(user);
+                    showPlusUser(user);
 
                     break;
                 case 2:
+
                     if (user== null) {
                         System.out.println("Please select a user first!!!!!!!\n(Press Enter to return to menu)");
                         choiceInput.nextLine();
@@ -43,6 +44,14 @@ class Menu{
         System.out.println("2) Let's plays!");
         System.out.println("3) Exit game");
     }
+    static void showPlusUser(String user){
+        System.out.println("Selected profile: " + user);
+        System.out.println("Please choose:");
+        System.out.println("1) Change user:");
+        System.out.println("2) Let's play!");
+        System.out.println("3) Exit game");
+    }
+
     static void getString(){
 
     }
@@ -52,5 +61,6 @@ class Menu{
     static void getInt(){
 
     }
+
 
 }
