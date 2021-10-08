@@ -4,12 +4,12 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 class Player {
+
+
     public static void main(String[] args) throws Exception {
 
 
     }
-
-
 
     /**
      This method stores different usernames in a textile for later use

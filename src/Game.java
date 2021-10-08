@@ -3,7 +3,7 @@ import java.util.Locale;
 import java.util.Scanner;
 
 public class Game {
-    public static void main(String[] args) {
+    public static void hangMan() {
 
         boolean victory = false;
         int playerLife = 10;
