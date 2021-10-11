@@ -3,32 +3,31 @@ import java.util.Scanner;
 class Menu{
 
     public static void main(String[] args) throws Exception {
-        System.out.println("Welcome to Hang man!!");
+        System.out.println("********************\nWelcome to Hang man!\n********************");
         show();
         Scanner choiceInput = new Scanner(System.in);
 
         String user = null;
         boolean run = true;
+        int choice = 0;
 
         while (run) {
-            int choice = 1;
-
-            try {
-                choice = choiceInput.nextInt();
-            } catch (Exception e) {
-                System.out.println("Invalid input! Please enter a number between 1-3\n");
-                choiceInput.nextLine();
+            while(!choiceInput.hasNextInt()){
+                System.out.println("\nPlease input a number between 1 - 3:\n");
                 show();
+                choiceInput.next();
             }
+
+            choice = choiceInput.nextInt();
 
             if (choice == 1) {
                 user = Player.readUsername(user);
                 showPlusUser(user);
-                break;
             }
+
                 else if (choice == 2) {
                 if (user == null) {
-                    System.out.println("Please select a user first!!!!!!!\n(Press Enter to return to menu)");
+                    System.out.println("\nPlease select a user first!!!!!!!\n(Press Enter to return to menu)");
                     choiceInput.nextLine();
                     choiceInput.nextLine();
                     show();
@@ -42,16 +41,12 @@ class Menu{
                 run = false;
                 break;
             }
-                else if (choice < 1){
-                System.out.println("Please enter a number greater than 0...");
+                else {
+                System.out.println("\nPlease enter a *number* greater than 0 and lower than 4:\n");
                 show();
                }
-                else if (choice > 3){
-                System.out.println("Please enter a number lower than 3...");
-                show();
             }
         }
-    }
 
     static void show(){
         System.out.println("Please choose:");

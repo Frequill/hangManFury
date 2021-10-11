@@ -2,7 +2,7 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Game {
+ class Game {
     public static void hangMan(String user) {
 
 
