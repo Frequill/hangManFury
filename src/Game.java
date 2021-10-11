@@ -1,3 +1,4 @@
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -10,7 +11,7 @@ public class Game {
         String placeholder = "Newton".toLowerCase();
         ArrayList<Character> allLetters = new ArrayList<>(placeholder.length());
         Scanner in = new Scanner(System.in);
-
+        ArrayList<String> dumbGuesses = new ArrayList();
         Player userName = new Player();
 
         System.out.println("Welcome " + userName.getInstanceVarUsername(user) + " guess the word that is  " + placeholder.length() + " letters long!");
@@ -24,7 +25,7 @@ public class Game {
         while (victory == false && playerLife > 0) {
             boolean guessCorrect = false;
             boolean guessIncorrect = false;
-
+            System.out.println();
             String letter = in.next().toLowerCase();
 
             for (int i = 0; i < placeholder.length(); i++) {
@@ -42,6 +43,7 @@ public class Game {
             } else if (guessIncorrect) {
                 playerLife = playerLife - 1;
                 System.out.println("Incorrect guess! You have lost one life!" + "\n(" + playerLife + " lives remaining)");
+                incorrectLetterCollector(letter, dumbGuesses);
             }
             if (playerLife == 0){
                 System.out.print( "\nYou have been defeated! (Scrub)");
@@ -68,6 +70,15 @@ public class Game {
             System.out.println("\n\nCongratulations "+userName.getInstanceVarUsername(user) +". You are victorious! :)");
             System.exit(0);
         }
+    }
+    public static ArrayList<String> incorrectLetterCollector(String letter, ArrayList<String> dumbGuesses){
+
+        dumbGuesses.add(letter);
+        System.out.println("\nPreviously guessed letters: ");
+        for(int i = 0; i < dumbGuesses.size(); i++){
+            System.out.print(dumbGuesses.get(i) +" ");
+        }
+        return dumbGuesses;
     }
 }
 

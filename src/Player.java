@@ -50,7 +50,7 @@ class Player {
     /**
      This method shows the user all available usernames and allows user to select an already existing username
      */
-//Fixa det här era dumma jävlar. Men gör inte på Johannas vis. Antingen returnera user till game eller skriv om userName metoden.
+
     public static String readUsername(String user) throws Exception {
         System.out.println("Please choose: \n1) Existing users\n2) Create new user");
         Scanner input = new Scanner(System.in);
