@@ -23,33 +23,39 @@ import java.util.Scanner;
         }
 
         while (victory == false && playerLife > 0) {
-            boolean guessCorrect = false;
-            boolean guessIncorrect = false;
-            System.out.println();
-            String letter = in.next().toLowerCase();
 
-            for (int i = 0; i < placeholder.length(); i++) {
-                if (letter.charAt(0) == placeholder.charAt(i)) {
-                    guessCorrect = true;
-                } else if (letter.charAt(0) != placeholder.charAt(i)) {
-                    guessIncorrect = true;
-                } else {
-                    System.out.println("BLÖ");
+                boolean guessCorrect = false;
+                boolean guessIncorrect = false;
+                System.out.println();
+                String letter = in.next().toLowerCase();
+
+                for (int i = 0; i < placeholder.length(); i++) {
+                    if (letter.charAt(0) == placeholder.charAt(i)) {
+                        guessCorrect = true;
+                    } else if (letter.charAt(0) != placeholder.charAt(i)) {
+                        guessIncorrect = true;
+                    } else {
+                        System.out.println("BLÖ");
+                    }
+                }
+
+                if (guessCorrect) {
+                    correctLetter(letter, placeholder, allLetters, userName, user);
+                } else if (guessIncorrect) {
+                    if (dumbGuesses.contains(letter)) {
+                        System.out.println("The letter " + letter + " has already been guessed!\nPlease choose another letter: ");
+                    } else {
+                        playerLife = playerLife - 1;
+                        System.out.println("Incorrect guess! You have lost one life!" + "\n(" + playerLife + " lives remaining)");
+                        incorrectLetterCollector(letter, dumbGuesses);
+                    }
+                }
+                if (playerLife == 0) {
+                    System.out.print("\nYou have been defeated! (Scrub)");
                 }
             }
-
-            if (guessCorrect) {
-                correctLetter(letter, placeholder, allLetters, userName, user);
-            } else if (guessIncorrect) {
-                playerLife = playerLife - 1;
-                System.out.println("Incorrect guess! You have lost one life!" + "\n(" + playerLife + " lives remaining)");
-                incorrectLetterCollector(letter, dumbGuesses);
-            }
-            if (playerLife == 0){
-                System.out.print( "\nYou have been defeated! (Scrub)");
-            }
         }
-    }
+
 
     public static void correctLetter(String letter, String placeholder, ArrayList<Character> allLetters ,Player userName, String user) {
         char guess = letter.charAt(0);
@@ -72,12 +78,11 @@ import java.util.Scanner;
         }
     }
     public static ArrayList<String> incorrectLetterCollector(String letter, ArrayList<String> dumbGuesses){
-
-        dumbGuesses.add(letter);
-        System.out.println("\nPreviously guessed letters: ");
-        for(int i = 0; i < dumbGuesses.size(); i++){
-            System.out.print(dumbGuesses.get(i) +" ");
-        }
+            dumbGuesses.add(letter);
+            System.out.println("\nPreviously guessed letters: ");
+            for (int i = 0; i < dumbGuesses.size(); i++) {
+                System.out.print(dumbGuesses.get(i) + " ");
+            }
         return dumbGuesses;
     }
 }
