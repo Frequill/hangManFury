@@ -1,17 +1,19 @@
 import java.util.ArrayList;
-import java.util.Locale;
 import java.util.Scanner;
 
 public class Game {
-    public static void hangMan() {
+    public static void hangMan(String user) {
+
 
         boolean victory = false;
         int playerLife = 10;
         String placeholder = "Newton".toLowerCase();
         ArrayList<Character> allLetters = new ArrayList<>(placeholder.length());
         Scanner in = new Scanner(System.in);
+
         Player userName = new Player();
-        System.out.println("Welcome " +userName.userToGame() + " guess the word that is  " + placeholder.length() + " letters long!");
+
+        System.out.println("Welcome " + userName.getInstanceVarUsername(user) + " guess the word that is  " + placeholder.length() + " letters long!");
 
 
         for (int i = 0; i < placeholder.length(); i++) {
@@ -36,18 +38,18 @@ public class Game {
             }
 
             if (guessCorrect) {
-                correctLetter(letter, placeholder, allLetters);
+                correctLetter(letter, placeholder, allLetters, userName, user);
             } else if (guessIncorrect) {
                 playerLife = playerLife - 1;
                 System.out.println("Incorrect guess! You have lost one life!" + "\n(" + playerLife + " lives remaining)");
             }
             if (playerLife == 0){
-                System.out.println("\nYou have been defeated! (Scrub)");
+                System.out.print( "\nYou have been defeated! (Scrub)");
             }
         }
     }
 
-    public static void correctLetter(String letter, String placeholder, ArrayList<Character> allLetters) {
+    public static void correctLetter(String letter, String placeholder, ArrayList<Character> allLetters ,Player userName, String user) {
         char guess = letter.charAt(0);
 
         for (int i = 0; i < placeholder.length(); i++) {
@@ -63,7 +65,7 @@ public class Game {
 
         }
         else{
-            System.out.println("\n\nVictory! :)");
+            System.out.println("\n\nCongratulations "+userName.getInstanceVarUsername(user) +". You are victorious! :)");
             System.exit(0);
         }
     }

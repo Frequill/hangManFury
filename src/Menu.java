@@ -13,12 +13,10 @@ class Menu{
             int choice = choiceInput.nextInt();
             switch (choice) {
                 case 1:
-                    user = Player.readUsername();
+                    user = Player.readUsername(user);
                     showPlusUser(user);
-
                     break;
                 case 2:
-
                     if (user== null) {
                         System.out.println("Please select a user first!!!!!!!\n(Press Enter to return to menu)");
                         choiceInput.nextLine();
@@ -26,13 +24,13 @@ class Menu{
                         show();
 
                     } else {
-                        Game.hangMan();
+                        Game.hangMan(user);
                     }
                     break;
                 case 3:
                     System.out.println("Thank you for playing!!");
                     run = false;
-
+                    break;
                 default:
                     System.out.println("NOOOOO!!");
             }

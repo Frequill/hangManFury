@@ -1,14 +1,20 @@
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 class Player {
-    String user;
 
+     private String instanceVarUsername;
+
+    public String getInstanceVarUsername(String user) {
+        instanceVarUsername = user;
+        return instanceVarUsername;
+    }
 
     /**
-     This method stores different usernames in a textile for later use
+     This method stores different usernames in a textfile for later use
      */
 
     static String writeUsername() throws Exception {
@@ -44,8 +50,8 @@ class Player {
     /**
      This method shows the user all available usernames and allows user to select an already existing username
      */
-//Fixa det här era dumma jävlar. Men gör inte på Johannas vis. Antingen retunera user till game eller skriv om userName metoden.
-    public String readUsername() throws Exception {
+//Fixa det här era dumma jävlar. Men gör inte på Johannas vis. Antingen returnera user till game eller skriv om userName metoden.
+    public static String readUsername(String user) throws Exception {
         System.out.println("Please choose: \n1) Existing users\n2) Create new user");
         Scanner input = new Scanner(System.in);
         int userChoice = input.nextInt();
@@ -80,12 +86,9 @@ class Player {
         else {
             System.out.println("VAFAN GÖRRU???");
         }
-
         return null;
-
     }
 
-    public String userToGame (){
-        return user;
-    }
+
 }
+
