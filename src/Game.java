@@ -1,10 +1,10 @@
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Locale;
 import java.util.Scanner;
 
-public class Game {
+class Game {
     public static void hangMan(String user) {
-
-
         boolean victory = false;
         int playerLife = 10;
         String placeholder = "Newton".toLowerCase();
@@ -15,53 +15,54 @@ public class Game {
 
         System.out.println("Welcome " + userName.getInstanceVarUsername(user) + " guess the word that is  " + placeholder.length() + " letters long!");
 
-
         for (int i = 0; i < placeholder.length(); i++) {
             System.out.print("_");
             allLetters.add(i, '_');
         }
 
         while (victory == false && playerLife > 0) {
-            try {
-                boolean guessCorrect = false;
-                boolean guessIncorrect = false;
-                String letter = getInput(in.next());
-                //String letter = in.next().toLowerCase();
+            boolean guessCorrect = false;
+            boolean guessIncorrect = false;
+            System.out.println();
+            String letter = null;
+            String trueLetter = null;
 
-
-                for (int i = 0; i < placeholder.length(); i++) {
-                    if (letter.charAt(0) == placeholder.charAt(i)) {
-                        guessCorrect = true;
-                    } else if (letter.charAt(0) != placeholder.charAt(i)) {
-                        guessIncorrect = true;
-                    } else {
-                        System.out.println("BLÖ");
-                    }
-                }
-
-                if (guessCorrect) {
-                    correctLetter(letter, placeholder, allLetters, userName, user);
-                    System.out.println("\n\nPreviously guessed incorrect letters: ");
-                    for (int i = 0; i < dumbGuesses.size(); i++) {
-                        System.out.print(dumbGuesses.get(i) + " ");
-                    }
-                } else if (guessIncorrect) {
-                    playerLife = playerLife - 1;
-                    System.out.println("Incorrect guess! You have lost one life!" + "\n(" + playerLife + " lives remaining)");
-                    incorrectLetterCollector(letter, dumbGuesses);
-                }
-                if (playerLife == 0) {
-                    System.out.print("\nYou have been defeated! (Scrub)");
+            boolean destroyDumbCharacters = true;
+            while (destroyDumbCharacters) {
+                letter = in.nextLine().toLowerCase(); // to lower case kills you capitalized letters *evil laugh*
+                trueLetter = characterDestroyer(letter);
+                if (trueLetter != null){
+                    destroyDumbCharacters = false;
                 }
             }
-            catch (Exception E) {
-                System.out.println("Please enter a letter! ");
+            for (int i = 0; i < placeholder.length(); i++) {
+                if (trueLetter.charAt(0) == placeholder.charAt(i)) {
+                    guessCorrect = true;
+                } else if (trueLetter.charAt(0) != placeholder.charAt(i)) {
+                    guessIncorrect = true;
+                } else {
+                    System.out.println("BLÖ");
+                }
+            }
+
+            if (guessCorrect) {
+                correctLetter(trueLetter, placeholder, allLetters, userName, user);
+            } else if (guessIncorrect) {
+                playerLife = playerLife - 1;
+                System.out.println("Incorrect guess! You have lost one life!" + "\n(" + playerLife + " lives remaining)");
+                incorrectLetterCollector(trueLetter, dumbGuesses);
+            }
+            if (playerLife == 0) {
+                System.out.print("\nYou have been defeated! (Scrub)");
             }
         }
     }
 
-    public static void correctLetter(String letter, String placeholder, ArrayList<Character> allLetters ,Player userName, String user) {
-        char guess = letter.charAt(0);
+    public static void correctLetter(String trueLetter, String placeholder, ArrayList<Character> allLetters, Player userName, String user) {
+        char guess = trueLetter.charAt(0);
+        if (Character.isDigit(guess)) {
+            System.out.println("Wrongful input!\nPlease enter a CHARACTER!");
+        }
 
         for (int i = 0; i < placeholder.length(); i++) {
             if (guess == placeholder.charAt(i)) {
@@ -72,38 +73,111 @@ public class Game {
         for (int j = 0; j < allLetters.size(); j++) {
             System.out.print(allLetters.get(j));
         }
-        if(allLetters.contains('_')){
+        if (allLetters.contains('_')) {
 
-        }
-        else{
-            System.out.println("\n\nCongratulations "+userName.getInstanceVarUsername(user) +". You are victorious! :)");
+        } else {
+            System.out.println("\n\nCongratulations " + userName.getInstanceVarUsername(user) + ". You are victorious! :)");
             System.exit(0);
         }
     }
-    public static ArrayList<Character> incorrectLetterCollector(String letter, ArrayList<Character> dumbGuesses){
-        char charLetter = letter.charAt(0);
-        dumbGuesses.add(charLetter);
-        System.out.println("\nPreviously guessed incorrect letters: ");
-        for(int i = 0; i < dumbGuesses.size(); i++){
-            System.out.print(dumbGuesses.get(i) +" ");
+
+    public static ArrayList<Character> incorrectLetterCollector(String trueLetter, ArrayList<Character> dumbGuesses) {
+
+        dumbGuesses.add(trueLetter.charAt(0));
+        System.out.println("\nPreviously guessed letters: ");
+        for (int i = 0; i < dumbGuesses.size(); i++) {
+            System.out.print(dumbGuesses.get(i) + " ");
         }
         return dumbGuesses;
     }
 
-    public static String getInput(String playerInput) {
-        Scanner scan = new Scanner(System.in);
-        boolean run = true;
+    /** This monstrosity of a method exists because I wish Java was easier...             //Julius Thomsen
+     */
 
-        while(run){
-            if(!scan.hasNextLine()) {
-                System.out.println("NOOOO try again!!!!!!");
-                scan.next(); }
+    public static String characterDestroyer(String letter) {
+        if (letter.contains("1")) {
+            System.out.println("You may not guess numbers!");
+        } else if (letter.contains("2")) {
+            System.out.println("You may not guess numbers!");
+        } else if (letter.contains("3")) {
+            System.out.println("You may not guess numbers!");
+        } else if (letter.contains("4")) {
+            System.out.println("You may not guess numbers!");
+        } else if (letter.contains("5")) {
+            System.out.println("You may not guess numbers!");
+        } else if (letter.contains("6")) {
+            System.out.println("You may not guess numbers!");
+        } else if (letter.contains("7")) {
+            System.out.println("You may not guess numbers!");
+        } else if (letter.contains("8")) {
+            System.out.println("You may not guess numbers!");
+        } else if (letter.contains("9")) {
+            System.out.println("You may not guess numbers!");
+        } else if (letter.contains("0")) {
+            System.out.println("You may not guess numbers!");
+        } else if (letter.contains("!")) {
+            System.out.println("You may not guess an exclamation point!");
+        } else if (letter.contains("?")) {
+            System.out.println("You may not guess a question mark!");
+        } else if (letter.contains("#")) {
+            System.out.println("You may not guess a non-alphabetical character!");
+        } else if (letter.contains("¤")) {
+            System.out.println("You may not guess a non-alphabetical character!");
+        } else if (letter.contains("%")) {
+            System.out.println("You may not guess a non-alphabetical character!");
+        } else if (letter.contains("&")) {
+            System.out.println("You may not guess a non-alphabetical character!");
+        } else if (letter.contains("/")) {
+            System.out.println("You may not guess a non-alphabetical character!");
+        } else if (letter.contains("(")) {
+            System.out.println("You may not guess a non-alphabetical character!");
+        } else if (letter.contains(")")) {
+            System.out.println("You may not guess a non-alphabetical character!");
+        } else if (letter.contains("=")) {
+            System.out.println("You may not guess a non-alphabetical character!");
+        } else if (letter.contains("*")) {
+            System.out.println("You may not guess a non-alphabetical character!");
+        } else if (letter.contains("-")) {
+            System.out.println("You may not guess a non-alphabetical character!");
+        } else if (letter.contains("+")) {
+            System.out.println("You may not guess a non-alphabetical character!");
+        } else if (letter.contains(",")) {
+            System.out.println("You may not guess a non-alphabetical character!");
+        } else if (letter.contains(".")) {
+            System.out.println("You may not guess a non-alphabetical character!");
+        } else if (letter.contains("<")) {
+            System.out.println("You may not guess a non-alphabetical character!");
+        } else if (letter.contains(">")) {
+            System.out.println("You may not guess a non-alphabetical character!");
+        } else if (letter.contains("|")) {
+            System.out.println("You may not guess a non-alphabetical character!");
+        } else if (letter.contains("@")) {
+            System.out.println("You may not guess a non-alphabetical character!");
+        } else if (letter.contains("£")) {
+            System.out.println("You may not guess a non-alphabetical character!");
+        } else if (letter.contains("$")) {
+            System.out.println("You may not guess a non-alphabetical character!");
+        } else if (letter.contains("€")) {
+            System.out.println("You may not guess a non-alphabetical character!");
+        } else if (letter.contains("{")) {
+            System.out.println("You may not guess a non-alphabetical character!");
+        } else if (letter.contains("[")) {
+            System.out.println("You may not guess a non-alphabetical character!");
+        } else if (letter.contains("]")) {
+            System.out.println("You may not guess a non-alphabetical character!");
+        } else if (letter.contains("}")) {
+            System.out.println("You may not guess a non-alphabetical character!");
+        } else if (letter.contains("´´")) {
+            System.out.println("You may not guess a non-alphabetical character!");
+        } else if (letter.contains("\"")) {
+            System.out.println("You may not guess a non-alphabetical character!");
+        }
         else {
-            playerInput = scan.nextLine();
-            run = false;
+            return letter;
         }
-        }
-    return playerInput;
+        return null;
     }
 }
+
+
 
