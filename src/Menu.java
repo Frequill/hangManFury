@@ -1,10 +1,48 @@
 import java.util.Scanner;
 
 class Menu{
+    public static Scanner in = new Scanner(System.in);
+    private int Int;
+    private char Alpha;
+    private String String;
+
+    public int getInt() {
+        boolean run = true;
+        while (run) {
+            while (!in.hasNextInt()) {
+                    System.out.println("Please input a number: ");
+                    in.next();
+            }
+            Int = in.nextInt();
+            run = false;
+        }
+        return Int;
+    }
+
+    public char getAlpha() {
+        Alpha = in.next().charAt(0);
+
+        return Alpha;
+    }
+
+    public String getString() {
+        String = in.nextLine();
+        return String;
+    }
+
+    /*public Menu(int anInt, char alpha, java.lang.String string) {
+        Int = anInt;
+        Alpha = alpha;
+        String = string;
+    }*/
 
     public static void main(String[] args) throws Exception {
         System.out.println("********************\nWelcome to Hang man!\n********************");
         show();
+
+
+
+
         Scanner choiceInput = new Scanner(System.in);
 
         String user = null;
@@ -61,16 +99,4 @@ class Menu{
         System.out.println("2) Let's play!");
         System.out.println("3) Exit game");
     }
-
-    static void getString(){
-
-    }
-    static void getAlpha(){
-
-    }
-    static void getInt(){
-
-    }
-
-
 }

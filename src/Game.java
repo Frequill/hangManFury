@@ -23,7 +23,7 @@ class Game {
         while (victory == false && playerLife > 0) {
             boolean guessCorrect = false;
             boolean guessIncorrect = false;
-            System.out.println();                                                      //JAG TROR ATT MARTIN KAN LÖSA DETTA...
+            System.out.println();
             String letter = null;
             String trueLetter = null;
 
