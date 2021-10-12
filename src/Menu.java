@@ -20,13 +20,34 @@ class Menu{
     }
 
     public char getAlpha() {
-        Alpha = in.next().charAt(0);
+        boolean run = true;
+
+        while(run){
+            while(!in.hasNextLine()) {
+                System.out.println("Skriv in en bokstav");
+                in.nextLine();
+            }
+
+            Alpha = in.next().charAt(0);
+
+            run = false;
+        }
+
+
 
         return Alpha;
     }
 
     public String getString() {
-        String = in.nextLine();
+        boolean run = true;
+        while(run){
+            while(!in.hasNextLine()){
+                System.out.println("Det där är ingen string ");
+                in.nextLine();
+            }
+            String = in.nextLine();
+            run = false;
+        }
         return String;
     }
 

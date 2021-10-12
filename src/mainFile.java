@@ -9,6 +9,15 @@ public class mainFile {
     public static void main(String[] args) {
 
         Menu menu = new Menu();
-        menu.getInt();
+        //menu.getInt();
+
+
+        //char result = menu.getAlpha();
+        //System.out.println(result);
+
+
+        String resultat =  menu.getString();
+        System.out.println(resultat);
+
     }
 }
