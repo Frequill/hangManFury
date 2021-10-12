@@ -99,31 +99,24 @@ class Game {
             System.out.println("You may not guess numbers!");
         } else if (letter.contains("2")) {
             System.out.println("You may not guess numbers!");
-
         } else if (letter.contains("3")) {
             System.out.println("You may not guess numbers!");
-
         } else if (letter.contains("4")) {
             System.out.println("You may not guess numbers!");
-
         } else if (letter.contains("5")) {
             System.out.println("You may not guess numbers!");
-
         } else if (letter.contains("6")) {
             System.out.println("You may not guess numbers!");
-
         } else if (letter.contains("7")) {
             System.out.println("You may not guess numbers!");
-
         } else if (letter.contains("8")) {
             System.out.println("You may not guess numbers!");
-
         } else if (letter.contains("9")) {
             System.out.println("You may not guess numbers!");
-
+        } else if (letter.contains("0")) {
+            System.out.println("You may not guess numbers!");
         } else if (letter.contains("!")) {
             System.out.println("You may not guess an exclamation point!");
-
         } else if (letter.contains("?")) {
             System.out.println("You may not guess a question mark!");
         } else if (letter.contains("#")) {

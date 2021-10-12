@@ -21,7 +21,6 @@ class Menu{
 
     public char getAlpha() {
         boolean run = true;
-
         while(run){
             while(!in.hasNextLine()) {
                 System.out.println("Skriv in en bokstav");
@@ -39,16 +38,19 @@ class Menu{
     }
 
     public String getString() {
-        boolean run = true;
-        while(run){
-            while(!in.hasNextLine()){
-                System.out.println("Det där är ingen string ");
-                in.nextLine();
-            }
-            String = in.nextLine();
-            run = false;
-        }
-        return String;
+       boolean run = true;
+       String input = null;
+       while(run){
+           try{
+               run = false;
+           }catch(Exception e){
+               System.out.println("Det här är fucking dåligt gjort");
+               in.nextLine();
+           }
+           input = in.nextLine();
+
+       }
+        return input ;
     }
 
     /*public Menu(int anInt, char alpha, java.lang.String string) {
