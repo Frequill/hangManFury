@@ -1,10 +1,71 @@
 import java.util.Scanner;
 
 class Menu{
+    public static Scanner in = new Scanner(System.in);
+    private int Int;
+    private char Alpha;
+    private String String;
+
+    public int getInt() {
+        boolean run = true;
+        while (run) {
+            while (!in.hasNextInt()) {
+                    System.out.println("Please input a number: ");
+                    in.next();
+            }
+            Int = in.nextInt();
+            run = false;
+        }
+        return Int;
+    }
+
+    public char getAlpha() {
+        boolean run = true;
+        while(run){
+            while(!in.hasNextLine()) {
+                System.out.println("Skriv in en bokstav");
+                in.nextLine();
+            }
+
+            Alpha = in.next().charAt(0);
+
+            run = false;
+        }
+
+
+
+        return Alpha;
+    }
+
+    public String getString() {
+       boolean run = true;
+       String input = null;
+       while(run){
+           try{
+               run = false;
+           }catch(Exception e){
+               System.out.println("Det här är fucking dåligt gjort");
+               in.nextLine();
+           }
+           input = in.nextLine();
+
+       }
+        return input ;
+    }
+
+    /*public Menu(int anInt, char alpha, java.lang.String string) {
+        Int = anInt;
+        Alpha = alpha;
+        String = string;
+    }*/
 
     public static void main(String[] args) throws Exception {
         System.out.println("********************\nWelcome to Hang man!\n********************");
         show();
+
+
+
+
         Scanner choiceInput = new Scanner(System.in);
 
         String user = null;
@@ -61,16 +122,4 @@ class Menu{
         System.out.println("2) Let's play!");
         System.out.println("3) Exit game");
     }
-
-    static void getString(){
-
-    }
-    static void getAlpha(){
-
-    }
-    static void getInt(){
-
-    }
-
-
 }
