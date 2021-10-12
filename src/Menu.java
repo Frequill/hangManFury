@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 class Menu{
@@ -5,6 +6,16 @@ class Menu{
     private int Int;
     private char Alpha;
     private String String;
+
+    public Menu(String name, int Int) {
+        System.out.println("********************");
+        System.out.println("Welcome to the " + name + " menu!");
+        System.out.println("********************");
+        ArrayList<String> menuOptions = new ArrayList<>(Int);
+        for (int i = 0; i < menuOptions.size(); i++){
+            menuOptions.get(i);
+        }
+    }
 
     public int getInt() {
         boolean run = true;
