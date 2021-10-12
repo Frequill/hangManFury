@@ -8,7 +8,9 @@ public class mainFile {
 
     public static void main(String[] args) {
 
-        Menu menu = new Menu();
+        Menu menu = new Menu("Johanna", 3);
+
+
         //menu.getInt();
 
 
@@ -16,8 +18,8 @@ public class mainFile {
         //System.out.println(result);
 
 
-        String resultat =  menu.getString();
-        System.out.println(resultat);
+        //String resultat =  menu.getString();
+        // System.out.println(resultat);
 
     }
 }
