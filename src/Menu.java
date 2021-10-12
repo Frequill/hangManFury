@@ -5,28 +5,37 @@ class Menu{
     public static Scanner in = new Scanner(System.in);
     private int Int;
     private char Alpha;
+    private ArrayList<String> menuOptions = new ArrayList<>();
     private String String;
 
     public Menu(String name, int Int) {
-        System.out.println("********************");
-        System.out.println("Welcome to the " + name + " menu!");
-        System.out.println("********************");
-        ArrayList<String> menuOptions = new ArrayList<>(Int);
+        this.Int = Int;
+        String greeting = ("Welcome to the " + name + " menu!");
+        String star = ("*");
+        for (int j = 0; j < greeting.length()+2; j++){
+            System.out.print(star);
+        }
+        System.out.println("\n" + greeting);
+        for (int j = 0; j < greeting.length()+2; j++){
+            System.out.print(star);
+        }
+        System.out.println();
         for (int i = 0; i < menuOptions.size(); i++){
-            menuOptions.get(i);
+            System.out.print(menuOptions.get(i));
         }
     }
 
-    public int getInt() {
-        boolean run = true;
-        while (run) {
-            while (!in.hasNextInt()) {
-                    System.out.println("Please input a number: ");
-                    in.next();
-            }
-            Int = in.nextInt();
-            run = false;
+    public void optionPrinter (ArrayList<String> menuOptions){
+        for (int i = 0; i < menuOptions.size(); i++){
+            System.out.println(menuOptions.get(i));
         }
+    }
+
+    public ArrayList<java.lang.String> getMenuOptions() {
+        return menuOptions;
+    }
+
+    public int getInt() {
         return Int;
     }
 

@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class mainFile {
 
     /*
@@ -8,8 +10,11 @@ public class mainFile {
 
     public static void main(String[] args) {
 
-        Menu menu = new Menu("Johanna", 3);
-
+        Menu menu = new Menu("edwinÄrEnLitenGullegrisMenViGillarHanÄndå",3);
+        menu.getMenuOptions().add(0, "1) Play");
+        menu.getMenuOptions().add(1, "2) Select user");
+        menu.getMenuOptions().add(2, "3) Exit game...");
+        menu.optionPrinter(menu.getMenuOptions());
 
         //menu.getInt();
 
