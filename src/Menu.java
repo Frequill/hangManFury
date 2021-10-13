@@ -1,10 +1,60 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 class Menu{
+    public static Scanner in = new Scanner(System.in);
+    private int Int;
+    private char Alpha;
+    private ArrayList<String> menuOptions = new ArrayList<>();
+    private String String;
 
-    public static void main(String[] args) throws Exception {
-        System.out.println("********************\nWelcome to Hang man!\n********************");
-        show();
+    public Menu(String name, int Int) {
+        this.Int = Int;
+        String greeting = ("Welcome to the " + name + " menu!");
+        String star = ("*");
+        for (int j = 0; j < greeting.length(); j++){
+            System.out.print(star);
+        }
+        System.out.println("\n" + greeting);
+        for (int j = 0; j < greeting.length(); j++){
+            System.out.print(star);
+        }
+        System.out.println();
+        for (int i = 0; i < menuOptions.size(); i++){
+            System.out.print(menuOptions.get(i));
+        }
+    }
+
+    public void optionPrinter (ArrayList<String> menuOptions){
+        for (int i = 0; i < menuOptions.size(); i++){
+            System.out.println(menuOptions.get(i));
+        }
+    }
+
+    public ArrayList<java.lang.String> getMenuOptions() {
+        return menuOptions;
+    }
+
+    public int getInt() {
+        return Int;
+    }
+    public char getAlpha() {
+
+        return Alpha;
+    }
+
+    public String getString() {
+        return String ;
+    }
+
+    /*public Menu(int anInt, char alpha, java.lang.String string) {
+        Int = anInt;
+        Alpha = alpha;
+        String = string;
+    }*/
+
+    public static void mainMenufunction() throws Exception {
+
         Scanner choiceInput = new Scanner(System.in);
 
         String user = null;
@@ -14,15 +64,15 @@ class Menu{
         while (run) {
             while(!choiceInput.hasNextInt()){
                 System.out.println("\nPlease input a number between 1 - 3:\n");
-                show();
+
                 choiceInput.next();
             }
 
             choice = choiceInput.nextInt();
 
             if (choice == 1) {
-                user = Player.readUsername(user);
-                showPlusUser(user);
+                user = userNameMenu(user);
+                secondMenu(user);
             }
 
                 else if (choice == 2) {
@@ -30,7 +80,7 @@ class Menu{
                     System.out.println("\nPlease select a user first!!!!!!!\n(Press Enter to return to menu)");
                     choiceInput.nextLine();
                     choiceInput.nextLine();
-                    show();
+                    firstMenu();
                 } else {
                     Game.hangMan(user);
                 }
@@ -48,29 +98,35 @@ class Menu{
             }
         }
 
-    static void show(){
-        System.out.println("Please choose:");
-        System.out.println("1) Select user");
-        System.out.println("2) Let's plays!");
-        System.out.println("3) Exit game");
+    static void show() throws Exception{
+    firstMenu();
+
     }
-    static void showPlusUser(String user){
+    public static void firstMenu() throws Exception {
+        Menu menu = new Menu("main",3);
+        menu.getMenuOptions().add(0, "1) Select user");
+        menu.getMenuOptions().add(1, "2) Play");
+        menu.getMenuOptions().add(2, "3) Exit game...");
+        menu.optionPrinter(menu.getMenuOptions());
+        Menu.mainMenufunction();
+    }
+    static String secondMenu(String user) throws Exception{
         System.out.println("Selected profile: " + user);
-        System.out.println("Please choose:");
-        System.out.println("1) Change user:");
-        System.out.println("2) Let's play!");
-        System.out.println("3) Exit game");
+        Menu menu = new Menu("main",3);
+        menu.getMenuOptions().add(0, "1) Change user: ");
+        menu.getMenuOptions().add(1, "2) Play");
+        menu.getMenuOptions().add(2, "3) Exit game...");
+        menu.optionPrinter(menu.getMenuOptions());
+        mainMenufunction();
+        return user;
     }
 
-    static void getString(){
-
+    public static String userNameMenu(String user) throws Exception{
+        Menu menu = new Menu("user",2);
+        menu.getMenuOptions().add(0, "1) Existing user");
+        menu.getMenuOptions().add(1, "2) New user ");
+        menu.optionPrinter(menu.getMenuOptions());
+        user = Player.readUsername(user);
+        return user;
     }
-    static void getAlpha(){
-
-    }
-    static void getInt(){
-
-    }
-
-
 }
