@@ -12,11 +12,11 @@ class Menu{
         this.Int = Int;
         String greeting = ("Welcome to the " + name + " menu!");
         String star = ("*");
-        for (int j = 0; j < greeting.length()+2; j++){
+        for (int j = 0; j < greeting.length(); j++){
             System.out.print(star);
         }
         System.out.println("\n" + greeting);
-        for (int j = 0; j < greeting.length()+2; j++){
+        for (int j = 0; j < greeting.length(); j++){
             System.out.print(star);
         }
         System.out.println();
@@ -38,39 +38,13 @@ class Menu{
     public int getInt() {
         return Int;
     }
-
     public char getAlpha() {
-        boolean run = true;
-        while(run){
-            while(!in.hasNextLine()) {
-                System.out.println("Skriv in en bokstav");
-                in.nextLine();
-            }
-
-            Alpha = in.next().charAt(0);
-
-            run = false;
-        }
-
-
 
         return Alpha;
     }
 
     public String getString() {
-       boolean run = true;
-       String input = null;
-       while(run){
-           try{
-               run = false;
-           }catch(Exception e){
-               System.out.println("Det här är fucking dåligt gjort");
-               in.nextLine();
-           }
-           input = in.nextLine();
-
-       }
-        return input ;
+        return String ;
     }
 
     /*public Menu(int anInt, char alpha, java.lang.String string) {
@@ -79,11 +53,7 @@ class Menu{
         String = string;
     }*/
 
-    public static void main(String[] args) throws Exception {
-        System.out.println("********************\nWelcome to Hang man!\n********************");
-        show();
-
-
+    public static void firstMenufunction() throws Exception {
 
 
         Scanner choiceInput = new Scanner(System.in);
@@ -95,7 +65,7 @@ class Menu{
         while (run) {
             while(!choiceInput.hasNextInt()){
                 System.out.println("\nPlease input a number between 1 - 3:\n");
-                show();
+
                 choiceInput.next();
             }
 
@@ -111,7 +81,7 @@ class Menu{
                     System.out.println("\nPlease select a user first!!!!!!!\n(Press Enter to return to menu)");
                     choiceInput.nextLine();
                     choiceInput.nextLine();
-                    show();
+                    firstMenu();
                 } else {
                     Game.hangMan(user);
                 }
@@ -129,11 +99,8 @@ class Menu{
             }
         }
 
-    static void show(){
-        System.out.println("Please choose:");
-        System.out.println("1) Select user");
-        System.out.println("2) Let's plays!");
-        System.out.println("3) Exit game");
+    static void show() throws Exception{
+    firstMenu();
     }
     static void showPlusUser(String user){
         System.out.println("Selected profile: " + user);
@@ -142,4 +109,13 @@ class Menu{
         System.out.println("2) Let's play!");
         System.out.println("3) Exit game");
     }
+    public static void firstMenu() throws Exception {
+        Menu menu = new Menu("main",3);
+        menu.getMenuOptions().add(0, "1) Select user");
+        menu.getMenuOptions().add(1, "2) Play");
+        menu.getMenuOptions().add(2, "3) Exit game...");
+        menu.optionPrinter(menu.getMenuOptions());
+        Menu.firstMenufunction();
+    }
+    public static void secondMenu() throws Exception{}
 }
