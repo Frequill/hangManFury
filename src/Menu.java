@@ -1,34 +1,76 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 class Menu{
     public static Scanner in = new Scanner(System.in);
     private int Int;
     private char Alpha;
+    private ArrayList<String> menuOptions = new ArrayList<>();
     private String String;
 
-    public int getInt() {
-        boolean run = true;
-        while (run) {
-            while (!in.hasNext) {
-                    System.out.println("Please input a number: ");
-                    in.next();
-            }
-            Int = in.nextInt();
-            run = false;
+    public Menu(String name, int Int) {
+        this.Int = Int;
+        String greeting = ("Welcome to the " + name + " menu!");
+        String star = ("*");
+        for (int j = 0; j < greeting.length()+2; j++){
+            System.out.print(star);
         }
+        System.out.println("\n" + greeting);
+        for (int j = 0; j < greeting.length()+2; j++){
+            System.out.print(star);
+        }
+        System.out.println();
+        for (int i = 0; i < menuOptions.size(); i++){
+            System.out.print(menuOptions.get(i));
+        }
+    }
+
+    public void optionPrinter (ArrayList<String> menuOptions){
+        for (int i = 0; i < menuOptions.size(); i++){
+            System.out.println(menuOptions.get(i));
+        }
+    }
+
+    public ArrayList<java.lang.String> getMenuOptions() {
+        return menuOptions;
+    }
+
+    public int getInt() {
         return Int;
     }
 
-
     public char getAlpha() {
-        Alpha = in.next().charAt(0);
+        boolean run = true;
+        while(run){
+            while(!in.hasNextLine()) {
+                System.out.println("Skriv in en bokstav");
+                in.nextLine();
+            }
+
+            Alpha = in.next().charAt(0);
+
+            run = false;
+        }
+
+
 
         return Alpha;
     }
 
     public String getString() {
-        String = in.nextLine();
-        return String;
+       boolean run = true;
+       String input = null;
+       while(run){
+           try{
+               run = false;
+           }catch(Exception e){
+               System.out.println("Det här är fucking dåligt gjort");
+               in.nextLine();
+           }
+           input = in.nextLine();
+
+       }
+        return input ;
     }
 
     /*public Menu(int anInt, char alpha, java.lang.String string) {
