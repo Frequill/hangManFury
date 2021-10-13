@@ -52,7 +52,6 @@ class Player {
      */
 
     public static String readUsername(String user) throws Exception {
-        System.out.println("\n*************\nPlease choose: \n1) Existing users\n2) Create new user");
         Scanner input = new Scanner(System.in);
         boolean run = true;
         int userChoice = 0;
@@ -83,7 +82,7 @@ class Player {
 
                 int pickUser = input.nextInt();
                 user = aList.get(pickUser);
-                System.out.println("You have selected the " + user + " profile!");
+                //System.out.println("You have selected the " + user + " profile!");
 
                 return user;
 

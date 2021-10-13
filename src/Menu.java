@@ -53,8 +53,7 @@ class Menu{
         String = string;
     }*/
 
-    public static void firstMenufunction() throws Exception {
-
+    public static void mainMenufunction() throws Exception {
 
         Scanner choiceInput = new Scanner(System.in);
 
@@ -72,8 +71,8 @@ class Menu{
             choice = choiceInput.nextInt();
 
             if (choice == 1) {
-                user = Player.readUsername(user);
-                showPlusUser(user);
+                user = userNameMenu(user);
+                secondMenu(user);
             }
 
                 else if (choice == 2) {
@@ -101,13 +100,7 @@ class Menu{
 
     static void show() throws Exception{
     firstMenu();
-    }
-    static void showPlusUser(String user){
-        System.out.println("Selected profile: " + user);
-        System.out.println("Please choose:");
-        System.out.println("1) Change user:");
-        System.out.println("2) Let's play!");
-        System.out.println("3) Exit game");
+
     }
     public static void firstMenu() throws Exception {
         Menu menu = new Menu("main",3);
@@ -115,7 +108,25 @@ class Menu{
         menu.getMenuOptions().add(1, "2) Play");
         menu.getMenuOptions().add(2, "3) Exit game...");
         menu.optionPrinter(menu.getMenuOptions());
-        Menu.firstMenufunction();
+        Menu.mainMenufunction();
     }
-    public static void secondMenu() throws Exception{}
+    static String secondMenu(String user) throws Exception{
+        System.out.println("Selected profile: " + user);
+        Menu menu = new Menu("main",3);
+        menu.getMenuOptions().add(0, "1) Change user: ");
+        menu.getMenuOptions().add(1, "2) Play");
+        menu.getMenuOptions().add(2, "3) Exit game...");
+        menu.optionPrinter(menu.getMenuOptions());
+        mainMenufunction();
+        return user;
+    }
+
+    public static String userNameMenu(String user) throws Exception{
+        Menu menu = new Menu("user",2);
+        menu.getMenuOptions().add(0, "1) Existing user");
+        menu.getMenuOptions().add(1, "2) New user ");
+        menu.optionPrinter(menu.getMenuOptions());
+        user = Player.readUsername(user);
+        return user;
+    }
 }
