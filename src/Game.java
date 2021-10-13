@@ -7,15 +7,18 @@ class Game {
     public static void hangMan(String user) {
         boolean victory = false;
         int playerLife = 10;
-        String placeholder = "Newton".toLowerCase();
-        ArrayList<Character> allLetters = new ArrayList<>(placeholder.length());
+        String [] wordHolder = {"Björn","Bill","Java","Edwin","Julius","Martin","Johanna","String","Int","Scanner","ArrayList","boolean","Character","Placeholder","null",
+                "monster","redbull","Newton","Katarina"};
+
+        String guessWord = wordHolder[wordGenerator(wordHolder)].toLowerCase();
+        ArrayList<Character> allLetters = new ArrayList<>(guessWord.length());
         Scanner in = new Scanner(System.in);
         ArrayList<Character> dumbGuesses = new ArrayList();
         Player userName = new Player();
 
-        System.out.println("Welcome " + userName.getInstanceVarUsername(user) + " guess the word that is  " + placeholder.length() + " letters long!");
+        System.out.println("Welcome " + userName.getInstanceVarUsername(user) + " guess the word that is  " + guessWord.length() + " letters long!");
 
-        for (int i = 0; i < placeholder.length(); i++) {
+        for (int i = 0; i < guessWord.length(); i++) {
             System.out.print("_");
             allLetters.add(i, '_');
         }
@@ -35,10 +38,10 @@ class Game {
                     destroyDumbCharacters = false;
                 }
             }
-            for (int i = 0; i < placeholder.length(); i++) {
-                if (trueLetter.charAt(0) == placeholder.charAt(i)) {
+            for (int i = 0; i < guessWord.length(); i++) {
+                if (trueLetter.charAt(0) == guessWord.charAt(i)) {
                     guessCorrect = true;
-                } else if (trueLetter.charAt(0) != placeholder.charAt(i)) {
+                } else if (trueLetter.charAt(0) != guessWord.charAt(i)) {
                     guessIncorrect = true;
                 } else {
                     System.out.println("BLÖ");
@@ -46,7 +49,7 @@ class Game {
             }
 
             if (guessCorrect) {
-                correctLetter(trueLetter, placeholder, allLetters, userName, user);
+                correctLetter(trueLetter, guessWord, allLetters, userName, user);
             } else if (guessIncorrect) {
                 playerLife = playerLife - 1;
                 System.out.println("Incorrect guess! You have lost one life!" + "\n(" + playerLife + " lives remaining)");
@@ -56,6 +59,10 @@ class Game {
                 System.out.print("\nYou have been defeated! (Scrub)");
             }
         }
+    }
+    public static int wordGenerator(String [] wordHolder){
+        int rand = (int) (Math.random()*wordHolder.length);
+        return rand;
     }
 
     public static void correctLetter(String trueLetter, String placeholder, ArrayList<Character> allLetters, Player userName, String user) {
@@ -77,7 +84,7 @@ class Game {
 
         } else {
             System.out.println("\n\nCongratulations " + userName.getInstanceVarUsername(user) + ". You are victorious! :)");
-            System.exit(0);
+           System.exit(0);
         }
     }
 

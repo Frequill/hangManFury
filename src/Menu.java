@@ -40,7 +40,7 @@ class Menu{
     public int getNum() {
         return num;
     }
-    public char getAlpha() {
+    public String getAlpha() {
         return Alpha;
     }
 
