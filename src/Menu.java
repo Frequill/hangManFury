@@ -9,7 +9,7 @@ class Menu{
     public int getInt() {
         boolean run = true;
         while (run) {
-            while (!in.hasNextInt()) {
+            while (!in.hasNext) {
                     System.out.println("Please input a number: ");
                     in.next();
             }
@@ -18,6 +18,7 @@ class Menu{
         }
         return Int;
     }
+
 
     public char getAlpha() {
         Alpha = in.next().charAt(0);
