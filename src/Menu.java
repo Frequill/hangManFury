@@ -5,7 +5,7 @@ class Menu{
     public static Scanner in = new Scanner(System.in);
 
     private int num;
-    private char Alpha;
+    private String Alpha;
     private String sentence;
     private ArrayList<String> menuOptions = new ArrayList<>();
 

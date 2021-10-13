@@ -171,6 +171,13 @@ class Game {
             System.out.println("You may not guess a non-alphabetical character!");
         } else if (letter.contains("\"")) {
             System.out.println("You may not guess a non-alphabetical character!");
+        } else if (letter.contains("\\")) {
+            System.out.println("You may not guess a non-alphabetical character!");
+        } else if (letter.contains("æ")) {
+            System.out.println("You may not guess a non-alphabetical character!");
+        } else if (letter.contains("ø")) {
+            System.out.println("Inga danskjävlar i spelet!");
+            System.exit(0);
         }
         else {
             return letter;
