@@ -59,14 +59,22 @@ class Game {
                 }
 
             if (guessCorrect) {
-                correctLetter(trueLetter, guessWord, allLetters, userName, user, victory);
+                correctLetter(trueLetter, guessWord, allLetters, userName, user);
+                 if (allLetters.contains('_')) {
+                 } else {
+            System.out.println("\n\nCongratulations " + userName.getInstanceVarUsername(user) + ". You are victorious! :)\n(Press Enter to return to main menu)");
+            in.nextLine();
+            victory = true;
+                 }
             } else if (guessIncorrect) {
                 playerLife = playerLife - 1;
                 System.out.println("Incorrect guess! You have lost one life!" + "\n(" + playerLife + " lives remaining)");
                 incorrectLetterCollector(trueLetter, dumbGuesses);
             }
             if (playerLife == 0) {
-                System.out.print("\nYou have been defeated! (Scrub)");
+                System.out.print("\nYou have been defeated! The word in question was: " + guessWord + "\n\nPress the Enter key to return to the main menu in shame");
+                in.nextLine();
+                victory = true;
             }
         }
     }
@@ -76,7 +84,7 @@ class Game {
     }
 
 
-    public static boolean correctLetter(String trueLetter, String placeholder, ArrayList<Character> allLetters, Player userName, String user, boolean victory) throws Exception {
+    public static void correctLetter(String trueLetter, String placeholder, ArrayList<Character> allLetters, Player userName, String user) throws Exception {
         char guess = trueLetter.charAt(0);
 
         if (Character.isDigit(guess)) {
@@ -91,15 +99,12 @@ class Game {
         for (int j = 0; j < allLetters.size(); j++) {
             System.out.print(allLetters.get(j));
         }
-        if (allLetters.contains('_')) {
+        /*if (allLetters.contains('_')) {
 
         } else {
             System.out.println("\n\nCongratulations " + userName.getInstanceVarUsername(user) + ". You are victorious! :)\n(Press Enter to return to main menu)");
             in.nextLine();
-            victory = true;
-            return victory;
-        }
-    return false;
+        }*/
     }
 
     public static ArrayList<Character> incorrectLetterCollector(String trueLetter, ArrayList<Character> dumbGuesses) {

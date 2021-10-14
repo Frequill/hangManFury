@@ -112,16 +112,13 @@ class Menu{
                     Game.hangMan(user);
                     secondMenu(user);
                 }
-                break;
             }
                 else if (choice == 3) {
                 System.out.println("Shutting down...");
                 run = false;
-                break;
             }
                 else {
                 System.out.println("\nPlease enter an *integer* greater than 0 and lower than 4:\n");
-                show();
                }
             }
         }

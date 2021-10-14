@@ -56,8 +56,7 @@ class Player {
 
         while (run) {
             while (!input.hasNextInt()){
-                System.out.println("\nPlease input a number between 1 - 2:\n");
-                System.out.println("Please choose: \n1) Existing users\n2) Create new user");
+                System.out.println("\nPlease input an integer between 1 - 2:\n");
                 input.next();
             }
             userChoice = input.nextInt();
@@ -80,15 +79,13 @@ class Player {
 
                 int pickUser = input.nextInt();
                 user = aList.get(pickUser);
-                //System.out.println("You have selected the " + user + " profile!");
-
                 return user;
 
             } else if (userChoice == 2) {
                 String username = writeUsername();
                 return username;
             } else {
-                System.out.println("\nPlease enter a *number* greater than 0 and lower than 2:\n");
+                System.out.println("\nPlease enter an *integer* greater than 0 and lower than 2:\n");
             }
         }
         return null;
