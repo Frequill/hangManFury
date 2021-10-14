@@ -26,26 +26,40 @@ class Game {
         while (victory == false && playerLife > 0) {
             boolean guessCorrect = false;
             boolean guessIncorrect = false;
+            boolean doubleGuess = true;
             System.out.println();
             String letter = null;
             String trueLetter = null;
 
-            boolean destroyDumbCharacters = true;
-            while (destroyDumbCharacters) {
-                letter = in.nextLine().toLowerCase(); // to lower case kills you capitalized letters *evil laugh*
-                trueLetter = characterDestroyer(letter);
-                if (trueLetter != null){
-                    destroyDumbCharacters = false;
+            while(doubleGuess) {
+                boolean destroyDumbCharacters = true;
+                while (destroyDumbCharacters) {
+                    letter = in.nextLine().toLowerCase(); // to lower case kills you capitalized letters *evil laugh*
+                    trueLetter = characterDestroyer(letter);
+                    if (trueLetter != null) {
+                        destroyDumbCharacters = false;
+                    }
+                    if (dumbGuesses.contains(trueLetter.charAt(0)) || allLetters.contains(trueLetter.charAt(0))) {
+                        System.out.println("Letter has already been guessed ??? What are you doing????");
+                    }  if (trueLetter != null) {
+                        destroyDumbCharacters = false;
+                    }else {
+                        doubleGuess = false;
+                    }
                 }
             }
-            for (int i = 0; i < guessWord.length(); i++) {
-                if (trueLetter.charAt(0) == guessWord.charAt(i)) {
-                    guessCorrect = true;
-                } else if (trueLetter.charAt(0) != guessWord.charAt(i)) {
-                    guessIncorrect = true;
-                } else {
-                    System.out.println("BLÖ");
-                }
+
+
+
+                for (int i = 0; i < guessWord.length(); i++) {
+                    if (trueLetter.charAt(0) == guessWord.charAt(i)) {
+                        guessCorrect = true;
+                    } else if (trueLetter.charAt(0) != guessWord.charAt(i)) {
+                        guessIncorrect = true;
+                    } else {
+                        System.out.println("BLÖ");
+                    }
+
             }
 
             if (guessCorrect) {
@@ -96,6 +110,13 @@ class Game {
             System.out.print(dumbGuesses.get(i) + " ");
         }
         return dumbGuesses;
+    }
+
+    public static char doubleGuessCollector (String trueLetter, ArrayList<Character> dumbGuesses,ArrayList<Character> allLetters){
+        if (dumbGuesses.contains(trueLetter.charAt(0)) || allLetters.contains(trueLetter.charAt(0))){
+            System.out.println("Letter has already been guessed ??? What are you doing????");
+        }
+        return  trueLetter.charAt(0);
     }
 
     /** This monstrosity of a method exists because I wish Java was easier...             //Julius Thomsen
