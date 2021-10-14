@@ -14,7 +14,7 @@ class Player {
     }
 
     /**
-     This method stores different usernames in a textfile for later use
+     This method stores different usernames in a text file for later use
      */
 
     static String writeUsername() throws Exception {
