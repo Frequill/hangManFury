@@ -89,6 +89,7 @@ class Game {
             if (guess == placeholder.charAt(i)) {
                 allLetters.set(i, guess);
                 //System.out.print(allLetters.get(i));
+                //jaG
             }
         }
         for (int j = 0; j < allLetters.size(); j++) {
