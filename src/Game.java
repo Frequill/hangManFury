@@ -70,6 +70,11 @@ class Game {
                 playerLife = playerLife - 1;
                 System.out.println("Incorrect guess! You have lost one life!" + "\n(" + playerLife + " lives remaining)");
                 incorrectLetterCollector(trueLetter, dumbGuesses);
+                System.out.println();
+                for (int j = 0; j < allLetters.size(); j++) {
+                    System.out.print(allLetters.get(j));
+                }
+
             }
             if (playerLife == 0) {
                 System.out.print("\nYou have been defeated! The word in question was: " + guessWord + "\n\nPress the Enter key to return to the main menu in shame");
@@ -99,12 +104,7 @@ class Game {
         for (int j = 0; j < allLetters.size(); j++) {
             System.out.print(allLetters.get(j));
         }
-        /*if (allLetters.contains('_')) {
 
-        } else {
-            System.out.println("\n\nCongratulations " + userName.getInstanceVarUsername(user) + ". You are victorious! :)\n(Press Enter to return to main menu)");
-            in.nextLine();
-        }*/
     }
 
     public static ArrayList<Character> incorrectLetterCollector(String trueLetter, ArrayList<Character> dumbGuesses) {

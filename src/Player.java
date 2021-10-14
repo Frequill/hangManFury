@@ -79,6 +79,7 @@ class Player {
 
                 int pickUser = input.nextInt();
                 user = aList.get(pickUser);
+                
                 return user;
 
             } else if (userChoice == 2) {
