@@ -4,9 +4,10 @@ import java.util.Scanner;
 class Menu{
     public static Scanner in = new Scanner(System.in);
     private int Int;
-    private char Alpha;
+   // private char Alpha;
+   // private String String;
     private ArrayList<String> menuOptions = new ArrayList<>();
-    private String String;
+    private String user = null;
 
     public Menu(String name, int Int) {
         this.Int = Int;
@@ -25,6 +26,10 @@ class Menu{
         }
     }
 
+    public Menu(String user) {
+
+    }
+
     public void optionPrinter (ArrayList<String> menuOptions){
         for (int i = 0; i < menuOptions.size(); i++){
             System.out.println(menuOptions.get(i));
@@ -38,9 +43,9 @@ class Menu{
     public int getInt() {
         return Int;
     }
+
     public char getAlpha() {
 
-        return Alpha;
     }
 
     public String getString() {
@@ -53,11 +58,18 @@ class Menu{
         String = string;
     }*/
 
+    public String getUser() {
+        return user;
+    }
+
+    public static void setUser(String user) {
+        this.user = user;
+    }
+
     public static void mainMenufunction() throws Exception {
 
         Scanner choiceInput = new Scanner(System.in);
-
-        String user = null;
+        setUser("Julius");
         boolean run = true;
         int choice = 0;
 
@@ -102,7 +114,7 @@ class Menu{
     firstMenu();
 
     }
-    public static void firstMenu() throws Exception {
+   /* public static void firstMenu() throws Exception {
         Menu menu = new Menu("main",3);
         menu.getMenuOptions().add(0, "1) Select user");
         menu.getMenuOptions().add(1, "2) Play");
@@ -128,5 +140,5 @@ class Menu{
         menu.optionPrinter(menu.getMenuOptions());
         user = Player.readUsername(user);
         return user;
-    }
+    } */
 }
