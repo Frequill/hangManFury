@@ -102,93 +102,98 @@ class Game {
      */
 
     public static String characterDestroyer(String letter) {
-        if (letter.contains("1")) {
-            System.out.println("You may not guess numbers!");
-        } else if (letter.contains("2")) {
-            System.out.println("You may not guess numbers!");
-        } else if (letter.contains("3")) {
-            System.out.println("You may not guess numbers!");
-        } else if (letter.contains("4")) {
-            System.out.println("You may not guess numbers!");
-        } else if (letter.contains("5")) {
-            System.out.println("You may not guess numbers!");
-        } else if (letter.contains("6")) {
-            System.out.println("You may not guess numbers!");
-        } else if (letter.contains("7")) {
-            System.out.println("You may not guess numbers!");
-        } else if (letter.contains("8")) {
-            System.out.println("You may not guess numbers!");
-        } else if (letter.contains("9")) {
-            System.out.println("You may not guess numbers!");
-        } else if (letter.contains("0")) {
-            System.out.println("You may not guess numbers!");
-        } else if (letter.contains("!")) {
-            System.out.println("You may not guess an exclamation point!");
-        } else if (letter.contains("?")) {
-            System.out.println("You may not guess a question mark!");
-        } else if (letter.contains("#")) {
-            System.out.println("You may not guess a non-alphabetical character!");
-        } else if (letter.contains("¤")) {
-            System.out.println("You may not guess a non-alphabetical character!");
-        } else if (letter.contains("%")) {
-            System.out.println("You may not guess a non-alphabetical character!");
-        } else if (letter.contains("&")) {
-            System.out.println("You may not guess a non-alphabetical character!");
-        } else if (letter.contains("/")) {
-            System.out.println("You may not guess a non-alphabetical character!");
-        } else if (letter.contains("(")) {
-            System.out.println("You may not guess a non-alphabetical character!");
-        } else if (letter.contains(")")) {
-            System.out.println("You may not guess a non-alphabetical character!");
-        } else if (letter.contains("=")) {
-            System.out.println("You may not guess a non-alphabetical character!");
-        } else if (letter.contains("*")) {
-            System.out.println("You may not guess a non-alphabetical character!");
-        } else if (letter.contains("-")) {
-            System.out.println("You may not guess a non-alphabetical character!");
-        } else if (letter.contains("+")) {
-            System.out.println("You may not guess a non-alphabetical character!");
-        } else if (letter.contains(",")) {
-            System.out.println("You may not guess a non-alphabetical character!");
-        } else if (letter.contains(".")) {
-            System.out.println("You may not guess a non-alphabetical character!");
-        } else if (letter.contains("<")) {
-            System.out.println("You may not guess a non-alphabetical character!");
-        } else if (letter.contains(">")) {
-            System.out.println("You may not guess a non-alphabetical character!");
-        } else if (letter.contains("|")) {
-            System.out.println("You may not guess a non-alphabetical character!");
-        } else if (letter.contains("@")) {
-            System.out.println("You may not guess a non-alphabetical character!");
-        } else if (letter.contains("£")) {
-            System.out.println("You may not guess a non-alphabetical character!");
-        } else if (letter.contains("$")) {
-            System.out.println("You may not guess a non-alphabetical character!");
-        } else if (letter.contains("€")) {
-            System.out.println("You may not guess a non-alphabetical character!");
-        } else if (letter.contains("{")) {
-            System.out.println("You may not guess a non-alphabetical character!");
-        } else if (letter.contains("[")) {
-            System.out.println("You may not guess a non-alphabetical character!");
-        } else if (letter.contains("]")) {
-            System.out.println("You may not guess a non-alphabetical character!");
-        } else if (letter.contains("}")) {
-            System.out.println("You may not guess a non-alphabetical character!");
-        } else if (letter.contains("´´")) {
-            System.out.println("You may not guess a non-alphabetical character!");
-        } else if (letter.contains("\"")) {
-            System.out.println("You may not guess a non-alphabetical character!");
-        } else if (letter.contains("\\")) {
-            System.out.println("You may not guess a non-alphabetical character!");
-        } else if (letter.contains("æ")) {
-            System.out.println("You may not guess a non-alphabetical character!");
-        } else if (letter.contains("ø")) {
-            System.out.println("Inga danskjävlar i spelet!");
-            System.exit(0);
-        }
-        else {
-            return letter;
-        }
+
+            if (letter.contains("1")) {
+                System.out.println("You may not guess numbers!");
+            } else if (letter.contains("2")) {
+                System.out.println("You may not guess numbers!");
+            } else if (letter.contains("3")) {
+                System.out.println("You may not guess numbers!");
+            } else if (letter.contains("4")) {
+                System.out.println("You may not guess numbers!");
+            } else if (letter.contains("5")) {
+                System.out.println("You may not guess numbers!");
+            } else if (letter.contains("6")) {
+                System.out.println("You may not guess numbers!");
+            } else if (letter.contains("7")) {
+                System.out.println("You may not guess numbers!");
+            } else if (letter.contains("8")) {
+                System.out.println("You may not guess numbers!");
+            } else if (letter.contains("9")) {
+                System.out.println("You may not guess numbers!");
+            } else if (letter.contains("0")) {
+                System.out.println("You may not guess numbers!");
+            } else if (letter.contains("!")) {
+                System.out.println("You may not guess an exclamation point!");
+            } else if (letter.contains("?")) {
+                System.out.println("You may not guess a question mark!");
+            } else if (letter.contains("#")) {
+                System.out.println("You may not guess a non-alphabetical character!");
+            } else if (letter.contains("¤")) {
+                System.out.println("You may not guess a non-alphabetical character!");
+            } else if (letter.contains("%")) {
+                System.out.println("You may not guess a non-alphabetical character!");
+            } else if (letter.contains("&")) {
+                System.out.println("You may not guess a non-alphabetical character!");
+            } else if (letter.contains("/")) {
+                System.out.println("You may not guess a non-alphabetical character!");
+            } else if (letter.contains("(")) {
+                System.out.println("You may not guess a non-alphabetical character!");
+            } else if (letter.contains(")")) {
+                System.out.println("You may not guess a non-alphabetical character!");
+            } else if (letter.contains("=")) {
+                System.out.println("You may not guess a non-alphabetical character!");
+            } else if (letter.contains("*")) {
+                System.out.println("You may not guess a non-alphabetical character!");
+            } else if (letter.contains("-")) {
+                System.out.println("You may not guess a non-alphabetical character!");
+            } else if (letter.contains("+")) {
+                System.out.println("You may not guess a non-alphabetical character!");
+            } else if (letter.contains(",")) {
+                System.out.println("You may not guess a non-alphabetical character!");
+            } else if (letter.contains(".")) {
+                System.out.println("You may not guess a non-alphabetical character!");
+            } else if (letter.contains("<")) {
+                System.out.println("You may not guess a non-alphabetical character!");
+            } else if (letter.contains(">")) {
+                System.out.println("You may not guess a non-alphabetical character!");
+            } else if (letter.contains("|")) {
+                System.out.println("You may not guess a non-alphabetical character!");
+            } else if (letter.contains("@")) {
+                System.out.println("You may not guess a non-alphabetical character!");
+            } else if (letter.contains("£")) {
+                System.out.println("You may not guess a non-alphabetical character!");
+            } else if (letter.contains("$")) {
+                System.out.println("You may not guess a non-alphabetical character!");
+            } else if (letter.contains("€")) {
+                System.out.println("You may not guess a non-alphabetical character!");
+            } else if (letter.contains("{")) {
+                System.out.println("You may not guess a non-alphabetical character!");
+            } else if (letter.contains("[")) {
+                System.out.println("You may not guess a non-alphabetical character!");
+            } else if (letter.contains("]")) {
+                System.out.println("You may not guess a non-alphabetical character!");
+            } else if (letter.contains("}")) {
+                System.out.println("You may not guess a non-alphabetical character!");
+            } else if (letter.contains("´´")) {
+                System.out.println("You may not guess a non-alphabetical character!");
+            } else if (letter.contains("\"")) {
+                System.out.println("You may not guess a non-alphabetical character!");
+            } else if (letter.contains("\\")) {
+                System.out.println("You may not guess a non-alphabetical character!");
+            }else if (letter.contains(" ")) {
+                System.out.println("No whitespace!");
+            }else if (letter.isEmpty()) {
+                System.out.println("No input was given!");
+            }else if (letter.contains("æ")) {
+                System.out.println("Inga danskjävlar i spelet!");
+                System.exit(0);
+            } else if (letter.contains("ø")) {
+                System.out.println("Inga danskjävlar i spelet!");
+                System.exit(0);
+            } else {
+                return letter;
+            }
         return null;
     }
 }
