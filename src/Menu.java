@@ -102,8 +102,7 @@ class Menu{
                 user = userNameMenu(user);
                 secondMenu(user);
             }
-
-                else if (choice == 2) {
+            else if (choice == 2) {
                 if (user == null) {
                     System.out.println("\nPlease select a user first!!!!!!!\n(Press Enter to return to menu)");
                     choiceInput.nextLine();
@@ -111,6 +110,7 @@ class Menu{
                     firstMenu();
                 } else {
                     Game.hangMan(user);
+                    secondMenu(user);
                 }
                 break;
             }

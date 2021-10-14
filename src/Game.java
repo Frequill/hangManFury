@@ -4,7 +4,8 @@ import java.util.Locale;
 import java.util.Scanner;
 
 class Game {
-    public static void hangMan(String user) {
+    public static Scanner in = new Scanner(System.in);
+    public static void hangMan(String user) throws Exception {
         boolean victory = false;
         int playerLife = 10;
         String [] wordHolder = {"Björn","Bill","Java","Edwin","Julius","Martin","Johanna","String","Int","Scanner","ArrayList","boolean","Character","Placeholder","null",
@@ -12,7 +13,6 @@ class Game {
 
         String guessWord = wordHolder[wordGenerator(wordHolder)].toLowerCase();
         ArrayList<Character> allLetters = new ArrayList<>(guessWord.length());
-        Scanner in = new Scanner(System.in);
         ArrayList<Character> dumbGuesses = new ArrayList();
         Player userName = new Player();
 
@@ -39,17 +39,14 @@ class Game {
                     if (trueLetter != null) {
                         destroyDumbCharacters = false;
                     }
-                    if (dumbGuesses.contains(trueLetter.charAt(0)) || allLetters.contains(trueLetter.charAt(0))) {
-                        System.out.println("Letter has already been guessed ??? What are you doing????");
-                    }  if (trueLetter != null) {
-                        destroyDumbCharacters = false;
-                    }else {
-                        doubleGuess = false;
-                    }
+                }
+                // This if-case prevents the user from guessing the same character more than once.
+                if (dumbGuesses.contains(trueLetter.charAt(0)) || allLetters.contains(trueLetter.charAt(0))) {
+                    System.out.println("Letter has already been guessed ??? What are you doing????");
+                } else {
+                    doubleGuess = false;
                 }
             }
-
-
 
                 for (int i = 0; i < guessWord.length(); i++) {
                     if (trueLetter.charAt(0) == guessWord.charAt(i)) {
@@ -59,11 +56,10 @@ class Game {
                     } else {
                         System.out.println("BLÖ");
                     }
-
-            }
+                }
 
             if (guessCorrect) {
-                correctLetter(trueLetter, guessWord, allLetters, userName, user);
+                correctLetter(trueLetter, guessWord, allLetters, userName, user, victory);
             } else if (guessIncorrect) {
                 playerLife = playerLife - 1;
                 System.out.println("Incorrect guess! You have lost one life!" + "\n(" + playerLife + " lives remaining)");
@@ -79,8 +75,10 @@ class Game {
         return rand;
     }
 
-    public static void correctLetter(String trueLetter, String placeholder, ArrayList<Character> allLetters, Player userName, String user) {
+
+    public static boolean correctLetter(String trueLetter, String placeholder, ArrayList<Character> allLetters, Player userName, String user, boolean victory) throws Exception {
         char guess = trueLetter.charAt(0);
+
         if (Character.isDigit(guess)) {
             System.out.println("Wrongful input!\nPlease enter a CHARACTER!");
         }
@@ -88,8 +86,6 @@ class Game {
         for (int i = 0; i < placeholder.length(); i++) {
             if (guess == placeholder.charAt(i)) {
                 allLetters.set(i, guess);
-                //System.out.print(allLetters.get(i));
-                //jaG
             }
         }
         for (int j = 0; j < allLetters.size(); j++) {
@@ -98,26 +94,21 @@ class Game {
         if (allLetters.contains('_')) {
 
         } else {
-            System.out.println("\n\nCongratulations " + userName.getInstanceVarUsername(user) + ". You are victorious! :)");
-           System.exit(0);
+            System.out.println("\n\nCongratulations " + userName.getInstanceVarUsername(user) + ". You are victorious! :)\n(Press Enter to return to main menu)");
+            in.nextLine();
+            victory = true;
+            return victory;
         }
+    return false;
     }
 
     public static ArrayList<Character> incorrectLetterCollector(String trueLetter, ArrayList<Character> dumbGuesses) {
-
         dumbGuesses.add(trueLetter.charAt(0));
         System.out.println("\nPreviously guessed letters: ");
         for (int i = 0; i < dumbGuesses.size(); i++) {
             System.out.print(dumbGuesses.get(i) + " ");
         }
         return dumbGuesses;
-    }
-
-    public static char doubleGuessCollector (String trueLetter, ArrayList<Character> dumbGuesses,ArrayList<Character> allLetters){
-        if (dumbGuesses.contains(trueLetter.charAt(0)) || allLetters.contains(trueLetter.charAt(0))){
-            System.out.println("Letter has already been guessed ??? What are you doing????");
-        }
-        return  trueLetter.charAt(0);
     }
 
     /** This monstrosity of a method exists because I wish Java was easier...             //Julius Thomsen
