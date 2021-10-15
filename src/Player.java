@@ -76,8 +76,22 @@ class Player {
                 for (int i = 1; i < aList.size(); i++) {
                     System.out.println(i + ") " + aList.get(i));
                 }
+                boolean run2 = true;
+                int pickUser = 0;
 
-                int pickUser = input.nextInt();
+                while(run2) {
+                   while (!input.hasNextInt()) {
+                       System.out.println("Please input an appropriate integer! ");
+                       input.next();
+                   }
+                   pickUser = input.nextInt();
+                   if(pickUser < 1 || pickUser >= aList.size()){
+                       System.out.println("Choice was out of bounds! ");
+                   }
+                   else{
+                       run2 = false;
+                   }
+               }
                 user = aList.get(pickUser);
                 
                 return user;
