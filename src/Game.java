@@ -14,7 +14,7 @@ class Game {
         String guessWord = wordHolder[wordGenerator(wordHolder)].toLowerCase();
         ArrayList<Character> allLetters = new ArrayList<>(guessWord.length());
         ArrayList<Character> dumbGuesses = new ArrayList();
-        Player userName = new Player();
+        Player userName = new Player(Player.getPickUser());
 
         System.out.println("Welcome " + userName.getInstanceVarUsername(user) + " guess the word that is  " + guessWord.length() + " letters long!");
 
@@ -67,8 +67,9 @@ class Game {
                  if (allLetters.contains('_')) {
                  } else {
             System.out.println("\n\nCongratulations " + userName.getInstanceVarUsername(user) + ". You are victorious! :)\n(Press Enter to return to main menu)");
-            in.nextLine();
-            victory = true;
+                 Player.addUserScore(Player.getPickUser());
+                 in.nextLine();
+                 victory = true;
                  }
             } else if (guessIncorrect) {
                 playerLife = playerLife - 1;
