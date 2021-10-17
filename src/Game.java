@@ -4,6 +4,13 @@ import java.util.Locale;
 import java.util.Scanner;
 
 class Game {
+    /*private int PickUserNumber;
+
+    public int getPickUser(int pickUser){
+        PickUserNumber = pickUser;
+        return PickUserNumber;
+    }*/
+
     public static Scanner in = new Scanner(System.in);
     public static void hangMan(String user) throws Exception {
         boolean victory = false;
@@ -15,6 +22,9 @@ class Game {
         ArrayList<Character> allLetters = new ArrayList<>(guessWord.length());
         ArrayList<Character> dumbGuesses = new ArrayList();
         Player userName = new Player();
+        Player matchRecorder = new Player();
+
+        //Player.saveMatch(matchRecorder.getPickUser());
 
         System.out.println("Welcome " + userName.getInstanceVarUsername(user) + " guess the word that is  " + guessWord.length() + " letters long!");
 
@@ -67,6 +77,7 @@ class Game {
                  if (allLetters.contains('_')) {
                  } else {
             System.out.println("\n\nCongratulations " + userName.getInstanceVarUsername(user) + ". You are victorious! :)\n(Press Enter to return to main menu)");
+            //HERE WE NEED TO GET PICKED USER NUMBER BACK TO RECORD A MATCH!!!
             in.nextLine();
             victory = true;
                  }

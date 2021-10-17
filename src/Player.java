@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 class Player {
-
      private String instanceVarUsername;
 
     public String getInstanceVarUsername(String user) {
@@ -13,11 +12,19 @@ class Player {
         return instanceVarUsername;
     }
 
+
+     private int PickUserNumber;
+
+    public int getPickUser(int pickUser){
+        PickUserNumber = pickUser;
+        return PickUserNumber;
+    }
+
     /**
      This method stores different usernames in a text file for later use
      */
 
-    static String writeUsername() throws Exception {
+    public static String writeUsername() throws Exception {
         Scanner in = new Scanner(System.in);
         System.out.println("Please enter your username: (NO SPACES!!)");
         String usersInput = in.nextLine();
@@ -50,6 +57,7 @@ class Player {
      */
 
     public static String readUsername(String user) throws Exception {
+        Player matchRecorder = new Player();
         Scanner input = new Scanner(System.in);
         boolean run = true;
         int userChoice = 0;
@@ -93,7 +101,7 @@ class Player {
                    }
                }
                 user = aList.get(pickUser);
-                
+
                 return user;
 
             } else if (userChoice == 2) {
@@ -104,6 +112,31 @@ class Player {
             }
         }
         return null;
+    }
+
+
+    //This method works in practice BUT I can't reach it from the "game" class... if I could it would work! (Martin knows more about getters than I do...)
+
+    public static void saveMatch(int currentMatchData)throws Exception{
+        File userMatchData = new File("src/userMatchData.txt");
+        Scanner readUserMatchData = new Scanner(userMatchData);
+
+        ArrayList<String> thisWasInsideUserMatchData = new ArrayList<>();
+        while (readUserMatchData.hasNextLine()){
+            thisWasInsideUserMatchData.add(readUserMatchData.nextLine());
+        }
+
+        int intMatchData = Integer.parseInt(thisWasInsideUserMatchData.get(currentMatchData));
+        Integer fullMatchData = intMatchData + 1;
+        String ultimateResult = fullMatchData.toString();
+
+        thisWasInsideUserMatchData.set(currentMatchData, ultimateResult);
+
+        PrintWriter writeToUserMatchData = new PrintWriter(userMatchData);
+        for (int i = 0; i < thisWasInsideUserMatchData.size(); i++){
+            writeToUserMatchData.println(thisWasInsideUserMatchData.get(i));
+        }
+        writeToUserMatchData.close();
     }
 }
 
