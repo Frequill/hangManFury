@@ -6,10 +6,21 @@ import java.util.Scanner;
 
 class Player {
      private String instanceVarUsername;
+     private int pickUserData;
 
     public String getInstanceVarUsername(String user) {
         instanceVarUsername = user;
         return instanceVarUsername;
+    }
+
+    public int getPickUserData() {
+        return pickUserData;
+
+    }
+
+    public void setPickUserData(int pickUserData) {
+        this.pickUserData = pickUserData;
+        System.out.println(pickUserData);
     }
 
     /**
@@ -48,7 +59,7 @@ class Player {
      This method shows the user all available usernames and allows user to select an already existing username
      */
 
-    public static String readUsername(String user) throws Exception {
+    public static String readUsername(String user, int pickUser) throws Exception {
         Player matchRecorder = new Player();
         Scanner input = new Scanner(System.in);
         boolean run = true;
@@ -77,7 +88,8 @@ class Player {
                     System.out.println(i + ") " + aList.get(i));
                 }
                 boolean run2 = true;
-                int pickUser = 0;
+
+                pickUser = 0;
                 while(run2) {
                    while (!input.hasNextInt()) {
                        System.out.println("Please input an appropriate integer! ");
@@ -88,10 +100,11 @@ class Player {
                        System.out.println("Choice was out of bounds! ");
                    }
                    else{
+                       matchRecorder.setPickUserData(pickUser);
                        run2 = false;
                    }
                }
-                //matchRecorder.setPickUser(pickUser); IF ONLY THIS WORKED :(
+
                 user = aList.get(pickUser);
                 return user;
 
@@ -107,7 +120,7 @@ class Player {
 
 
     //This method works in practice BUT I can't reach it from the "game" class... if I could it would work! (Martin knows more about getters than I do...)
-    /*
+
 
     public static void saveMatch(int currentMatchData)throws Exception{
         File userMatchData = new File("src/userMatchData.txt");
@@ -129,6 +142,6 @@ class Player {
             writeToUserMatchData.println(thisWasInsideUserMatchData.get(i));
         }
         writeToUserMatchData.close();
-    } */
+    }
 }
 

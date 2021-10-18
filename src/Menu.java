@@ -68,12 +68,12 @@ class Menu{
         return user;
     }
 
-    public static String userNameMenu(String user) throws Exception{
+    public static String userNameMenu(String user, int pickUser) throws Exception{
         Menu menu = new Menu("user",2);
         menu.getMenuOptions().add(0, "1) Existing user");
         menu.getMenuOptions().add(1, "2) New user ");
         menu.optionPrinter(menu.getMenuOptions());
-        user = Player.readUsername(user);
+        user = Player.readUsername(user,pickUser);
         return user;
     }
 
@@ -89,6 +89,8 @@ class Menu{
         Scanner choiceInput = new Scanner(System.in);
         boolean run = true;
         int choice = 0;
+        Player matchSaver = new Player();
+        int pickUser = matchSaver.getPickUserData();
 
         while (run) {
             while(!choiceInput.hasNextInt()){
@@ -99,7 +101,7 @@ class Menu{
             choice = choiceInput.nextInt();
 
             if (choice == 1) {
-                user = userNameMenu(user);
+                user = userNameMenu(user,pickUser);
                 secondMenu(user);
             }
             else if (choice == 2) {
@@ -110,6 +112,7 @@ class Menu{
                     firstMenu();
                 } else {
                     Game.hangMan(user);
+                    Player.saveMatch(pickUser);
                     secondMenu(user);
                 }
             }

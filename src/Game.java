@@ -125,7 +125,7 @@ class Game {
         }
         return dumbGuesses;
     }
-
+/*
     public static void saveMatch(int currentMatchData)throws Exception {
         File userMatchData = new File("src/userMatchData.txt");
         Scanner readUserMatchData = new Scanner(userMatchData);
@@ -146,7 +146,7 @@ class Game {
             writeToUserMatchData.println(thisWasInsideUserMatchData.get(i));
         }
         writeToUserMatchData.close();
-    }
+    }*/
 
     /** This monstrosity of a method exists because I wish Java was easier...             //Julius Thomsen
      */
