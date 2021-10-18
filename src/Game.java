@@ -18,7 +18,6 @@ class Game {
         ArrayList<Character> allLetters = new ArrayList<>(guessWord.length());
         ArrayList<Character> dumbGuesses = new ArrayList();
         Player userName = new Player();
-        Player matchRecorder = new Player();
 
         System.out.println("Welcome " + userName.getInstanceVarUsername(user) + " guess the word that is  " + guessWord.length() + " letters long!");
 

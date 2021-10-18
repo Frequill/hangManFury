@@ -6,21 +6,21 @@ import java.util.Scanner;
 
 class Player {
      private String instanceVarUsername;
-     private int pickUserData;
+     private int pickUserData = 0;
 
     public String getInstanceVarUsername(String user) {
         instanceVarUsername = user;
         return instanceVarUsername;
     }
 
+    public void setPickUserData(int pickUserData2) {
+        this.pickUserData = pickUserData2;
+        System.out.println(this.pickUserData + "Detta är i setter" );
+    }
     public int getPickUserData() {
+        System.out.println(pickUserData + "Detta är i getter ");
         return pickUserData;
 
-    }
-
-    public void setPickUserData(int pickUserData) {
-        this.pickUserData = pickUserData;
-        System.out.println(pickUserData);
     }
 
     /**
@@ -89,7 +89,7 @@ class Player {
                 }
                 boolean run2 = true;
 
-                pickUser = 0;
+                //pickUser = 0;
                 while(run2) {
                    while (!input.hasNextInt()) {
                        System.out.println("Please input an appropriate integer! ");
@@ -101,6 +101,8 @@ class Player {
                    }
                    else{
                        matchRecorder.setPickUserData(pickUser);
+                       matchRecorder.getPickUserData();
+                       System.out.println(matchRecorder.getPickUserData());
                        run2 = false;
                    }
                }
