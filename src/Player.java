@@ -6,12 +6,23 @@ import java.util.Scanner;
 
 class Player {
      private String instanceVarUsername;
+     private int pickUserData;
 
 
 
     public String getInstanceVarUsername(String user) {
         instanceVarUsername = user;
         return instanceVarUsername;
+    }
+
+    public void setPickUserData(int pickUserData2) {
+        this.pickUserData = pickUserData2;
+        System.out.println(this.pickUserData + "Detta är i setter" );
+    }
+    public int getPickUserData() {
+        System.out.println(pickUserData + "Detta är i getter ");
+        return pickUserData;
+
     }
 
     /**
@@ -80,6 +91,7 @@ class Player {
                     System.out.println(i + ") " + aList.get(i));
                 }
                 boolean run2 = true;
+
                 int pickUser = 0;
                 while(run2) {
                    while (!input.hasNextInt()) {
@@ -91,10 +103,14 @@ class Player {
                        System.out.println("Choice was out of bounds! ");
                    }
                    else{
+                       matchRecorder.setPickUserData(pickUser);
+                       matchRecorder.getPickUserData();
+                       System.out.println(" Detta är gettern: " + matchRecorder.getPickUserData());
                        run2 = false;
                    }
                }
-                //matchRecorder.setPickUser(pickUser); IF ONLY THIS WORKED :(
+
+                matchRecorder.setPickUserData(pickUser);
                 user = aList.get(pickUser);
                 return user;
 
@@ -110,9 +126,9 @@ class Player {
 
 
     //This method works in practice BUT I can't reach it from the "game" class... if I could it would work! (Martin knows more about getters than I do...)
-    /*
 
-    public static void saveMatch(int currentMatchData)throws Exception{
+
+    public static void saveMatch(int pickUser)throws Exception{
         File userMatchData = new File("src/userMatchData.txt");
         Scanner readUserMatchData = new Scanner(userMatchData);
 
@@ -121,17 +137,17 @@ class Player {
             thisWasInsideUserMatchData.add(readUserMatchData.nextLine());
         }
 
-        int intMatchData = Integer.parseInt(thisWasInsideUserMatchData.get(currentMatchData));
-        Integer fullMatchData = intMatchData + 1;
-        String ultimateResult = fullMatchData.toString();
+        int intMatchData = Integer.parseInt(thisWasInsideUserMatchData.get(pickUser));
+        int fullMatchData = intMatchData + 1;
+        String ultimateResult = Integer.toString(fullMatchData);
 
-        thisWasInsideUserMatchData.set(currentMatchData, ultimateResult);
+        thisWasInsideUserMatchData.set(pickUser, ultimateResult);
 
         PrintWriter writeToUserMatchData = new PrintWriter(userMatchData);
         for (int i = 0; i < thisWasInsideUserMatchData.size(); i++){
             writeToUserMatchData.println(thisWasInsideUserMatchData.get(i));
         }
         writeToUserMatchData.close();
-    } */
+    }
 }
 
