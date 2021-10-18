@@ -96,10 +96,8 @@ class Game {
         } else {
             System.out.println("\n\nCongratulations " + userName.getInstanceVarUsername(user) + ". You are victorious! :)\n(Press Enter to return to main menu)");
             in.nextLine();
-            victory = true;
-            return victory;
+            Menu.firstMenu();
         }
-    return false;
     }
 
     public static ArrayList<Character> incorrectLetterCollector(String trueLetter, ArrayList<Character> dumbGuesses) {

@@ -109,8 +109,6 @@ class Menu{
                     choiceInput.nextLine();
                     firstMenu();
                 } else {
-                    Game.hangMan(user);
-                    secondMenu(user);
                 }
                 break;
             }

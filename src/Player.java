@@ -8,6 +8,8 @@ class Player {
 
      private String instanceVarUsername;
 
+
+
     public String getInstanceVarUsername(String user) {
         instanceVarUsername = user;
         return instanceVarUsername;
