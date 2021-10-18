@@ -1,15 +1,11 @@
+import java.io.File;
+import java.io.PrintWriter;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Locale;
 import java.util.Scanner;
 
 class Game {
-    /*private int PickUserNumber;
-
-    public int getPickUser(int pickUser){
-        PickUserNumber = pickUser;
-        return PickUserNumber;
-    }*/
 
     public static Scanner in = new Scanner(System.in);
     public static void hangMan(String user) throws Exception {
@@ -23,8 +19,6 @@ class Game {
         ArrayList<Character> dumbGuesses = new ArrayList();
         Player userName = new Player();
         Player matchRecorder = new Player();
-
-        //Player.saveMatch(matchRecorder.getPickUser());
 
         System.out.println("Welcome " + userName.getInstanceVarUsername(user) + " guess the word that is  " + guessWord.length() + " letters long!");
 
@@ -77,7 +71,7 @@ class Game {
                  if (allLetters.contains('_')) {
                  } else {
             System.out.println("\n\nCongratulations " + userName.getInstanceVarUsername(user) + ". You are victorious! :)\n(Press Enter to return to main menu)");
-            //HERE WE NEED TO GET PICKED USER NUMBER BACK TO RECORD A MATCH!!!
+            //saveMatch(matchRecorder.getPickUser());  I will miss you, brave code :(
             in.nextLine();
             victory = true;
                  }
@@ -93,6 +87,7 @@ class Game {
             }
             if (playerLife == 0) {
                 System.out.print("\nYou have been defeated! The word in question was: " + guessWord + "\n\nPress the Enter key to return to the main menu in shame");
+                //Player.saveMatch(matchRecorder.getPickUser());
                 in.nextLine();
                 victory = true;
             }
@@ -129,6 +124,28 @@ class Game {
             System.out.print(dumbGuesses.get(i) + " ");
         }
         return dumbGuesses;
+    }
+
+    public static void saveMatch(int currentMatchData)throws Exception {
+        File userMatchData = new File("src/userMatchData.txt");
+        Scanner readUserMatchData = new Scanner(userMatchData);
+
+        ArrayList<String> thisWasInsideUserMatchData = new ArrayList<>();
+        while (readUserMatchData.hasNextLine()) {
+            thisWasInsideUserMatchData.add(readUserMatchData.nextLine());
+        }
+
+        int intMatchData = Integer.parseInt(thisWasInsideUserMatchData.get(currentMatchData));
+        Integer fullMatchData = intMatchData + 1;
+        String ultimateResult = fullMatchData.toString();
+
+        thisWasInsideUserMatchData.set(currentMatchData, ultimateResult);
+
+        PrintWriter writeToUserMatchData = new PrintWriter(userMatchData);
+        for (int i = 0; i < thisWasInsideUserMatchData.size(); i++) {
+            writeToUserMatchData.println(thisWasInsideUserMatchData.get(i));
+        }
+        writeToUserMatchData.close();
     }
 
     /** This monstrosity of a method exists because I wish Java was easier...             //Julius Thomsen

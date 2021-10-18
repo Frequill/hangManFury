@@ -12,14 +12,6 @@ class Player {
         return instanceVarUsername;
     }
 
-
-     private int PickUserNumber;
-
-    public int getPickUser(int pickUser){
-        PickUserNumber = pickUser;
-        return PickUserNumber;
-    }
-
     /**
      This method stores different usernames in a text file for later use
      */
@@ -86,7 +78,6 @@ class Player {
                 }
                 boolean run2 = true;
                 int pickUser = 0;
-
                 while(run2) {
                    while (!input.hasNextInt()) {
                        System.out.println("Please input an appropriate integer! ");
@@ -100,8 +91,8 @@ class Player {
                        run2 = false;
                    }
                }
+                //matchRecorder.setPickUser(pickUser); IF ONLY THIS WORKED :(
                 user = aList.get(pickUser);
-
                 return user;
 
             } else if (userChoice == 2) {
@@ -116,6 +107,7 @@ class Player {
 
 
     //This method works in practice BUT I can't reach it from the "game" class... if I could it would work! (Martin knows more about getters than I do...)
+    /*
 
     public static void saveMatch(int currentMatchData)throws Exception{
         File userMatchData = new File("src/userMatchData.txt");
@@ -137,6 +129,6 @@ class Player {
             writeToUserMatchData.println(thisWasInsideUserMatchData.get(i));
         }
         writeToUserMatchData.close();
-    }
+    } */
 }
 
