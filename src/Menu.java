@@ -93,8 +93,6 @@ class Menu{
         Scanner choiceInput = new Scanner(System.in);
         boolean run = true;
         int choice = 0;
-        Player findPickUser = new Player();
-        int pickUser = findPickUser.getPickUserData();
 
         while (run) {
             while(!choiceInput.hasNextInt()){
@@ -117,7 +115,6 @@ class Menu{
                     firstMenu();
                 } else {
                     Game.hangMan(user);
-                    Player.saveMatch(pickUser);
                     secondMenu(user);
                 }
             }

@@ -23,6 +23,8 @@ class Player {
 
     }
 
+    public static Player modifyX = new Player();
+
     /**
      This method stores different usernames in a text file for later use
      */
@@ -51,6 +53,8 @@ class Player {
             out.println( usernameSaver + " " + newUsername );
             out.close();
         }
+
+         newUserScore();
         //This selects the new user immediately
         return usersInput;
     }
@@ -60,7 +64,6 @@ class Player {
      */
 
     public static String readUsername(String user) throws Exception {
-        Player matchRecorder = new Player();
         Scanner input = new Scanner(System.in);
         boolean run = true;
         int userChoice = 0;
@@ -100,14 +103,12 @@ class Player {
                        System.out.println("Choice was out of bounds! ");
                    }
                    else{
-                       matchRecorder.setPickUserData(pickUser);
-                       matchRecorder.getPickUserData();
-                       System.out.println(" Detta är gettern: " + matchRecorder.getPickUserData());
                        run2 = false;
                    }
                }
 
-                matchRecorder.setPickUserData(pickUser);
+                modifyX.setPickUserData(pickUser);
+
                 user = aList.get(pickUser);
                 return user;
 
@@ -123,6 +124,36 @@ class Player {
 
 
     //This method works in practice BUT I can't reach it from the "game" class... if I could it would work! (Martin knows more about getters than I do...)
+
+
+    public static void saveMatchCaller() throws Exception {
+        saveMatch(modifyX.getPickUserData());
+    }
+
+
+    public static void newUserScore() throws Exception {
+        int defaultScore = 0;
+
+        File toScoreMatchPlaceholder = new File("src/userMatchDataPlaceholder.txt");
+        File toUserMatchData = new File("src/userMatchData.txt");
+
+        //This Printwriter stores the users matches in the "userMatchDataPlaceholder" textfile
+        PrintWriter output = new PrintWriter(toScoreMatchPlaceholder);
+        output.println(defaultScore);
+        output.close();
+
+        Scanner readMatchDataPlaceholder = new Scanner(toScoreMatchPlaceholder);
+        Scanner readMatchData = new Scanner(toUserMatchData);
+        String newUserScore = readMatchDataPlaceholder.nextLine();
+        String matchSaver = readMatchData.nextLine();
+        readMatchDataPlaceholder.close();
+
+        for (int i = 0; i < newUserScore.length(); i++) {
+            PrintWriter out = new PrintWriter("src/userMatchData.txt");
+            out.println(matchSaver + " " + newUserScore);
+            out.close();
+        }
+    }
 
 
     public static void saveMatch(int pickUser)throws Exception{

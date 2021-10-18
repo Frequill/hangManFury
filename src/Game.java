@@ -9,6 +9,8 @@ class Game {
 
     public static Scanner in = new Scanner(System.in);
 
+    public static Player findPickUser = new Player();
+
     public static void hangMan(String user) throws Exception {
         boolean victory = false;
         int playerLife = 10;
@@ -19,9 +21,8 @@ class Game {
         ArrayList<Character> allLetters = new ArrayList<>(guessWord.length());
         ArrayList<Character> dumbGuesses = new ArrayList();
         Player userName = new Player();
-        //Player findPickUser = new Player();
-        //pickUser = findPickUser.getPickUserData();
-        //System.out.println(pickUser + " Är från getter...");
+        int pickUser = findPickUser.getPickUserData();
+
 
         System.out.println("Welcome " + userName.getInstanceVarUsername(user) + " guess the word that is  " + guessWord.length() + " letters long!");
 
@@ -74,6 +75,7 @@ class Game {
                  if (allLetters.contains('_')) {
                  } else {
             System.out.println("\n\nCongratulations " + userName.getInstanceVarUsername(user) + ". You are victorious! :)\n(Press Enter to return to main menu)");
+            Player.saveMatchCaller();
             in.nextLine();
             victory = true;
                  }
@@ -89,6 +91,7 @@ class Game {
             }
             if (playerLife == 0) {
                 System.out.print("\nYou have been defeated! The word in question was: " + guessWord + "\n\nPress the Enter key to return to the main menu in shame");
+                Player.saveMatchCaller();
                 in.nextLine();
                 victory = true;
             }
