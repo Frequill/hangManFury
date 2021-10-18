@@ -58,7 +58,7 @@ class Menu{
         menu.optionPrinter(menu.getMenuOptions());
         Menu.mainMenuFunction();
     }
-    static String secondMenu(String user) throws Exception{
+    public static String secondMenu(String user) throws Exception{
         System.out.println("Selected profile: " + user);
         Menu menu = new Menu("main",3);
         menu.getMenuOptions().add(0, "1) Change user ");
@@ -110,16 +110,13 @@ class Menu{
                     firstMenu();
                 } else {
                 }
-                break;
             }
                 else if (choice == 3) {
                 System.out.println("Shutting down...");
                 run = false;
-                break;
             }
                 else {
                 System.out.println("\nPlease enter an *integer* greater than 0 and lower than 4:\n");
-                show();
                }
             }
         }
