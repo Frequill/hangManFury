@@ -46,6 +46,7 @@ class Player {
         return usersInput;
     }
 
+
     /**
      This method shows the user all available usernames and allows user to select an already existing username
      */
