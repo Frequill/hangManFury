@@ -15,7 +15,7 @@ class Game {
         boolean victory = false;
         int playerLife = 10;
         String [] wordHolder = {"Björn","Bill","Java","Edwin","Julius","Martin","Johanna","String","Int","Scanner","ArrayList","boolean","Character","Placeholder","null",
-                "monster","redbull","Newton","Katarina"};
+                "monster","redbull","Newton","Katarina","Switchbitch"};
 
         String guessWord = wordHolder[wordGenerator(wordHolder)].toLowerCase();
         ArrayList<Character> allLetters = new ArrayList<>(guessWord.length());
