@@ -1,28 +1,58 @@
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 class Player {
      private String instanceVarUsername;
-     private int pickUserData;
-
-
+     private int winsCount;
+     private int lossCount;
 
     public String getInstanceVarUsername(String user) {
         instanceVarUsername = user;
         return instanceVarUsername;
     }
 
-    public void setPickUserData(int pickUserData2) {
-        this.pickUserData = pickUserData2;
-        System.out.println(this.pickUserData + "Detta är i setter" );
+    public int getWinsCount() {
+        return winsCount;
     }
-    public int getPickUserData() {
-        System.out.println(pickUserData + "Detta är i getter ");
-        return pickUserData;
 
+    public void setWinsCount(int winsCount) {
+        this.winsCount = winsCount;
+    }
+
+    public int getLossCount() {
+        return lossCount;
+    }
+
+    public void setLossCount(int lossCount) {
+        this.lossCount = lossCount;
+    }
+
+    private void generateWinsLossesFromInput(String filePath) {
+
+        Scanner input = new Scanner(filePath);
+        ArrayList<Player> playerData = new ArrayList<Player>();
+        while(input.hasNext())
+        {
+            String match = input.next();
+
+            if(user == victory)
+            {
+                addWinner(firstTeam, teams);
+                addLoser(secondTeam, teams);
+            }
+            else
+            {
+                if(secondTeamScore > firstTeamScore)
+                {
+                    addWinner(secondTeam,teams);
+                    addLoser(firstTeam, teams);
+                }
+            }
+        }
     }
 
     /**
@@ -103,14 +133,10 @@ class Player {
                        System.out.println("Choice was out of bounds! ");
                    }
                    else{
-                       matchRecorder.setPickUserData(pickUser);
-                       matchRecorder.getPickUserData();
-                       System.out.println(" Detta är gettern: " + matchRecorder.getPickUserData());
                        run2 = false;
                    }
                }
 
-                matchRecorder.setPickUserData(pickUser);
                 user = aList.get(pickUser);
                 return user;
 
@@ -127,8 +153,7 @@ class Player {
 
     //This method works in practice BUT I can't reach it from the "game" class... if I could it would work! (Martin knows more about getters than I do...)
 
-
-    public static void saveMatch(int pickUser)throws Exception{
+   /* public static void saveMatch(int pickUser)throws Exception{
         File userMatchData = new File("src/userMatchData.txt");
         Scanner readUserMatchData = new Scanner(userMatchData);
 
@@ -148,6 +173,6 @@ class Player {
             writeToUserMatchData.println(thisWasInsideUserMatchData.get(i));
         }
         writeToUserMatchData.close();
-    }
+    }*/
 }
 

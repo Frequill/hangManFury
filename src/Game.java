@@ -18,10 +18,9 @@ class Game {
         String guessWord = wordHolder[wordGenerator(wordHolder)].toLowerCase();
         ArrayList<Character> allLetters = new ArrayList<>(guessWord.length());
         ArrayList<Character> dumbGuesses = new ArrayList();
+        ArrayList<Player> playerData = new ArrayList<>();
         Player userName = new Player();
-        //Player findPickUser = new Player();
-        //pickUser = findPickUser.getPickUserData();
-        //System.out.println(pickUser + " Är från getter...");
+
 
         System.out.println("Welcome " + userName.getInstanceVarUsername(user) + " guess the word that is  " + guessWord.length() + " letters long!");
 
@@ -54,9 +53,8 @@ class Game {
                     for (int j = 0; j < allLetters.size(); j++) {
                         System.out.print(allLetters.get(j));
                     }
-
-
-                } else {
+                }
+                else {
                     doubleGuess = false;
                 }
             }
@@ -126,28 +124,6 @@ class Game {
         }
         return dumbGuesses;
     }
-/*
-    public static void saveMatch(int currentMatchData)throws Exception {
-        File userMatchData = new File("src/userMatchData.txt");
-        Scanner readUserMatchData = new Scanner(userMatchData);
-
-        ArrayList<String> thisWasInsideUserMatchData = new ArrayList<>();
-        while (readUserMatchData.hasNextLine()) {
-            thisWasInsideUserMatchData.add(readUserMatchData.nextLine());
-        }
-
-        int intMatchData = Integer.parseInt(thisWasInsideUserMatchData.get(currentMatchData));
-        Integer fullMatchData = intMatchData + 1;
-        String ultimateResult = fullMatchData.toString();
-
-        thisWasInsideUserMatchData.set(currentMatchData, ultimateResult);
-
-        PrintWriter writeToUserMatchData = new PrintWriter(userMatchData);
-        for (int i = 0; i < thisWasInsideUserMatchData.size(); i++) {
-            writeToUserMatchData.println(thisWasInsideUserMatchData.get(i));
-        }
-        writeToUserMatchData.close();
-    }*/
 
     /** This monstrosity of a method exists because I wish Java was easier...             //Julius Thomsen
      */

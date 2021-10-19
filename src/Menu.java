@@ -43,7 +43,6 @@ class Menu{
     public String getAlpha() {
         return Alpha;
     }
-
     public String getSentence() {
         return sentence;
     }
@@ -93,8 +92,9 @@ class Menu{
         Scanner choiceInput = new Scanner(System.in);
         boolean run = true;
         int choice = 0;
-        Player findPickUser = new Player();
-        int pickUser = findPickUser.getPickUserData();
+        // Player findPickUser = new Player();
+       // int pickUser = findPickUser.getPickUserData();
+      // System.out.println("här är gettern i mainmenu" + pickUser);
 
         while (run) {
             while(!choiceInput.hasNextInt()){
@@ -116,8 +116,9 @@ class Menu{
                     choiceInput.nextLine();
                     firstMenu();
                 } else {
+                   // int pickUser = findPickUser.getPickUserData();
                     Game.hangMan(user);
-                    Player.saveMatch(pickUser);
+                   // Player.saveMatch(pickUser);
                     secondMenu(user);
                 }
             }
