@@ -1,6 +1,4 @@
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.PrintWriter;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -28,29 +26,50 @@ class Player {
 
     public static String writeUsername() throws Exception {
         Scanner in = new Scanner(System.in);
+
+        File toUsername = new File("src/username.txt");
+
         System.out.println("Please enter your username: (NO SPACES!!)");
         String usersInput = in.nextLine();
+
+        Writer out;
+        out = new BufferedWriter(new FileWriter(toUsername,true));
+        out.append("\n" + usersInput);
+        out.close();
+
+        newUserScore();
+
+        return usersInput;
+    }
+        /*Scanner in = new Scanner(System.in);
 
         File toPlaceholder = new File("src/thePlaceholder.txt");
         File toUsername = new File("src/username.txt");
 
-        //This Printwriter stores the users username in the "thePlaceholder" textfile.
         PrintWriter output = new PrintWriter(toPlaceholder);
+
+        System.out.println("Please enter your username: (NO SPACES!!)");
+        String usersInput = in.nextLine();
         output.println(usersInput);
         output.close();
 
+        //This Printwriter stores the users username in the "thePlaceholder" textfile.
+
+
+
+        PrintWriter jojo = new PrintWriter(toUsername);
+
         Scanner readPlaceholder = new Scanner(toPlaceholder);
-        Scanner readUsername = new Scanner(toUsername);
         String newUsername = readPlaceholder.nextLine();
 
         ArrayList<String> usernameSaver = new ArrayList<>();
-        PrintWriter jojo = new PrintWriter(toUsername);
-        while(readUsername.hasNextLine()) {
-            String scannerLine = readUsername.nextLine();
-            usernameSaver.add(scannerLine);
+
+        while(readPlaceholder.hasNextLine()) {
+            usernameSaver.add(readPlaceholder.nextLine());
         }
 
         System.out.println(usernameSaver.size());
+
         for(int i = 0; i < usernameSaver.size(); i++){
             System.out.println(usernameSaver.get(i));
             jojo.println(usernameSaver.get(i));
@@ -60,20 +79,20 @@ class Player {
 
         usernameSaver.add(newUsername);
         System.out.println(usernameSaver);
-
+        PrintWriter out = new PrintWriter ("src/username.txt");
         for(int i = 0; i < usernameSaver.size(); i++){
-            PrintWriter out = new PrintWriter ("src/username.txt");
+
             out.println(usernameSaver.get(i));
             // out.println(usernameSaver + " " + newUsername);
         }
-        output.println(newUsername);
-        output.close();
+        out.println(newUsername);
+        out.close();
 
         newUserScore();
 
         //This selects the new user immediately
         return usersInput;
-    }
+    }*/
 
     /**
      This method shows the user all available usernames and allows user to select an already existing username
