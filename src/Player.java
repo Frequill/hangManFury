@@ -1,6 +1,4 @@
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.PrintWriter;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -148,9 +146,13 @@ class Player {
         String matchSaver = readMatchData.nextLine();
         readMatchDataPlaceholder.close();
 
+        //String edwinsIde = "\n" + matchSaver + " " + newUserScore;
+
         for (int i = 0; i < newUserScore.length(); i++) {
             PrintWriter out = new PrintWriter("src/userMatchData.txt");
-            out.println(matchSaver + " " + newUserScore);
+            out.println(matchSaver + " " + newUserScore ); // gör detta i en array!);
+            out.println();
+            out.println(newUserScore);
             out.close();
         }
     }
