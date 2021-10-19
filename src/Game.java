@@ -9,17 +9,19 @@ class Game {
 
     public static Scanner in = new Scanner(System.in);
 
+    public static Player findPickUser = new Player();
+
     public static void hangMan(String user) throws Exception {
         boolean victory = false;
         int playerLife = 10;
         String [] wordHolder = {"Björn","Bill","Java","Edwin","Julius","Martin","Johanna","String","Int","Scanner","ArrayList","boolean","Character","Placeholder","null",
-                "monster","redbull","Newton","Katarina"};
+                "monster","redbull","Newton","Katarina","Switchbitch"};
 
         String guessWord = wordHolder[wordGenerator(wordHolder)].toLowerCase();
         ArrayList<Character> allLetters = new ArrayList<>(guessWord.length());
         ArrayList<Character> dumbGuesses = new ArrayList();
-        ArrayList<Player> playerData = new ArrayList<>();
         Player userName = new Player();
+        int pickUser = findPickUser.getPickUserData();
 
 
         System.out.println("Welcome " + userName.getInstanceVarUsername(user) + " guess the word that is  " + guessWord.length() + " letters long!");
@@ -53,8 +55,9 @@ class Game {
                     for (int j = 0; j < allLetters.size(); j++) {
                         System.out.print(allLetters.get(j));
                     }
-                }
-                else {
+
+
+                } else {
                     doubleGuess = false;
                 }
             }
@@ -72,6 +75,7 @@ class Game {
                  if (allLetters.contains('_')) {
                  } else {
             System.out.println("\n\nCongratulations " + userName.getInstanceVarUsername(user) + ". You are victorious! :)\n(Press Enter to return to main menu)");
+            Player.saveMatchCaller();
             in.nextLine();
             victory = true;
                  }
@@ -87,6 +91,7 @@ class Game {
             }
             if (playerLife == 0) {
                 System.out.print("\nYou have been defeated! The word in question was: " + guessWord + "\n\nPress the Enter key to return to the main menu in shame");
+                Player.saveMatchCaller();
                 in.nextLine();
                 victory = true;
             }
@@ -124,6 +129,28 @@ class Game {
         }
         return dumbGuesses;
     }
+/*
+    public static void saveMatch(int currentMatchData)throws Exception {
+        File userMatchData = new File("src/userMatchData.txt");
+        Scanner readUserMatchData = new Scanner(userMatchData);
+
+        ArrayList<String> thisWasInsideUserMatchData = new ArrayList<>();
+        while (readUserMatchData.hasNextLine()) {
+            thisWasInsideUserMatchData.add(readUserMatchData.nextLine());
+        }
+
+        int intMatchData = Integer.parseInt(thisWasInsideUserMatchData.get(currentMatchData));
+        Integer fullMatchData = intMatchData + 1;
+        String ultimateResult = fullMatchData.toString();
+
+        thisWasInsideUserMatchData.set(currentMatchData, ultimateResult);
+
+        PrintWriter writeToUserMatchData = new PrintWriter(userMatchData);
+        for (int i = 0; i < thisWasInsideUserMatchData.size(); i++) {
+            writeToUserMatchData.println(thisWasInsideUserMatchData.get(i));
+        }
+        writeToUserMatchData.close();
+    }*/
 
     /** This monstrosity of a method exists because I wish Java was easier...             //Julius Thomsen
      */
