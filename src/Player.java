@@ -7,14 +7,6 @@ import java.util.Scanner;
 class Player {
      private String instanceVarUsername;
      private int pickUserData;
-     private ArrayList <String> matchSaver = new ArrayList<>();
-
-     File toUserMatchData = new File("src/userMatchData.txt");
-
-
-    public ArrayList<String> getMatchSaver() {
-        return matchSaver;
-    }
 
     public String getInstanceVarUsername(String user) {
         instanceVarUsername = user;
@@ -26,7 +18,6 @@ class Player {
     }
     public int getPickUserData() {
         return pickUserData;
-
     }
 
     public static Player modifyX = new Player();
@@ -43,7 +34,7 @@ class Player {
         File toPlaceholder = new File("src/thePlaceholder.txt");
         File toUsername = new File("src/username.txt");
 
-        //This Printwriter stores the users username in the "thePlaceholder" textfile
+        //This Printwriter stores the users username in the "thePlaceholder" textfile.
         PrintWriter output = new PrintWriter(toPlaceholder);
         output.println(usersInput);
         output.close();
@@ -51,16 +42,35 @@ class Player {
         Scanner readPlaceholder = new Scanner(toPlaceholder);
         Scanner readUsername = new Scanner(toUsername);
         String newUsername = readPlaceholder.nextLine();
-        String usernameSaver = readUsername.nextLine();
-        readPlaceholder.close();
 
-        for(int i = 0; i < newUsername.length(); i++){
-            PrintWriter out = new PrintWriter ("src/username.txt");
-            out.println( usernameSaver + " " + newUsername );
-            out.close();
+        ArrayList<String> usernameSaver = new ArrayList<>();
+        PrintWriter jojo = new PrintWriter(toUsername);
+        while(readUsername.hasNextLine()) {
+            String scannerLine = readUsername.nextLine();
+            usernameSaver.add(scannerLine);
         }
 
-         newUserScore();
+        System.out.println(usernameSaver.size());
+        for(int i = 0; i < usernameSaver.size(); i++){
+            System.out.println(usernameSaver.get(i));
+            jojo.println(usernameSaver.get(i));
+        }
+        System.out.println("jojo stängs!!!!");
+        jojo.close();
+
+        usernameSaver.add(newUsername);
+        System.out.println(usernameSaver);
+
+        for(int i = 0; i < usernameSaver.size(); i++){
+            PrintWriter out = new PrintWriter ("src/username.txt");
+            out.println(usernameSaver.get(i));
+            // out.println(usernameSaver + " " + newUsername);
+        }
+        output.println(newUsername);
+        output.close();
+
+        newUserScore();
+
         //This selects the new user immediately
         return usersInput;
     }
@@ -73,6 +83,7 @@ class Player {
         Scanner input = new Scanner(System.in);
         boolean run = true;
         int userChoice = 0;
+
 
         while (run) {
             while (!input.hasNextInt()){
@@ -94,7 +105,7 @@ class Player {
                 readUsernames.close();
 
                 for (int i = 1; i < aList.size(); i++) {
-                    System.out.println(i + ") " + aList.get(i) + modifyX.matchSaver.get(i));
+                    System.out.println(i + ") " + aList.get(i));
 
                 }
                 boolean run2 = true;
@@ -113,7 +124,6 @@ class Player {
                        run2 = false;
                    }
                }
-
                 modifyX.setPickUserData(pickUser);
 
                 user = aList.get(pickUser);
@@ -142,7 +152,8 @@ class Player {
         int defaultScore = 0;
 
         File toScoreMatchPlaceholder = new File("src/userMatchDataPlaceholder.txt");
-
+        File toUserMatchData = new File("src/userMatchData.txt");
+        ArrayList <String> matchSaver = new ArrayList<>();
 
         //This Printwriter stores the users matches in the "userMatchDataPlaceholder" textfile
         PrintWriter output = new PrintWriter(toScoreMatchPlaceholder);
@@ -154,11 +165,9 @@ class Player {
         String newUserScore = readMatchDataPlaceholder.nextLine();
         readMatchDataPlaceholder.close();
 
-
-
         PrintWriter out = new PrintWriter("src/userMatchData.txt");
-        for (int i = 0; i < modifyX.getMatchSaver().size(); i++) {
-            out.println(modifyX.getMatchSaver().get(i));
+        for (int i = 0; i < matchSaver.size(); i++) {
+            out.println(matchSaver.get(i));
         }
         out.println( newUserScore);
         out.close();
