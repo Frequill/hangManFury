@@ -1,10 +1,20 @@
-import java.io.*;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 class Player {
      private String instanceVarUsername;
      private int pickUserData;
+     private ArrayList <String> matchSaver = new ArrayList<>();
+
+     File toUserMatchData = new File("src/userMatchData.txt");
+
+
+    public ArrayList<String> getMatchSaver() {
+        return matchSaver;
+    }
 
     public String getInstanceVarUsername(String user) {
         instanceVarUsername = user;
@@ -13,10 +23,8 @@ class Player {
 
     public void setPickUserData(int pickUserData2) {
         this.pickUserData = pickUserData2;
-        System.out.println(this.pickUserData + "Detta är i setter" );
     }
     public int getPickUserData() {
-        System.out.println(pickUserData + "Detta är i getter ");
         return pickUserData;
 
     }
@@ -86,7 +94,8 @@ class Player {
                 readUsernames.close();
 
                 for (int i = 1; i < aList.size(); i++) {
-                    System.out.println(i + ") " + aList.get(i));
+                    System.out.println(i + ") " + aList.get(i) + modifyX.matchSaver.get(i));
+
                 }
                 boolean run2 = true;
 
@@ -133,7 +142,7 @@ class Player {
         int defaultScore = 0;
 
         File toScoreMatchPlaceholder = new File("src/userMatchDataPlaceholder.txt");
-        File toUserMatchData = new File("src/userMatchData.txt");
+
 
         //This Printwriter stores the users matches in the "userMatchDataPlaceholder" textfile
         PrintWriter output = new PrintWriter(toScoreMatchPlaceholder);
@@ -141,20 +150,18 @@ class Player {
         output.close();
 
         Scanner readMatchDataPlaceholder = new Scanner(toScoreMatchPlaceholder);
-        Scanner readMatchData = new Scanner(toUserMatchData);
+
         String newUserScore = readMatchDataPlaceholder.nextLine();
-        String matchSaver = readMatchData.nextLine();
         readMatchDataPlaceholder.close();
 
-        //String edwinsIde = "\n" + matchSaver + " " + newUserScore;
 
-        for (int i = 0; i < newUserScore.length(); i++) {
-            PrintWriter out = new PrintWriter("src/userMatchData.txt");
-            out.println(matchSaver + " " + newUserScore ); // gör detta i en array!);
-            out.println();
-            out.println(newUserScore);
-            out.close();
+
+        PrintWriter out = new PrintWriter("src/userMatchData.txt");
+        for (int i = 0; i < modifyX.getMatchSaver().size(); i++) {
+            out.println(modifyX.getMatchSaver().get(i));
         }
+        out.println( newUserScore);
+        out.close();
     }
 
 
