@@ -5,6 +5,7 @@ import java.util.Scanner;
 class Player {
      private String instanceVarUsername;
      private int pickUserData;
+     private int G;
 
     public String getInstanceVarUsername(String user) {
         instanceVarUsername = user;
@@ -28,23 +29,18 @@ class Player {
 
     public static String writeUsername() throws Exception {
         Scanner in = new Scanner(System.in);
-
         File toUsername = new File("src/username.txt");
 
         System.out.println("Please enter your username: (NO SPACES!!)");
-
         String usersInput = in.next();
-
 
         Writer out;
         out = new BufferedWriter(new FileWriter(toUsername,true));
         out.append("\n" + usersInput + " 0" + " 0" + " 0");
         out.close();
 
-        usersInput = usersInput + " 0" + " 0" + " 0";
+
         userArray(usersInput);
-
-
 
         return usersInput;
     }
@@ -62,12 +58,14 @@ class Player {
         else {
             allUsernames.add(userInput);
         }
+        modifyX.setPickUserData(allUsernames.size()-1);
+        modifyX.G = allUsernames.size()-1;
     }
 
     public static void matchAdder(int userInQuestion) throws Exception {
         File usernameFile = new File("src/username.txt");
         String userName = allUsernames.get(userInQuestion);
-        String[] userSplitter = userName.split(" ", 5);
+        String[] userSplitter = userName.split(" ", 4);
 
         int x = Integer.parseInt(userSplitter[1]);
         x = x + 1;
@@ -223,6 +221,7 @@ class Player {
             userChoice = input.nextInt();
 
             if (userChoice == 1) {
+
                 File usernames = new File("src/username.txt");
                 Scanner readUsernames = new Scanner(usernames);
 
@@ -251,6 +250,9 @@ class Player {
                    if(pickUser < 1 || pickUser >= aList.size()){
                        System.out.println("Choice was out of bounds! ");
                    }
+                   else if(modifyX.G == pickUser){
+                       System.out.println("Try again motherfucker");
+                   }
                    else{
                        run2 = false;
                    }
@@ -259,9 +261,10 @@ class Player {
 
                 modifyX.setPickUserData(pickUser);
                 user = aList.get(pickUser);
-                //String []splitUser = user.split(" ", 3);
-                //String trueUser = splitUser [0];
-                return user;
+                String[]userSplitter = user.split(" ",4);
+                String fullUser = userSplitter[0];
+                modifyX.G = pickUser;
+                return fullUser;
 
             } else if (userChoice == 2) {
                 String username = writeUsername();

@@ -1,9 +1,5 @@
 *Placeholder(KonsumentSkallAldrigTagaBortAnvändareViaTextfilen!)*
-Edwin 6 5 1
-Stenart 3 2 1
-Julius 4 4 0
-Julius 2 2 0
-you 0 0 0
-rickard 0 0 0
-Juluis 0 0 0
-Youuuuu 0 0 0
+Edwin 1 0 1
+Julius 0 0 0
+Johanna 0 0 0
+Martin 0 0 0
