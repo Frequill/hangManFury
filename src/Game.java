@@ -75,7 +75,7 @@ class Game {
                  if (allLetters.contains('_')) {
                  } else {
             System.out.println("\n\nCongratulations " + userName.getInstanceVarUsername(user) + ". You are victorious! :)\n(Press Enter to return to main menu)");
-            Player.saveMatchCaller();
+            Player.matchAdderCaller();
             in.nextLine();
             victory = true;
                  }
@@ -91,7 +91,7 @@ class Game {
             }
             if (playerLife == 0) {
                 System.out.print("\nYou have been defeated! The word in question was: " + guessWord + "\n\nPress the Enter key to return to the main menu in shame");
-                Player.saveMatchCaller();
+                Player.matchAdderCaller();
                 in.nextLine();
                 victory = true;
             }

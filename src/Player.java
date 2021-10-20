@@ -18,6 +18,8 @@ class Player {
         return pickUserData;
     }
 
+    public static ArrayList <String> allUsernames = new ArrayList();
+
     public static Player modifyX = new Player();
 
     /**
@@ -34,13 +36,63 @@ class Player {
 
         Writer out;
         out = new BufferedWriter(new FileWriter(toUsername,true));
-        out.append("\n" + usersInput);
+        out.append("\n" + usersInput + " 0" + " 0");
         out.close();
 
-        newUserScore();
+        userArray(usersInput);
 
         return usersInput;
     }
+
+    public static void userArray(String userInput) throws Exception{
+        File username = new File("src/username.txt");
+        Scanner readUsername = new Scanner(username);
+
+        //ArrayList <String> allUsernames = new ArrayList();
+
+        if (allUsernames.isEmpty()) {
+            while (readUsername.hasNextLine()) {
+                allUsernames.add(readUsername.nextLine());
+            }
+        }
+
+        else {
+            allUsernames.add(userInput);
+        }
+
+        //This is for test!
+        //matchAdder(1);
+    }
+
+    public static void matchAdder(int userInQuestion) throws Exception {
+        File usernameFile = new File("src/username.txt");
+        //Scanner readUsername = new Scanner(username);
+
+        String userName = allUsernames.get(userInQuestion);
+        String[] userSplitter = userName.split(" ", 3);
+
+        int x = Integer.parseInt(userSplitter[1]);
+        x = x + 1;
+        String x2 = String.valueOf(x);
+        userSplitter[1] = x2;
+
+        String finalResult = userSplitter[0] + " " + userSplitter[1] + " " + userSplitter[2];
+        allUsernames.set(userInQuestion, finalResult);
+
+        System.out.println(allUsernames);
+
+        PrintWriter out = new PrintWriter(usernameFile);
+        for (int i = 0; i < allUsernames.size(); i++){
+            out.println(allUsernames.get(i));
+        }
+        out.close();
+    }
+
+    public static void matchAdderCaller() throws Exception {
+        matchAdder(modifyX.getPickUserData());
+    }
+
+    // *************************************   ALLTING HÄR NEDÅT ÄR BULLSHIT **********************************
         /*Scanner in = new Scanner(System.in);
 
         File toPlaceholder = new File("src/thePlaceholder.txt");
@@ -115,11 +167,12 @@ class Player {
                 File usernames = new File("src/username.txt");
                 Scanner readUsernames = new Scanner(usernames);
 
+                System.out.println("Profile name, games played, matches won");
                 //This arraylist saves all usernames from username.txt
                 ArrayList<String> aList = new ArrayList<>();
 
                 while (readUsernames.hasNext()) {
-                    aList.add(readUsernames.next());
+                    aList.add(readUsernames.nextLine());
                 }
                 readUsernames.close();
 
@@ -143,8 +196,9 @@ class Player {
                        run2 = false;
                    }
                }
-                modifyX.setPickUserData(pickUser);
+                userArray(aList.get(pickUser));
 
+                modifyX.setPickUserData(pickUser);
                 user = aList.get(pickUser);
                 return user;
 
@@ -162,12 +216,8 @@ class Player {
     //This method works in practice BUT I can't reach it from the "game" class... if I could it would work! (Martin knows more about getters than I do...)
 
 
-    public static void saveMatchCaller() throws Exception {
-        saveMatch(modifyX.getPickUserData());
-    }
 
-
-    public static void newUserScore() throws Exception {
+    /*public static void newUserScore() throws Exception {
         int defaultScore = 0;
 
         File toScoreMatchPlaceholder = new File("src/userMatchDataPlaceholder.txt");
@@ -190,7 +240,7 @@ class Player {
         }
         out.println( newUserScore);
         out.close();
-    }
+    }*/
 
 
     public static void saveMatch(int pickUser)throws Exception{
