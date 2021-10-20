@@ -76,6 +76,7 @@ class Game {
                  } else {
             System.out.println("\n\nCongratulations " + userName.getInstanceVarUsername(user) + ". You are victorious! :)\n(Press Enter to return to main menu)");
             Player.matchAdderCaller();
+            Player.winAdderCaller();
             in.nextLine();
             victory = true;
                  }
@@ -92,6 +93,7 @@ class Game {
             if (playerLife == 0) {
                 System.out.print("\nYou have been defeated! The word in question was: " + guessWord + "\n\nPress the Enter key to return to the main menu in shame");
                 Player.matchAdderCaller();
+                Player.lossAdderCaller();
                 in.nextLine();
                 victory = true;
             }

@@ -36,7 +36,7 @@ class Player {
 
         Writer out;
         out = new BufferedWriter(new FileWriter(toUsername,true));
-        out.append("\n" + usersInput + " 0" + " 0");
+        out.append("\n" + usersInput + " 0" + " 0" + " 0");
         out.close();
 
         userArray(usersInput);
@@ -59,27 +59,22 @@ class Player {
         else {
             allUsernames.add(userInput);
         }
-
-        //This is for test!
-        //matchAdder(1);
     }
 
     public static void matchAdder(int userInQuestion) throws Exception {
         File usernameFile = new File("src/username.txt");
-        //Scanner readUsername = new Scanner(username);
-
         String userName = allUsernames.get(userInQuestion);
-        String[] userSplitter = userName.split(" ", 3);
+        String[] userSplitter = userName.split(" ", 4);
 
         int x = Integer.parseInt(userSplitter[1]);
         x = x + 1;
         String x2 = String.valueOf(x);
         userSplitter[1] = x2;
 
-        String finalResult = userSplitter[0] + " " + userSplitter[1] + " " + userSplitter[2];
+        String finalResult = userSplitter[0] + " " + userSplitter[1] + " " + userSplitter[2] + " " +userSplitter[3];
         allUsernames.set(userInQuestion, finalResult);
 
-        System.out.println(allUsernames);
+        /*This is for test purpouses! */System.out.println(allUsernames);
 
         PrintWriter out = new PrintWriter(usernameFile);
         for (int i = 0; i < allUsernames.size(); i++){
@@ -88,8 +83,69 @@ class Player {
         out.close();
     }
 
+
+
+
+    public static void winAdder(int userInQuestion) throws Exception {
+        File usernameFile = new File("src/username.txt");
+        String userName = allUsernames.get(userInQuestion);
+        String[] userSplitter = userName.split(" ", 4);
+
+        int x = Integer.parseInt(userSplitter[2]);
+        x = x + 1;
+        String x2 = String.valueOf(x);
+        userSplitter[2] = x2;
+
+        String finalResult = userSplitter[0] + " " + userSplitter[1] + " " + userSplitter[2] + " " +userSplitter[3];
+        allUsernames.set(userInQuestion, finalResult);
+
+        /*This is for test purpouses! */System.out.println(allUsernames);
+
+        PrintWriter out = new PrintWriter(usernameFile);
+        for (int i = 0; i < allUsernames.size(); i++){
+            out.println(allUsernames.get(i));
+        }
+        out.close();
+    }
+
+
+
+
+    public static void lossAdder(int userInQuestion) throws Exception {
+        File usernameFile = new File("src/username.txt");
+        String userName = allUsernames.get(userInQuestion);
+        String[] userSplitter = userName.split(" ", 4);
+
+        int x = Integer.parseInt(userSplitter[3]);
+        x = x + 1;
+        String x2 = String.valueOf(x);
+        userSplitter[3] = x2;
+
+        String finalResult = userSplitter[0] + " " + userSplitter[1] + " " + userSplitter[2] + " " +userSplitter[3];
+        allUsernames.set(userInQuestion, finalResult);
+
+        /*This is for test purpouses! */System.out.println(allUsernames);
+
+        PrintWriter out = new PrintWriter(usernameFile);
+        for (int i = 0; i < allUsernames.size(); i++){
+            out.println(allUsernames.get(i));
+        }
+        out.close();
+    }
+
+
+
+
     public static void matchAdderCaller() throws Exception {
         matchAdder(modifyX.getPickUserData());
+    }
+
+    public static void winAdderCaller() throws Exception {
+        winAdder(modifyX.getPickUserData());
+    }
+
+    public static void lossAdderCaller() throws Exception {
+        lossAdder(modifyX.getPickUserData());
     }
 
     // *************************************   ALLTING HÄR NEDÅT ÄR BULLSHIT **********************************
@@ -167,7 +223,7 @@ class Player {
                 File usernames = new File("src/username.txt");
                 Scanner readUsernames = new Scanner(usernames);
 
-                System.out.println("Profile name, games played, matches won");
+                System.out.println("Profile name, Games played, Matches won, Matches lost");
                 //This arraylist saves all usernames from username.txt
                 ArrayList<String> aList = new ArrayList<>();
 
@@ -200,7 +256,9 @@ class Player {
 
                 modifyX.setPickUserData(pickUser);
                 user = aList.get(pickUser);
-                return user;
+                String []splitUser = user.split(" ", 3);
+                String trueUser = splitUser [0];
+                return trueUser;
 
             } else if (userChoice == 2) {
                 String username = writeUsername();

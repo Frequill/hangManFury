@@ -1,5 +1,4 @@
-*Placeholderbullshit*
-Anders 1 0
-Edwin 0 0
-Nicklas 1 0
-Mokblö 0 0
+*Placeholder(KonsumentSkallAldrigTagaBortAnvändareViaTextfilen!)*
+Julius 2 2 0
+Edwin 5 5 0
+
