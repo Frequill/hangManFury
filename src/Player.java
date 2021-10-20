@@ -32,14 +32,19 @@ class Player {
         File toUsername = new File("src/username.txt");
 
         System.out.println("Please enter your username: (NO SPACES!!)");
-        String usersInput = in.nextLine();
+
+        String usersInput = in.next();
+
 
         Writer out;
         out = new BufferedWriter(new FileWriter(toUsername,true));
         out.append("\n" + usersInput + " 0" + " 0" + " 0");
         out.close();
 
+        usersInput = usersInput + " 0" + " 0" + " 0";
         userArray(usersInput);
+
+
 
         return usersInput;
     }
@@ -47,8 +52,6 @@ class Player {
     public static void userArray(String userInput) throws Exception{
         File username = new File("src/username.txt");
         Scanner readUsername = new Scanner(username);
-
-        //ArrayList <String> allUsernames = new ArrayList();
 
         if (allUsernames.isEmpty()) {
             while (readUsername.hasNextLine()) {
@@ -64,7 +67,7 @@ class Player {
     public static void matchAdder(int userInQuestion) throws Exception {
         File usernameFile = new File("src/username.txt");
         String userName = allUsernames.get(userInQuestion);
-        String[] userSplitter = userName.split(" ", 4);
+        String[] userSplitter = userName.split(" ", 5);
 
         int x = Integer.parseInt(userSplitter[1]);
         x = x + 1;
@@ -74,7 +77,7 @@ class Player {
         String finalResult = userSplitter[0] + " " + userSplitter[1] + " " + userSplitter[2] + " " +userSplitter[3];
         allUsernames.set(userInQuestion, finalResult);
 
-        /*This is for test purpouses! */System.out.println(allUsernames);
+        /*This is for test purpouses! *///System.out.println(allUsernames);
 
         PrintWriter out = new PrintWriter(usernameFile);
         for (int i = 0; i < allUsernames.size(); i++){
@@ -99,7 +102,7 @@ class Player {
         String finalResult = userSplitter[0] + " " + userSplitter[1] + " " + userSplitter[2] + " " +userSplitter[3];
         allUsernames.set(userInQuestion, finalResult);
 
-        /*This is for test purpouses! */System.out.println(allUsernames);
+        /*This is for test purpouses! *///System.out.println(allUsernames);
 
         PrintWriter out = new PrintWriter(usernameFile);
         for (int i = 0; i < allUsernames.size(); i++){
@@ -124,7 +127,7 @@ class Player {
         String finalResult = userSplitter[0] + " " + userSplitter[1] + " " + userSplitter[2] + " " +userSplitter[3];
         allUsernames.set(userInQuestion, finalResult);
 
-        /*This is for test purpouses! */System.out.println(allUsernames);
+        /*This is for test purpouses! *///System.out.println(allUsernames);
 
         PrintWriter out = new PrintWriter(usernameFile);
         for (int i = 0; i < allUsernames.size(); i++){
@@ -256,9 +259,9 @@ class Player {
 
                 modifyX.setPickUserData(pickUser);
                 user = aList.get(pickUser);
-                String []splitUser = user.split(" ", 3);
-                String trueUser = splitUser [0];
-                return trueUser;
+                //String []splitUser = user.split(" ", 3);
+                //String trueUser = splitUser [0];
+                return user;
 
             } else if (userChoice == 2) {
                 String username = writeUsername();

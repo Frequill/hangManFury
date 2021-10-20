@@ -81,6 +81,7 @@ class Game {
             victory = true;
                  }
             } else if (guessIncorrect) {
+                hangManWriter(playerLife);
                 playerLife = playerLife - 1;
                 System.out.println("Incorrect guess! You have lost one life!" + "\n(" + playerLife + " lives remaining)");
                 incorrectLetterCollector(trueLetter, dumbGuesses);
@@ -91,6 +92,8 @@ class Game {
 
             }
             if (playerLife == 0) {
+                System.out.println();
+                hangManWriter(playerLife);
                 System.out.print("\nYou have been defeated! The word in question was: " + guessWord + "\n\nPress the Enter key to return to the main menu in shame");
                 Player.matchAdderCaller();
                 Player.lossAdderCaller();
@@ -131,6 +134,24 @@ class Game {
         }
         return dumbGuesses;
     }
+    public static void hangManWriter (int playerLife) {
+        String[] hangManIllus = {"   +--+\n   |  |\n   0  |\n  /|\\ |\n  / \\ |\n      |\n ======\n",
+                "   +--+\n   |  |\n   0  |\n  /|\\ |\n  /   |\n      |\n ======\n",
+                "   +--+\n   |  |\n   0  |\n  /|\\ |\n      |\n      |\n ======\n",
+                "   +--+\n   |  |\n   0  |\n  /|  |\n      |\n      |\n ======\n",
+                "   +--+\n   |  |\n   0  |\n   |  |\n      |\n      |\n ======\n",
+                "   +--+\n   |  |\n   0  |\n      |\n      |\n      |\n ======\n",
+                "   +--+\n   |  |\n      |\n      |\n      |\n      |\n ======\n",
+                "   +--+\n      |\n      |\n      |\n      |\n      |\n ======\n",
+                "      +\n      |\n      |\n      |\n      |\n      |\n ======\n",
+                "       \n       \n       \n       \n       \n       \n ======\n",""};
+
+        for (int i = playerLife; i == playerLife; i++) {
+                    System.out.println(hangManIllus[i]);
+        }
+
+
+    }
 /*
     public static void saveMatch(int currentMatchData)throws Exception {
         File userMatchData = new File("src/userMatchData.txt");
@@ -153,6 +174,7 @@ class Game {
         }
         writeToUserMatchData.close();
     }*/
+
 
     /** This monstrosity of a method exists because I wish Java was easier...             //Julius Thomsen
      */
