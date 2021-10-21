@@ -9,19 +9,16 @@ class Game {
 
     public static Scanner in = new Scanner(System.in);
 
-    public static Player findPickUser = new Player();
-
     public static void hangMan(String user) throws Exception {
         boolean victory = false;
         int playerLife = 10;
         String [] wordHolder = {"Björn","Bill","Java","Edwin","Julius","Martin","Johanna","String","Int","Scanner","ArrayList","boolean","Character","Placeholder","null",
-                "monster","redbull","Newton","Katarina","Switchbitch"};
+                "monster","redbull","Newton","Katarina","Switchbitch","HANGMAN"};
 
         String guessWord = wordHolder[wordGenerator(wordHolder)].toLowerCase();
         ArrayList<Character> allLetters = new ArrayList<>(guessWord.length());
         ArrayList<Character> dumbGuesses = new ArrayList();
         Player userName = new Player();
-        int pickUser = findPickUser.getPickUserData();
 
 
         System.out.println("Welcome " + userName.getInstanceVarUsername(user) + " guess the word that is  " + guessWord.length() + " letters long!");
@@ -56,12 +53,10 @@ class Game {
                         System.out.print(allLetters.get(j));
                     }
 
-
                 } else {
                     doubleGuess = false;
                 }
             }
-
                 for (int i = 0; i < guessWord.length(); i++) {
                     if (trueLetter.charAt(0) == guessWord.charAt(i)) {
                         guessCorrect = true;
@@ -82,6 +77,7 @@ class Game {
                  }
             } else if (guessIncorrect) {
                 playerLife = playerLife - 1;
+                hangManWriter(playerLife);
                 System.out.println("Incorrect guess! You have lost one life!" + "\n(" + playerLife + " lives remaining)");
                 incorrectLetterCollector(trueLetter, dumbGuesses);
                 System.out.println();
@@ -91,6 +87,8 @@ class Game {
 
             }
             if (playerLife == 0) {
+                System.out.println();
+                hangManWriter(playerLife);
                 System.out.print("\nYou have been defeated! The word in question was: " + guessWord + "\n\nPress the Enter key to return to the main menu in shame");
                 Player.matchAdderCaller();
                 Player.lossAdderCaller();
@@ -131,6 +129,34 @@ class Game {
         }
         return dumbGuesses;
     }
+    public static void hangManWriter (int playerLife) {
+        String TEXT_RESET = "\u001B[0m";
+        String TEXT_RED = "\u001B[31m";
+        String TEXT_GREEN = "\u001B[32m";
+        String TEXT_YELLOW = "\u001B[33m";
+        String TEXT_BLUE = "\u001B[34m";
+        String TEXT_PURPLE = "\u001B[35m";
+        String TEXT_CYAN = "\u001B[36m";
+
+        String [] wordHolder = {TEXT_RED,TEXT_GREEN,TEXT_YELLOW,TEXT_BLUE,TEXT_PURPLE,TEXT_CYAN};
+
+        String[] hangManIllus = {"   +--+\n   |  |\n   0  |\n  /|\\ |\n  / \\ |\n      |\n ======\n",
+                "   +--+\n   |  |\n   0  |\n  /|\\ |\n  /   |\n      |\n ======\n",
+                "   +--+\n   |  |\n   0  |\n  /|\\ |\n      |\n      |\n ======\n",
+                "   +--+\n   |  |\n   0  |\n  /|  |\n      |\n      |\n ======\n",
+                "   +--+\n   |  |\n   0  |\n   |  |\n      |\n      |\n ======\n",
+                "   +--+\n   |  |\n   0  |\n      |\n      |\n      |\n ======\n",
+                "   +--+\n   |  |\n      |\n      |\n      |\n      |\n ======\n",
+                "   +--+\n      |\n      |\n      |\n      |\n      |\n ======\n",
+                "      +\n      |\n      |\n      |\n      |\n      |\n ======\n",
+                "       \n       \n       \n       \n       \n       \n ======\n",""};
+
+        for (int i = playerLife; i == playerLife; i++) {
+                    System.out.println(wordHolder[wordGenerator(wordHolder)] + hangManIllus[i] + TEXT_RESET);
+        }
+
+
+    }
 /*
     public static void saveMatch(int currentMatchData)throws Exception {
         File userMatchData = new File("src/userMatchData.txt");
@@ -153,6 +179,7 @@ class Game {
         }
         writeToUserMatchData.close();
     }*/
+
 
     /** This monstrosity of a method exists because I wish Java was easier...             //Julius Thomsen
      */

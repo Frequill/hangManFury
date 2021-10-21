@@ -3,9 +3,9 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 class Player {
-     public static Player modifyX = new Player();
      private String instanceVarUsername;
      private int pickUserData;
+     private int fakeUser;
 
     public String getInstanceVarUsername(String user) {
         instanceVarUsername = user;
@@ -21,22 +21,24 @@ class Player {
 
     public static ArrayList <String> allUsernames = new ArrayList();
 
+    public static Player modifyX = new Player();
+
     /**
      This method stores different usernames in a text file for later use
      */
 
     public static String writeUsername() throws Exception {
         Scanner in = new Scanner(System.in);
-
         File toUsername = new File("src/username.txt");
 
         System.out.println("Please enter your username: (NO SPACES!!)");
-        String usersInput = in.nextLine();
+        String usersInput = in.next();
 
         Writer out;
         out = new BufferedWriter(new FileWriter(toUsername,true));
         out.append("\n" + usersInput + " 0" + " 0" + " 0");
         out.close();
+
 
         userArray(usersInput);
 
@@ -47,10 +49,20 @@ class Player {
         File username = new File("src/username.txt");
         Scanner readUsername = new Scanner(username);
 
-        allUsernames.clear();
-        allUsernames.add(readUsername.nextLine() + userInput);
-        //allUsernames.add(userInput);
+        if (allUsernames.isEmpty()) {
+            while (readUsername.hasNextLine()) {
+                allUsernames.add(readUsername.nextLine());
+            }
 
+            modifyX.setPickUserData(allUsernames.size()-1);
+            modifyX.fakeUser = allUsernames.size()-1;
+        }
+
+        else {
+            allUsernames.add(userInput);
+        }
+        modifyX.setPickUserData(allUsernames.size()-1);
+        modifyX.fakeUser = allUsernames.size()-1;
     }
 
     public static void matchAdder(int userInQuestion) throws Exception {
@@ -66,7 +78,7 @@ class Player {
         String finalResult = userSplitter[0] + " " + userSplitter[1] + " " + userSplitter[2] + " " +userSplitter[3];
         allUsernames.set(userInQuestion, finalResult);
 
-        /*This is for test purposes! */System.out.println(allUsernames);
+        /*This is for test purpouses! *///System.out.println(allUsernames);
 
         PrintWriter out = new PrintWriter(usernameFile);
         for (int i = 0; i < allUsernames.size(); i++){
@@ -91,7 +103,7 @@ class Player {
         String finalResult = userSplitter[0] + " " + userSplitter[1] + " " + userSplitter[2] + " " +userSplitter[3];
         allUsernames.set(userInQuestion, finalResult);
 
-        /*This is for test purposes! */System.out.println(allUsernames);
+        /*This is for test purpouses! *///System.out.println(allUsernames);
 
         PrintWriter out = new PrintWriter(usernameFile);
         for (int i = 0; i < allUsernames.size(); i++){
@@ -116,7 +128,7 @@ class Player {
         String finalResult = userSplitter[0] + " " + userSplitter[1] + " " + userSplitter[2] + " " +userSplitter[3];
         allUsernames.set(userInQuestion, finalResult);
 
-        /*This is for test purposes! */System.out.println(allUsernames);
+        /*This is for test purpouses! *///System.out.println(allUsernames);
 
         PrintWriter out = new PrintWriter(usernameFile);
         for (int i = 0; i < allUsernames.size(); i++){
@@ -140,60 +152,6 @@ class Player {
         lossAdder(modifyX.getPickUserData());
     }
 
-    // *************************************   ALLTING HÄR NEDÅT ÄR BULLSHIT **********************************
-        /*Scanner in = new Scanner(System.in);
-
-        File toPlaceholder = new File("src/thePlaceholder.txt");
-        File toUsername = new File("src/username.txt");
-
-        PrintWriter output = new PrintWriter(toPlaceholder);
-
-        System.out.println("Please enter your username: (NO SPACES!!)");
-        String usersInput = in.nextLine();
-        output.println(usersInput);
-        output.close();
-
-        //This Printwriter stores the users username in the "thePlaceholder" textfile.
-
-
-
-        PrintWriter jojo = new PrintWriter(toUsername);
-
-        Scanner readPlaceholder = new Scanner(toPlaceholder);
-        String newUsername = readPlaceholder.nextLine();
-
-        ArrayList<String> usernameSaver = new ArrayList<>();
-
-        while(readPlaceholder.hasNextLine()) {
-            usernameSaver.add(readPlaceholder.nextLine());
-        }
-
-        System.out.println(usernameSaver.size());
-
-        for(int i = 0; i < usernameSaver.size(); i++){
-            System.out.println(usernameSaver.get(i));
-            jojo.println(usernameSaver.get(i));
-        }
-        System.out.println("jojo stängs!!!!");
-        jojo.close();
-
-        usernameSaver.add(newUsername);
-        System.out.println(usernameSaver);
-        PrintWriter out = new PrintWriter ("src/username.txt");
-        for(int i = 0; i < usernameSaver.size(); i++){
-
-            out.println(usernameSaver.get(i));
-            // out.println(usernameSaver + " " + newUsername);
-        }
-        out.println(newUsername);
-        out.close();
-
-        newUserScore();
-
-        //This selects the new user immediately
-        return usersInput;
-    }*/
-
     /**
      This method shows the user all available usernames and allows user to select an already existing username
      */
@@ -212,6 +170,7 @@ class Player {
             userChoice = input.nextInt();
 
             if (userChoice == 1) {
+
                 File usernames = new File("src/username.txt");
                 Scanner readUsernames = new Scanner(usernames);
 
@@ -240,17 +199,20 @@ class Player {
                    if(pickUser < 1 || pickUser >= aList.size()){
                        System.out.println("Choice was out of bounds! ");
                    }
+                   else if(modifyX.fakeUser == pickUser){
+                       System.out.println("You can`t reselect your current profile!!");
+                   }
                    else{
                        run2 = false;
                    }
                }
-                userArray(aList.get(pickUser));
+                modifyX.fakeUser = pickUser;
                 modifyX.setPickUserData(pickUser);
-
                 user = aList.get(pickUser);
-                String []splitUser = user.split(" ", 3);
-                String trueUser = splitUser [0];
-                return trueUser;
+                String[]userSplitter = user.split(" ",4);
+                String fullUser = userSplitter[0];
+
+                return fullUser;
 
             } else if (userChoice == 2) {
                 String username = writeUsername();
@@ -260,58 +222,6 @@ class Player {
             }
         }
         return null;
-    }
-
-    //This method works in practice BUT I can't reach it from the "game" class... if I could it would work! (Martin knows more about getters than I do...)
-
-
-
-    /*public static void newUserScore() throws Exception {
-        int defaultScore = 0;
-
-        File toScoreMatchPlaceholder = new File("src/userMatchDataPlaceholder.txt");
-        File toUserMatchData = new File("src/userMatchData.txt");
-        ArrayList <String> matchSaver = new ArrayList<>();
-
-        //This Printwriter stores the users matches in the "userMatchDataPlaceholder" textfile
-        PrintWriter output = new PrintWriter(toScoreMatchPlaceholder);
-        output.println(defaultScore);
-        output.close();
-
-        Scanner readMatchDataPlaceholder = new Scanner(toScoreMatchPlaceholder);
-
-        String newUserScore = readMatchDataPlaceholder.nextLine();
-        readMatchDataPlaceholder.close();
-
-        PrintWriter out = new PrintWriter("src/userMatchData.txt");
-        for (int i = 0; i < matchSaver.size(); i++) {
-            out.println(matchSaver.get(i));
-        }
-        out.println( newUserScore);
-        out.close();
-    }*/
-
-
-    public static void saveMatch(int pickUser)throws Exception{
-        File userMatchData = new File("src/userMatchData.txt");
-        Scanner readUserMatchData = new Scanner(userMatchData);
-
-        ArrayList<String> thisWasInsideUserMatchData = new ArrayList<>();
-        while (readUserMatchData.hasNextLine()){
-            thisWasInsideUserMatchData.add(readUserMatchData.nextLine());
-        }
-
-        int intMatchData = Integer.parseInt(thisWasInsideUserMatchData.get(pickUser));
-        int fullMatchData = intMatchData + 1;
-        String ultimateResult = Integer.toString(fullMatchData);
-
-        thisWasInsideUserMatchData.set(pickUser, ultimateResult);
-
-        PrintWriter writeToUserMatchData = new PrintWriter(userMatchData);
-        for (int i = 0; i < thisWasInsideUserMatchData.size(); i++){
-            writeToUserMatchData.println(thisWasInsideUserMatchData.get(i));
-        }
-        writeToUserMatchData.close();
     }
 }
 

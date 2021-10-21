@@ -59,7 +59,8 @@ class Menu{
         Menu.mainMenuFunction();
     }
     public static String secondMenu(String user) throws Exception{
-        System.out.println("Selected profile: " + user);
+        String [] splitUser = user.split(" ",4);
+        System.out.println("Selected profile: " + splitUser[0]);
         Menu menu = new Menu("main",3);
         menu.getMenuOptions().add(0, "1) Change user ");
         menu.getMenuOptions().add(1, "2) Play");
