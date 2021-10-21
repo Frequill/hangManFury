@@ -58,8 +58,9 @@ class Menu{
         menu.optionPrinter(menu.getMenuOptions());
         Menu.mainMenuFunction();
     }
-    static String secondMenu(String user) throws Exception{
-        System.out.println("Selected profile: " + user);
+    public static String secondMenu(String user) throws Exception{
+        String [] splitUser = user.split(" ",4);
+        System.out.println("Selected profile: " + splitUser[0]);
         Menu menu = new Menu("main",3);
         menu.getMenuOptions().add(0, "1) Change user ");
         menu.getMenuOptions().add(1, "2) Play");
@@ -100,10 +101,10 @@ class Menu{
 
             if (choice == 1) {
                 user = userNameMenu(user);
+                //System.out.println(matchSaver.getPickUserData());
                 secondMenu(user);
             }
-
-                else if (choice == 2) {
+            else if (choice == 2) {
                 if (user == null) {
                     System.out.println("\nPlease select a user first!!!!!!!\n(Press Enter to return to menu)");
                     choiceInput.nextLine();
@@ -111,17 +112,15 @@ class Menu{
                     firstMenu();
                 } else {
                     Game.hangMan(user);
+                    secondMenu(user);
                 }
-                break;
             }
                 else if (choice == 3) {
                 System.out.println("Shutting down...");
                 run = false;
-                break;
             }
                 else {
                 System.out.println("\nPlease enter an *integer* greater than 0 and lower than 4:\n");
-                show();
                }
             }
         }
