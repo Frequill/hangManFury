@@ -59,8 +59,6 @@ class Menu{
         Menu.mainMenuFunction();
     }
     public static String secondMenu(String user) throws Exception{
-        //Player matchSaver = new Player();
-        //pickUser = matchSaver.getPickUserData();
         System.out.println("Selected profile: " + user);
         Menu menu = new Menu("main",3);
         menu.getMenuOptions().add(0, "1) Change user ");
@@ -71,8 +69,6 @@ class Menu{
     }
 
     public static String userNameMenu(String user) throws Exception{
-        //Player matchSaver = new Player();
-        //pickUser = matchSaver.getPickUserData();
         Menu menu = new Menu("user",2);
         menu.getMenuOptions().add(0, "1) Existing user");
         menu.getMenuOptions().add(1, "2) New user ");

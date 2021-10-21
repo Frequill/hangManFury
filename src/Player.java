@@ -3,6 +3,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 class Player {
+     public static Player modifyX = new Player();
      private String instanceVarUsername;
      private int pickUserData;
 
@@ -19,8 +20,6 @@ class Player {
     }
 
     public static ArrayList <String> allUsernames = new ArrayList();
-
-    public static Player modifyX = new Player();
 
     /**
      This method stores different usernames in a text file for later use
@@ -48,17 +47,10 @@ class Player {
         File username = new File("src/username.txt");
         Scanner readUsername = new Scanner(username);
 
-        //ArrayList <String> allUsernames = new ArrayList();
+        allUsernames.clear();
+        allUsernames.add(readUsername.nextLine() + userInput);
+        //allUsernames.add(userInput);
 
-        if (allUsernames.isEmpty()) {
-            while (readUsername.hasNextLine()) {
-                allUsernames.add(readUsername.nextLine());
-            }
-        }
-
-        else {
-            allUsernames.add(userInput);
-        }
     }
 
     public static void matchAdder(int userInQuestion) throws Exception {
@@ -74,7 +66,7 @@ class Player {
         String finalResult = userSplitter[0] + " " + userSplitter[1] + " " + userSplitter[2] + " " +userSplitter[3];
         allUsernames.set(userInQuestion, finalResult);
 
-        /*This is for test purpouses! */System.out.println(allUsernames);
+        /*This is for test purposes! */System.out.println(allUsernames);
 
         PrintWriter out = new PrintWriter(usernameFile);
         for (int i = 0; i < allUsernames.size(); i++){
@@ -99,7 +91,7 @@ class Player {
         String finalResult = userSplitter[0] + " " + userSplitter[1] + " " + userSplitter[2] + " " +userSplitter[3];
         allUsernames.set(userInQuestion, finalResult);
 
-        /*This is for test purpouses! */System.out.println(allUsernames);
+        /*This is for test purposes! */System.out.println(allUsernames);
 
         PrintWriter out = new PrintWriter(usernameFile);
         for (int i = 0; i < allUsernames.size(); i++){
@@ -124,7 +116,7 @@ class Player {
         String finalResult = userSplitter[0] + " " + userSplitter[1] + " " + userSplitter[2] + " " +userSplitter[3];
         allUsernames.set(userInQuestion, finalResult);
 
-        /*This is for test purpouses! */System.out.println(allUsernames);
+        /*This is for test purposes! */System.out.println(allUsernames);
 
         PrintWriter out = new PrintWriter(usernameFile);
         for (int i = 0; i < allUsernames.size(); i++){
@@ -253,8 +245,8 @@ class Player {
                    }
                }
                 userArray(aList.get(pickUser));
-
                 modifyX.setPickUserData(pickUser);
+
                 user = aList.get(pickUser);
                 String []splitUser = user.split(" ", 3);
                 String trueUser = splitUser [0];
@@ -269,7 +261,6 @@ class Player {
         }
         return null;
     }
-
 
     //This method works in practice BUT I can't reach it from the "game" class... if I could it would work! (Martin knows more about getters than I do...)
 
