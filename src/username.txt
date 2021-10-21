@@ -1,5 +1,6 @@
 *Placeholder(KonsumentSkallAldrigTagaBortAnvändareViaTextfilen!)*
-Julius 0 0 0
+Julius 4 4 0
 Edwin 0 0 0
 Martin 0 0 0
 Johanna 0 0 0
+frukost 0 0 0

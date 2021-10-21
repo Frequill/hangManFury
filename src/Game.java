@@ -14,8 +14,8 @@ class Game {
         boolean victory = false;
         int playerLife = 10;
         // Here is our full wordlist!
-        String [] wordHolder = {"Björn","Bill","Java","Edwin","Julius","Martin","Johanna","String","Int","Scanner","ArrayList","boolean","Character","Placeholder","null",
-                "monster","redbull","Newton","Katarina","Switchbitch","HANGMAN"};
+        String [] wordHolder = {"Björn"};//,"Bill","Java","Edwin","Julius","Martin","Johanna","String","Int","Scanner","ArrayList","boolean","Character","Placeholder","null",
+               // "monster","redbull","Newton","Katarina","Switchbitch","HANGMAN"};
 
         String guessWord = wordHolder[randomizer(wordHolder)].toLowerCase();
         ArrayList<Character> allLetters = new ArrayList<>(guessWord.length());

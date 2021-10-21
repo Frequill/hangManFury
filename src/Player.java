@@ -61,8 +61,8 @@ class Player {
                 allUsernames.add(readUsername.nextLine());
             }
 
-            modifyX.setPickUserData(allUsernames.size()-1);
-            modifyX.fakeUser = allUsernames.size()-1;
+         //   modifyX.setPickUserData(allUsernames.size()-1);
+         //   modifyX.fakeUser = allUsernames.size()-1;
         }
 
         else {
@@ -77,8 +77,13 @@ class Player {
      */
     public static void matchAdder(int userInQuestion) throws Exception {
         File usernameFile = new File("src/username.txt");
+        System.out.println(allUsernames.size());
+        System.out.println(userInQuestion);
         String userName = allUsernames.get(userInQuestion);
+        System.out.println(userName);
+        System.out.println(allUsernames.get(userInQuestion));
         String[] userSplitter = userName.split(" ", 4);
+
 
         int x = Integer.parseInt(userSplitter[1]);
         x = x + 1;
@@ -92,7 +97,7 @@ class Player {
 
         PrintWriter out = new PrintWriter(usernameFile);
         for (int i = 0; i < allUsernames.size(); i++){
-            out.println(allUsernames.get(i));
+            out.print(allUsernames.get(i) + "\n");
         }
         out.close();
     }
@@ -118,7 +123,7 @@ class Player {
 
         PrintWriter out = new PrintWriter(usernameFile);
         for (int i = 0; i < allUsernames.size(); i++){
-            out.println(allUsernames.get(i));
+            out.print(allUsernames.get(i) + "\n");
         }
         out.close();
     }
@@ -144,7 +149,7 @@ class Player {
 
         PrintWriter out = new PrintWriter(usernameFile);
         for (int i = 0; i < allUsernames.size(); i++){
-            out.println(allUsernames.get(i));
+            out.print(allUsernames.get(i) + "\n");
         }
         out.close();
     }
@@ -191,7 +196,7 @@ class Player {
                 //This arraylist saves all usernames from username.txt
                 ArrayList<String> aList = new ArrayList<>();
 
-                while (readUsernames.hasNext()) {
+                while (readUsernames.hasNextLine()) {
                     aList.add(readUsernames.nextLine());
                 }
                 readUsernames.close();
@@ -219,6 +224,7 @@ class Player {
                        run2 = false;
                    }
                }
+                userArray(aList.get(pickUser));
                 modifyX.fakeUser = pickUser;  // Variable "fakeUser" is used to keep track of which user is currently selected
                 modifyX.setPickUserData(pickUser);
                 user = aList.get(pickUser);
