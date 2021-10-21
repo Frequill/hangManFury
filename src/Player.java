@@ -6,7 +6,6 @@ import java.util.Scanner;
 class Player {
      private String instanceVarUsername;
      private int pickUserData;
-     private int fakeUser;
 
     public String getInstanceVarUsername(String user) {
         instanceVarUsername = user;
@@ -21,6 +20,7 @@ class Player {
     }
 
     public static ArrayList <String> allUsernames = new ArrayList();
+    public static ArrayList <Integer> allUserNumbers = new ArrayList();
 
     public static Player modifyX = new Player();
 
@@ -36,15 +36,15 @@ class Player {
         System.out.println("Please enter your username: (NO SPACES!!)");
         String usersInput = in.next();
 
+        String newUser = usersInput+" 0"+" 0"+" 0";
         Writer out;
         out = new BufferedWriter(new FileWriter(toUsername,true));
-        out.append("\n" + usersInput + " 0" + " 0" + " 0");
+        out.append("\n" + newUser);
         out.close();
 
+        userArray(newUser);
 
-        userArray(usersInput);
-
-        return usersInput;
+        return newUser;
     }
 
     /**
@@ -56,20 +56,24 @@ class Player {
         File username = new File("src/username.txt");
         Scanner readUsername = new Scanner(username);
 
+
         if (allUsernames.isEmpty()) {
             while (readUsername.hasNextLine()) {
                 allUsernames.add(readUsername.nextLine());
             }
 
-         //   modifyX.setPickUserData(allUsernames.size()-1);
-         //   modifyX.fakeUser = allUsernames.size()-1;
         }
 
         else {
-            allUsernames.add(userInput);
+            if (allUsernames.contains(userInput)) {
+
+            } else {
+                allUsernames.add(userInput);
+            }
         }
-        modifyX.setPickUserData(allUsernames.size()-1);
-        modifyX.fakeUser = allUsernames.size()-1;
+
+        modifyX.pickUserData = allUsernames.size()-1;
+        modifyX.setPickUserData(modifyX.pickUserData);
     }
 
     /**
@@ -77,11 +81,7 @@ class Player {
      */
     public static void matchAdder(int userInQuestion) throws Exception {
         File usernameFile = new File("src/username.txt");
-        System.out.println(allUsernames.size());
-        System.out.println(userInQuestion);
         String userName = allUsernames.get(userInQuestion);
-        System.out.println(userName);
-        System.out.println(allUsernames.get(userInQuestion));
         String[] userSplitter = userName.split(" ", 4);
 
 
@@ -93,7 +93,6 @@ class Player {
         String finalResult = userSplitter[0] + " " + userSplitter[1] + " " + userSplitter[2] + " " +userSplitter[3];
         allUsernames.set(userInQuestion, finalResult);
 
-        /*This is for test purpouses! *///System.out.println(allUsernames);
 
         PrintWriter out = new PrintWriter(usernameFile);
         for (int i = 0; i < allUsernames.size(); i++){
@@ -119,7 +118,6 @@ class Player {
         String finalResult = userSplitter[0] + " " + userSplitter[1] + " " + userSplitter[2] + " " +userSplitter[3];
         allUsernames.set(userInQuestion, finalResult);
 
-        /*This is for test purpouses! *///System.out.println(allUsernames);
 
         PrintWriter out = new PrintWriter(usernameFile);
         for (int i = 0; i < allUsernames.size(); i++){
@@ -145,16 +143,12 @@ class Player {
         String finalResult = userSplitter[0] + " " + userSplitter[1] + " " + userSplitter[2] + " " +userSplitter[3];
         allUsernames.set(userInQuestion, finalResult);
 
-        /*This is for test purpouses! *///System.out.println(allUsernames);
-
         PrintWriter out = new PrintWriter(usernameFile);
         for (int i = 0; i < allUsernames.size(); i++){
             out.print(allUsernames.get(i) + "\n");
         }
         out.close();
     }
-
-
 
     // Three basic "callers" that allows us to access instance variables of the "Player" class from other classes
 
@@ -217,15 +211,16 @@ class Player {
                    if(pickUser < 1 || pickUser >= aList.size()){
                        System.out.println("Choice was out of bounds! ");
                    }
-                   else if(modifyX.fakeUser == pickUser){
-                       System.out.println("You can`t reselect your current profile!!");
+                   else if(allUserNumbers.contains(pickUser)){
+                       System.out.println("You can`t reselect a profile that was used earlier!!");
                    }
+
                    else{
                        run2 = false;
                    }
                }
                 userArray(aList.get(pickUser));
-                modifyX.fakeUser = pickUser;  // Variable "fakeUser" is used to keep track of which user is currently selected
+                allUserNumbers.add(pickUser);
                 modifyX.setPickUserData(pickUser);
                 user = aList.get(pickUser);
                 String[]userSplitter = user.split(" ",4);  // Splits username from stats so the two can be showed separately

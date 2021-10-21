@@ -14,8 +14,10 @@ class Game {
         boolean victory = false;
         int playerLife = 10;
         // Here is our full wordlist!
-        String [] wordHolder = {"Björn"};//,"Bill","Java","Edwin","Julius","Martin","Johanna","String","Int","Scanner","ArrayList","boolean","Character","Placeholder","null",
-               // "monster","redbull","Newton","Katarina","Switchbitch","HANGMAN"};
+        String [] wordHolder = {"Björn","Bill","Java","Edwin","Julius","Martin","Johanna","String","Int","Scanner","ArrayList","boolean","Character","Placeholder","null",
+               "monster","redbull","Newton","Switchbitch","HANGMAN","FUCKYOU","Fury","Class","Static","Void","GeOssHögtBetygBill","System","Exception","Mupphuvud"
+        ,"JamesGosling","Kaffe","ForLoop","While","Index","Double","Minecraft","Starcraft","Warcraft","Cantcrashthisgame","Xbox","Discord","Git","Github","CleanDrink","Corona",
+        "False","True","Stockholm","CtrlAltDelete","Syntax"};
 
         String guessWord = wordHolder[randomizer(wordHolder)].toLowerCase();
         ArrayList<Character> allLetters = new ArrayList<>(guessWord.length());
@@ -162,7 +164,7 @@ class Game {
 
         String [] wordHolder = {TEXT_RED,TEXT_GREEN,TEXT_YELLOW,TEXT_BLUE,TEXT_PURPLE,TEXT_CYAN};
 
-        String[] hangManIllus = {"   +--+\n   |  |\n   0  |\n  /|\\ |\n  / \\ |\n      |\n ======\n",
+        String[] hangManIllus = {"   +--+\n   |  |\n   \uD83D\uDC80 |\n  /|\\ |\n  / \\ |\n      |\n ======\n",
                 "   +--+\n   |  |\n   0  |\n  /|\\ |\n  /   |\n      |\n ======\n",
                 "   +--+\n   |  |\n   0  |\n  /|\\ |\n      |\n      |\n ======\n",
                 "   +--+\n   |  |\n   0  |\n  /|  |\n      |\n      |\n ======\n",
