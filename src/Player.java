@@ -2,6 +2,7 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+// ****************************************** Instance variables and object *******************************************
 class Player {
      private String instanceVarUsername;
      private int pickUserData;
@@ -23,10 +24,11 @@ class Player {
 
     public static Player modifyX = new Player();
 
+    //******************************************** Functions *********************************************
+
     /**
      This method stores different usernames in a text file for later use
      */
-
     public static String writeUsername() throws Exception {
         Scanner in = new Scanner(System.in);
         File toUsername = new File("src/username.txt");
@@ -44,6 +46,11 @@ class Player {
 
         return usersInput;
     }
+
+    /**
+     Method stores all "usernames" from username.txt file into an arraylist so that specific indesex (users) can be
+     called upon later for stats increases or decreases...
+     */
 
     public static void userArray(String userInput) throws Exception{
         File username = new File("src/username.txt");
@@ -65,6 +72,9 @@ class Player {
         modifyX.fakeUser = allUsernames.size()-1;
     }
 
+    /**
+     This method increases the users overall matches played!
+     */
     public static void matchAdder(int userInQuestion) throws Exception {
         File usernameFile = new File("src/username.txt");
         String userName = allUsernames.get(userInQuestion);
@@ -88,8 +98,9 @@ class Player {
     }
 
 
-
-
+    /**
+     This method increases the users overall matches won!
+     */
     public static void winAdder(int userInQuestion) throws Exception {
         File usernameFile = new File("src/username.txt");
         String userName = allUsernames.get(userInQuestion);
@@ -113,8 +124,9 @@ class Player {
     }
 
 
-
-
+    /**
+     This method increases the users overall matches lost :(
+     */
     public static void lossAdder(int userInQuestion) throws Exception {
         File usernameFile = new File("src/username.txt");
         String userName = allUsernames.get(userInQuestion);
@@ -139,6 +151,7 @@ class Player {
 
 
 
+    // Three basic "callers" that allows us to access instance variables of the "Player" class from other classes
 
     public static void matchAdderCaller() throws Exception {
         matchAdder(modifyX.getPickUserData());
@@ -206,10 +219,10 @@ class Player {
                        run2 = false;
                    }
                }
-                modifyX.fakeUser = pickUser;
+                modifyX.fakeUser = pickUser;  // Variable "fakeUser" is used to keep track of which user is currently selected
                 modifyX.setPickUserData(pickUser);
                 user = aList.get(pickUser);
-                String[]userSplitter = user.split(" ",4);
+                String[]userSplitter = user.split(" ",4);  // Splits username from stats so the two can be showed separately
                 String fullUser = userSplitter[0];
 
                 return fullUser;

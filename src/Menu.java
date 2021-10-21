@@ -4,10 +4,13 @@ import java.util.Scanner;
 class Menu{
     public static Scanner in = new Scanner(System.in);
 
+    //*************************************** Instance variables and menu object **************************************
+
     private int num;
     private String Alpha;
     private String sentence;
     private ArrayList<String> menuOptions = new ArrayList<>();
+
 
     public Menu(String name, int Int) {
         this.num = Int;
@@ -48,7 +51,7 @@ class Menu{
         return sentence;
     }
 
-    //************************************* Menus **************************************
+    //************************************************ Menus ************************************************
 
     public static void firstMenu() throws Exception {
         Menu menu = new Menu("main",3);
@@ -78,7 +81,8 @@ class Menu{
         return user;
     }
 
-    //*********************************** Functions *************************************
+    //******************************************** Functions ***********************************************
+    //   (This is how the menus work)
 
     /**
      This method allows user to make inputs in the various menus. It also makes sure that a user is selected
@@ -96,12 +100,10 @@ class Menu{
                 System.out.println("\nPlease input an integer between 1 - 3:\n");
                 choiceInput.next();
             }
-
             choice = choiceInput.nextInt();
 
             if (choice == 1) {
                 user = userNameMenu(user);
-                //System.out.println(matchSaver.getPickUserData());
                 secondMenu(user);
             }
             else if (choice == 2) {
@@ -109,7 +111,7 @@ class Menu{
                     System.out.println("\nPlease select a user first!!!!!!!\n(Press Enter to return to menu)");
                     choiceInput.nextLine();
                     choiceInput.nextLine();
-                    firstMenu();
+                    show();
                 } else {
                     Game.hangMan(user);
                     secondMenu(user);
@@ -125,8 +127,10 @@ class Menu{
             }
         }
 
+    /**
+     Shows first menu because Bill says to make it so!
+     */
     static void show() throws Exception{
     firstMenu();
-
     }
 }

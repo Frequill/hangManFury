@@ -3,3 +3,11 @@ public class mainFile {
         Menu.firstMenu();
     }
 }
+
+
+
+// hangMan is brought to you by the fantastic group "Fury"
+
+
+
+// Julius Thomsen, Edwin Juzovitski Chaiderson, Martin Charlemaine, Johanna Örnbrand                                     Grupp Fury!

@@ -1,12 +1,5 @@
 *Placeholder(KonsumentSkallAldrigTagaBortAnvändareViaTextfilen!)*
-Edwin 2 0 2
 Julius 0 0 0
-Johanna 0 0 0
+Edwin 0 0 0
 Martin 0 0 0
-Thor 0 0 0
-Mamma 0 0 0
-wss 0 0 0
-Willam 0 0 0
-Tre 0 0 0
-Github 0 0 0
-Gunnar 1 1 0
+Johanna 0 0 0
