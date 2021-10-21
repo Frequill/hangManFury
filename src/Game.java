@@ -23,9 +23,9 @@ class Game {
         ArrayList<Character> allLetters = new ArrayList<>(guessWord.length());
         ArrayList<Character> dumbGuesses = new ArrayList();
         Player userName = new Player();
+        String [] splitUserName = user.split(" ", 5);
 
-
-        System.out.println("Welcome " + userName.getInstanceVarUsername(user) + " guess the word that is  " + guessWord.length() + " letters long!");
+        System.out.println("Welcome " + userName.getInstanceVarUsername(splitUserName[0]) + " guess the word that is " + guessWord.length() + " letters long!");
 
         for (int i = 0; i < guessWord.length(); i++) {
             System.out.print("_");
@@ -77,9 +77,13 @@ class Game {
                 correctLetter(trueLetter, guessWord, allLetters, userName, user);
                  if (allLetters.contains('_')) {
                  } else {
-            System.out.println("\n\nCongratulations " + userName.getInstanceVarUsername(user) + ". You are victorious! :)\n(Press Enter to return to main menu)");
+            System.out.println("\n\nCongratulations " + userName.getInstanceVarUsername(splitUserName[0]) + ". You are victorious! :)\n(Press Enter to return to main menu)");
             Player.matchAdderCaller();
             Player.winAdderCaller();
+            if (playerLife == 10){
+                Player.flawlessAdderCaller();
+                System.out.println("\nNO LIVES LOST! FLAWLESS VICTORY ARCHIVED!!!!!!\n" + userName.getInstanceVarUsername(splitUserName[0]) + " is a legend!");
+            }
             in.nextLine();
             victory = true;
                  }

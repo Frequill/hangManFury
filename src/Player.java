@@ -36,7 +36,7 @@ class Player {
         System.out.println("Please enter your username: (NO SPACES!!)");
         String usersInput = in.next();
 
-        String newUser = usersInput+" 0"+" 0"+" 0";
+        String newUser = usersInput+" 0"+" 0"+" 0" + " 0";
         Writer out;
         out = new BufferedWriter(new FileWriter(toUsername,true));
         out.append("\n" + newUser);
@@ -82,7 +82,7 @@ class Player {
     public static void matchAdder(int userInQuestion) throws Exception {
         File usernameFile = new File("src/username.txt");
         String userName = allUsernames.get(userInQuestion);
-        String[] userSplitter = userName.split(" ", 4);
+        String[] userSplitter = userName.split(" ", 5);
 
 
         int x = Integer.parseInt(userSplitter[1]);
@@ -90,7 +90,7 @@ class Player {
         String x2 = String.valueOf(x);
         userSplitter[1] = x2;
 
-        String finalResult = userSplitter[0] + " " + userSplitter[1] + " " + userSplitter[2] + " " +userSplitter[3];
+        String finalResult = userSplitter[0] + " " + userSplitter[1] + " " + userSplitter[2] + " " +userSplitter[3] + " " + userSplitter[4];
         allUsernames.set(userInQuestion, finalResult);
 
 
@@ -108,14 +108,14 @@ class Player {
     public static void winAdder(int userInQuestion) throws Exception {
         File usernameFile = new File("src/username.txt");
         String userName = allUsernames.get(userInQuestion);
-        String[] userSplitter = userName.split(" ", 4);
+        String[] userSplitter = userName.split(" ", 5);
 
         int x = Integer.parseInt(userSplitter[2]);
         x = x + 1;
         String x2 = String.valueOf(x);
         userSplitter[2] = x2;
 
-        String finalResult = userSplitter[0] + " " + userSplitter[1] + " " + userSplitter[2] + " " +userSplitter[3];
+        String finalResult = userSplitter[0] + " " + userSplitter[1] + " " + userSplitter[2] + " " +userSplitter[3] + " " + userSplitter[4];
         allUsernames.set(userInQuestion, finalResult);
 
 
@@ -133,15 +133,37 @@ class Player {
     public static void lossAdder(int userInQuestion) throws Exception {
         File usernameFile = new File("src/username.txt");
         String userName = allUsernames.get(userInQuestion);
-        String[] userSplitter = userName.split(" ", 4);
+        String[] userSplitter = userName.split(" ", 5);
 
         int x = Integer.parseInt(userSplitter[3]);
         x = x + 1;
         String x2 = String.valueOf(x);
         userSplitter[3] = x2;
 
-        String finalResult = userSplitter[0] + " " + userSplitter[1] + " " + userSplitter[2] + " " +userSplitter[3];
+        String finalResult = userSplitter[0] + " " + userSplitter[1] + " " + userSplitter[2] + " " +userSplitter[3] + " " + userSplitter[4];
         allUsernames.set(userInQuestion, finalResult);
+
+        PrintWriter out = new PrintWriter(usernameFile);
+        for (int i = 0; i < allUsernames.size(); i++){
+            out.print(allUsernames.get(i) + "\n");
+        }
+        out.close();
+    }
+
+    public static void flawlessAdder(int userInQuestion) throws Exception {
+        File usernameFile = new File("src/username.txt");
+        String userName = allUsernames.get(userInQuestion);
+        String[] userSplitter = userName.split(" ", 5);
+
+
+        int x = Integer.parseInt(userSplitter[4]);
+        x = x + 1;
+        String x2 = String.valueOf(x);
+        userSplitter[4] = x2;
+
+        String finalResult = userSplitter[0] + " " + userSplitter[1] + " " + userSplitter[2] + " " +userSplitter[3] + " " + userSplitter[4];
+        allUsernames.set(userInQuestion, finalResult);
+
 
         PrintWriter out = new PrintWriter(usernameFile);
         for (int i = 0; i < allUsernames.size(); i++){
@@ -162,6 +184,10 @@ class Player {
 
     public static void lossAdderCaller() throws Exception {
         lossAdder(modifyX.getPickUserData());
+    }
+
+    public static void flawlessAdderCaller() throws Exception {
+        flawlessAdder(modifyX.getPickUserData());
     }
 
     /**
@@ -186,7 +212,7 @@ class Player {
                 File usernames = new File("src/username.txt");
                 Scanner readUsernames = new Scanner(usernames);
 
-                System.out.println("Profile name, Games played, Matches won, Matches lost");
+                System.out.println("Profile name, Games played, Matches won, Matches lost, Flawless Victories!");
                 //This arraylist saves all usernames from username.txt
                 ArrayList<String> aList = new ArrayList<>();
 
@@ -200,7 +226,7 @@ class Player {
 
                 }
                 int last = aList.size()+1;
-                System.out.println(last+")" + " Back");
+                System.out.println(aList.size()+ ")" + " Back");
                 boolean run2 = true;
 
                 int pickUser = 0;
@@ -210,13 +236,13 @@ class Player {
                        input.next();
                    }
                    pickUser = input.nextInt();
-                   if(pickUser < 1 || pickUser >= last+1){
+                   if(pickUser < 1 || pickUser >= aList.size()+1){
                        System.out.println("Choice was out of bounds! ");
                    }
                    else if(allUserNumbers.contains(pickUser)){
                        System.out.println("You can`t reselect a profile that was used earlier!!");
                    }
-                   else if(pickUser == last){
+                   else if(pickUser == aList.size()){
                        if (user == null) {
                            Menu.firstMenu();
                        }
@@ -252,7 +278,7 @@ class Player {
 
             }
             else {
-                System.out.println("\nPlease enter an *integer* greater than 0 and lower than 3:\n");
+                System.out.println("\nPlease enter an *integer* greater than 0 and lower than 4:\n");
             }
         }
         return null;

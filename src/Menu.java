@@ -120,7 +120,7 @@ class Menu{
             }
                 else if (choice == 3) {
                 System.out.println("Shutting down...");
-                run = false;
+                System.exit(0);
             }
                 else {
                 System.out.println("\nPlease enter an *integer* greater than 0 and lower than 4:\n");
