@@ -73,9 +73,10 @@ class Menu{
     }
 
     public static String userNameMenu(String user) throws Exception{
-        Menu menu = new Menu("user",2);
+        Menu menu = new Menu("user",3);
         menu.getMenuOptions().add(0, "1) Existing user");
         menu.getMenuOptions().add(1, "2) New user ");
+        menu.getMenuOptions().add(2,"3) Back");
         menu.optionPrinter(menu.getMenuOptions());
         user = Player.readUsername(user);
         return user;

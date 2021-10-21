@@ -176,7 +176,7 @@ class Player {
 
         while (run) {
             while (!input.hasNextInt()){
-                System.out.println("\nPlease input an integer between 1 - 2:\n");
+                System.out.println("\nPlease input an integer between 1 - 3:\n");
                 input.next();
             }
             userChoice = input.nextInt();
@@ -199,6 +199,8 @@ class Player {
                     System.out.println(i + ") " + aList.get(i));
 
                 }
+                int last = aList.size()+1;
+                System.out.println(last+")" + " Back");
                 boolean run2 = true;
 
                 int pickUser = 0;
@@ -208,11 +210,20 @@ class Player {
                        input.next();
                    }
                    pickUser = input.nextInt();
-                   if(pickUser < 1 || pickUser >= aList.size()){
+                   if(pickUser < 1 || pickUser >= last+1){
                        System.out.println("Choice was out of bounds! ");
                    }
                    else if(allUserNumbers.contains(pickUser)){
                        System.out.println("You can`t reselect a profile that was used earlier!!");
+                   }
+                   else if(pickUser == last){
+                       if (user == null) {
+                           Menu.firstMenu();
+                       }
+                       else{
+                           Menu.secondMenu(user);
+                           return user;
+                       }
                    }
 
                    else{
@@ -231,8 +242,17 @@ class Player {
             } else if (userChoice == 2) {
                 String username = writeUsername();
                 return username;
-            } else {
-                System.out.println("\nPlease enter an *integer* greater than 0 and lower than 2:\n");
+            }else if (userChoice == 3) {
+                if (user == null){
+                    Menu.firstMenu();
+                }
+                else{
+                    Menu.secondMenu(user);
+                }
+
+            }
+            else {
+                System.out.println("\nPlease enter an *integer* greater than 0 and lower than 3:\n");
             }
         }
         return null;
