@@ -3,3 +3,14 @@ Edwin 1 0 1
 Julius 0 0 0
 Johanna 0 0 0
 Martin 0 0 0
+halle 1 1 0
+uuu 0 0 0
+kiisssie 0 0 0
+hoj 0 0 0
+haj 0 0 0
+koj 0 0 0
+hanna 0 0 0
+jojo 0 0 0
+toros 1 1 0
+
+hare 0 0 0
