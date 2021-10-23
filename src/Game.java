@@ -1,33 +1,38 @@
-import java.io.File;
-import java.io.PrintWriter;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Locale;
 import java.util.Scanner;
 
 class Game {
 
     public static Scanner in = new Scanner(System.in);
 
+    /**
+     This method launches and plays the entire game, this is the most important class. It picks out a word and makes player guess the various letters
+     in said word until the player either wins or loses!
+     */
+
     public static void hangMan(String user) throws Exception {
         boolean victory = false;
         int playerLife = 10;
+        // Here is our full wordlist!
         String [] wordHolder = {"Björn","Bill","Java","Edwin","Julius","Martin","Johanna","String","Int","Scanner","ArrayList","boolean","Character","Placeholder","null",
-                "monster","redbull","Newton","Katarina","Switchbitch","HANGMAN"};
+               "monster","redbull","Newton","Switchbitch","HANGMAN","FUCKYOU","Fury","Class","Static","Void","GeOssHögtBetygBill","System","Exception","Mupphuvud"
+        ,"JamesGosling","Kaffe","ForLoop","While","Index","Double","Minecraft","Starcraft","Warcraft","Cantcrashthisgame","Xbox","Discord","Git","Github","CleanDrink","Corona",
+        "False","True","Stockholm","CtrlAltDelete","Syntax"};
 
-        String guessWord = wordHolder[wordGenerator(wordHolder)].toLowerCase();
+        String guessWord = wordHolder[randomizer(wordHolder)].toLowerCase();
         ArrayList<Character> allLetters = new ArrayList<>(guessWord.length());
         ArrayList<Character> dumbGuesses = new ArrayList();
         Player userName = new Player();
+        String [] splitUserName = user.split(" ", 5);
 
-
-        System.out.println("Welcome " + userName.getInstanceVarUsername(user) + " guess the word that is  " + guessWord.length() + " letters long!");
+        System.out.println("Welcome " + userName.getInstanceVarUsername(splitUserName[0]) + " guess the word that is " + guessWord.length() + " letters long!");
 
         for (int i = 0; i < guessWord.length(); i++) {
             System.out.print("_");
             allLetters.add(i, '_');
         }
 
+        // "Victory" and "playerLife" checks weather the player wins or looses throughout the game.
         while (victory == false && playerLife > 0) {
             boolean guessCorrect = false;
             boolean guessIncorrect = false;
@@ -36,6 +41,7 @@ class Game {
             String letter = null;
             String trueLetter = null;
 
+            // doubleGuess ensures player does not guess same letter twice! You're welcome <3
             while(doubleGuess) {
                 boolean destroyDumbCharacters = true;
                 while (destroyDumbCharacters) {
@@ -46,7 +52,6 @@ class Game {
                         destroyDumbCharacters = false;
                     }
                 }
-                // This if-case prevents the user from guessing the same character more than once.
                 if (dumbGuesses.contains(trueLetter.charAt(0)) || allLetters.contains(trueLetter.charAt(0))) {
                     System.out.println("Letter has already been guessed!");
                     for (int j = 0; j < allLetters.size(); j++) {
@@ -65,13 +70,20 @@ class Game {
                     }
                 }
 
+                /* "guessCorrect" and "guessIncorrect" makes the game react to your choices as a player.
+                    incorrect guesses result in a loss of life, correct guesses reveals letter in arrayList!*/
+
             if (guessCorrect) {
                 correctLetter(trueLetter, guessWord, allLetters, userName, user);
                  if (allLetters.contains('_')) {
                  } else {
-            System.out.println("\n\nCongratulations " + userName.getInstanceVarUsername(user) + ". You are victorious! :)\n(Press Enter to return to main menu)");
+            System.out.println("\n\nCongratulations " + userName.getInstanceVarUsername(splitUserName[0]) + ". You are victorious! :)\n(Press Enter to return to main menu)");
             Player.matchAdderCaller();
             Player.winAdderCaller();
+            if (playerLife == 10){
+                Player.flawlessAdderCaller();
+                System.out.println("\nNO LIVES LOST! FLAWLESS VICTORY ARCHIVED!!!!!!\n" + userName.getInstanceVarUsername(splitUserName[0]) + " is a legend!");
+            }
             in.nextLine();
             victory = true;
                  }
@@ -86,6 +98,7 @@ class Game {
                 }
 
             }
+            // You already know what "playerLife" does...
             if (playerLife == 0) {
                 System.out.println();
                 hangManWriter(playerLife);
@@ -97,12 +110,19 @@ class Game {
             }
         }
     }
-    public static int wordGenerator(String [] wordHolder){
-        int rand = (int) (Math.random()*wordHolder.length);
+
+    /**
+     Randomizer uses a Math-random function to pick out a word from our "wordlist" at the top of "hangMan" method.
+     It's also used to randomize colors for our "hangMan-graph"!
+     */
+    public static int randomizer(String [] randomArray){
+        int rand = (int) (Math.random()*randomArray.length);
         return rand;
     }
 
-
+    /**
+     Checks if inputted letter is correct.
+     */
     public static void correctLetter(String trueLetter, String placeholder, ArrayList<Character> allLetters, Player userName, String user) throws Exception {
         char guess = trueLetter.charAt(0);
 
@@ -121,6 +141,10 @@ class Game {
 
     }
 
+    /**
+     Method collects all user inputted letters that were incorrect guesses! These letters are later printed out
+     to remind user what he or she previously guessed as to not make same mistake twice.
+     */
     public static ArrayList<Character> incorrectLetterCollector(String trueLetter, ArrayList<Character> dumbGuesses) {
         dumbGuesses.add(trueLetter.charAt(0));
         System.out.println("\nPreviously guessed letters: ");
@@ -129,6 +153,10 @@ class Game {
         }
         return dumbGuesses;
     }
+
+    /**
+     Method randomly changes color of "hangMan-graphic" as to make it stand out from text... and because this way it is less boring!p
+     */
     public static void hangManWriter (int playerLife) {
         String TEXT_RESET = "\u001B[0m";
         String TEXT_RED = "\u001B[31m";
@@ -140,7 +168,7 @@ class Game {
 
         String [] wordHolder = {TEXT_RED,TEXT_GREEN,TEXT_YELLOW,TEXT_BLUE,TEXT_PURPLE,TEXT_CYAN};
 
-        String[] hangManIllus = {"   +--+\n   |  |\n   0  |\n  /|\\ |\n  / \\ |\n      |\n ======\n",
+        String[] hangManIllus = {"   +--+\n   |  |\n   \uD83D\uDC80 |\n  /|\\ |\n  / \\ |\n      |\n ======\n",
                 "   +--+\n   |  |\n   0  |\n  /|\\ |\n  /   |\n      |\n ======\n",
                 "   +--+\n   |  |\n   0  |\n  /|\\ |\n      |\n      |\n ======\n",
                 "   +--+\n   |  |\n   0  |\n  /|  |\n      |\n      |\n ======\n",
@@ -152,36 +180,14 @@ class Game {
                 "       \n       \n       \n       \n       \n       \n ======\n",""};
 
         for (int i = playerLife; i == playerLife; i++) {
-                    System.out.println(wordHolder[wordGenerator(wordHolder)] + hangManIllus[i] + TEXT_RESET);
+                    System.out.println(wordHolder[randomizer(wordHolder)] + hangManIllus[i] + TEXT_RESET);
         }
 
 
     }
-/*
-    public static void saveMatch(int currentMatchData)throws Exception {
-        File userMatchData = new File("src/userMatchData.txt");
-        Scanner readUserMatchData = new Scanner(userMatchData);
 
-        ArrayList<String> thisWasInsideUserMatchData = new ArrayList<>();
-        while (readUserMatchData.hasNextLine()) {
-            thisWasInsideUserMatchData.add(readUserMatchData.nextLine());
-        }
-
-        int intMatchData = Integer.parseInt(thisWasInsideUserMatchData.get(currentMatchData));
-        Integer fullMatchData = intMatchData + 1;
-        String ultimateResult = fullMatchData.toString();
-
-        thisWasInsideUserMatchData.set(currentMatchData, ultimateResult);
-
-        PrintWriter writeToUserMatchData = new PrintWriter(userMatchData);
-        for (int i = 0; i < thisWasInsideUserMatchData.size(); i++) {
-            writeToUserMatchData.println(thisWasInsideUserMatchData.get(i));
-        }
-        writeToUserMatchData.close();
-    }*/
-
-
-    /** This monstrosity of a method exists because I wish Java was easier...             //Julius Thomsen
+    /**
+     This monstrosity of a method exists because I wish Java was easier...             //Julius Thomsen
      */
 
     public static String characterDestroyer(String letter,ArrayList<Character>allLetters) {
