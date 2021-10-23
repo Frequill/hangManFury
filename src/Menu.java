@@ -74,7 +74,7 @@ class Menu{
         menu.getMenuOptions().add(0, "1) Existing user");
         menu.getMenuOptions().add(1, "2) New user ");
         menu.optionPrinter(menu.getMenuOptions());
-        user = Player.readUsername(user);
+        user = Player.readUsername();
         return user;
     }
 
