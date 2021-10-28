@@ -1,3 +1,5 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -14,8 +16,8 @@ class Menu{
 
     public Menu(String name, int Int) {
         this.num = Int;
-        String greeting = ("Welcome to the " + name + " menu!");
-        String star = ("*");
+        String greeting = (Color.BLUE + "Welcome to the " + name + " menu!" + Color.RESET);
+        String star = (Color.YELLOW + "*" + Color.RESET);
         for (int j = 0; j < greeting.length(); j++){
             System.out.print(star);
         }
@@ -23,7 +25,7 @@ class Menu{
         for (int j = 0; j < greeting.length(); j++){
             System.out.print(star);
         }
-        System.out.println("\nPlease choose one of the following options:\nInput the corresponding number and mark with the Enter key");
+        System.out.println( "\nPlease choose one of the following options:\nInput the corresponding number and mark with the Enter key" );
 
         System.out.println();
         for (int i = 0; i < menuOptions.size(); i++){
@@ -54,10 +56,14 @@ class Menu{
     //************************************************ Menus ************************************************
 
     public static void firstMenu() throws Exception {
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDateTime now = LocalDateTime.now();
+        System.out.println("Datum: " + dtf.format(now));
+
         Menu menu = new Menu("main",3);
-        menu.getMenuOptions().add(0, "1) Select user");
-        menu.getMenuOptions().add(1, "2) Play");
-        menu.getMenuOptions().add(2, "3) Exit game...");
+        menu.getMenuOptions().add(0, Color.YELLOW + "1) " + Color.RESET+ "Select user");
+        menu.getMenuOptions().add(1, Color.YELLOW + "2) " + Color.RESET+ "Play");
+        menu.getMenuOptions().add(2, Color.YELLOW + "3) " + Color.RESET+ "Exit game...");
         menu.optionPrinter(menu.getMenuOptions());
         Menu.mainMenuFunction();
     }
@@ -65,18 +71,18 @@ class Menu{
         String [] splitUser = user.split(" ",4);
         System.out.println("Selected profile: " + splitUser[0]);
         Menu menu = new Menu("main",3);
-        menu.getMenuOptions().add(0, "1) Change user ");
-        menu.getMenuOptions().add(1, "2) Play");
-        menu.getMenuOptions().add(2, "3) Exit game...");
+        menu.getMenuOptions().add(0, Color.YELLOW + "1) " + Color.RESET+  "Change user ");
+        menu.getMenuOptions().add(1, Color.YELLOW + "2) " + Color.RESET+ "Play");
+        menu.getMenuOptions().add(2, Color.YELLOW + "3) " + Color.RESET+ "Exit game...");
         menu.optionPrinter(menu.getMenuOptions());
         return user;
     }
 
     public static String userNameMenu(String user) throws Exception{
         Menu menu = new Menu("user",3);
-        menu.getMenuOptions().add(0, "1) Existing user");
-        menu.getMenuOptions().add(1, "2) New user ");
-        menu.getMenuOptions().add(2,"3) Back");
+        menu.getMenuOptions().add(0, Color.YELLOW + "1) " + Color.RESET+ "Existing user");
+        menu.getMenuOptions().add(1, Color.YELLOW + "2) " + Color.RESET+ "New user ");
+        menu.getMenuOptions().add(2,Color.YELLOW + "3) " + Color.RESET+ "Back");
         menu.optionPrinter(menu.getMenuOptions());
         user = Player.readUsername(user);
         return user;
@@ -98,7 +104,7 @@ class Menu{
 
         while (run) {
             while(!choiceInput.hasNextInt()){
-                System.out.println("\nPlease input an integer between 1 - 3:\n");
+                System.out.println(Color.RED +"\nPlease input an integer between 1 - 3:\n" + Color.RESET);
                 choiceInput.next();
             }
             choice = choiceInput.nextInt();
@@ -109,7 +115,7 @@ class Menu{
             }
             else if (choice == 2) {
                 if (user == null) {
-                    System.out.println("\nPlease select a user first!!!!!!!\n(Press Enter to return to menu)");
+                    System.out.println(Color.RED + "\nPlease select a user first!!!!!!!" + Color.RESET + "\n(Press Enter to return to menu)");
                     choiceInput.nextLine();
                     choiceInput.nextLine();
                     show();
@@ -119,11 +125,11 @@ class Menu{
                 }
             }
                 else if (choice == 3) {
-                System.out.println("Shutting down...");
+                System.out.println( Color.RED + "Shutting down..." + Color.RESET);
                 System.exit(0);
             }
                 else {
-                System.out.println("\nPlease enter an *integer* greater than 0 and lower than 4:\n");
+                System.out.println(Color.RED + "\nPlease enter an *integer* greater than 0 and lower than 4:\n" + Color.RESET);
                }
             }
         }
