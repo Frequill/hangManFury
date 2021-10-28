@@ -36,7 +36,7 @@ class Player {
         System.out.println("Please enter your username: (NO SPACES!!)");
         String usersInput = in.next();
 
-        String newUser = usersInput+" 0"+" 0"+" 0" + " 0";
+        String newUser = usersInput + " 0" + " 0" + " 0" + " 0";
         Writer out;
         out = new BufferedWriter(new FileWriter(toUsername,true));
         out.append("\n" + newUser);
@@ -202,7 +202,7 @@ class Player {
 
         while (run) {
             while (!input.hasNextInt()){
-                System.out.println("\nPlease input an integer between 1 - 3:\n");
+                System.out.println(Color.RED + "\nPlease input an integer between 1 - 3:\n" + Color.RESET);
                 input.next();
             }
             userChoice = input.nextInt();
@@ -222,11 +222,11 @@ class Player {
                 readUsernames.close();
 
                 for (int i = 1; i < aList.size(); i++) {
-                    System.out.println(i + ") " + aList.get(i));
+                    System.out.println(Color.YELLOW + i + ") " + Color.RESET + aList.get(i));
 
                 }
                 int last = aList.size()+1;
-                System.out.println(aList.size()+ ")" + " Back");
+                System.out.println(Color.YELLOW + aList.size()+ ")" + Color.RESET + " Back");
                 boolean run2 = true;
 
                 int pickUser = 0;
