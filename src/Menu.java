@@ -56,9 +56,9 @@ class Menu{
     //************************************************ Menus ************************************************
 
     public static void firstMenu() throws Exception {
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        LocalDateTime now = LocalDateTime.now();
-        System.out.println("Datum: " + dtf.format(now));
+        //DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        //LocalDateTime now = LocalDateTime.now();
+        //System.out.println("Datum: " + dtf.format(now));
 
         Menu menu = new Menu("main",3);
         menu.getMenuOptions().add(0, Color.YELLOW + "1) " + Color.RESET+ "Select user");
@@ -134,6 +134,7 @@ class Menu{
             }
         }
         //Edwin
+    //Edwin
 
     /**
      Shows first menu because Bill says to make it so!
