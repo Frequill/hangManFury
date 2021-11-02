@@ -55,6 +55,20 @@ class Menu{
 
     //************************************************ Menus ************************************************
 
+    public static void amountOfPlayersMenu() throws Exception {
+        System.out.println("Hej på dig, rumpnisse hur många vill ni va?");
+        System.out.println("1) 1 Spelare");
+        System.out.println("2) 2 Spelare");
+
+        int choice = in.nextInt();
+        switch(choice){
+            case 1: firstMenu();
+            break;
+            case 2:
+        }
+
+    }
+
     public static void firstMenu() throws Exception {
         //DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         //LocalDateTime now = LocalDateTime.now();
@@ -62,7 +76,7 @@ class Menu{
 
         Menu menu = new Menu("main",3);
         menu.getMenuOptions().add(0, Color.YELLOW + "1) " + Color.RESET+ "Select user");
-        menu.getMenuOptions().add(1, Color.YELLOW + "2) " + Color.RESET+ "Play");
+        menu.getMenuOptions().add(1, Color.YELLOW + "2) " + Color.RESET+ "Back");
         menu.getMenuOptions().add(2, Color.YELLOW + "3) " + Color.RESET+ "Exit game...");
         menu.optionPrinter(menu.getMenuOptions());
         Menu.mainMenuFunction();
@@ -86,6 +100,15 @@ class Menu{
         menu.optionPrinter(menu.getMenuOptions());
         user = Player.readUsername(user);
         return user;
+    }
+
+    public static void multiplayerMenu() throws Exception {
+        Menu menu = new Menu("Main", 3);
+        menu.getMenuOptions().add(0, Color.YELLOW + "1) " + Color.RESET+ "Select user");
+        menu.getMenuOptions().add(1, Color.YELLOW + "2) " + Color.RESET+ "Back to amount of Players");
+        menu.getMenuOptions().add(2, Color.YELLOW + "3) " + Color.RESET+ "Exit game...");
+        menu.optionPrinter(menu.getMenuOptions());
+        Menu.mainMenuFunction();
     }
 
     //******************************************** Functions ***********************************************
@@ -115,10 +138,11 @@ class Menu{
             }
             else if (choice == 2) {
                 if (user == null) {
-                    System.out.println(Color.RED + "\nPlease select a user first!!!!!!!" + Color.RESET + "\n(Press Enter to return to menu)");
+                    /*System.out.println(Color.RED + "\nPlease select a user first!!!!!!!" + Color.RESET + "\n(Press Enter to return to menu)");
                     choiceInput.nextLine();
                     choiceInput.nextLine();
-                    show();
+                    show();*/
+                    amountOfPlayersMenu();
                 } else {
                     Game.hangMan(user);
                     secondMenu(user);
@@ -133,8 +157,6 @@ class Menu{
                }
             }
         }
-        //Edwin
-    //Edwin
 
     /**
      Shows first menu because Bill says to make it so!
