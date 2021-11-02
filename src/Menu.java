@@ -13,7 +13,6 @@ class Menu{
     private String sentence;
     private ArrayList<String> menuOptions = new ArrayList<>();
 
-
     public Menu(String name, int Int) {
         this.num = Int;
         String greeting = (Color.BLUE + "Welcome to the " + name + " menu!" + Color.RESET);
@@ -54,21 +53,20 @@ class Menu{
     }
 
     //************************************************ Menus ************************************************
+    //DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+    //LocalDateTime now = LocalDateTime.now();
+    //System.out.println("Datum: " + dtf.format(now));
 
     public static void amountOfPlayersMenu() throws Exception {
-        System.out.println("Hej på dig, rumpnisse hur många vill ni va?");
-        System.out.println("1) 1 Spelare");
-        System.out.println("2) 2 Spelare");
-
-        int choice = in.nextInt();
-        switch(choice){
-            case 1: firstMenu();
-            break;
-            case 2:
-        }
+        Menu menu = new Menu("main",5);
+        menu.getMenuOptions().add(0, Color.YELLOW + "1) " + Color.RESET+ "Select user 1");
+        menu.getMenuOptions().add(1, Color.YELLOW + "2) " + Color.RESET+ "Select user 2");
+        menu.getMenuOptions().add(2, Color.YELLOW + "3) " + Color.RESET+ "Select user 3");
+        menu.getMenuOptions().add(3, Color.YELLOW + "4) " + Color.RESET+ "Select user 4");
+        menu.getMenuOptions().add(4, Color.YELLOW + "5) " + Color.RESET+ "Back");
+        menu.optionPrinter(menu.getMenuOptions());
 
     }
-
     public static void firstMenu() throws Exception {
         //DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         //LocalDateTime now = LocalDateTime.now();
@@ -113,6 +111,14 @@ class Menu{
 
     //******************************************** Functions ***********************************************
     //   (This is how the menus work)
+
+    public static void selectUsersFunction() {
+        int choice = in.nextInt();
+        if (choice == 1) {
+
+        }
+    }
+
 
     /**
      This method allows user to make inputs in the various menus. It also makes sure that a user is selected
