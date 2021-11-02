@@ -1,6 +1,6 @@
 public class mainFile {
     public static void main(String[] args) throws Exception {
-        Menu.firstMenu();
+        Menu.amountOfPlayersMenu();
     }
 }
 // hangMan is brought to you by the fantastic group "Fury"
