@@ -2,4 +2,6 @@
 Julius 0 0 0 0
 Edwin 0 0 0 0
 Martin 0 0 0 0
-Johanna 0 0 0 0
+Johanna 1 1 0 0
+
+Malaka 3 2 1 0

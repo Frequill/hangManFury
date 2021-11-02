@@ -78,7 +78,7 @@ class Menu{
         menu.getMenuOptions().add(1, "2) New user ");
         menu.getMenuOptions().add(2,"3) Back");
         menu.optionPrinter(menu.getMenuOptions());
-        user = Player.readUsername();
+        user = Player.readUsername(user);
         return user;
     }
 
