@@ -1,6 +1,7 @@
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 
 class Menu{
@@ -47,22 +48,14 @@ class Menu{
     }
 
 
-    public String [] userOptions = new String[4];
+    public static String [] userOptions = {"Add user 1", "Add user 2", "Add user 3", "Add user 4"};
 
-    public static void uuu (){
-
-        Menu menu = new Menu();
-            menu.setUserOption("Add user 1", 0);
-            menu.setUserOption("Add user 2", 1);
-            menu.setUserOption("Add user 3", 2);
-            menu.setUserOption("Add user 4", 3);
-    }
 
     public String[] getUserOptions(){return userOptions;}
 
-    public void setUserOption(String user, int index){
-        userOptions[index] = user;
-    }
+    //public void setUserOption(String user, int index){
+       // userOptions[index] = user;
+   // }
 
     public int getNum() {
         return num;
@@ -146,35 +139,49 @@ class Menu{
         String user4 = null;
 
 
-        int choice = in.nextInt();
 
-        if (choice == 1) {
-            user1 = userNameMenu(user1);
-            menu.setUserOption(user1,0);
-            System.out.println("!!!!!!");
-            System.out.println(menu.getUserOptions()[0]);
+        String[] x = menu.getUserOptions();
+        boolean run = true;
+        while (run) {
+            int choice = in.nextInt();
+            if (choice == 1) {
+                user1 = userNameMenu(user1);
+                x[0] = user1;
+                amountOfPlayersMenu();
+            } else if (choice == 2) {
+                if (x[0] == "Add user 1") {
+                    System.out.println("Please add user 1 first");
+                } else {
+                    user2 = userNameMenu(user2);
+                    x[1] = user2;
+                    amountOfPlayersMenu();
+                }
+            } else if (choice == 3) {
+                if (x[1] == "Add user 2") {
+                    System.out.println("Please add user 2 first");
+                } else {
+                    user3 = userNameMenu(user3);
+                    x[2] = user3;
+                    amountOfPlayersMenu();
+                }
+            } else if (choice == 4) {
+                if (x[2] == "Add user 3") {
+                    System.out.println("Please add user 3 first");
+                } else {
+                    user4 = userNameMenu(user4);
+                    x[3] = user4;
+                    amountOfPlayersMenu();
+                }
+            }
+            else if (choice == 5){
+                firstMenu();
+                run = false;
+            }
+            else{
+                System.out.println("Error");
+            }
+        }
 
-           // menu.getUserOptions()[0] = user1;
-            amountOfPlayersMenu();
-        }
-        else if (choice == 2){
-            userNameMenu(user2);
-            menu.getUserOptions()[1] = user2;
-        }
-        else if (choice == 3){
-            userNameMenu(user3);
-            menu.getUserOptions()[2] = user3;
-        }
-        else if (choice == 4){
-            userNameMenu(user4);
-            menu.getUserOptions()[3] = user4;
-        }
-        else if (choice == 5){
-            firstMenu();
-        }
-        else{
-            System.out.println("Error");
-        }
     }
 
 
@@ -197,7 +204,6 @@ class Menu{
             choice = choiceInput.nextInt();
 
             if (choice == 1) {
-                uuu();
                 amountOfPlayersMenu();
                 //user = userNameMenu(user);
                 //secondMenu(user);
@@ -228,5 +234,8 @@ class Menu{
      */
     static void show() throws Exception{
     firstMenu();
+    }
+    public static void showData() {
+        System.out.println(Arrays.toString(userOptions));
     }
 }
