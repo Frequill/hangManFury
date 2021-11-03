@@ -1,5 +1,7 @@
 *Placeholder(KonsumentSkallAldrigTagaBortAnvändareViaTextfilen!)*
 Edwin 9 7 2 2
 Martin 0 0 0 0
-Julius 3 2 1 0
+Julius 0 0 0 0
 Johanna 0 0 0 0
+BillÄrSnygg 2 1 1 0
+Arrg 0 0 0 0

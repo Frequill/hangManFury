@@ -13,6 +13,11 @@ class Menu{
     private String sentence;
     private ArrayList<String> menuOptions = new ArrayList<>();
 
+    private String [] userOptions = {"Select 1","Select 2","Select 3","Select 4"};
+
+    public Menu(){
+
+    }
 
     public Menu(String name, int Int) {
         this.num = Int;
@@ -41,7 +46,7 @@ class Menu{
     public ArrayList<java.lang.String> getMenuOptions() {
         return menuOptions;
     }
-
+    public String [] getUserOptions(){return userOptions;}
     public int getNum() {
         return num;
     }
@@ -54,7 +59,21 @@ class Menu{
     }
 
     //************************************************ Menus ************************************************
+    //DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+    //LocalDateTime now = LocalDateTime.now();
+    //System.out.println("Datum: " + dtf.format(now));
 
+    public static void amountOfPlayersMenu() throws Exception {
+        Menu menu = new Menu("main",5);
+        menu.getMenuOptions().add(0, Color.YELLOW + "1) " + Color.RESET+ menu.getUserOptions()[0] );
+        menu.getMenuOptions().add(1, Color.YELLOW + "2) " + Color.RESET+ menu.getUserOptions()[1]);
+        menu.getMenuOptions().add(2, Color.YELLOW + "3) " + Color.RESET+ menu.getUserOptions()[2]);
+        menu.getMenuOptions().add(3, Color.YELLOW + "4) " + Color.RESET+ menu.getUserOptions()[3]);
+        menu.getMenuOptions().add(4, Color.YELLOW + "5) " + Color.RESET+ "Back");
+        menu.optionPrinter(menu.getMenuOptions());
+        Menu.selectUsersFunction();
+
+    }
     public static void firstMenu() throws Exception {
         //DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         //LocalDateTime now = LocalDateTime.now();
@@ -88,8 +107,55 @@ class Menu{
         return user;
     }
 
+    public static void multiplayerMenu() throws Exception {
+        Menu menu = new Menu("Main", 3);
+        menu.getMenuOptions().add(0, Color.YELLOW + "1) " + Color.RESET+ "Select user");
+        menu.getMenuOptions().add(1, Color.YELLOW + "2) " + Color.RESET+ "Back to amount of Players");
+        menu.getMenuOptions().add(2, Color.YELLOW + "3) " + Color.RESET+ "Exit game...");
+        menu.optionPrinter(menu.getMenuOptions());
+        Menu.mainMenuFunction();
+    }
+
     //******************************************** Functions ***********************************************
     //   (This is how the menus work)
+
+    public static void selectUsersFunction() throws Exception {
+       Menu menu = new Menu();
+
+        String user1 = null;
+        String user2 = null;
+        String user3 = null;
+        String user4 = null;
+
+
+        int choice = in.nextInt();
+
+        if (choice == 1) {
+            user1 = userNameMenu(user1);
+            menu.getUserOptions()[0] = user1;
+            System.out.println(menu.getUserOptions()[0]);
+
+        }
+        else if (choice == 2){
+            userNameMenu(user2);
+            menu.getUserOptions()[1] = user2;
+        }
+        else if (choice == 3){
+            userNameMenu(user3);
+            menu.getUserOptions()[2] = user3;
+        }
+        else if (choice == 4){
+            userNameMenu(user4);
+            menu.getUserOptions()[3] = user4;
+        }
+        else if (choice == 5){
+            firstMenu();
+        }
+        else{
+            System.out.println("Error");
+        }
+    }
+
 
     /**
      This method allows user to make inputs in the various menus. It also makes sure that a user is selected
@@ -110,8 +176,9 @@ class Menu{
             choice = choiceInput.nextInt();
 
             if (choice == 1) {
-                user = userNameMenu(user);
-                secondMenu(user);
+                amountOfPlayersMenu();
+                //user = userNameMenu(user);
+                //secondMenu(user);
             }
             else if (choice == 2) {
                 if (user == null) {
@@ -133,8 +200,6 @@ class Menu{
                }
             }
         }
-        //Edwin
-    //Edwin
 
     /**
      Shows first menu because Bill says to make it so!
