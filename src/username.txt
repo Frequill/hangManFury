@@ -5,3 +5,4 @@ Julius 0 0 0 0
 Johanna 0 0 0 0
 BillÄrSnygg 2 1 1 0
 Arrg 0 0 0 0
+Frank 0 0 0 0

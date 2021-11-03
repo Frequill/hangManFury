@@ -1,6 +1,7 @@
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 
 class Menu{
@@ -13,7 +14,6 @@ class Menu{
     private String sentence;
     private ArrayList<String> menuOptions = new ArrayList<>();
 
-    private String [] userOptions = {"Select 1","Select 2","Select 3","Select 4"};
 
     public Menu(){
 
@@ -46,10 +46,21 @@ class Menu{
     public ArrayList<java.lang.String> getMenuOptions() {
         return menuOptions;
     }
-    public String [] getUserOptions(){return userOptions;}
+
+
+    public static String [] userOptions = {"Add user 1", "Add user 2", "Add user 3", "Add user 4"};
+
+
+    public String[] getUserOptions(){return userOptions;}
+
+    //public void setUserOption(String user, int index){
+       // userOptions[index] = user;
+   // }
+
     public int getNum() {
         return num;
     }
+
     public String getAlpha() {
         return Alpha;
     }
@@ -62,7 +73,7 @@ class Menu{
 
     public static void amountOfPlayersMenu() throws Exception {
         Menu menu = new Menu("main",5);
-        menu.getMenuOptions().add(0, Color.YELLOW + "1) " + Color.RESET+ menu.getUserOptions()[0] );
+        menu.getMenuOptions().add(0, Color.YELLOW + "1) " + Color.RESET+ menu.getUserOptions()[0]);
         menu.getMenuOptions().add(1, Color.YELLOW + "2) " + Color.RESET+ menu.getUserOptions()[1]);
         menu.getMenuOptions().add(2, Color.YELLOW + "3) " + Color.RESET+ menu.getUserOptions()[2]);
         menu.getMenuOptions().add(3, Color.YELLOW + "4) " + Color.RESET+ menu.getUserOptions()[3]);
@@ -125,32 +136,49 @@ class Menu{
         String user4 = null;
 
 
-        int choice = in.nextInt();
 
-        if (choice == 1) {
-            user1 = userNameMenu(user1);
-            menu.getUserOptions()[0] = user1;
-            System.out.println(menu.getUserOptions()[0]);
+        String[] x = menu.getUserOptions();
+        boolean run = true;
+        while (run) {
+            int choice = in.nextInt();
+            if (choice == 1) {
+                user1 = userNameMenu(user1);
+                x[0] = user1;
+                amountOfPlayersMenu();
+            } else if (choice == 2) {
+                if (x[0] == "Add user 1") {
+                    System.out.println("Please add user 1 first");
+                } else {
+                    user2 = userNameMenu(user2);
+                    x[1] = user2;
+                    amountOfPlayersMenu();
+                }
+            } else if (choice == 3) {
+                if (x[1] == "Add user 2") {
+                    System.out.println("Please add user 2 first");
+                } else {
+                    user3 = userNameMenu(user3);
+                    x[2] = user3;
+                    amountOfPlayersMenu();
+                }
+            } else if (choice == 4) {
+                if (x[2] == "Add user 3") {
+                    System.out.println("Please add user 3 first");
+                } else {
+                    user4 = userNameMenu(user4);
+                    x[3] = user4;
+                    amountOfPlayersMenu();
+                }
+            }
+            else if (choice == 5){
+                firstMenu();
+                run = false;
+            }
+            else{
+                System.out.println("Error");
+            }
+        }
 
-        }
-        else if (choice == 2){
-            userNameMenu(user2);
-            menu.getUserOptions()[1] = user2;
-        }
-        else if (choice == 3){
-            userNameMenu(user3);
-            menu.getUserOptions()[2] = user3;
-        }
-        else if (choice == 4){
-            userNameMenu(user4);
-            menu.getUserOptions()[3] = user4;
-        }
-        else if (choice == 5){
-            firstMenu();
-        }
-        else{
-            System.out.println("Error");
-        }
     }
 
 
@@ -203,5 +231,8 @@ class Menu{
      */
     static void show() throws Exception{
     firstMenu();
+    }
+    public static void showData() {
+        System.out.println(Arrays.toString(userOptions));
     }
 }
