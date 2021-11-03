@@ -59,9 +59,6 @@ class Menu{
     }
 
     //************************************************ Menus ************************************************
-    //DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-    //LocalDateTime now = LocalDateTime.now();
-    //System.out.println("Datum: " + dtf.format(now));
 
     public static void amountOfPlayersMenu() throws Exception {
         Menu menu = new Menu("main",5);
