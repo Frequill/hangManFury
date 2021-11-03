@@ -73,6 +73,7 @@ class Menu{
 
     public static void amountOfPlayersMenu() throws Exception {
         Menu menu = new Menu("main",5);
+        System.out.println("You can add up to four users to play multiplayer!");
         menu.getMenuOptions().add(0, Color.YELLOW + "1) " + Color.RESET+ menu.getUserOptions()[0]);
         menu.getMenuOptions().add(1, Color.YELLOW + "2) " + Color.RESET+ menu.getUserOptions()[1]);
         menu.getMenuOptions().add(2, Color.YELLOW + "3) " + Color.RESET+ menu.getUserOptions()[2]);
@@ -188,7 +189,9 @@ class Menu{
      */
 
     public static void mainMenuFunction() throws Exception {
-        String user = null;
+        Menu userGetter = new Menu();
+        String user1 = userGetter.getUserOptions()[0];
+
         Scanner choiceInput = new Scanner(System.in);
         boolean run = true;
         int choice = 0;
@@ -202,18 +205,16 @@ class Menu{
 
             if (choice == 1) {
                 amountOfPlayersMenu();
-                //user = userNameMenu(user);
-                //secondMenu(user);
             }
             else if (choice == 2) {
-                if (user == null) {
-                    System.out.println(Color.RED + "\nPlease select a user first!!!!!!!" + Color.RESET + "\n(Press Enter to return to menu)");
+                if (user1 == "Add user 1") {
+                    System.out.println(Color.RED + "\nPlease select a user1 first!!!!!!!" + Color.RESET + "\n(Press Enter to return to menu)");
                     choiceInput.nextLine();
                     choiceInput.nextLine();
                     show();
                 } else {
-                    Game.hangMan(user);
-                    secondMenu(user);
+                    Game.hangMan(user1);
+                    secondMenu(user1);
                 }
             }
                 else if (choice == 3) {
