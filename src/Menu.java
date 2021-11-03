@@ -13,7 +13,6 @@ class Menu{
     private String sentence;
     private ArrayList<String> menuOptions = new ArrayList<>();
 
-    private String [] userOptions = {"Select 1","Select 2","Select 3","Select 4"};
 
     public Menu(){
 
@@ -46,10 +45,29 @@ class Menu{
     public ArrayList<java.lang.String> getMenuOptions() {
         return menuOptions;
     }
-    public String [] getUserOptions(){return userOptions;}
+
+
+    public String [] userOptions = new String[4];
+
+    public static void uuu (){
+
+        Menu menu = new Menu();
+            menu.setUserOption("Add user 1", 0);
+            menu.setUserOption("Add user 2", 1);
+            menu.setUserOption("Add user 3", 2);
+            menu.setUserOption("Add user 4", 3);
+    }
+
+    public String[] getUserOptions(){return userOptions;}
+
+    public void setUserOption(String user, int index){
+        userOptions[index] = user;
+    }
+
     public int getNum() {
         return num;
     }
+
     public String getAlpha() {
         return Alpha;
     }
@@ -65,7 +83,7 @@ class Menu{
 
     public static void amountOfPlayersMenu() throws Exception {
         Menu menu = new Menu("main",5);
-        menu.getMenuOptions().add(0, Color.YELLOW + "1) " + Color.RESET+ menu.getUserOptions()[0] );
+        menu.getMenuOptions().add(0, Color.YELLOW + "1) " + Color.RESET+ menu.getUserOptions()[0]);
         menu.getMenuOptions().add(1, Color.YELLOW + "2) " + Color.RESET+ menu.getUserOptions()[1]);
         menu.getMenuOptions().add(2, Color.YELLOW + "3) " + Color.RESET+ menu.getUserOptions()[2]);
         menu.getMenuOptions().add(3, Color.YELLOW + "4) " + Color.RESET+ menu.getUserOptions()[3]);
@@ -132,9 +150,12 @@ class Menu{
 
         if (choice == 1) {
             user1 = userNameMenu(user1);
-            menu.getUserOptions()[0] = user1;
+            menu.setUserOption(user1,0);
+            System.out.println("!!!!!!");
             System.out.println(menu.getUserOptions()[0]);
 
+           // menu.getUserOptions()[0] = user1;
+            amountOfPlayersMenu();
         }
         else if (choice == 2){
             userNameMenu(user2);
@@ -176,6 +197,7 @@ class Menu{
             choice = choiceInput.nextInt();
 
             if (choice == 1) {
+                uuu();
                 amountOfPlayersMenu();
                 //user = userNameMenu(user);
                 //secondMenu(user);
