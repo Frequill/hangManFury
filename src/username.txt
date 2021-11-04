@@ -1,5 +1,5 @@
 *Placeholder(KonsumentSkallAldrigTagaBortAnvändareViaTextfilen!)*
-Edwin 10 8 2 2
+Edwin 13 8 5 2
 Martin 2 2 0 0
 Julius 3 1 2 0
 Johanna 4 4 0 0

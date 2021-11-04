@@ -15,6 +15,25 @@ import java.util.Scanner;
             //  //This array holds all currently selected and playing users
             String[] users = {user1, user2, user3, user4};
 
+
+            //  **********************  This ArrayList keeps track of users SCORE during the game **********************
+            ArrayList<Integer> usersPoints = new ArrayList<>();
+            if (user3 == null){
+                usersPoints.add(0, 0);
+                usersPoints.add(1, 0);
+            }else if (user4 == null){
+                usersPoints.add(0, 0);
+                usersPoints.add(1, 0);
+                usersPoints.add(2, 0);
+            }else{
+                usersPoints.add(0, 0);
+                usersPoints.add(1, 0);
+                usersPoints.add(2, 0);
+                usersPoints.add(3, 0);
+            }
+            // *********************************************************************************************************
+
+
             boolean victory = false;
             int playersLife = 0;
             // Here is our full wordlist!
@@ -140,14 +159,19 @@ import java.util.Scanner;
                         if (allLetters.contains('_')) {
                         } else {
 
-                            System.out.println(Color.GREEN + "\n\nCongratulations " + users[currentPlayer] + ". You get a point! :)" + Color.RESET);
+                            System.out.println(Color.GREEN + "\n\nCongratulations " + users[currentPlayer] + ". You get a point!\n(It's still " + users[currentPlayer] + "'s turn)" + Color.RESET);
+                            usersPoints.set(currentPlayer, +1);
                             guessWord = wordHolder[randomizer(wordHolder)].toLowerCase();
-                            System.out.println(guessWord);
+                            System.out.println("The next word to be guessed is " + guessWord.length() + " letters long!");
                             //Här ska den spelare som skrev ut ordet få ett poäng
-                            // Här avslutade vi igår 4 november. Detta är morgondagens grupp furys problem, Fuckyou och jag ska leva lite. Inte mitt problem iallafall.
-                            dumbGuesses.clear();
-
+                            dumbGuesses.removeAll(dumbGuesses);
+                            allLetters.clear();
+                            for (int i = 0; i < guessWord.length(); i++) {
+                                System.out.print("_");
+                                allLetters.add(i, '_');
+                            }
                         }
+
                     } else if (guessIncorrect) {
                         playersLife = playersLife - 1;
                         //hangManWriter(playersLife);
@@ -166,6 +190,7 @@ import java.util.Scanner;
                         System.out.println();
                         //hangManWriter(playersLife);
                         System.out.print(Color.RED + "\nThe game is over! The last word was: " + guessWord + "\n\nThe winning player was PLACEHOLDER!\n\nPress enter to return to main menu" +  Color.RESET);
+                        // ^ För att ovanstående skall fungera så måste vi veta vem som fick högst "poäng" under spelet! ^
                         Player.matchAdderCaller();
                         Player.lossAdderCaller();
                         in.nextLine();
@@ -175,6 +200,19 @@ import java.util.Scanner;
                 }
             }
         }
+
+
+
+            //  NEDANSTÅENDE METOD SKALL SKRIVAS KLART OCH ANVÄNDAS FÖR ATT LOKALISERA EN VINNARE NÄR MATCHEN ÄR KLAR
+            public static void winnerSelect(ArrayList<Integer> usersPoints) {
+                if (usersPoints.size() == 4){
+                    if (usersPoints.get(0) > usersPoints.get(1) && usersPoints.get(0) > usersPoints.get(2) && usersPoints.get(0) > usersPoints.get(3)){
+                        System.out.println();
+
+                    }
+                }
+
+            }
 
 
             public static int turn (int amountOfPlayers, String user1, String user2, String user3, String user4) {

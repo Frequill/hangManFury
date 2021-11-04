@@ -1,8 +1,8 @@
 *Placeholder(KonsumentSkallAldrigTagaBortAnvändareViaTextfilen!)*
-Edwin 10 8 2 2
+Edwin 13 8 5 2
 Martin 2 2 0 0
 Julius 3 1 2 0
-Johanna 2 2 0 0
+Johanna 4 4 0 0
 BillÄrSnygg 2 1 1 0
 Arrg 0 0 0 0
 Frank 0 0 0 0
