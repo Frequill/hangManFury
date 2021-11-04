@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.Scanner;
 
         class Multiplayer {
@@ -12,7 +13,10 @@ import java.util.Scanner;
 
         public static void hangMan(String user1, String user2, String user3, String user4) throws Exception {
             boolean victory = false;
-            int playerLife = 10;
+            int playerLife1 = 0;
+            int playerLife2 = 0;
+            int playerLife3;
+            int playerLife4;
             // Here is our full wordlist!
             String [] wordHolder = {"Björn","Bill","Java","Edwin","Julius","Martin","Johanna","String","Int","Scanner","ArrayList","boolean","Character","Placeholder","null",
                     "monster","redbull","Newton","Switchbitch","HANGMAN","FUCKYOU","Fury","Class","Static","Void","GeOssHögtBetygBill","System","Exception","Mupphuvud"
@@ -30,13 +34,32 @@ import java.util.Scanner;
 
             if (user3 == null) {
                 System.out.println(Color.PURPLE + "Welcome " + /*userName.getInstanceVarUsername(splitUserName[0])*/ user1 + " and " + user2 + ", get ready for battle!\nThe first word is " + guessWord.length() + " letters long!" + Color.RESET);
+                playerLife1 = 10;
+                playerLife2 = 10;
+                Random vadduvill = new Random();
+
+                int lowest = 1;
+                int highest = 2;
+                int result = vadduvill.nextInt(highest-lowest) + lowest;
             }
             else if (user4 == null){
                 System.out.println(Color.PURPLE + "Welcome " + user1 + ", " + user2 + " and " + user3 + "! Get ready for battle!\nThe first word is " + guessWord.length() + " letters long!" + Color.RESET);
+                Random vadduvill = new Random();
+
+                int lowest = 1;
+                int highest = 3;
+                int result = vadduvill.nextInt(highest-lowest) + lowest;
             }
             else{
                 System.out.println(Color.PURPLE + "Welcome " + user1 + ", " + user2 + ", " + user3 + " and " + user4 + "! Get ready for battle!\nThe first word is " + guessWord.length() + " letters long!" + Color.RESET);
+                Random vadduvill = new Random();
+
+                int lowest = 1;
+                int highest = 4;
+                int result = vadduvill.nextInt(highest-lowest) + lowest;
             }
+
+
 
 
             for (int i = 0; i < guessWord.length(); i++) {
@@ -45,13 +68,13 @@ import java.util.Scanner;
                 allLetters.add(i,  '_');
             }
 
-            // "Victory" and "playerLife" checks weather the player wins or looses throughout the game.
-            while (victory == false && playerLife > 0) {
+            // "Victory" and "playerLife1" checks weather the player wins or looses throughout the game.
+            while (victory == false && playerLife1 > 0||victory == false && playerLife2 > 0 ) {
                 boolean guessCorrect = false;
                 boolean guessIncorrect = false;
                 boolean doubleGuess = true;
                 System.out.println();
-                String letter = null;
+                String letter;
                 String trueLetter = null;
 
                 // doubleGuess ensures player does not guess same letter twice! You're welcome <3
@@ -93,7 +116,7 @@ import java.util.Scanner;
                         System.out.println(Color.GREEN + "\n\nCongratulations " + userName.getInstanceVarUsername(splitUserName[0]) + ". You are victorious! :)" + Color.RESET + "\n (Press Enter to return to main menu)");
                         Player.matchAdderCaller();
                         Player.winAdderCaller();
-                        if (playerLife == 10){
+                        if (playerLife1 == 10){
                             Player.flawlessAdderCaller();
                             System.out.println(Color.YELLOW + "\nNO LIVES LOST! FLAWLESS VICTORY ARCHIVED!!!!!!\n" + userName.getInstanceVarUsername(splitUserName[0]) + " is a legend!" + Color.RESET);
                         }
@@ -101,9 +124,9 @@ import java.util.Scanner;
                         victory = true;
                     }
                 } else if (guessIncorrect) {
-                    playerLife = playerLife - 1;
-                    hangManWriter(playerLife);
-                    System.out.println(Color.RED + "Incorrect guess! You have lost one life!" + "\n(" + playerLife + " lives remaining)" + Color.RESET);
+                    playerLife1 = playerLife1 - 1;
+                    hangManWriter(playerLife1);
+                    System.out.println(Color.RED + "Incorrect guess! You have lost one life!" + "\n(" + playerLife1 + " lives remaining)" + Color.RESET);
                     incorrectLetterCollector(trueLetter, dumbGuesses);
                     System.out.println();
                     for (int j = 0; j < allLetters.size(); j++) {
@@ -111,10 +134,10 @@ import java.util.Scanner;
                     }
 
                 }
-                // You already know what "playerLife" does...
-                if (playerLife == 0) {
+                // You already know what "playerLife1" does...
+                if (playerLife1 == 0) {
                     System.out.println();
-                    hangManWriter(playerLife);
+                    hangManWriter(playerLife1);
                     System.out.print(Color.RED + "\nYou have been defeated! The word in question was: " + guessWord + "\n\nPress the Enter key to return to the main menu in shame" + Color.RESET);
                     Player.matchAdderCaller();
                     Player.lossAdderCaller();
@@ -189,6 +212,24 @@ import java.util.Scanner;
                 System.out.println(wordHolder[randomizer(wordHolder)] + hangManIllus[i] + Color.RESET);
             }
 
+
+        }
+        public static void turn (int result ){
+
+
+
+           if (result == 1){
+               result = 2;
+           }
+           else if(result == 2){
+               result = 3;
+           }
+           else if(result == 3){
+               result = 4;
+           }
+           else if(result == 4){
+               result = 1;
+           }
 
         }
 
