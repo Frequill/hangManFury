@@ -12,6 +12,9 @@ import java.util.Scanner;
          */
 
         public static void hangMan(String user1, String user2, String user3, String user4) throws Exception {
+            //  //This array holds all currently selected and playing users
+            //String[]users = {user1, user2, user3, user4};
+
             boolean victory = false;
             int playersLife = 0;
             // Here is our full wordlist!
@@ -29,12 +32,16 @@ import java.util.Scanner;
             //This if/else-if case keeps track of if the game has 2, 3 or 4 players!
             ArrayList<Integer> randomNumber = new ArrayList<>();
 
+            int amountOfPlayers;
+
             if (user3 == null) {
                 playersLife = 20;
                 System.out.println(Color.PURPLE + "Welcome " + /*userName.getInstanceVarUsername(splitUserName[0])*/ user1 + " and " + user2 + ", get ready for battle!\nThe first word is " + guessWord.length() + " letters long!" + Color.RESET);
 
                 randomNumber.add(0, 1);
                 randomNumber.add(1, 2);
+                amountOfPlayers = randomizerList(randomNumber);
+                //turn(amountOfPlayers, user1, user2, user3, user4);
 
             }
             else if (user4 == null) {
@@ -44,6 +51,8 @@ import java.util.Scanner;
                 randomNumber.add(0, 1);
                 randomNumber.add(1, 2);
                 randomNumber.add(2, 3);
+                amountOfPlayers = randomizerList(randomNumber);
+                //turn(amountOfPlayers, user1, user2, user3, user4);
             }
 
             else {
@@ -54,13 +63,21 @@ import java.util.Scanner;
                 randomNumber.add(1, 2);
                 randomNumber.add(2, 3);
                 randomNumber.add(3, 4);
+                amountOfPlayers = randomizerList(randomNumber);
+
             }
+
+            amountOfPlayers = turn(amountOfPlayers, user1, user2, user3, user4);
 
             for (int i = 0; i < guessWord.length(); i++) {
                 System.out.print("_");
-
                 allLetters.add(i,  '_');
             }
+
+
+            // ******************************************** Game Start! ************************************************
+
+
 
             // "Victory" and "playersLife" checks weather the player wins or looses throughout the game.
             while (victory == false && playersLife > 0) {
@@ -119,19 +136,20 @@ import java.util.Scanner;
                     }
                 } else if (guessIncorrect) {
                     playersLife = playersLife - 1;
-                    hangManWriter(playersLife);
-                    System.out.println(Color.RED + "Incorrect guess! You have lost one life!" + "\n(" + playersLife + " lives remaining)" + Color.RESET);
+                    //hangManWriter(playersLife);
+                    System.out.println(Color.RED + "Incorrect guess! Your collective life has gone down by 1!" + "\n(" + playersLife + " lives remaining)" + Color.RESET);
                     incorrectLetterCollector(trueLetter, dumbGuesses);
                     System.out.println();
                     for (int j = 0; j < allLetters.size(); j++) {
                         System.out.print(allLetters.get(j));
                     }
-
+                    amountOfPlayers = turn(amountOfPlayers, user1, user2, user3, user4);
                 }
+
                 // You already know what "playersLife" does...
                 if (playersLife == 0) {
                     System.out.println();
-                    hangManWriter(playersLife);
+                    //hangManWriter(playersLife);
                     System.out.print(Color.RED + "\nYou have been defeated! The word in question was: " + guessWord + "\n\nPress the Enter key to return to the main menu in shame" + Color.RESET);
                     Player.matchAdderCaller();
                     Player.lossAdderCaller();
@@ -142,10 +160,38 @@ import java.util.Scanner;
         }
 
 
-            public static void turn (ArrayList<Integer> randomNumber) {
+            public static int turn (int amountOfPlayers, String user1, String user2, String user3, String user4) {
+            if (amountOfPlayers == 1){
+                System.out.println("\nIt is " + user1 +"'s turn!");
+                amountOfPlayers = 2;
+                }
 
-
+            else if (amountOfPlayers == 2){
+                System.out.println("\nIt is " + user2 +"'s turn!");
+                if (user3 == null){
+                    amountOfPlayers = 1;
+                }
+                else {
+                    amountOfPlayers = 3;
+                }
             }
+
+            else if (amountOfPlayers == 3){
+                System.out.println("\nIt is " + user3 +"'s turn!");
+                if (user4 == null){
+                    amountOfPlayers = 1;
+                }
+                else {
+                    amountOfPlayers = 4;
+                }
+            }
+
+            else if (amountOfPlayers == 4){
+                System.out.println("\nIt is " + user4 +"'s turn!");
+                amountOfPlayers = 1;
+            }
+            return amountOfPlayers;
+        }
 
         /**
          Randomizer uses a Math-random function to pick out a word from our "wordlist" at the top of "hangMan" method.
@@ -155,6 +201,19 @@ import java.util.Scanner;
             int rand = (int) (Math.random()*randomArray.length);
             return rand;
         }
+
+
+
+        /**
+         This method randomizes which player starts first in a multiplayer game!
+         */
+
+        public static int randomizerList(ArrayList<Integer> randomNumber){
+            Random rng = new Random();
+            int rand = randomNumber.get(rng.nextInt(randomNumber.size()));
+            return rand;
+        }
+
 
         /**
          Checks if inputted letter is correct.
