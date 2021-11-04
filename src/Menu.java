@@ -1,6 +1,7 @@
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 
 class Menu{
@@ -12,6 +13,11 @@ class Menu{
     private String Alpha;
     private String sentence;
     private ArrayList<String> menuOptions = new ArrayList<>();
+
+
+    public Menu(){
+
+    }
 
     public Menu(String name, int Int) {
         this.num = Int;
@@ -41,9 +47,17 @@ class Menu{
         return menuOptions;
     }
 
+
+    public static String [] userOptions = {"Add user 1", "Add user 2", "Add user 3", "Add user 4"};
+
+
+    public String[] getUserOptions(){return userOptions;}
+
+
     public int getNum() {
         return num;
     }
+
     public String getAlpha() {
         return Alpha;
     }
@@ -53,18 +67,17 @@ class Menu{
     }
 
     //************************************************ Menus ************************************************
-    //DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-    //LocalDateTime now = LocalDateTime.now();
-    //System.out.println("Datum: " + dtf.format(now));
 
     public static void amountOfPlayersMenu() throws Exception {
         Menu menu = new Menu("main",5);
-        menu.getMenuOptions().add(0, Color.YELLOW + "1) " + Color.RESET+ "Select user 1");
-        menu.getMenuOptions().add(1, Color.YELLOW + "2) " + Color.RESET+ "Select user 2");
-        menu.getMenuOptions().add(2, Color.YELLOW + "3) " + Color.RESET+ "Select user 3");
-        menu.getMenuOptions().add(3, Color.YELLOW + "4) " + Color.RESET+ "Select user 4");
+        System.out.println("You can add up to four users to play multiplayer!");
+        menu.getMenuOptions().add(0, Color.YELLOW + "1) " + Color.RESET+ menu.getUserOptions()[0]);
+        menu.getMenuOptions().add(1, Color.YELLOW + "2) " + Color.RESET+ menu.getUserOptions()[1]);
+        menu.getMenuOptions().add(2, Color.YELLOW + "3) " + Color.RESET+ menu.getUserOptions()[2]);
+        menu.getMenuOptions().add(3, Color.YELLOW + "4) " + Color.RESET+ menu.getUserOptions()[3]);
         menu.getMenuOptions().add(4, Color.YELLOW + "5) " + Color.RESET+ "Back");
         menu.optionPrinter(menu.getMenuOptions());
+        Menu.selectUsersFunction();
 
     }
     public static void firstMenu() throws Exception {
@@ -74,7 +87,7 @@ class Menu{
 
         Menu menu = new Menu("main",3);
         menu.getMenuOptions().add(0, Color.YELLOW + "1) " + Color.RESET+ "Select user");
-        menu.getMenuOptions().add(1, Color.YELLOW + "2) " + Color.RESET+ "Back");
+        menu.getMenuOptions().add(1, Color.YELLOW + "2) " + Color.RESET+ "Play");
         menu.getMenuOptions().add(2, Color.YELLOW + "3) " + Color.RESET+ "Exit game...");
         menu.optionPrinter(menu.getMenuOptions());
         Menu.mainMenuFunction();
@@ -100,23 +113,70 @@ class Menu{
         return user;
     }
 
-    public static void multiplayerMenu() throws Exception {
+    /*public static void multiplayerMenu() throws Exception {
         Menu menu = new Menu("Main", 3);
         menu.getMenuOptions().add(0, Color.YELLOW + "1) " + Color.RESET+ "Select user");
         menu.getMenuOptions().add(1, Color.YELLOW + "2) " + Color.RESET+ "Back to amount of Players");
         menu.getMenuOptions().add(2, Color.YELLOW + "3) " + Color.RESET+ "Exit game...");
         menu.optionPrinter(menu.getMenuOptions());
         Menu.mainMenuFunction();
-    }
+    }*/
 
     //******************************************** Functions ***********************************************
     //   (This is how the menus work)
 
-    public static void selectUsersFunction() {
-        int choice = in.nextInt();
-        if (choice == 1) {
+    public static void selectUsersFunction() throws Exception {
+       Menu menu = new Menu();
 
+        String user1 = null;
+        String user2 = null;
+        String user3 = null;
+        String user4 = null;
+
+
+
+        String[] x = menu.getUserOptions();
+        boolean run = true;
+        while (run) {
+            int choice = in.nextInt();
+            if (choice == 1) {
+                user1 = userNameMenu(user1);
+                x[0] = user1;
+                amountOfPlayersMenu();
+            } else if (choice == 2) {
+                if (x[0] == "Add user 1") {
+                    System.out.println("Please add user 1 first");
+                } else {
+                    user2 = userNameMenu(user2);
+                    x[1] = user2;
+                    amountOfPlayersMenu();
+                }
+            } else if (choice == 3) {
+                if (x[1] == "Add user 2") {
+                    System.out.println("Please add user 2 first");
+                } else {
+                    user3 = userNameMenu(user3);
+                    x[2] = user3;
+                    amountOfPlayersMenu();
+                }
+            } else if (choice == 4) {
+                if (x[2] == "Add user 3") {
+                    System.out.println("Please add user 3 first");
+                } else {
+                    user4 = userNameMenu(user4);
+                    x[3] = user4;
+                    amountOfPlayersMenu();
+                }
+            }
+            else if (choice == 5){
+                firstMenu();
+                run = false;
+            }
+            else{
+                System.out.println("Error");
+            }
         }
+
     }
 
 
@@ -126,7 +186,12 @@ class Menu{
      */
 
     public static void mainMenuFunction() throws Exception {
-        String user = null;
+        Menu userGetter = new Menu();
+        String user1 = userGetter.getUserOptions()[0];
+        String user2 = userGetter.getUserOptions()[1];
+        String user3 = userGetter.getUserOptions()[2];
+        String user4 = userGetter.getUserOptions()[3];
+
         Scanner choiceInput = new Scanner(System.in);
         boolean run = true;
         int choice = 0;
@@ -139,19 +204,31 @@ class Menu{
             choice = choiceInput.nextInt();
 
             if (choice == 1) {
-                user = userNameMenu(user);
-                secondMenu(user);
+                amountOfPlayersMenu();
             }
             else if (choice == 2) {
-                if (user == null) {
-                    /*System.out.println(Color.RED + "\nPlease select a user first!!!!!!!" + Color.RESET + "\n(Press Enter to return to menu)");
+                if (user1 == "Add user 1") {
+                    System.out.println(Color.RED + "\nPlease select a user1 first!!!!!!!" + Color.RESET + "\n(Press Enter to return to menu)");
                     choiceInput.nextLine();
                     choiceInput.nextLine();
-                    show();*/
-                    amountOfPlayersMenu();
+                    show();
                 } else {
-                    Game.hangMan(user);
-                    secondMenu(user);
+                    if (user2 == "Add user 2"){
+                        Game.hangMan(user1);
+                        secondMenu(user1);
+                    }
+                    else if (user3 == "Add user 3"){
+                        Multiplayer.hangMan(user1, user2, null, null);
+                        firstMenu();
+                    }
+                    else if (user4 == "Add user 4"){
+                        Multiplayer.hangMan(user1, user2, user3, null);
+                        firstMenu();
+                    }
+                    else if (user4 != "Add user 4"){
+                        Multiplayer.hangMan(user1, user2, user3, user4);
+                        firstMenu();
+                    }
                 }
             }
                 else if (choice == 3) {
@@ -169,5 +246,8 @@ class Menu{
      */
     static void show() throws Exception{
     firstMenu();
+    }
+    public static void showData() {
+        System.out.println(Arrays.toString(userOptions));
     }
 }
