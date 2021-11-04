@@ -53,9 +53,6 @@ class Menu{
 
     public String[] getUserOptions(){return userOptions;}
 
-    //public void setUserOption(String user, int index){
-       // userOptions[index] = user;
-   // }
 
     public int getNum() {
         return num;
@@ -116,14 +113,14 @@ class Menu{
         return user;
     }
 
-    public static void multiplayerMenu() throws Exception {
+    /*public static void multiplayerMenu() throws Exception {
         Menu menu = new Menu("Main", 3);
         menu.getMenuOptions().add(0, Color.YELLOW + "1) " + Color.RESET+ "Select user");
         menu.getMenuOptions().add(1, Color.YELLOW + "2) " + Color.RESET+ "Back to amount of Players");
         menu.getMenuOptions().add(2, Color.YELLOW + "3) " + Color.RESET+ "Exit game...");
         menu.optionPrinter(menu.getMenuOptions());
         Menu.mainMenuFunction();
-    }
+    }*/
 
     //******************************************** Functions ***********************************************
     //   (This is how the menus work)
@@ -191,6 +188,9 @@ class Menu{
     public static void mainMenuFunction() throws Exception {
         Menu userGetter = new Menu();
         String user1 = userGetter.getUserOptions()[0];
+        String user2 = userGetter.getUserOptions()[1];
+        String user3 = userGetter.getUserOptions()[2];
+        String user4 = userGetter.getUserOptions()[3];
 
         Scanner choiceInput = new Scanner(System.in);
         boolean run = true;
@@ -213,8 +213,22 @@ class Menu{
                     choiceInput.nextLine();
                     show();
                 } else {
-                    Game.hangMan(user1);
-                    secondMenu(user1);
+                    if (user2 == "Add user 2"){
+                        Game.hangMan(user1);
+                        secondMenu(user1);
+                    }
+                    else if (user3 == "Add user 3"){
+                        Multiplayer.hangMan(user1, user2, null, null);
+                        firstMenu();
+                    }
+                    else if (user4 == "Add user 4"){
+                        Multiplayer.hangMan(user1, user2, user3, null);
+                        firstMenu();
+                    }
+                    else if (user4 != "Add user 4"){
+                        Multiplayer.hangMan(user1, user2, user3, user4);
+                        firstMenu();
+                    }
                 }
             }
                 else if (choice == 3) {
