@@ -13,10 +13,7 @@ import java.util.Scanner;
 
         public static void hangMan(String user1, String user2, String user3, String user4) throws Exception {
             boolean victory = false;
-            int playerLife1 = 0;
-            int playerLife2 = 0;
-            int playerLife3;
-            int playerLife4;
+            int playersLife = 0;
             // Here is our full wordlist!
             String [] wordHolder = {"Björn","Bill","Java","Edwin","Julius","Martin","Johanna","String","Int","Scanner","ArrayList","boolean","Character","Placeholder","null",
                     "monster","redbull","Newton","Switchbitch","HANGMAN","FUCKYOU","Fury","Class","Static","Void","GeOssHögtBetygBill","System","Exception","Mupphuvud"
@@ -29,38 +26,35 @@ import java.util.Scanner;
             Player userName = new Player();
             String [] splitUserName = user1.split(" ", 5);
 
-
             //This if/else-if case keeps track of if the game has 2, 3 or 4 players!
+            ArrayList<Integer> randomNumber = new ArrayList<>();
 
             if (user3 == null) {
+                playersLife = 20;
                 System.out.println(Color.PURPLE + "Welcome " + /*userName.getInstanceVarUsername(splitUserName[0])*/ user1 + " and " + user2 + ", get ready for battle!\nThe first word is " + guessWord.length() + " letters long!" + Color.RESET);
-                playerLife1 = 10;
-                playerLife2 = 10;
-                Random vadduvill = new Random();
 
-                int lowest = 1;
-                int highest = 2;
-                int result = vadduvill.nextInt(highest-lowest) + lowest;
+                randomNumber.add(0, 1);
+                randomNumber.add(1, 2);
+
             }
-            else if (user4 == null){
+            else if (user4 == null) {
+                playersLife = 30;
                 System.out.println(Color.PURPLE + "Welcome " + user1 + ", " + user2 + " and " + user3 + "! Get ready for battle!\nThe first word is " + guessWord.length() + " letters long!" + Color.RESET);
-                Random vadduvill = new Random();
 
-                int lowest = 1;
-                int highest = 3;
-                int result = vadduvill.nextInt(highest-lowest) + lowest;
+                randomNumber.add(0, 1);
+                randomNumber.add(1, 2);
+                randomNumber.add(2, 3);
             }
-            else{
+
+            else {
+                playersLife = 40;
                 System.out.println(Color.PURPLE + "Welcome " + user1 + ", " + user2 + ", " + user3 + " and " + user4 + "! Get ready for battle!\nThe first word is " + guessWord.length() + " letters long!" + Color.RESET);
-                Random vadduvill = new Random();
 
-                int lowest = 1;
-                int highest = 4;
-                int result = vadduvill.nextInt(highest-lowest) + lowest;
+                randomNumber.add(0, 1);
+                randomNumber.add(1, 2);
+                randomNumber.add(2, 3);
+                randomNumber.add(3, 4);
             }
-
-
-
 
             for (int i = 0; i < guessWord.length(); i++) {
                 System.out.print("_");
@@ -68,8 +62,8 @@ import java.util.Scanner;
                 allLetters.add(i,  '_');
             }
 
-            // "Victory" and "playerLife1" checks weather the player wins or looses throughout the game.
-            while (victory == false && playerLife1 > 0||victory == false && playerLife2 > 0 ) {
+            // "Victory" and "playersLife" checks weather the player wins or looses throughout the game.
+            while (victory == false && playersLife > 0) {
                 boolean guessCorrect = false;
                 boolean guessIncorrect = false;
                 boolean doubleGuess = true;
@@ -116,7 +110,7 @@ import java.util.Scanner;
                         System.out.println(Color.GREEN + "\n\nCongratulations " + userName.getInstanceVarUsername(splitUserName[0]) + ". You are victorious! :)" + Color.RESET + "\n (Press Enter to return to main menu)");
                         Player.matchAdderCaller();
                         Player.winAdderCaller();
-                        if (playerLife1 == 10){
+                        if (playersLife == 10){
                             Player.flawlessAdderCaller();
                             System.out.println(Color.YELLOW + "\nNO LIVES LOST! FLAWLESS VICTORY ARCHIVED!!!!!!\n" + userName.getInstanceVarUsername(splitUserName[0]) + " is a legend!" + Color.RESET);
                         }
@@ -124,9 +118,9 @@ import java.util.Scanner;
                         victory = true;
                     }
                 } else if (guessIncorrect) {
-                    playerLife1 = playerLife1 - 1;
-                    hangManWriter(playerLife1);
-                    System.out.println(Color.RED + "Incorrect guess! You have lost one life!" + "\n(" + playerLife1 + " lives remaining)" + Color.RESET);
+                    playersLife = playersLife - 1;
+                    hangManWriter(playersLife);
+                    System.out.println(Color.RED + "Incorrect guess! You have lost one life!" + "\n(" + playersLife + " lives remaining)" + Color.RESET);
                     incorrectLetterCollector(trueLetter, dumbGuesses);
                     System.out.println();
                     for (int j = 0; j < allLetters.size(); j++) {
@@ -134,10 +128,10 @@ import java.util.Scanner;
                     }
 
                 }
-                // You already know what "playerLife1" does...
-                if (playerLife1 == 0) {
+                // You already know what "playersLife" does...
+                if (playersLife == 0) {
                     System.out.println();
-                    hangManWriter(playerLife1);
+                    hangManWriter(playersLife);
                     System.out.print(Color.RED + "\nYou have been defeated! The word in question was: " + guessWord + "\n\nPress the Enter key to return to the main menu in shame" + Color.RESET);
                     Player.matchAdderCaller();
                     Player.lossAdderCaller();
@@ -146,6 +140,12 @@ import java.util.Scanner;
                 }
             }
         }
+
+
+            public static void turn (ArrayList<Integer> randomNumber) {
+
+
+            }
 
         /**
          Randomizer uses a Math-random function to pick out a word from our "wordlist" at the top of "hangMan" method.
@@ -211,26 +211,6 @@ import java.util.Scanner;
             for (int i = playerLife; i == playerLife; i++) {
                 System.out.println(wordHolder[randomizer(wordHolder)] + hangManIllus[i] + Color.RESET);
             }
-
-
-        }
-        public static void turn (int result ){
-
-
-
-           if (result == 1){
-               result = 2;
-           }
-           else if(result == 2){
-               result = 3;
-           }
-           else if(result == 3){
-               result = 4;
-           }
-           else if(result == 4){
-               result = 1;
-           }
-
         }
 
         /**
