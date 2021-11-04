@@ -13,21 +13,21 @@ import java.util.Scanner;
 
         public static void hangMan(String user1, String user2, String user3, String user4) throws Exception {
             //  //This array holds all currently selected and playing users
-            //String[]users = {user1, user2, user3, user4};
+            String[] users = {user1, user2, user3, user4};
 
             boolean victory = false;
             int playersLife = 0;
             // Here is our full wordlist!
-            String [] wordHolder = {"Björn","Bill","Java","Edwin","Julius","Martin","Johanna","String","Int","Scanner","ArrayList","boolean","Character","Placeholder","null",
-                    "monster","redbull","Newton","Switchbitch","HANGMAN","FUCKYOU","Fury","Class","Static","Void","GeOssHögtBetygBill","System","Exception","Mupphuvud"
-                    ,"JamesGosling","Kaffe","ForLoop","While","Index","Double","Minecraft","Starcraft","Warcraft","Cantcrashthisgame","Xbox","Discord","Git","Github","CleanDrink","Corona",
-                    "False","True","Stockholm","CtrlAltDelete","Syntax"};
+            String[] wordHolder = {"Björn", "Bill", "Java", "Edwin", "Julius", "Martin", "Johanna", "String", "Int", "Scanner", "ArrayList", "boolean", "Character", "Placeholder", "null",
+                    "monster", "redbull", "Newton", "Switchbitch", "HANGMAN", "FUCKYOU", "Fury", "Class", "Static", "Void", "GeOssHögtBetygBill", "System", "Exception", "Mupphuvud"
+                    , "JamesGosling", "Kaffe", "ForLoop", "While", "Index", "Double", "Minecraft", "Starcraft", "Warcraft", "Cantcrashthisgame", "Xbox", "Discord", "Git", "Github", "CleanDrink", "Corona",
+                    "False", "True", "Stockholm", "CtrlAltDelete", "Syntax"};
 
             String guessWord = wordHolder[randomizer(wordHolder)].toLowerCase();
             ArrayList<Character> allLetters = new ArrayList<>(guessWord.length());
             ArrayList<Character> dumbGuesses = new ArrayList();
             Player userName = new Player();
-            String [] splitUserName = user1.split(" ", 5);
+            String[] splitUserName = user1.split(" ", 5);
 
             //This if/else-if case keeps track of if the game has 2, 3 or 4 players!
             ArrayList<Integer> randomNumber = new ArrayList<>();
@@ -43,8 +43,7 @@ import java.util.Scanner;
                 amountOfPlayers = randomizerList(randomNumber);
                 //turn(amountOfPlayers, user1, user2, user3, user4);
 
-            }
-            else if (user4 == null) {
+            } else if (user4 == null) {
                 playersLife = 30;
                 System.out.println(Color.PURPLE + "Welcome " + user1 + ", " + user2 + " and " + user3 + "! Get ready for battle!\nThe first word is " + guessWord.length() + " letters long!" + Color.RESET);
 
@@ -53,9 +52,7 @@ import java.util.Scanner;
                 randomNumber.add(2, 3);
                 amountOfPlayers = randomizerList(randomNumber);
                 //turn(amountOfPlayers, user1, user2, user3, user4);
-            }
-
-            else {
+            } else {
                 playersLife = 40;
                 System.out.println(Color.PURPLE + "Welcome " + user1 + ", " + user2 + ", " + user3 + " and " + user4 + "! Get ready for battle!\nThe first word is " + guessWord.length() + " letters long!" + Color.RESET);
 
@@ -69,92 +66,112 @@ import java.util.Scanner;
 
             amountOfPlayers = turn(amountOfPlayers, user1, user2, user3, user4);
 
-            for (int i = 0; i < guessWord.length(); i++) {
-                System.out.print("_");
-                allLetters.add(i,  '_');
-            }
+            boolean runMultiplayer = true;
+            while (runMultiplayer) {
+                for (int i = 0; i < guessWord.length(); i++) {
+                    System.out.print("_");
+                    allLetters.add(i, '_');
+                }
 
 
-            // ******************************************** Game Start! ************************************************
+                // ******************************************** Game Start! ************************************************
 
 
+                // "Victory" and "playersLife" checks weather the player wins or looses throughout the game.
+                while (victory == false && playersLife > 0) {
+                    boolean guessCorrect = false;
+                    boolean guessIncorrect = false;
+                    boolean doubleGuess = true;
+                    System.out.println();
+                    String letter;
+                    String trueLetter = null;
 
-            // "Victory" and "playersLife" checks weather the player wins or looses throughout the game.
-            while (victory == false && playersLife > 0) {
-                boolean guessCorrect = false;
-                boolean guessIncorrect = false;
-                boolean doubleGuess = true;
-                System.out.println();
-                String letter;
-                String trueLetter = null;
+                    // doubleGuess ensures player does not guess same letter twice! You're welcome <3
+                    while (doubleGuess) {
+                        boolean destroyDumbCharacters = true;
+                        while (destroyDumbCharacters) {
+                            letter = in.nextLine().toLowerCase(); // to lower case kills you capitalized letters *evil laugh*
+                            trueLetter = characterDestroyer(letter, allLetters);
 
-                // doubleGuess ensures player does not guess same letter twice! You're welcome <3
-                while(doubleGuess) {
-                    boolean destroyDumbCharacters = true;
-                    while (destroyDumbCharacters) {
-                        letter = in.nextLine().toLowerCase(); // to lower case kills you capitalized letters *evil laugh*
-                        trueLetter = characterDestroyer(letter, allLetters);
+                            if (trueLetter != null) {
+                                destroyDumbCharacters = false;
+                            }
+                        }
+                        if (dumbGuesses.contains(trueLetter.charAt(0)) || allLetters.contains(trueLetter.charAt(0))) {
+                            System.out.println(Color.RED + "Letter has already been guessed!" + Color.RESET);
+                            for (int j = 0; j < allLetters.size(); j++) {
+                                System.out.print(allLetters.get(j));
+                            }
 
-                        if (trueLetter != null) {
-                            destroyDumbCharacters = false;
+                        } else {
+                            doubleGuess = false;
                         }
                     }
-                    if (dumbGuesses.contains(trueLetter.charAt(0)) || allLetters.contains(trueLetter.charAt(0))) {
-                        System.out.println(Color.RED + "Letter has already been guessed!"+ Color.RESET);
+                    for (int i = 0; i < guessWord.length(); i++) {
+                        if (trueLetter.charAt(0) == guessWord.charAt(i)) {
+                            guessCorrect = true;
+                        } else if (trueLetter.charAt(0) != guessWord.charAt(i)) {
+                            guessIncorrect = true;
+                        }
+                    }
+
+                    // this matches current turn with an index in the "users" array to keep track of which player should get a point
+
+                    int currentPlayer = 0;
+
+                    if (amountOfPlayers == 2 || amountOfPlayers == 3 || amountOfPlayers == 4) {
+                        currentPlayer = amountOfPlayers - 2;
+                    } else if (amountOfPlayers == 1) {
+                        if (user3 == null) {
+                            currentPlayer = 1;
+                        } else if (user4 == null) {
+                            currentPlayer = 2;
+                        } else {
+                            currentPlayer = 3;
+                        }
+                    }
+
+                /* "guessCorrect" and "guessIncorrect" makes the game react to your choices as a player.
+                incorrect guesses result in a loss of life, correct guesses reveals letter in arrayList!*/
+
+
+                    if (guessCorrect) {
+                        correctLetter(trueLetter, guessWord, allLetters, userName, user1);
+                        if (allLetters.contains('_')) {
+                        } else {
+
+                            System.out.println(Color.GREEN + "\n\nCongratulations " + users[currentPlayer] + ". You get a point! :)" + Color.RESET);
+                            guessWord = wordHolder[randomizer(wordHolder)].toLowerCase();
+                            System.out.println(guessWord);
+                            //Här ska den spelare som skrev ut ordet få ett poäng
+                            // Här avslutade vi igår 4 november. Detta är morgondagens grupp furys problem, Fuckyou och jag ska leva lite. Inte mitt problem iallafall.
+                            dumbGuesses.clear();
+
+                        }
+                    } else if (guessIncorrect) {
+                        playersLife = playersLife - 1;
+                        //hangManWriter(playersLife);
+                        System.out.println(Color.RED + "Incorrect guess! Your collective life has gone down by 1!" + "\n(" + playersLife + " lives remaining)" + Color.RESET);
+                        incorrectLetterCollector(trueLetter, dumbGuesses);
+                        System.out.println();
                         for (int j = 0; j < allLetters.size(); j++) {
                             System.out.print(allLetters.get(j));
                         }
+                        amountOfPlayers = turn(amountOfPlayers, user1, user2, user3, user4);
 
-                    } else {
-                        doubleGuess = false;
                     }
-                }
-                for (int i = 0; i < guessWord.length(); i++) {
-                    if (trueLetter.charAt(0) == guessWord.charAt(i)) {
-                        guessCorrect = true;
-                    } else if (trueLetter.charAt(0) != guessWord.charAt(i)) {
-                        guessIncorrect = true;
-                    }
-                }
 
-                /* "guessCorrect" and "guessIncorrect" makes the game react to your choices as a player.
-                    incorrect guesses result in a loss of life, correct guesses reveals letter in arrayList!*/
-
-                if (guessCorrect) {
-                    correctLetter(trueLetter, guessWord, allLetters, userName, user1);
-                    if (allLetters.contains('_')) {
-                    } else {
-                        System.out.println(Color.GREEN + "\n\nCongratulations " + userName.getInstanceVarUsername(splitUserName[0]) + ". You are victorious! :)" + Color.RESET + "\n (Press Enter to return to main menu)");
+                    // You already know what "playersLife" does...
+                    if (playersLife == 0) {
+                        System.out.println();
+                        //hangManWriter(playersLife);
+                        System.out.print(Color.RED + "\nThe game is over! The last word was: " + guessWord + "\n\nThe winning player was PLACEHOLDER!\n\nPress enter to return to main menu" +  Color.RESET);
                         Player.matchAdderCaller();
-                        Player.winAdderCaller();
-                        if (playersLife == 10){
-                            Player.flawlessAdderCaller();
-                            System.out.println(Color.YELLOW + "\nNO LIVES LOST! FLAWLESS VICTORY ARCHIVED!!!!!!\n" + userName.getInstanceVarUsername(splitUserName[0]) + " is a legend!" + Color.RESET);
-                        }
+                        Player.lossAdderCaller();
                         in.nextLine();
                         victory = true;
+                        runMultiplayer = false;
                     }
-                } else if (guessIncorrect) {
-                    playersLife = playersLife - 1;
-                    //hangManWriter(playersLife);
-                    System.out.println(Color.RED + "Incorrect guess! Your collective life has gone down by 1!" + "\n(" + playersLife + " lives remaining)" + Color.RESET);
-                    incorrectLetterCollector(trueLetter, dumbGuesses);
-                    System.out.println();
-                    for (int j = 0; j < allLetters.size(); j++) {
-                        System.out.print(allLetters.get(j));
-                    }
-                    amountOfPlayers = turn(amountOfPlayers, user1, user2, user3, user4);
-                }
-
-                // You already know what "playersLife" does...
-                if (playersLife == 0) {
-                    System.out.println();
-                    //hangManWriter(playersLife);
-                    System.out.print(Color.RED + "\nYou have been defeated! The word in question was: " + guessWord + "\n\nPress the Enter key to return to the main menu in shame" + Color.RESET);
-                    Player.matchAdderCaller();
-                    Player.lossAdderCaller();
-                    in.nextLine();
-                    victory = true;
                 }
             }
         }
