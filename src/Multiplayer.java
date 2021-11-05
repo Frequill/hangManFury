@@ -1,8 +1,6 @@
-import java.util.ArrayList;
-import java.util.Random;
-import java.util.Scanner;
+import java.util.*;
 
-        class Multiplayer {
+class Multiplayer {
 
         public static Scanner in = new Scanner(System.in);
 
@@ -80,7 +78,6 @@ import java.util.Scanner;
                 randomNumber.add(2, 3);
                 randomNumber.add(3, 4);
                 amountOfPlayers = randomizerList(randomNumber);
-
             }
 
             amountOfPlayers = turn(amountOfPlayers, user1, user2, user3, user4);
@@ -182,18 +179,18 @@ import java.util.Scanner;
                             System.out.print(allLetters.get(j));
                         }
                         amountOfPlayers = turn(amountOfPlayers, user1, user2, user3, user4);
-
                     }
 
                     // You already know what "playersLife" does...
                     if (playersLife == 0) {
                         System.out.println();
-                        //hangManWriter(playersLife);
-                        System.out.print(Color.RED + "\nThe game is over! The last word was: " + guessWord + "\n\nThe winning player was PLACEHOLDER!\n\nPress enter to return to main menu" +  Color.RESET);
-                        // ^ För att ovanstående skall fungera så måste vi veta vem som fick högst "poäng" under spelet! ^
-                        Player.matchAdderCaller();
-                        Player.lossAdderCaller();
+                        System.out.print(Color.RED + "\nThe game is over! The last word was: " + guessWord +
+                                Color.RESET);
+                        winnerSelect(usersPoints, users);
+                        //Player.matchAdderCaller();
+                        //Player.lossAdderCaller();
                         in.nextLine();
+
                         victory = true;
                         runMultiplayer = false;
                     }
@@ -202,18 +199,13 @@ import java.util.Scanner;
         }
 
 
-
             //  NEDANSTÅENDE METOD SKALL SKRIVAS KLART OCH ANVÄNDAS FÖR ATT LOKALISERA EN VINNARE NÄR MATCHEN ÄR KLAR
-            public static void winnerSelect(ArrayList<Integer> usersPoints) {
-                if (usersPoints.size() == 4){
-                    if (usersPoints.get(0) > usersPoints.get(1) && usersPoints.get(0) > usersPoints.get(2) && usersPoints.get(0) > usersPoints.get(3)){
-                        System.out.println();
+            public static void winnerSelect(ArrayList<Integer> usersPoints, String[] users) {
+            Integer maxVal = Collections.max(usersPoints);
+            int index = usersPoints.indexOf(maxVal);
 
-                    }
-                }
-
-            }
-
+                System.out.println("\nThe winner is " + users[index] + " with " + maxVal + " points!");
+        }
 
             public static int turn (int amountOfPlayers, String user1, String user2, String user3, String user4) {
             if (amountOfPlayers == 1){
