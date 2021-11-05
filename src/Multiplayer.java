@@ -157,7 +157,8 @@ class Multiplayer {
                         } else {
 
                             System.out.println(Color.GREEN + "\n\nCongratulations " + users[currentPlayer] + ". You get a point!\n(It's still " + users[currentPlayer] + "'s turn)" + Color.RESET);
-                            usersPoints.set(currentPlayer, +1);
+                            usersPoints.set(currentPlayer,usersPoints.get(currentPlayer) + 1) ;
+                            System.out.println(usersPoints.get(currentPlayer));
                             guessWord = wordHolder[randomizer(wordHolder)].toLowerCase();
                             System.out.println("The next word to be guessed is " + guessWord.length() + " letters long!");
                             //Här ska den spelare som skrev ut ordet få ett poäng
@@ -198,13 +199,12 @@ class Multiplayer {
             }
         }
 
-
-            //  NEDANSTÅENDE METOD SKALL SKRIVAS KLART OCH ANVÄNDAS FÖR ATT LOKALISERA EN VINNARE NÄR MATCHEN ÄR KLAR
             public static void winnerSelect(ArrayList<Integer> usersPoints, String[] users) {
             Integer maxVal = Collections.max(usersPoints);
             int index = usersPoints.indexOf(maxVal);
 
                 System.out.println("\nThe winner is " + users[index] + " with " + maxVal + " points!");
+
         }
 
             public static int turn (int amountOfPlayers, String user1, String user2, String user3, String user4) {
