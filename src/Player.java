@@ -2,19 +2,22 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-// ****************************************** Instance variables and object *******************************************
+//******************************************* Instance variables and object *******************************************
 class Player {
      private String instanceVarUsername;
-     private int pickUserData;
+     private int pickUserData;    // Vi kommer (högst troligt) att behöva 4st "pickUserData" för att hålla koll på
+                                  // alla fyra valda players, (istället för bara den senaste) för att kunna
+                                  // öka high-score på samtliga spelare under en multiplayer match...
 
     public String getInstanceVarUsername(String user) {
         instanceVarUsername = user;
         return instanceVarUsername;
     }
 
-    public void setPickUserData(int pickUserData2) {
-        this.pickUserData = pickUserData2;
+    public void setPickUserData(int pickUserDataArgument) {
+        this.pickUserData = pickUserDataArgument;
     }
+
     public int getPickUserData() {
         return pickUserData;
     }
@@ -24,11 +27,12 @@ class Player {
 
     public static Player modifyX = new Player();
 
-    //******************************************** Functions *********************************************
+    //************************************************* Functions *****************************************************
 
     /**
      This method stores different usernames in a text file for later use
      */
+
     public static String writeUsername() throws Exception {
         Scanner in = new Scanner(System.in);
         File toUsername = new File("src/username.txt");
@@ -36,7 +40,7 @@ class Player {
         System.out.println("Please enter your username: (NO SPACES!!)");
         String usersInput = in.next();
 
-        String newUser = usersInput + " 0" + " 0" + " 0" + " 0";
+        String newUser = usersInput + " 0" + " 0" + " 0" + " 0" + " 0";
         Writer out;
         out = new BufferedWriter(new FileWriter(toUsername,true));
         out.append("\n" + newUser);
@@ -61,7 +65,6 @@ class Player {
             while (readUsername.hasNextLine()) {
                 allUsernames.add(readUsername.nextLine());
             }
-
         }
 
         else {
@@ -79,10 +82,11 @@ class Player {
     /**
      This method increases the users overall matches played!
      */
+
     public static void matchAdder(int userInQuestion) throws Exception {
         File usernameFile = new File("src/username.txt");
         String userName = allUsernames.get(userInQuestion);
-        String[] userSplitter = userName.split(" ", 5);
+        String[] userSplitter = userName.split(" ", 6);
 
 
         int x = Integer.parseInt(userSplitter[1]);
@@ -90,7 +94,7 @@ class Player {
         String x2 = String.valueOf(x);
         userSplitter[1] = x2;
 
-        String finalResult = userSplitter[0] + " " + userSplitter[1] + " " + userSplitter[2] + " " +userSplitter[3] + " " + userSplitter[4];
+        String finalResult = userSplitter[0] + " " + userSplitter[1] + " " + userSplitter[2] + " " +userSplitter[3] + " " + userSplitter[4] + " " + userSplitter[5];
         allUsernames.set(userInQuestion, finalResult);
 
 
@@ -105,17 +109,18 @@ class Player {
     /**
      This method increases the users overall matches won!
      */
+
     public static void winAdder(int userInQuestion) throws Exception {
         File usernameFile = new File("src/username.txt");
         String userName = allUsernames.get(userInQuestion);
-        String[] userSplitter = userName.split(" ", 5);
+        String[] userSplitter = userName.split(" ", 6);
 
         int x = Integer.parseInt(userSplitter[2]);
         x = x + 1;
         String x2 = String.valueOf(x);
         userSplitter[2] = x2;
 
-        String finalResult = userSplitter[0] + " " + userSplitter[1] + " " + userSplitter[2] + " " +userSplitter[3] + " " + userSplitter[4];
+        String finalResult = userSplitter[0] + " " + userSplitter[1] + " " + userSplitter[2] + " " +userSplitter[3] + " " + userSplitter[4] + " " + userSplitter[5];
         allUsernames.set(userInQuestion, finalResult);
 
 
@@ -130,17 +135,18 @@ class Player {
     /**
      This method increases the users overall matches lost :(
      */
+
     public static void lossAdder(int userInQuestion) throws Exception {
         File usernameFile = new File("src/username.txt");
         String userName = allUsernames.get(userInQuestion);
-        String[] userSplitter = userName.split(" ", 5);
+        String[] userSplitter = userName.split(" ", 6);
 
         int x = Integer.parseInt(userSplitter[3]);
         x = x + 1;
         String x2 = String.valueOf(x);
         userSplitter[3] = x2;
 
-        String finalResult = userSplitter[0] + " " + userSplitter[1] + " " + userSplitter[2] + " " +userSplitter[3] + " " + userSplitter[4];
+        String finalResult = userSplitter[0] + " " + userSplitter[1] + " " + userSplitter[2] + " " +userSplitter[3] + " " + userSplitter[4] + " " + userSplitter[5];
         allUsernames.set(userInQuestion, finalResult);
 
         PrintWriter out = new PrintWriter(usernameFile);
@@ -150,10 +156,14 @@ class Player {
         out.close();
     }
 
+    /**
+     This method increases the flawless victories of a noble user!
+     */
+
     public static void flawlessAdder(int userInQuestion) throws Exception {
         File usernameFile = new File("src/username.txt");
         String userName = allUsernames.get(userInQuestion);
-        String[] userSplitter = userName.split(" ", 5);
+        String[] userSplitter = userName.split(" ", 6);
 
 
         int x = Integer.parseInt(userSplitter[4]);
@@ -161,7 +171,7 @@ class Player {
         String x2 = String.valueOf(x);
         userSplitter[4] = x2;
 
-        String finalResult = userSplitter[0] + " " + userSplitter[1] + " " + userSplitter[2] + " " +userSplitter[3] + " " + userSplitter[4];
+        String finalResult = userSplitter[0] + " " + userSplitter[1] + " " + userSplitter[2] + " " +userSplitter[3] + " " + userSplitter[4] + " " + userSplitter[5];
         allUsernames.set(userInQuestion, finalResult);
 
 
@@ -171,6 +181,32 @@ class Player {
         }
         out.close();
     }
+
+    /**
+     This method keeps track of the points one attained from the last game multiplayer game, so it can be compared to high-scores
+     */
+
+    public static void multiplayerPointAdder(int userInQuestion, int userPoints) throws Exception {
+        File usernameFile = new File("src/username.txt");
+        String userName = allUsernames.get(userInQuestion);
+        String[] userSplitter = userName.split(" ", 6);
+
+        int x = Integer.parseInt(userSplitter[5]);
+        x = userPoints;
+        String x2 = String.valueOf(x);
+        userSplitter[5] = x2;
+
+        String finalResult = userSplitter[0] + " " + userSplitter[1] + " " + userSplitter[2] + " " +userSplitter[3] + " " + userSplitter[4] + " " + userSplitter[5];
+        allUsernames.set(userInQuestion, finalResult);
+
+        PrintWriter out = new PrintWriter(usernameFile);
+        for (int i = 0; i < allUsernames.size(); i++){
+            out.print(allUsernames.get(i) + "\n");
+        }
+        out.close();
+    }
+
+
 
     // Three basic "callers" that allows us to access instance variables of the "Player" class from other classes
 
@@ -188,6 +224,10 @@ class Player {
 
     public static void flawlessAdderCaller() throws Exception {
         flawlessAdder(modifyX.getPickUserData());
+    }
+
+    public static void multiplayerPointAdderCaller(int user1Points) throws Exception {
+        multiplayerPointAdder(modifyX.getPickUserData(), user1Points);
     }
 
     /**

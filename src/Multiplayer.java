@@ -199,13 +199,23 @@ class Multiplayer {
             }
         }
 
-            public static void winnerSelect(ArrayList<Integer> usersPoints, String[] users) {
+            public static void winnerSelect(ArrayList<Integer> usersPoints, String[] users) throws Exception {
             Integer maxVal = Collections.max(usersPoints);
             int index = usersPoints.indexOf(maxVal);
 
                 System.out.println("\nThe winner is " + users[index] + " with " + maxVal + " points!");
 
-        }
+
+                // Nedanstående for-loop behöver ha 4st "pickUserData" i "Player" classen för att fungera correct...
+                // (Syftet är att "komma ihåg" poängen som samtliga spelare fick under en multiplayer match för att
+                // sedan kunna jämföra samtliga med en high-score lista)
+
+                for (int i = 0; i < usersPoints.size(); i++){
+                    Player.multiplayerPointAdderCaller(usersPoints.get(i));
+                    System.out.println("SNURR");
+                }
+
+            }
 
             public static int turn (int amountOfPlayers, String user1, String user2, String user3, String user4) {
             if (amountOfPlayers == 1){
