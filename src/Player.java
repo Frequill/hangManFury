@@ -5,21 +5,46 @@ import java.util.Scanner;
 //******************************************* Instance variables and object *******************************************
 class Player {
      private String instanceVarUsername;
-     private int pickUserData;    // Vi kommer (högst troligt) att behöva 4st "pickUserData" för att hålla koll på
-                                  // alla fyra valda players, (istället för bara den senaste) för att kunna
-                                  // öka high-score på samtliga spelare under en multiplayer match...
+     private int pickUserData1 = -1;
+     private int pickUserData2 = -1;
+     private int pickUserData3 = -1;
+     private int pickUserData4 = -1;
 
     public String getInstanceVarUsername(String user) {
         instanceVarUsername = user;
         return instanceVarUsername;
     }
 
-    public void setPickUserData(int pickUserDataArgument) {
-        this.pickUserData = pickUserDataArgument;
+    public void setPickUserData1(int pickUserDataArgument) {
+        this.pickUserData1 = pickUserDataArgument;
     }
 
-    public int getPickUserData() {
-        return pickUserData;
+    public int getPickUserData1() {
+        return pickUserData1;
+    }
+
+    public void setPickUserData2(int pickUserDataArgument) {
+        this.pickUserData2 = pickUserDataArgument;
+    }
+
+    public int getPickUserData2() {
+        return pickUserData2;
+    }
+
+    public void setPickUserData3(int pickUserDataArgument) {
+        this.pickUserData3 = pickUserDataArgument;
+    }
+
+    public int getPickUserData3() {
+        return pickUserData3;
+    }
+
+    public void setPickUserData4(int pickUserDataArgument) {
+        this.pickUserData4 = pickUserDataArgument;
+    }
+
+    public int getPickUserData4() {
+        return pickUserData4;
     }
 
     public static ArrayList <String> allUsernames = new ArrayList();
@@ -75,8 +100,8 @@ class Player {
             }
         }
 
-        modifyX.pickUserData = allUsernames.size()-1;
-        modifyX.setPickUserData(modifyX.pickUserData);
+        modifyX.pickUserData1 = allUsernames.size()-1;
+        modifyX.setPickUserData1(modifyX.pickUserData1);
     }
 
     /**
@@ -211,23 +236,44 @@ class Player {
     // Three basic "callers" that allows us to access instance variables of the "Player" class from other classes
 
     public static void matchAdderCaller() throws Exception {
-        matchAdder(modifyX.getPickUserData());
+        matchAdder(modifyX.getPickUserData1());
     }
 
     public static void winAdderCaller() throws Exception {
-        winAdder(modifyX.getPickUserData());
+        winAdder(modifyX.getPickUserData1());
     }
 
     public static void lossAdderCaller() throws Exception {
-        lossAdder(modifyX.getPickUserData());
+        lossAdder(modifyX.getPickUserData1());
     }
 
     public static void flawlessAdderCaller() throws Exception {
-        flawlessAdder(modifyX.getPickUserData());
+        flawlessAdder(modifyX.getPickUserData1());
     }
 
-    public static void multiplayerPointAdderCaller(int user1Points) throws Exception {
-        multiplayerPointAdder(modifyX.getPickUserData(), user1Points);
+    public static void multiplayerPointAdderCaller(int userPoints) throws Exception {
+        if (modifyX.getPickUserData1() != -1 && modifyX.getPickUserData2() != -1 && modifyX.getPickUserData3() != -1 && modifyX.getPickUserData4() != -1) {
+            multiplayerPointAdder(modifyX.getPickUserData1(), userPoints);
+            multiplayerPointAdder(modifyX.getPickUserData2(), userPoints);
+            multiplayerPointAdder(modifyX.getPickUserData3(), userPoints);
+            multiplayerPointAdder(modifyX.getPickUserData4(), userPoints);
+        }
+            else if (modifyX.getPickUserData1() != -1 && modifyX.getPickUserData2() != -1 && modifyX.getPickUserData3() != -1) {
+            multiplayerPointAdder(modifyX.getPickUserData1(), userPoints);
+            multiplayerPointAdder(modifyX.getPickUserData2(), userPoints);
+            multiplayerPointAdder(modifyX.getPickUserData3(), userPoints);
+        }
+
+             else if (modifyX.getPickUserData1() != -1 && modifyX.getPickUserData2() != -1 ){
+                multiplayerPointAdder(modifyX.getPickUserData1(), userPoints);
+                multiplayerPointAdder(modifyX.getPickUserData2(), userPoints);
+            }
+                else if (modifyX.getPickUserData1() != -1) {
+                    multiplayerPointAdder(modifyX.getPickUserData1(), userPoints);
+            }
+                 else {
+                    System.out.println("Du har lyckats skapa nå jävla konstigt error");
+                 }
     }
 
     /**
@@ -298,7 +344,30 @@ class Player {
                }
                 userArray(aList.get(pickUser));
                 allUserNumbers.add(pickUser);
-                modifyX.setPickUserData(pickUser);
+
+
+                if (modifyX.getPickUserData1() == -1){
+                    modifyX.setPickUserData1(pickUser);
+                    System.out.println(modifyX.getPickUserData1());
+                }
+                else if (modifyX.getPickUserData1() != -1 && modifyX.getPickUserData2() == -1){
+                    modifyX.setPickUserData2(pickUser);
+                    System.out.println(modifyX.getPickUserData2());
+                }
+                else if (modifyX.getPickUserData1() != -1 && modifyX.getPickUserData2() != -1 && modifyX.getPickUserData3() == -1){
+                    modifyX.setPickUserData3(pickUser);
+                    System.out.println(modifyX.getPickUserData3());
+                }
+                else if (modifyX.getPickUserData1() != -1 && modifyX.getPickUserData2() != -1 && modifyX.getPickUserData3() != -1 && modifyX.getPickUserData4() == -1){
+                    modifyX.setPickUserData4(pickUser);
+                    System.out.println(modifyX.getPickUserData4());
+                }
+                else{
+                    System.out.println("Edwins röv");
+                }
+
+
+
                 user = aList.get(pickUser);
                 String[]userSplitter = user.split(" ",4);  // Splits username from stats so the two can be showed separately
                 String fullUser = userSplitter[0];
