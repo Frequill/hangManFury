@@ -3,6 +3,6 @@ Edwin 15 9 6 2 0
 Martin 2 2 0 0 0
 Julius 3 1 2 0 0
 Johanna 4 4 0 0 0
-kakanv2011 3 3 0 0 1
+kakanv2011 3 3 0 0 0
 Stenart! 0 0 0 0 0
 Edwardo 0 0 0 0 0
