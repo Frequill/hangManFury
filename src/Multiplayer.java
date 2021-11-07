@@ -44,7 +44,8 @@ class Multiplayer {
             ArrayList<Character> allLetters = new ArrayList<>(guessWord.length());
             ArrayList<Character> dumbGuesses = new ArrayList();
             Player userName = new Player();
-            String[] splitUserName = user1.split(" ", 5);
+
+
 
             //This if/else-if case keeps track of if the game has 2, 3 or 4 players!
             ArrayList<Integer> randomNumber = new ArrayList<>();
@@ -52,8 +53,10 @@ class Multiplayer {
             int amountOfPlayers;
 
             if (user3 == null) {
+                String[] splitUserName1 = user1.split(" ", 6);
+                String[] splitUserName2 = user2.split(" ", 6);
                 playersLife = 20;
-                System.out.println(Color.PURPLE + "Welcome " + /*userName.getInstanceVarUsername(splitUserName[0])*/ user1 + " and " + user2 + ", get ready for battle!\nThe first word is " + guessWord.length() + " letters long!" + Color.RESET);
+                System.out.println(Color.PURPLE + "Welcome " + /*userName.getInstanceVarUsername(splitUserName1[0])*/ splitUserName1[0] + " and " + splitUserName2[0] + ", get ready for battle!\nThe first word is " + guessWord.length() + " letters long!" + Color.RESET);
 
                 randomNumber.add(0, 1);
                 randomNumber.add(1, 2);
@@ -61,8 +64,11 @@ class Multiplayer {
                 //turn(amountOfPlayers, user1, user2, user3, user4);
 
             } else if (user4 == null) {
+                String[] splitUserName1 = user1.split(" ", 6);
+                String[] splitUserName2 = user2.split(" ", 6);
+                String[] splitUserName3 = user3.split(" ", 6);
                 playersLife = 5;
-                System.out.println(Color.PURPLE + "Welcome " + user1 + ", " + user2 + " and " + user3 + "! Get ready for battle!\nThe first word is " + guessWord.length() + " letters long!" + Color.RESET);
+                System.out.println(Color.PURPLE + "Welcome " + splitUserName1[0] + ", " + splitUserName2[0] + " and " + splitUserName3[0] + "! Get ready for battle!\nThe first word is " + guessWord.length() + " letters long!" + Color.RESET);
 
                 randomNumber.add(0, 1);
                 randomNumber.add(1, 2);
@@ -70,8 +76,13 @@ class Multiplayer {
                 amountOfPlayers = randomizerList(randomNumber);
                 //turn(amountOfPlayers, user1, user2, user3, user4);
             } else {
+                String[] splitUserName1 = user1.split(" ", 6);
+                String[] splitUserName2 = user2.split(" ", 6);
+                String[] splitUserName3 = user3.split(" ", 6);
+                String[] splitUserName4 = user4.split(" ", 6);
+
                 playersLife = 40;
-                System.out.println(Color.PURPLE + "Welcome " + user1 + ", " + user2 + ", " + user3 + " and " + user4 + "! Get ready for battle!\nThe first word is " + guessWord.length() + " letters long!" + Color.RESET);
+                System.out.println(Color.PURPLE + "Welcome " + splitUserName1[0] + ", " + splitUserName2[0] + ", " + splitUserName3[0] + " and " + splitUserName4[0] + "! Get ready for battle!\nThe first word is " + guessWord.length() + " letters long!" + Color.RESET);
 
                 randomNumber.add(0, 1);
                 randomNumber.add(1, 2);
@@ -155,8 +166,8 @@ class Multiplayer {
                         correctLetter(trueLetter, guessWord, allLetters, userName, user1);
                         if (allLetters.contains('_')) {
                         } else {
-
-                            System.out.println(Color.GREEN + "\n\nCongratulations " + users[currentPlayer] + ". You get a point!\n(It's still " + users[currentPlayer] + "'s turn)" + Color.RESET);
+                            String[] userSpliter = users[currentPlayer].split(" ",6);
+                            System.out.println(Color.GREEN + "\n\nCongratulations " + userSpliter[0] + ". You get a point!\n(It's still " + userSpliter[0] + "'s turn)" + Color.RESET);
                             usersPoints.set(currentPlayer,usersPoints.get(currentPlayer) + 1) ;
                             System.out.println(usersPoints.get(currentPlayer));
                             guessWord = wordHolder[randomizer(wordHolder)].toLowerCase();
@@ -210,23 +221,31 @@ class Multiplayer {
                 // (Syftet är att "komma ihåg" poängen som samtliga spelare fick under en multiplayer match för att
                 // sedan kunna jämföra samtliga med en high-score lista)
 
-
+                int x = 0;
 
                 for (int i = 0; i < usersPoints.size(); i++){
-                    Player.multiplayerPointAdderCaller(usersPoints.get(i));
-                    System.out.println("SNURR");
+                    x++;
+                    Player.multiplayerPointAdderCaller(usersPoints.get(i), x);
+                    System.out.println("Snurr");
                 }
 
             }
 
             public static int turn (int amountOfPlayers, String user1, String user2, String user3, String user4) {
+
+
+
+
+
             if (amountOfPlayers == 1){
-                System.out.println("\nIt is " + user1 +"'s turn!");
+                String[] splitUserName1 = user1.split(" ", 6);
+                System.out.println("\nIt is " + splitUserName1[0] +"'s turn!");
                 amountOfPlayers = 2;
                 }
 
             else if (amountOfPlayers == 2){
-                System.out.println("\nIt is " + user2 +"'s turn!");
+                String[] splitUserName2 = user2.split(" ", 6);
+                System.out.println("\nIt is " + splitUserName2[0] +"'s turn!");
                 if (user3 == null){
                     amountOfPlayers = 1;
                 }
@@ -236,7 +255,8 @@ class Multiplayer {
             }
 
             else if (amountOfPlayers == 3){
-                System.out.println("\nIt is " + user3 +"'s turn!");
+                String[] splitUserName3 = user3.split(" ", 6);
+                System.out.println("\nIt is " + splitUserName3[0] +"'s turn!");
                 if (user4 == null){
                     amountOfPlayers = 1;
                 }
@@ -246,7 +266,8 @@ class Multiplayer {
             }
 
             else if (amountOfPlayers == 4){
-                System.out.println("\nIt is " + user4 +"'s turn!");
+                String[] splitUserName4 = user4.split(" ", 6);
+                System.out.println("\nIt is " + splitUserName4[0] +"'s turn!");
                 amountOfPlayers = 1;
             }
             return amountOfPlayers;

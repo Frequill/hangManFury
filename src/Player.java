@@ -98,10 +98,27 @@ class Player {
             } else {
                 allUsernames.add(userInput);
             }
+            //modifyX.pickUserData1 = allUsernames.size()-1;
+            //modifyX.setPickUserData1(modifyX.pickUserData1);
+
+
+        }
+        if (modifyX.getPickUserData1() == -1){
+            modifyX.setPickUserData1(allUserNumbers.size() - 1);
+        }
+        else if (modifyX.getPickUserData1() != -1 && modifyX.getPickUserData2() == -1){
+            modifyX.setPickUserData2(allUserNumbers.size() - 1);
+        }
+        else if (modifyX.getPickUserData1() != -1 && modifyX.getPickUserData2() != -1 && modifyX.getPickUserData3() == -1){
+            modifyX.setPickUserData3(allUserNumbers.size() - 1);
+        }
+        else if (modifyX.getPickUserData1() != -1 && modifyX.getPickUserData2() != -1 && modifyX.getPickUserData3() != -1 && modifyX.getPickUserData4() == -1){
+            modifyX.setPickUserData4(allUserNumbers.size() - 1);
+        }
+        else{
+            System.out.println("Edwins röv");
         }
 
-       // modifyX.pickUserData1 = allUsernames.size()-1;
-        //modifyX.setPickUserData1(modifyX.pickUserData1);
     }
 
     /**
@@ -251,36 +268,21 @@ class Player {
         flawlessAdder(modifyX.getPickUserData1());
     }
 
-    public static void multiplayerPointAdderCaller(int userPoints) throws Exception {
-        if (modifyX.getPickUserData1() != -1 && modifyX.getPickUserData2() != -1 && modifyX.getPickUserData3() != -1 && modifyX.getPickUserData4() != -1) {
+    public static void multiplayerPointAdderCaller(int userPoints, int x) throws Exception {
+
+        if (x == 1) {
             multiplayerPointAdder(modifyX.getPickUserData1(), userPoints);
+
+        }
+            else if (x == 2) {
             multiplayerPointAdder(modifyX.getPickUserData2(), userPoints);
-            multiplayerPointAdder(modifyX.getPickUserData3(), userPoints);
-            multiplayerPointAdder(modifyX.getPickUserData4(), userPoints);
-
-            System.out.println(modifyX.getPickUserData1() + " " + modifyX.getPickUserData2() + " " + modifyX.getPickUserData3() + " " + modifyX.getPickUserData4());
-        }
-            else if (modifyX.getPickUserData1() != -1 && modifyX.getPickUserData2() != -1 && modifyX.getPickUserData3() != -1) {
-            multiplayerPointAdder(modifyX.getPickUserData1(), userPoints);
-            multiplayerPointAdder(modifyX.getPickUserData2(), userPoints);
-            multiplayerPointAdder(modifyX.getPickUserData3(), userPoints);
-
-            System.out.println(modifyX.getPickUserData1() + " " + modifyX.getPickUserData2() + " " + modifyX.getPickUserData3());
 
         }
-
-             else if (modifyX.getPickUserData1() != -1 && modifyX.getPickUserData2() != -1 ){
-                multiplayerPointAdder(modifyX.getPickUserData1(), userPoints);
-                multiplayerPointAdder(modifyX.getPickUserData2(), userPoints);
-
-            System.out.println(modifyX.getPickUserData1() + " " + modifyX.getPickUserData2());
-
+             else if (x == 3){
+                multiplayerPointAdder(modifyX.getPickUserData3(), userPoints);
         }
-                else if (modifyX.getPickUserData1() != -1) {
-                    multiplayerPointAdder(modifyX.getPickUserData1(), userPoints);
-
-            System.out.println(modifyX.getPickUserData1());
-
+                else if (x == 4) {
+                    multiplayerPointAdder(modifyX.getPickUserData4(), userPoints);
         }
                  else {
                     System.out.println("Du har lyckats skapa nå jävla konstigt error");
@@ -322,7 +324,6 @@ class Player {
                     System.out.println(Color.YELLOW + i + ") " + Color.RESET + aList.get(i));
 
                 }
-                int last = aList.size()+1;
                 System.out.println(Color.YELLOW + aList.size()+ ")" + Color.RESET + " Back");
                 boolean run2 = true;
 
@@ -358,19 +359,15 @@ class Player {
 
                 if (modifyX.getPickUserData1() == -1){
                     modifyX.setPickUserData1(pickUser);
-                    System.out.println(modifyX.getPickUserData1());
                 }
                 else if (modifyX.getPickUserData1() != -1 && modifyX.getPickUserData2() == -1){
                     modifyX.setPickUserData2(pickUser);
-                    System.out.println(modifyX.getPickUserData2());
                 }
                 else if (modifyX.getPickUserData1() != -1 && modifyX.getPickUserData2() != -1 && modifyX.getPickUserData3() == -1){
                     modifyX.setPickUserData3(pickUser);
-                    System.out.println(modifyX.getPickUserData3());
                 }
                 else if (modifyX.getPickUserData1() != -1 && modifyX.getPickUserData2() != -1 && modifyX.getPickUserData3() != -1 && modifyX.getPickUserData4() == -1){
                     modifyX.setPickUserData4(pickUser);
-                    System.out.println(modifyX.getPickUserData4());
                 }
                 else{
                     System.out.println("Edwins röv");
