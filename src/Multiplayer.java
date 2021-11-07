@@ -35,10 +35,10 @@ class Multiplayer {
             boolean victory = false;
             int playersLife = 0;
             // Here is our full wordlist!
-            String[] wordHolder = {"Björn", "Bill", "Java", "Edwin", "Julius", "Martin", "Johanna", "String", "Int", "Scanner", "ArrayList", "boolean", "Character", "Placeholder", "null",
+            String[] wordHolder = {"Björn", /* "Bill", "Java", "Edwin", "Julius", "Martin", "Johanna", "String", "Int", "Scanner", "ArrayList", "boolean", "Character", "Placeholder", "null",
                     "monster", "redbull", "Newton", "Switchbitch", "HANGMAN", "FUCKYOU", "Fury", "Class", "Static", "Void", "GeOssHögtBetygBill", "System", "Exception", "Mupphuvud"
                     , "JamesGosling", "Kaffe", "ForLoop", "While", "Index", "Double", "Minecraft", "Starcraft", "Warcraft", "Cantcrashthisgame", "Xbox", "Discord", "Git", "Github", "CleanDrink", "Corona",
-                    "False", "True", "Stockholm", "CtrlAltDelete", "Syntax"};
+                    "False", "True", "Stockholm", "CtrlAltDelete", "Syntax"*/};
 
             String guessWord = wordHolder[randomizer(wordHolder)].toLowerCase();
             ArrayList<Character> allLetters = new ArrayList<>(guessWord.length());
@@ -61,7 +61,7 @@ class Multiplayer {
                 //turn(amountOfPlayers, user1, user2, user3, user4);
 
             } else if (user4 == null) {
-                playersLife = 30;
+                playersLife = 5;
                 System.out.println(Color.PURPLE + "Welcome " + user1 + ", " + user2 + " and " + user3 + "! Get ready for battle!\nThe first word is " + guessWord.length() + " letters long!" + Color.RESET);
 
                 randomNumber.add(0, 1);
