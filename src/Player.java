@@ -100,8 +100,8 @@ class Player {
             }
         }
 
-        modifyX.pickUserData1 = allUsernames.size()-1;
-        modifyX.setPickUserData1(modifyX.pickUserData1);
+       // modifyX.pickUserData1 = allUsernames.size()-1;
+        //modifyX.setPickUserData1(modifyX.pickUserData1);
     }
 
     /**
@@ -257,20 +257,31 @@ class Player {
             multiplayerPointAdder(modifyX.getPickUserData2(), userPoints);
             multiplayerPointAdder(modifyX.getPickUserData3(), userPoints);
             multiplayerPointAdder(modifyX.getPickUserData4(), userPoints);
+
+            System.out.println(modifyX.getPickUserData1() + " " + modifyX.getPickUserData2() + " " + modifyX.getPickUserData3() + " " + modifyX.getPickUserData4());
         }
             else if (modifyX.getPickUserData1() != -1 && modifyX.getPickUserData2() != -1 && modifyX.getPickUserData3() != -1) {
             multiplayerPointAdder(modifyX.getPickUserData1(), userPoints);
             multiplayerPointAdder(modifyX.getPickUserData2(), userPoints);
             multiplayerPointAdder(modifyX.getPickUserData3(), userPoints);
+
+            System.out.println(modifyX.getPickUserData1() + " " + modifyX.getPickUserData2() + " " + modifyX.getPickUserData3());
+
         }
 
              else if (modifyX.getPickUserData1() != -1 && modifyX.getPickUserData2() != -1 ){
                 multiplayerPointAdder(modifyX.getPickUserData1(), userPoints);
                 multiplayerPointAdder(modifyX.getPickUserData2(), userPoints);
-            }
+
+            System.out.println(modifyX.getPickUserData1() + " " + modifyX.getPickUserData2());
+
+        }
                 else if (modifyX.getPickUserData1() != -1) {
                     multiplayerPointAdder(modifyX.getPickUserData1(), userPoints);
-            }
+
+            System.out.println(modifyX.getPickUserData1());
+
+        }
                  else {
                     System.out.println("Du har lyckats skapa nå jävla konstigt error");
                  }
@@ -344,7 +355,6 @@ class Player {
                }
                 userArray(aList.get(pickUser));
                 allUserNumbers.add(pickUser);
-
 
                 if (modifyX.getPickUserData1() == -1){
                     modifyX.setPickUserData1(pickUser);

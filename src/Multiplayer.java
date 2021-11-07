@@ -210,6 +210,8 @@ class Multiplayer {
                 // (Syftet är att "komma ihåg" poängen som samtliga spelare fick under en multiplayer match för att
                 // sedan kunna jämföra samtliga med en high-score lista)
 
+
+
                 for (int i = 0; i < usersPoints.size(); i++){
                     Player.multiplayerPointAdderCaller(usersPoints.get(i));
                     System.out.println("SNURR");
