@@ -239,7 +239,7 @@ class Multiplayer {
                     }
                     for (int j = 0; j < usersPoints.size(); j++) {
                         y++;
-                        Player.multiLossAdderCaller(y, index);
+                        Player.multiLossAdderCaller(y, index ,users);
                     }
                 }
 
@@ -299,36 +299,18 @@ class Multiplayer {
                     }
                     if (run == true) {
                         System.out.println("\nThe winner is " + splitUser[0] + " with " + maxVal + " points!");
-                        Player.winAdder(index);
+                        System.out.println(index);
+                        int x = 0;
+                        for (int i = 0; i < usersPoints.size();i++){
+                            x++;
+                            Player.multiWinAdderCaller(x,index,users);
+
+                        }
                         run = false;
+
                     }
                 }
 
-
-                    /*} else if (users[index] != users[1]) {
-                        if (maxVal == usersPoints.get(1)) {
-                            System.out.println("\n\nPlayers " + users[index] + " and " + users[1] + " both have " + maxVal + " points!\nThe Game ends as a draw!");
-                            run = false;
-                        }
-                    } else if (users[2] != null && users[2] != users[index]) {
-                        if (maxVal == usersPoints.get(2)) {
-                            System.out.println("\n\nPlayers " + users[index] + " and " + users[2] + " both have " + maxVal + " points!\nThe Game ends as a draw!");
-                            run = false;
-                        }
-                    } else if (users[3] != null && users[3] != users[index]) {
-                        if (maxVal == usersPoints.get(3)) {
-                            System.out.println("\n\nPlayers " + users[index] + " and " + users[3] + " both have " + maxVal + " points!\nThe Game ends as a draw!");
-                            run = false;
-                        }
-                    } else if (users[1] != users[index] && users[0] != users[index] && users[1] != users[0]) {
-                        if (maxVal == usersPoints.get(0) && maxVal == usersPoints.get(1))
-                            System.out.println("\n\nPlayers " + users[index] + ", " + users[0] + " and " + users[1] + "all have " + maxVal + " points!\nThe Game ends as a draw!");
-
-                    } else {
-                        System.out.println("\nThe winner is " + splitUser[0] + " with " + maxVal + " points!");
-                        Player.winAdder(index);
-                    }
-                }*/
 
             }
 

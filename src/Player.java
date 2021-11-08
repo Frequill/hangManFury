@@ -1,5 +1,6 @@
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.Scanner;
 
 //******************************************* Instance variables and object *******************************************
@@ -155,6 +156,7 @@ class Player {
     public static void winAdder(int userInQuestion) throws Exception {
         File usernameFile = new File("src/username.txt");
         String userName = allUsernames.get(userInQuestion);
+        System.out.println(userName);
         String[] userSplitter = userName.split(" ", 6);
 
         int x = Integer.parseInt(userSplitter[2]);
@@ -163,7 +165,7 @@ class Player {
         userSplitter[2] = x2;
 
         String finalResult = userSplitter[0] + " " + userSplitter[1] + " " + userSplitter[2] + " " +userSplitter[3] + " " + userSplitter[4] + " " + userSplitter[5];
-        allUsernames.set(userInQuestion, finalResult);
+        allUsernames.set(userInQuestion , finalResult);
 
 
         PrintWriter out = new PrintWriter(usernameFile);
@@ -229,6 +231,7 @@ class Player {
      */
 
     public static void multiplayerPointAdder(int userInQuestion, int userPoints) throws Exception {
+
         File usernameFile = new File("src/username.txt");
         String userName = allUsernames.get(userInQuestion);
         String[] userSplitter = userName.split(" ", 6);
@@ -249,7 +252,6 @@ class Player {
     }
 
 
-
     // Three basic "callers" that allows us to access instance variables of the "Player" class from other classes
 
     public static void matchAdderCaller() throws Exception {
@@ -258,6 +260,37 @@ class Player {
 
     public static void winAdderCaller() throws Exception {
         winAdder(modifyX.getPickUserData1());
+    }
+    public static void multiWinAdderCaller(int x, int index, String [] users) throws Exception {
+        String [] splitUsers = users[index].split(" ", 6);
+        String [] splitAllusernames1 = allUsernames.get(modifyX.getPickUserData1()).split(" ", 6);
+        String [] splitAllusernames2 = allUsernames.get(modifyX.getPickUserData2()).split(" ", 6);
+
+        if (x == 1 && splitAllusernames1[0].equals(splitUsers[0])) {
+            winAdder(modifyX.getPickUserData1());
+        }
+        else if (x == 2 && splitAllusernames2[0].equals(splitUsers[0])) {
+            winAdder(modifyX.getPickUserData2());
+        }
+        else if (users[3] != null){
+            String [] splitAllusernames3 = allUsernames.get(modifyX.getPickUserData3()).split(" ", 6);
+            String [] splitAllusernames4 = allUsernames.get(modifyX.getPickUserData4()).split(" ", 6);
+            if (x==3 && splitAllusernames3[0].equals(splitUsers[0])){
+                winAdder(modifyX.getPickUserData3());
+            }
+            else if (x==4 && splitAllusernames4[0].equals(splitUsers[0])) {
+                winAdder(modifyX.getPickUserData4());
+            }
+        }
+        else if (users[2] != null) {
+            String [] splitAllusernames3 = allUsernames.get(modifyX.getPickUserData3()).split(" ", 6);
+            if (x == 3 && splitAllusernames3[0].equals(splitUsers[0])) {
+                winAdder(modifyX.getPickUserData3());
+            }
+        }
+        else{
+            System.out.println("Du har lyckats skapa nå jävla konstigt error 2.0 lul");
+        }
     }
 
     public static void multiMatchAdderCaller(int x) throws Exception {
@@ -273,28 +306,44 @@ class Player {
         else if (x == 4) {
             matchAdder(modifyX.getPickUserData4());
         }
-        else {
-            System.out.println("Du har lyckats skapa nå jävla konstigt error 2.0 lul");
-        }
+
     }
 
     public static void lossAdderCaller() throws Exception {
         lossAdder(modifyX.getPickUserData1());
     }
 
-    public static void multiLossAdderCaller(int x, int index) throws Exception {
-        if (x == 1 && modifyX.getPickUserData1() != index) {
+    public static void multiLossAdderCaller(int x, int index , String[] users) throws Exception {
+        String [] splitUsers = users[index].split(" ", 6);
+        String [] splitAllusernames1 = allUsernames.get(modifyX.getPickUserData1()).split(" ", 6);
+        String [] splitAllusernames2 = allUsernames.get(modifyX.getPickUserData2()).split(" ", 6);
+
+        if (x == 1 && !Objects.equals(splitAllusernames1[0], splitUsers[0])) {
             lossAdder(modifyX.getPickUserData1());
         }
-        else if (x == 2 && modifyX.getPickUserData2() != index) {
+        else if (x == 2 && !Objects.equals(splitAllusernames2[0], splitUsers[0])) {
             lossAdder(modifyX.getPickUserData2());
         }
-        else if (x == 3 && modifyX.getPickUserData3() != index){
-            lossAdder(modifyX.getPickUserData3());
+        else if (users[3] != null){
+            String [] splitAllusernames3 = allUsernames.get(modifyX.getPickUserData3()).split(" ", 6);
+            String [] splitAllusernames4 = allUsernames.get(modifyX.getPickUserData4()).split(" ", 6);
+            if (x == 3 && !Objects.equals(splitAllusernames3[0], splitUsers[0])){
+                lossAdder(modifyX.getPickUserData3());
+            }
+            else if (x == 4 &&!Objects.equals(splitAllusernames4[0], splitUsers[0])){
+                lossAdder(modifyX.getPickUserData4());
+            }
         }
-        else if (x == 4 && modifyX.getPickUserData4() != index) {
-            lossAdder(modifyX.getPickUserData4());
+        else if ( users[2] != null) {
+            String [] splitAllusernames3 = allUsernames.get(modifyX.getPickUserData3()).split(" ", 6);
+            if ( x == 3 && !Objects.equals(splitAllusernames3[0], splitUsers[0])) {
+                lossAdder(modifyX.getPickUserData3());
+            }
         }
+        else{
+            System.out.println("Du har lyckats skapa nå jävla konstigt error 2.0 lul");
+        }
+
     }
 
     public static void flawlessAdderCaller() throws Exception {
@@ -317,9 +366,7 @@ class Player {
                 else if (x == 4) {
                     multiplayerPointAdder(modifyX.getPickUserData4(), userPoints);
         }
-                 else {
-                    System.out.println("Du har lyckats skapa nå jävla konstigt error");
-                 }
+
     }
 
 
