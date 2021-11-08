@@ -210,32 +210,54 @@ class Multiplayer {
             }
         }
 
+
+
             public static void winnerSelect(ArrayList<Integer> usersPoints, String[] users) throws Exception {
-            Integer maxVal = Collections.max(usersPoints);
-            int index = usersPoints.indexOf(maxVal);
+                Integer maxVal = Collections.max(usersPoints);
+                int index = usersPoints.indexOf(maxVal);  // "index" means the index with the highest points aka the Winner
+                String[] splitUser = users[index].split(" ", 6);
 
-                System.out.println("\nThe winner is " + users[index] + " with " + maxVal + " points!");
-
-
-                // Nedanstående for-loop behöver ha 4st "pickUserData" i "Player" classen för att fungera correct...
-                // (Syftet är att "komma ihåg" poängen som samtliga spelare fick under en multiplayer match för att
-                // sedan kunna jämföra samtliga med en high-score lista)
-
-                int x = 0;
-
-                for (int i = 0; i < usersPoints.size(); i++){
-                    x++;
-                    Player.multiplayerPointAdderCaller(usersPoints.get(i), x);
-                    System.out.println("Snurr");
+                // If game ends as a draw
+                int q = 0;
+                for (int count = 0; count < users.length; count++) {
+                    if (index != count) {
+                        if (maxVal == usersPoints.get(count)) {
+                            System.out.println("\n\nPlayers " + users[index] + " and " + users[count] + " both have " + maxVal + " points!\nThe Game ends as a draw!");
+                            q++;
+                        }
+                    }
                 }
 
-            }
+                // THIS METHOD IS STILL BROKEN, REPAIR IT **************************!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+
+                // If there is a single clear winner
+                if (q != 1) {
+                    System.out.println("\nThe winner is " + splitUser[0] + " with " + maxVal + " points!");
+                }
+
+                    // Adds a win to the winner (Duh)
+                    Player.winAdder(index);
+
+                    int x = 0;
+                    int y = 0;
+
+                    for (int i = 0; i < usersPoints.size(); i++) {
+                        x++;
+                        Player.multiplayerPointAdderCaller(usersPoints.get(i), x);
+                        Player.multiMatchAdderCaller(x);
+                        //System.out.println("Snurr");
+                    }
+                    for (int j = 0; j < usersPoints.size(); j++) {
+                        y++;
+                        Player.multiLossAdderCaller(y, index);
+                    }
+                }
+
+
+
 
             public static int turn (int amountOfPlayers, String user1, String user2, String user3, String user4) {
-
-
-
-
 
             if (amountOfPlayers == 1){
                 String[] splitUserName1 = user1.split(" ", 6);

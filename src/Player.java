@@ -73,6 +73,26 @@ class Player {
 
         userArray(newUser);
 
+        if (modifyX.getPickUserData1() == -1){
+            modifyX.pickUserData1 = allUsernames.size()-1;
+            modifyX.setPickUserData1(modifyX.pickUserData1);
+        }
+        else if (modifyX.getPickUserData1() != -1 && modifyX.getPickUserData2() == -1){
+            modifyX.pickUserData2 = allUsernames.size()-1;
+            modifyX.setPickUserData2(modifyX.pickUserData2);
+        }
+        else if (modifyX.getPickUserData1() != -1 && modifyX.getPickUserData2() != -1 && modifyX.getPickUserData3() == -1){
+            modifyX.pickUserData3 = allUsernames.size()-1;
+            modifyX.setPickUserData3(modifyX.pickUserData3);
+        }
+        else if (modifyX.getPickUserData1() != -1 && modifyX.getPickUserData2() != -1 && modifyX.getPickUserData3() != -1 && modifyX.getPickUserData4() == -1){
+            modifyX.pickUserData4 = allUsernames.size()-1;
+            modifyX.setPickUserData4(modifyX.pickUserData4);
+        }
+        else{
+            System.out.println("Edwins röv");
+        }
+
         return newUser;
     }
 
@@ -98,27 +118,7 @@ class Player {
             } else {
                 allUsernames.add(userInput);
             }
-            //modifyX.pickUserData1 = allUsernames.size()-1;
-            //modifyX.setPickUserData1(modifyX.pickUserData1);
-
-
         }
-        if (modifyX.getPickUserData1() == -1){
-            modifyX.setPickUserData1(allUserNumbers.size() - 1);
-        }
-        else if (modifyX.getPickUserData1() != -1 && modifyX.getPickUserData2() == -1){
-            modifyX.setPickUserData2(allUserNumbers.size() - 1);
-        }
-        else if (modifyX.getPickUserData1() != -1 && modifyX.getPickUserData2() != -1 && modifyX.getPickUserData3() == -1){
-            modifyX.setPickUserData3(allUserNumbers.size() - 1);
-        }
-        else if (modifyX.getPickUserData1() != -1 && modifyX.getPickUserData2() != -1 && modifyX.getPickUserData3() != -1 && modifyX.getPickUserData4() == -1){
-            modifyX.setPickUserData4(allUserNumbers.size() - 1);
-        }
-        else{
-            System.out.println("Edwins röv");
-        }
-
     }
 
     /**
@@ -260,8 +260,41 @@ class Player {
         winAdder(modifyX.getPickUserData1());
     }
 
+    public static void multiMatchAdderCaller(int x) throws Exception {
+        if (x == 1) {
+            matchAdder(modifyX.getPickUserData1());
+        }
+        else if (x == 2) {
+            matchAdder(modifyX.getPickUserData2());
+        }
+        else if (x == 3){
+            matchAdder(modifyX.getPickUserData3());
+        }
+        else if (x == 4) {
+            matchAdder(modifyX.getPickUserData4());
+        }
+        else {
+            System.out.println("Du har lyckats skapa nå jävla konstigt error 2.0 lul");
+        }
+    }
+
     public static void lossAdderCaller() throws Exception {
         lossAdder(modifyX.getPickUserData1());
+    }
+
+    public static void multiLossAdderCaller(int x, int index) throws Exception {
+        if (x == 1 && modifyX.getPickUserData1() != index) {
+            lossAdder(modifyX.getPickUserData1());
+        }
+        else if (x == 2 && modifyX.getPickUserData2() != index) {
+            lossAdder(modifyX.getPickUserData2());
+        }
+        else if (x == 3 && modifyX.getPickUserData3() != index){
+            lossAdder(modifyX.getPickUserData3());
+        }
+        else if (x == 4 && modifyX.getPickUserData4() != index) {
+            lossAdder(modifyX.getPickUserData4());
+        }
     }
 
     public static void flawlessAdderCaller() throws Exception {
@@ -288,6 +321,9 @@ class Player {
                     System.out.println("Du har lyckats skapa nå jävla konstigt error");
                  }
     }
+
+
+
 
     /**
      This method shows the user all available usernames and allows user to select an already existing username
