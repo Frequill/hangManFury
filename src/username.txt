@@ -1,5 +1,12 @@
 PLaceHolder
-Edwin 0 0 0 0 0
-Johanna 0 0 0 0 0
-Julius 0 0 0 0 0
-Martin 0 0 0 0 0
+Edwin 26 5 22 0 0
+Johanna 20 5 15 0 0
+Julius 24 0 24 0 1
+Martin 1 0 1 0 1
+Urman 3 0 3 0 0
+stenart 0 0 0 0 0
+Fuck 1 0 1 0 1
+Klocka 1 0 1 0 1
+Troll 1 0 1 0 1
+Hora 0 0 0 0 0
+Mamma 0 0 0 0 0
