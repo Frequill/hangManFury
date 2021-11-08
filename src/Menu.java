@@ -70,11 +70,43 @@ class Menu{
 
     public static void amountOfPlayersMenu() throws Exception {
         Menu menu = new Menu("main",5);
+        String[] split = menu.getUserOptions()[0].split(" ", 6);
+        String[] split2 = menu.getUserOptions()[1].split(" ", 6);
+        String[] split3 = menu.getUserOptions()[2].split(" ", 6);
+        String[] split4 = menu.getUserOptions()[3].split(" ", 6);
+
+
+
+        // Splits of stats from usernames
         System.out.println("You can add up to four users to play multiplayer!");
-        menu.getMenuOptions().add(0, Color.YELLOW + "1) " + Color.RESET+ menu.getUserOptions()[0]);
-        menu.getMenuOptions().add(1, Color.YELLOW + "2) " + Color.RESET+ menu.getUserOptions()[1]);
-        menu.getMenuOptions().add(2, Color.YELLOW + "3) " + Color.RESET+ menu.getUserOptions()[2]);
-        menu.getMenuOptions().add(3, Color.YELLOW + "4) " + Color.RESET+ menu.getUserOptions()[3]);
+        if (menu.getUserOptions()[3] != "Add user 4") {
+            menu.getMenuOptions().add(0, Color.YELLOW + "4) " + Color.RESET+ split4[0]);
+        }
+        else{
+            menu.getMenuOptions().add(0, Color.YELLOW + "4) " + Color.RESET+ menu.getUserOptions()[3]);
+        }
+
+        if (menu.getUserOptions()[2] != "Add user 3") {
+            menu.getMenuOptions().add(0, Color.YELLOW + "3) " + Color.RESET+ split3[0]);
+        }
+        else{
+            menu.getMenuOptions().add(0, Color.YELLOW + "3) " + Color.RESET+ menu.getUserOptions()[2]);
+        }
+
+        if (menu.getUserOptions()[1] != "Add user 2") {
+            menu.getMenuOptions().add(0, Color.YELLOW + "2) " + Color.RESET+ split2[0]);
+        }
+        else{
+            menu.getMenuOptions().add(0, Color.YELLOW + "2) " + Color.RESET+ menu.getUserOptions()[1]);
+        }
+
+        if (menu.getUserOptions()[0] != "Add user 1") {
+            menu.getMenuOptions().add(0, Color.YELLOW + "1) " + Color.RESET+ split[0]);
+        }
+        else{
+            menu.getMenuOptions().add(0, Color.YELLOW + "1) " + Color.RESET+ menu.getUserOptions()[0]);
+        }
+
         menu.getMenuOptions().add(4, Color.YELLOW + "5) " + Color.RESET+ "Back");
         menu.optionPrinter(menu.getMenuOptions());
         Menu.selectUsersFunction();
@@ -135,36 +167,37 @@ class Menu{
 
 
 
-        String[] x = menu.getUserOptions();
+        String[] defultAddUserOptions = menu.getUserOptions();
         boolean run = true;
         while (run) {
             int choice = in.nextInt();
             if (choice == 1) {
+
                 user1 = userNameMenu(user1);
-                x[0] = user1;
+                defultAddUserOptions[0] = user1;
                 amountOfPlayersMenu();
             } else if (choice == 2) {
-                if (x[0] == "Add user 1") {
+                if (defultAddUserOptions[0] == "Add user 1") {
                     System.out.println("Please add user 1 first");
                 } else {
                     user2 = userNameMenu(user2);
-                    x[1] = user2;
+                    defultAddUserOptions[1] = user2;
                     amountOfPlayersMenu();
                 }
             } else if (choice == 3) {
-                if (x[1] == "Add user 2") {
+                if (defultAddUserOptions[1] == "Add user 2") {
                     System.out.println("Please add user 2 first");
                 } else {
                     user3 = userNameMenu(user3);
-                    x[2] = user3;
+                    defultAddUserOptions[2] = user3;
                     amountOfPlayersMenu();
                 }
             } else if (choice == 4) {
-                if (x[2] == "Add user 3") {
+                if (defultAddUserOptions[2] == "Add user 3") {
                     System.out.println("Please add user 3 first");
                 } else {
                     user4 = userNameMenu(user4);
-                    x[3] = user4;
+                    defultAddUserOptions[3] = user4;
                     amountOfPlayersMenu();
                 }
             }
