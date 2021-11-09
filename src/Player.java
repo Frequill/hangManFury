@@ -1,22 +1,51 @@
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.Scanner;
 
-// ****************************************** Instance variables and object *******************************************
+//******************************************* Instance variables and object *******************************************
 class Player {
      private String instanceVarUsername;
-     private int pickUserData;
+     private int pickUserData1 = -1;
+     private int pickUserData2 = -1;
+     private int pickUserData3 = -1;
+     private int pickUserData4 = -1;
 
     public String getInstanceVarUsername(String user) {
         instanceVarUsername = user;
         return instanceVarUsername;
     }
 
-    public void setPickUserData(int pickUserData2) {
-        this.pickUserData = pickUserData2;
+    public void setPickUserData1(int pickUserDataArgument) {
+        this.pickUserData1 = pickUserDataArgument;
     }
-    public int getPickUserData() {
-        return pickUserData;
+
+    public int getPickUserData1() {
+        return pickUserData1;
+    }
+
+    public void setPickUserData2(int pickUserDataArgument) {
+        this.pickUserData2 = pickUserDataArgument;
+    }
+
+    public int getPickUserData2() {
+        return pickUserData2;
+    }
+
+    public void setPickUserData3(int pickUserDataArgument) {
+        this.pickUserData3 = pickUserDataArgument;
+    }
+
+    public int getPickUserData3() {
+        return pickUserData3;
+    }
+
+    public void setPickUserData4(int pickUserDataArgument) {
+        this.pickUserData4 = pickUserDataArgument;
+    }
+
+    public int getPickUserData4() {
+        return pickUserData4;
     }
 
     public static ArrayList <String> allUsernames = new ArrayList();
@@ -24,11 +53,12 @@ class Player {
 
     public static Player modifyX = new Player();
 
-    //******************************************** Functions *********************************************
+    //************************************************* Functions *****************************************************
 
     /**
      This method stores different usernames in a text file for later use
      */
+
     public static String writeUsername() throws Exception {
         Scanner in = new Scanner(System.in);
         File toUsername = new File("src/username.txt");
@@ -36,13 +66,33 @@ class Player {
         System.out.println("Please enter your username: (NO SPACES!!)");
         String usersInput = in.next();
 
-        String newUser = usersInput + " 0" + " 0" + " 0" + " 0";
+        String newUser = usersInput + " 0" + " 0" + " 0" + " 0" + " 0";
         Writer out;
         out = new BufferedWriter(new FileWriter(toUsername,true));
         out.append("\n" + newUser);
         out.close();
 
         userArray(newUser);
+
+        if (modifyX.getPickUserData1() == -1){
+            modifyX.pickUserData1 = allUsernames.size()-1;
+            modifyX.setPickUserData1(modifyX.pickUserData1);
+        }
+        else if (modifyX.getPickUserData1() != -1 && modifyX.getPickUserData2() == -1){
+            modifyX.pickUserData2 = allUsernames.size()-1;
+            modifyX.setPickUserData2(modifyX.pickUserData2);
+        }
+        else if (modifyX.getPickUserData1() != -1 && modifyX.getPickUserData2() != -1 && modifyX.getPickUserData3() == -1){
+            modifyX.pickUserData3 = allUsernames.size()-1;
+            modifyX.setPickUserData3(modifyX.pickUserData3);
+        }
+        else if (modifyX.getPickUserData1() != -1 && modifyX.getPickUserData2() != -1 && modifyX.getPickUserData3() != -1 && modifyX.getPickUserData4() == -1){
+            modifyX.pickUserData4 = allUsernames.size()-1;
+            modifyX.setPickUserData4(modifyX.pickUserData4);
+        }
+        else{
+            System.out.println("Edwins röv");
+        }
 
         return newUser;
     }
@@ -61,7 +111,6 @@ class Player {
             while (readUsername.hasNextLine()) {
                 allUsernames.add(readUsername.nextLine());
             }
-
         }
 
         else {
@@ -71,18 +120,16 @@ class Player {
                 allUsernames.add(userInput);
             }
         }
-
-        modifyX.pickUserData = allUsernames.size()-1;
-        modifyX.setPickUserData(modifyX.pickUserData);
     }
 
     /**
      This method increases the users overall matches played!
      */
+
     public static void matchAdder(int userInQuestion) throws Exception {
         File usernameFile = new File("src/username.txt");
         String userName = allUsernames.get(userInQuestion);
-        String[] userSplitter = userName.split(" ", 5);
+        String[] userSplitter = userName.split(" ", 6);
 
 
         int x = Integer.parseInt(userSplitter[1]);
@@ -90,7 +137,7 @@ class Player {
         String x2 = String.valueOf(x);
         userSplitter[1] = x2;
 
-        String finalResult = userSplitter[0] + " " + userSplitter[1] + " " + userSplitter[2] + " " +userSplitter[3] + " " + userSplitter[4];
+        String finalResult = userSplitter[0] + " " + userSplitter[1] + " " + userSplitter[2] + " " +userSplitter[3] + " " + userSplitter[4] + " " + userSplitter[5];
         allUsernames.set(userInQuestion, finalResult);
 
 
@@ -105,18 +152,20 @@ class Player {
     /**
      This method increases the users overall matches won!
      */
+
     public static void winAdder(int userInQuestion) throws Exception {
         File usernameFile = new File("src/username.txt");
         String userName = allUsernames.get(userInQuestion);
-        String[] userSplitter = userName.split(" ", 5);
+        System.out.println(userName);
+        String[] userSplitter = userName.split(" ", 6);
 
         int x = Integer.parseInt(userSplitter[2]);
         x = x + 1;
         String x2 = String.valueOf(x);
         userSplitter[2] = x2;
 
-        String finalResult = userSplitter[0] + " " + userSplitter[1] + " " + userSplitter[2] + " " +userSplitter[3] + " " + userSplitter[4];
-        allUsernames.set(userInQuestion, finalResult);
+        String finalResult = userSplitter[0] + " " + userSplitter[1] + " " + userSplitter[2] + " " +userSplitter[3] + " " + userSplitter[4] + " " + userSplitter[5];
+        allUsernames.set(userInQuestion , finalResult);
 
 
         PrintWriter out = new PrintWriter(usernameFile);
@@ -130,17 +179,18 @@ class Player {
     /**
      This method increases the users overall matches lost :(
      */
+
     public static void lossAdder(int userInQuestion) throws Exception {
         File usernameFile = new File("src/username.txt");
         String userName = allUsernames.get(userInQuestion);
-        String[] userSplitter = userName.split(" ", 5);
+        String[] userSplitter = userName.split(" ", 6);
 
         int x = Integer.parseInt(userSplitter[3]);
         x = x + 1;
         String x2 = String.valueOf(x);
         userSplitter[3] = x2;
 
-        String finalResult = userSplitter[0] + " " + userSplitter[1] + " " + userSplitter[2] + " " +userSplitter[3] + " " + userSplitter[4];
+        String finalResult = userSplitter[0] + " " + userSplitter[1] + " " + userSplitter[2] + " " +userSplitter[3] + " " + userSplitter[4] + " " + userSplitter[5];
         allUsernames.set(userInQuestion, finalResult);
 
         PrintWriter out = new PrintWriter(usernameFile);
@@ -150,10 +200,14 @@ class Player {
         out.close();
     }
 
+    /**
+     This method increases the flawless victories of a noble user!
+     */
+
     public static void flawlessAdder(int userInQuestion) throws Exception {
         File usernameFile = new File("src/username.txt");
         String userName = allUsernames.get(userInQuestion);
-        String[] userSplitter = userName.split(" ", 5);
+        String[] userSplitter = userName.split(" ", 6);
 
 
         int x = Integer.parseInt(userSplitter[4]);
@@ -161,7 +215,7 @@ class Player {
         String x2 = String.valueOf(x);
         userSplitter[4] = x2;
 
-        String finalResult = userSplitter[0] + " " + userSplitter[1] + " " + userSplitter[2] + " " +userSplitter[3] + " " + userSplitter[4];
+        String finalResult = userSplitter[0] + " " + userSplitter[1] + " " + userSplitter[2] + " " +userSplitter[3] + " " + userSplitter[4] + " " + userSplitter[5];
         allUsernames.set(userInQuestion, finalResult);
 
 
@@ -172,23 +226,151 @@ class Player {
         out.close();
     }
 
+    /**
+     This method keeps track of the points one attained from the last game multiplayer game, so it can be compared to high-scores
+     */
+
+    public static void multiplayerPointAdder(int userInQuestion, int userPoints) throws Exception {
+
+        File usernameFile = new File("src/username.txt");
+        String userName = allUsernames.get(userInQuestion);
+        String[] userSplitter = userName.split(" ", 6);
+
+        int x = Integer.parseInt(userSplitter[5]);
+        x = userPoints;
+        String x2 = String.valueOf(x);
+        userSplitter[5] = x2;
+
+        String finalResult = userSplitter[0] + " " + userSplitter[1] + " " + userSplitter[2] + " " +userSplitter[3] + " " + userSplitter[4] + " " + userSplitter[5];
+        allUsernames.set(userInQuestion, finalResult);
+
+        PrintWriter out = new PrintWriter(usernameFile);
+        for (int i = 0; i < allUsernames.size(); i++){
+            out.print(allUsernames.get(i) + "\n");
+        }
+        out.close();
+    }
+
+
     // Three basic "callers" that allows us to access instance variables of the "Player" class from other classes
 
     public static void matchAdderCaller() throws Exception {
-        matchAdder(modifyX.getPickUserData());
+        matchAdder(modifyX.getPickUserData1());
     }
 
     public static void winAdderCaller() throws Exception {
-        winAdder(modifyX.getPickUserData());
+        winAdder(modifyX.getPickUserData1());
+    }
+    public static void multiWinAdderCaller(int x, int index, String [] users) throws Exception {
+        String [] splitUsers = users[index].split(" ", 6);
+        String [] splitAllusernames1 = allUsernames.get(modifyX.getPickUserData1()).split(" ", 6);
+        String [] splitAllusernames2 = allUsernames.get(modifyX.getPickUserData2()).split(" ", 6);
+
+        if (x == 1 && splitAllusernames1[0].equals(splitUsers[0])) {
+            winAdder(modifyX.getPickUserData1());
+        }
+        else if (x == 2 && splitAllusernames2[0].equals(splitUsers[0])) {
+            winAdder(modifyX.getPickUserData2());
+        }
+        else if (users[3] != null){
+            String [] splitAllusernames3 = allUsernames.get(modifyX.getPickUserData3()).split(" ", 6);
+            String [] splitAllusernames4 = allUsernames.get(modifyX.getPickUserData4()).split(" ", 6);
+            if (x==3 && splitAllusernames3[0].equals(splitUsers[0])){
+                winAdder(modifyX.getPickUserData3());
+            }
+            else if (x==4 && splitAllusernames4[0].equals(splitUsers[0])) {
+                winAdder(modifyX.getPickUserData4());
+            }
+        }
+        else if (users[2] != null) {
+            String [] splitAllusernames3 = allUsernames.get(modifyX.getPickUserData3()).split(" ", 6);
+            if (x == 3 && splitAllusernames3[0].equals(splitUsers[0])) {
+                winAdder(modifyX.getPickUserData3());
+            }
+        }
+        else{
+            System.out.println("Du har lyckats skapa nå jävla konstigt error 2.0 lul");
+        }
+    }
+
+    public static void multiMatchAdderCaller(int x) throws Exception {
+        if (x == 1) {
+            matchAdder(modifyX.getPickUserData1());
+        }
+        else if (x == 2) {
+            matchAdder(modifyX.getPickUserData2());
+        }
+        else if (x == 3){
+            matchAdder(modifyX.getPickUserData3());
+        }
+        else if (x == 4) {
+            matchAdder(modifyX.getPickUserData4());
+        }
+
     }
 
     public static void lossAdderCaller() throws Exception {
-        lossAdder(modifyX.getPickUserData());
+        lossAdder(modifyX.getPickUserData1());
+    }
+
+    public static void multiLossAdderCaller(int x, int index , String[] users) throws Exception {
+        String [] splitUsers = users[index].split(" ", 6);
+        String [] splitAllusernames1 = allUsernames.get(modifyX.getPickUserData1()).split(" ", 6);
+        String [] splitAllusernames2 = allUsernames.get(modifyX.getPickUserData2()).split(" ", 6);
+
+        if (x == 1 && !Objects.equals(splitAllusernames1[0], splitUsers[0])) {
+            lossAdder(modifyX.getPickUserData1());
+        }
+        else if (x == 2 && !Objects.equals(splitAllusernames2[0], splitUsers[0])) {
+            lossAdder(modifyX.getPickUserData2());
+        }
+        else if (users[3] != null){
+            String [] splitAllusernames3 = allUsernames.get(modifyX.getPickUserData3()).split(" ", 6);
+            String [] splitAllusernames4 = allUsernames.get(modifyX.getPickUserData4()).split(" ", 6);
+            if (x == 3 && !Objects.equals(splitAllusernames3[0], splitUsers[0])){
+                lossAdder(modifyX.getPickUserData3());
+            }
+            else if (x == 4 &&!Objects.equals(splitAllusernames4[0], splitUsers[0])){
+                lossAdder(modifyX.getPickUserData4());
+            }
+        }
+        else if ( users[2] != null) {
+            String [] splitAllusernames3 = allUsernames.get(modifyX.getPickUserData3()).split(" ", 6);
+            if ( x == 3 && !Objects.equals(splitAllusernames3[0], splitUsers[0])) {
+                lossAdder(modifyX.getPickUserData3());
+            }
+        }
+        else{
+            System.out.println("Du har lyckats skapa nå jävla konstigt error 2.0 lul");
+        }
+
     }
 
     public static void flawlessAdderCaller() throws Exception {
-        flawlessAdder(modifyX.getPickUserData());
+        flawlessAdder(modifyX.getPickUserData1());
     }
+
+    public static void multiplayerPointAdderCaller(int userPoints, int x) throws Exception {
+
+        if (x == 1) {
+            multiplayerPointAdder(modifyX.getPickUserData1(), userPoints);
+
+        }
+            else if (x == 2) {
+            multiplayerPointAdder(modifyX.getPickUserData2(), userPoints);
+
+        }
+             else if (x == 3){
+                multiplayerPointAdder(modifyX.getPickUserData3(), userPoints);
+        }
+                else if (x == 4) {
+                    multiplayerPointAdder(modifyX.getPickUserData4(), userPoints);
+        }
+
+    }
+
+
+
 
     /**
      This method shows the user all available usernames and allows user to select an already existing username
@@ -225,7 +407,6 @@ class Player {
                     System.out.println(Color.YELLOW + i + ") " + Color.RESET + aList.get(i));
 
                 }
-                int last = aList.size()+1;
                 System.out.println(Color.YELLOW + aList.size()+ ")" + Color.RESET + " Back");
                 boolean run2 = true;
 
@@ -258,7 +439,25 @@ class Player {
                }
                 userArray(aList.get(pickUser));
                 allUserNumbers.add(pickUser);
-                modifyX.setPickUserData(pickUser);
+
+                if (modifyX.getPickUserData1() == -1){
+                    modifyX.setPickUserData1(pickUser);
+                }
+                else if (modifyX.getPickUserData1() != -1 && modifyX.getPickUserData2() == -1){
+                    modifyX.setPickUserData2(pickUser);
+                }
+                else if (modifyX.getPickUserData1() != -1 && modifyX.getPickUserData2() != -1 && modifyX.getPickUserData3() == -1){
+                    modifyX.setPickUserData3(pickUser);
+                }
+                else if (modifyX.getPickUserData1() != -1 && modifyX.getPickUserData2() != -1 && modifyX.getPickUserData3() != -1 && modifyX.getPickUserData4() == -1){
+                    modifyX.setPickUserData4(pickUser);
+                }
+                else{
+                    System.out.println("Edwins röv");
+                }
+
+
+
                 user = aList.get(pickUser);
                 String[]userSplitter = user.split(" ",4);  // Splits username from stats so the two can be showed separately
                 String fullUser = userSplitter[0];

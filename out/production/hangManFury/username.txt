@@ -1,9 +1,6 @@
-*Placeholder(KonsumentSkallAldrigTagaBortAnvändareViaTextfilen!)*
-Edwin 13 8 5 2
-Martin 2 2 0 0
-Julius 3 1 2 0
-Johanna 4 4 0 0
-BillÄrSnygg 2 1 1 0
-Arrg 0 0 0 0
-Frank 0 0 0 0
-Stjärt 1 1 0 0
+PLACHOLDER(Match, win, loss, flawless, invis)
+Johanna 1 0 1 0 0
+Edwin 1 0 1 0 1
+Julius 2 0 1 0 1
+Martin 1 0 1 0 0
+Homan 1 1 0 0 1
