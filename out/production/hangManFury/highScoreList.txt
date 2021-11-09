@@ -1,0 +1,5 @@
+1 Edwin 11
+2 Julius 7
+3 Johanna 3
+4 Martin 2
+5 Homan 1

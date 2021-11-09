@@ -1,5 +1,6 @@
 PLACHOLDER(Match, win, loss, flawless, invis)
-Johanna 0 0 0 0 0
-Edwin 0 0 0 0 0
-Julius 0 0 0 0 0
-Martin 0 0 0 0 0
+Johanna 1 0 1 0 0
+Edwin 1 0 1 0 1
+Julius 2 0 1 0 1
+Martin 1 0 1 0 0
+Homan 1 1 0 0 1

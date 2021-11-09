@@ -1,4 +1,5 @@
-1 Edwin 11
-2 Julius 7
-3 Johanna 2
-4 Martin 1
+Edwin 11
+Julius 7
+Johanna 3
+Martin 2
+Homan 1
