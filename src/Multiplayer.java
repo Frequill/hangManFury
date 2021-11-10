@@ -1,6 +1,7 @@
+import java.io.IOException;
 import java.util.*;
 
-class Multiplayer {
+class Multiplayer{
 
         public static Scanner in = new Scanner(System.in);
 
@@ -449,7 +450,7 @@ class Multiplayer {
          */
 
         public static String characterDestroyer(String letter, ArrayList<Character>allLetters, String guessWord, ArrayList<Character> dumbGuesses,
-                                                int playersLife, ArrayList<Integer> usersPoints) {
+                                                int playersLife, ArrayList<Integer> usersPoints) throws IOException {
             if (!letter.isEmpty()) {
                 if (letter.contains("1")) {
                     System.out.println(Color.RED + "You may not guess numbers!" + Color.RESET);

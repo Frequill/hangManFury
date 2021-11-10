@@ -4,7 +4,7 @@ import java.util.Objects;
 import java.util.Scanner;
 
 //******************************************* Instance variables and object *******************************************
-class Player {
+public class Player {
      private String instanceVarUsername;
      private int pickUserData1 = -1;
      private int pickUserData2 = -1;
@@ -59,7 +59,7 @@ class Player {
      This method stores different usernames in a text file for later use
      */
 
-    public static String writeUsername() throws Exception {
+    public static String writeUsername(int choice) throws Exception {
         Scanner in = new Scanner(System.in);
         File toUsername = new File("src/username.txt");
 
@@ -74,19 +74,19 @@ class Player {
 
         userArray(newUser);
 
-        if (modifyX.getPickUserData1() == -1){
+        if (choice == 1){
             modifyX.pickUserData1 = allUsernames.size()-1;
             modifyX.setPickUserData1(modifyX.pickUserData1);
         }
-        else if (modifyX.getPickUserData1() != -1 && modifyX.getPickUserData2() == -1){
+        else if (choice == 2){
             modifyX.pickUserData2 = allUsernames.size()-1;
             modifyX.setPickUserData2(modifyX.pickUserData2);
         }
-        else if (modifyX.getPickUserData1() != -1 && modifyX.getPickUserData2() != -1 && modifyX.getPickUserData3() == -1){
+        else if (choice == 3){
             modifyX.pickUserData3 = allUsernames.size()-1;
             modifyX.setPickUserData3(modifyX.pickUserData3);
         }
-        else if (modifyX.getPickUserData1() != -1 && modifyX.getPickUserData2() != -1 && modifyX.getPickUserData3() != -1 && modifyX.getPickUserData4() == -1){
+        else if (choice == 4){
             modifyX.pickUserData4 = allUsernames.size()-1;
             modifyX.setPickUserData4(modifyX.pickUserData4);
         }
@@ -370,7 +370,7 @@ class Player {
      This method shows the user all available usernames and allows user to select an already existing username
      */
 
-    public static String readUsername(String user) throws Exception {
+    public static String readUsername(String user, int choice) throws Exception {
         Scanner input = new Scanner(System.in);
         boolean run = true;
         int userChoice = 0;
@@ -434,16 +434,16 @@ class Player {
                 userArray(aList.get(pickUser));
                 allUserNumbers.add(pickUser);
 
-                if (modifyX.getPickUserData1() == -1){
+                if (choice == 1){
                     modifyX.setPickUserData1(pickUser);
                 }
-                else if (modifyX.getPickUserData1() != -1 && modifyX.getPickUserData2() == -1){
+                else if (choice == 2){
                     modifyX.setPickUserData2(pickUser);
                 }
-                else if (modifyX.getPickUserData1() != -1 && modifyX.getPickUserData2() != -1 && modifyX.getPickUserData3() == -1){
+                else if (choice == 3){
                     modifyX.setPickUserData3(pickUser);
                 }
-                else if (modifyX.getPickUserData1() != -1 && modifyX.getPickUserData2() != -1 && modifyX.getPickUserData3() != -1 && modifyX.getPickUserData4() == -1){
+                else if (choice == 4){
                     modifyX.setPickUserData4(pickUser);
                 }
 
@@ -455,7 +455,7 @@ class Player {
                 return fullUser;
 
             } else if (userChoice == 2) {
-                String username = writeUsername();
+                String username = writeUsername(choice);
                 return username;
             }else if (userChoice == 3) {
                 if (user == null){

@@ -138,13 +138,13 @@ class Menu{
         return user;
     }
 
-    public static String userNameMenu(String user) throws Exception{
+    public static String userNameMenu(String user, int choice) throws Exception{
         Menu menu = new Menu("user",3);
         menu.getMenuOptions().add(0, Color.YELLOW + "1) " + Color.RESET+ "Existing user");
         menu.getMenuOptions().add(1, Color.YELLOW + "2) " + Color.RESET+ "New user ");
         menu.getMenuOptions().add(2,Color.YELLOW + "3) " + Color.RESET+ "Back");
         menu.optionPrinter(menu.getMenuOptions());
-        user = Player.readUsername(user);
+        user = Player.readUsername(user, choice);
         return user;
     }
 
@@ -172,14 +172,14 @@ class Menu{
             choice = in.nextInt();
             if (choice == 1) {
 
-                user1 = userNameMenu(user1);
+                user1 = userNameMenu(user1, choice);
                 defultAddUserOptions[0] = user1;
                 amountOfPlayersMenu();
             } else if (choice == 2) {
                 if (defultAddUserOptions[0] == "Add user 1") {
                     System.out.println("Please select at least a single user first!");
                 } else {
-                    user2 = userNameMenu(user2);
+                    user2 = userNameMenu(user2, choice);
                     defultAddUserOptions[1] = user2;
                     amountOfPlayersMenu();
                 }
@@ -187,7 +187,7 @@ class Menu{
                 if (defultAddUserOptions[1] == "Add user 2") {
                     System.out.println("Please add user 2 first");
                 } else {
-                    user3 = userNameMenu(user3);
+                    user3 = userNameMenu(user3, choice);
                     defultAddUserOptions[2] = user3;
                     amountOfPlayersMenu();
                 }
@@ -195,7 +195,7 @@ class Menu{
                 if (defultAddUserOptions[2] == "Add user 3") {
                     System.out.println("Please add user 3 first");
                 } else {
-                    user4 = userNameMenu(user4);
+                    user4 = userNameMenu(user4, choice);
                     defultAddUserOptions[3] = user4;
                     amountOfPlayersMenu();
                 }
