@@ -1,6 +1,7 @@
 public class mainFile {
     public static void main(String[] args) throws Exception {
-        highScoreFunction.fileReader();
+        //highScoreFunction.fileReader();
+        LoadGame.setPickUsers();
         Menu.firstMenu();
     }
 }

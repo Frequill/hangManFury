@@ -1,3 +1,4 @@
+import java.io.File;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -69,7 +70,7 @@ class Menu{
     //************************************************ Menus ************************************************
 
     public static void amountOfPlayersMenu() throws Exception {
-        Menu menu = new Menu("main",5);
+        Menu menu = new Menu("add user",5);
         String[] split = menu.getUserOptions()[0].split(" ", 6);
         String[] split2 = menu.getUserOptions()[1].split(" ", 6);
         String[] split3 = menu.getUserOptions()[2].split(" ", 6);
@@ -117,10 +118,11 @@ class Menu{
         //LocalDateTime now = LocalDateTime.now();
         //System.out.println("Datum: " + dtf.format(now));
 
-        Menu menu = new Menu("main",3);
+        Menu menu = new Menu("main",4);
         menu.getMenuOptions().add(0, Color.YELLOW + "1) " + Color.RESET+ "Select user");
         menu.getMenuOptions().add(1, Color.YELLOW + "2) " + Color.RESET+ "Play");
-        menu.getMenuOptions().add(2, Color.YELLOW + "3) " + Color.RESET+ "Exit game...");
+        menu.getMenuOptions().add(2, Color.YELLOW + "3) " + Color.RESET+ "High score list ");
+        menu.getMenuOptions().add(3, Color.YELLOW + "4) " + Color.RESET+ "Exit game...");
         menu.optionPrinter(menu.getMenuOptions());
         Menu.mainMenuFunction();
     }
@@ -130,7 +132,8 @@ class Menu{
         Menu menu = new Menu("main",3);
         menu.getMenuOptions().add(0, Color.YELLOW + "1) " + Color.RESET+  "Change user ");
         menu.getMenuOptions().add(1, Color.YELLOW + "2) " + Color.RESET+ "Play");
-        menu.getMenuOptions().add(2, Color.YELLOW + "3) " + Color.RESET+ "Exit game...");
+        menu.getMenuOptions().add(2, Color.YELLOW + "3) " + Color.RESET+ "High score list ");
+        menu.getMenuOptions().add(3, Color.YELLOW + "4) " + Color.RESET+ "Exit game...");
         menu.optionPrinter(menu.getMenuOptions());
         return user;
     }
@@ -144,15 +147,6 @@ class Menu{
         user = Player.readUsername(user);
         return user;
     }
-
-    /*public static void multiplayerMenu() throws Exception {
-        Menu menu = new Menu("Main", 3);
-        menu.getMenuOptions().add(0, Color.YELLOW + "1) " + Color.RESET+ "Select user");
-        menu.getMenuOptions().add(1, Color.YELLOW + "2) " + Color.RESET+ "Back to amount of Players");
-        menu.getMenuOptions().add(2, Color.YELLOW + "3) " + Color.RESET+ "Exit game...");
-        menu.optionPrinter(menu.getMenuOptions());
-        Menu.mainMenuFunction();
-    }*/
 
     //******************************************** Functions ***********************************************
     //   (This is how the menus work)
@@ -169,8 +163,13 @@ class Menu{
 
         String[] defultAddUserOptions = menu.getUserOptions();
         boolean run = true;
+        int choice;
         while (run) {
-            int choice = in.nextInt();
+            while(!in.hasNextInt()){
+                System.out.println(Color.RED + "I did not understand that:" + Color.RESET);
+                in.next();
+            }
+            choice = in.nextInt();
             if (choice == 1) {
 
                 user1 = userNameMenu(user1);
@@ -178,7 +177,7 @@ class Menu{
                 amountOfPlayersMenu();
             } else if (choice == 2) {
                 if (defultAddUserOptions[0] == "Add user 1") {
-                    System.out.println("Please add user 1 first");
+                    System.out.println("Please select at least a single user first!");
                 } else {
                     user2 = userNameMenu(user2);
                     defultAddUserOptions[1] = user2;
@@ -206,7 +205,12 @@ class Menu{
                 run = false;
             }
             else{
-                System.out.println("Error");
+                if(choice < 1){
+                    System.out.println(Color.RED + "You must select a *integer* greater than 0" + Color.RESET);
+                }
+                else if(choice > 5){
+                    System.out.println(Color.RED + "You must select a *integer* lower than 6" + Color.RED);
+                }
             }
         }
 
@@ -230,41 +234,64 @@ class Menu{
         int choice = 0;
 
         while (run) {
-            while(!choiceInput.hasNextInt()){
-                System.out.println(Color.RED +"\nPlease input an integer between 1 - 3:\n" + Color.RESET);
+            while (!choiceInput.hasNextInt()) {
+                System.out.println(Color.RED + "\nPlease input an integer between 1 - 3:\n" + Color.RESET);
                 choiceInput.next();
             }
             choice = choiceInput.nextInt();
 
             if (choice == 1) {
                 amountOfPlayersMenu();
-            }
-            else if (choice == 2) {
+            } else if (choice == 2) {
                 if (user1 == "Add user 1") {
                     System.out.println(Color.RED + "\nPlease select a user1 first!!!!!!!" + Color.RESET + "\n(Press Enter to return to menu)");
                     choiceInput.nextLine();
                     choiceInput.nextLine();
                     show();
                 } else {
-                    if (user2 == "Add user 2"){
+                    if (user2 == "Add user 2") {
                         Game.hangMan(user1);
                         secondMenu(user1);
-                    }
-                    else if (user3 == "Add user 3"){
+                    } else if (user3 == "Add user 3") {
                         Multiplayer.hangMan(user1, user2, null, null);
                         firstMenu();
-                    }
-                    else if (user4 == "Add user 4"){
+                    } else if (user4 == "Add user 4") {
                         Multiplayer.hangMan(user1, user2, user3, null);
                         firstMenu();
-                    }
-                    else if (user4 != "Add user 4"){
+                    } else if (user4 != "Add user 4") {
                         Multiplayer.hangMan(user1, user2, user3, user4);
                         firstMenu();
                     }
                 }
+            } else if (choice == 3) {
+                File highScorePath = new File("src/highScoreList.txt");
+                Scanner readHighscore = new Scanner(highScorePath);
+
+                ArrayList<String> highScoreList = new ArrayList<>();
+                while (readHighscore.hasNextLine()) {
+                    highScoreList.add(readHighscore.nextLine());
+                }
+                System.out.println(Color.YELLOW + "HIGH SCORE LIST" + Color.RESET);
+                for(int i = 0; i < highScoreList.size(); i++){
+                    System.out.println(Color.YELLOW + (i+1) + ") " + Color.RESET + highScoreList.get(i) + ":Points");
+                }
+                System.out.println(Color.YELLOW  + "6)" + Color.RESET + Color.GREEN + " Back" + Color.RESET);
+                boolean run2 = true;
+                while (run2) {
+                    while (!in.hasNextInt()) {
+                        System.out.println(Color.RED + "Please input the inger 6:" + Color.RESET);
+                        in.next();
+                    }
+                    if (in.nextInt() == 6) {
+                        firstMenu();
+                        run2 = false;
+                    } else {
+                        System.out.println(Color.RED + "Please input the inger 6:" + Color.RESET);
+                    }
+                }
+
             }
-                else if (choice == 3) {
+        else if (choice == 4) {
                 System.out.println( Color.RED + "Shutting down..." + Color.RESET);
                 System.exit(0);
             }

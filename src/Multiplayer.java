@@ -57,6 +57,7 @@ class Multiplayer {
                 String[] splitUserName2 = user2.split(" ", 6);
                 playersLife = 20;
                 System.out.println(Color.PURPLE + "Welcome " + /*userName.getInstanceVarUsername(splitUserName1[0])*/ splitUserName1[0] + " and " + splitUserName2[0] + ", get ready for battle!\nThe first word is " + guessWord.length() + " letters long!" + Color.RESET);
+                System.out.println("Press 0 to save and exit");
 
                 randomNumber.add(0, 1);
                 randomNumber.add(1, 2);
@@ -199,6 +200,17 @@ class Multiplayer {
                         System.out.print(Color.RED + "\nThe game is over! The last word was: " + guessWord +
                                 Color.RESET);
                         winnerSelect(usersPoints, users);
+                            highScoreFunction.fileReader(Player.allUsernames.get(Player.modifyX.getPickUserData1()));
+                            highScoreFunction.fileReader(Player.allUsernames.get(Player.modifyX.getPickUserData2()));
+                            if (Player.modifyX.getPickUserData3() != -1){
+                                highScoreFunction.fileReader(Player.allUsernames.get(Player.modifyX.getPickUserData3()));
+                            }
+                            if (Player.modifyX.getPickUserData4() != -1){
+                                highScoreFunction.fileReader(Player.allUsernames.get(Player.modifyX.getPickUserData4()));
+                            }
+
+
+
                         //Player.matchAdderCaller();
                         //Player.lossAdderCaller();
                         in.nextLine();
@@ -299,7 +311,6 @@ class Multiplayer {
                     }
                     if (run == true) {
                         System.out.println("\nThe winner is " + splitUser[0] + " with " + maxVal + " points!");
-                        System.out.println(index);
                         int x = 0;
                         for (int i = 0; i < usersPoints.size();i++){
                             x++;
@@ -459,9 +470,13 @@ class Multiplayer {
                     System.out.println(Color.RED +"You may not guess numbers!" + Color.RESET);
                 } else if (letter.contains("9")) {
                     System.out.println(Color.RED +"You may not guess numbers!" + Color.RESET);
-                } else if (letter.contains("0")) {
-                    System.out.println(Color.RED +"You may not guess numbers!" + Color.RESET);
-                } else if (letter.contains("!")) {
+                } else if
+                (letter.contains("0"))  // ***************************** SAVE FEATURE *********************************
+                {
+                    System.out.println(Color.RED +"Saving and exiting!" + Color.RESET);
+                }
+                // ****************************************************************************************************
+                else if (letter.contains("!")) {
                     System.out.println(Color.RED +"You may not guess an exclamation point!" + Color.RESET);
                 } else if (letter.contains("?")) {
                     System.out.println(Color.RED +"You may not guess a question mark!" + Color.RESET);
