@@ -199,6 +199,17 @@ class Multiplayer {
                         System.out.print(Color.RED + "\nThe game is over! The last word was: " + guessWord +
                                 Color.RESET);
                         winnerSelect(usersPoints, users);
+                            highScoreFunction.fileReader(Player.allUsernames.get(Player.modifyX.getPickUserData1()));
+                            highScoreFunction.fileReader(Player.allUsernames.get(Player.modifyX.getPickUserData2()));
+                            if (Player.modifyX.getPickUserData3() != -1){
+                                highScoreFunction.fileReader(Player.allUsernames.get(Player.modifyX.getPickUserData3()));
+                            }
+                            if (Player.modifyX.getPickUserData4() != -1){
+                                highScoreFunction.fileReader(Player.allUsernames.get(Player.modifyX.getPickUserData4()));
+                            }
+
+
+
                         //Player.matchAdderCaller();
                         //Player.lossAdderCaller();
                         in.nextLine();
@@ -299,7 +310,6 @@ class Multiplayer {
                     }
                     if (run == true) {
                         System.out.println("\nThe winner is " + splitUser[0] + " with " + maxVal + " points!");
-                        System.out.println(index);
                         int x = 0;
                         for (int i = 0; i < usersPoints.size();i++){
                             x++;

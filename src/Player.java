@@ -155,8 +155,7 @@ class Player {
 
     public static void winAdder(int userInQuestion) throws Exception {
         File usernameFile = new File("src/username.txt");
-        String userName = allUsernames.get(userInQuestion);
-        System.out.println(userName);
+        String userName = allUsernames.get(userInQuestion);;
         String[] userSplitter = userName.split(" ", 6);
 
         int x = Integer.parseInt(userSplitter[2]);
@@ -284,13 +283,11 @@ class Player {
         }
         else if (users[2] != null) {
             String [] splitAllusernames3 = allUsernames.get(modifyX.getPickUserData3()).split(" ", 6);
-            if (x == 3 && splitAllusernames3[0].equals(splitUsers[0])) {
+            if (x==3 && splitAllusernames3[0].equals(splitUsers[0])) {
                 winAdder(modifyX.getPickUserData3());
             }
         }
-        else{
-            System.out.println("Du har lyckats skapa nå jävla konstigt error 2.0 lul");
-        }
+
     }
 
     public static void multiMatchAdderCaller(int x) throws Exception {
@@ -339,9 +336,6 @@ class Player {
             if ( x == 3 && !Objects.equals(splitAllusernames3[0], splitUsers[0])) {
                 lossAdder(modifyX.getPickUserData3());
             }
-        }
-        else{
-            System.out.println("Du har lyckats skapa nå jävla konstigt error 2.0 lul");
         }
 
     }
@@ -452,10 +446,6 @@ class Player {
                 else if (modifyX.getPickUserData1() != -1 && modifyX.getPickUserData2() != -1 && modifyX.getPickUserData3() != -1 && modifyX.getPickUserData4() == -1){
                     modifyX.setPickUserData4(pickUser);
                 }
-                else{
-                    System.out.println("Edwins röv");
-                }
-
 
 
                 user = aList.get(pickUser);
