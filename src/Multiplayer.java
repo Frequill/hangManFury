@@ -70,6 +70,7 @@ class Multiplayer {
                 String[] splitUserName3 = user3.split(" ", 6);
                 playersLife = 5;
                 System.out.println(Color.PURPLE + "Welcome " + splitUserName1[0] + ", " + splitUserName2[0] + " and " + splitUserName3[0] + "! Get ready for battle!\nThe first word is " + guessWord.length() + " letters long!" + Color.RESET);
+                System.out.println("Press 0 to save and exit");
 
                 randomNumber.add(0, 1);
                 randomNumber.add(1, 2);
@@ -84,6 +85,7 @@ class Multiplayer {
 
                 playersLife = 6;
                 System.out.println(Color.PURPLE + "Welcome " + splitUserName1[0] + ", " + splitUserName2[0] + ", " + splitUserName3[0] + " and " + splitUserName4[0] + "! Get ready for battle!\nThe first word is " + guessWord.length() + " letters long!" + Color.RESET);
+                System.out.println("Press 0 to save and exit");
 
                 randomNumber.add(0, 1);
                 randomNumber.add(1, 2);
@@ -119,7 +121,7 @@ class Multiplayer {
                         boolean destroyDumbCharacters = true;
                         while (destroyDumbCharacters) {
                             letter = in.nextLine().toLowerCase(); // to lower case kills you capitalized letters *evil laugh*
-                            trueLetter = characterDestroyer(letter, allLetters);
+                            trueLetter = characterDestroyer(letter, allLetters, guessWord, dumbGuesses, playersLife, usersPoints);
 
                             if (trueLetter != null) {
                                 destroyDumbCharacters = false;
@@ -173,6 +175,7 @@ class Multiplayer {
                             System.out.println(usersPoints.get(currentPlayer));
                             guessWord = wordHolder[randomizer(wordHolder)].toLowerCase();
                             System.out.println("The next word to be guessed is " + guessWord.length() + " letters long!");
+                            System.out.println("Press 0 to save and exit");
                             //Här ska den spelare som skrev ut ordet få ett poäng
                             dumbGuesses.removeAll(dumbGuesses);
                             allLetters.clear();
@@ -321,12 +324,7 @@ class Multiplayer {
 
                     }
                 }
-
-
             }
-
-
-
 
 
             public static int turn (int amountOfPlayers, String user1, String user2, String user3, String user4) {
@@ -450,7 +448,8 @@ class Multiplayer {
          This monstrosity of a method exists because I wish Java was easier...             //Julius Thomsen
          */
 
-        public static String characterDestroyer(String letter,ArrayList<Character>allLetters) {
+        public static String characterDestroyer(String letter, ArrayList<Character>allLetters, String guessWord, ArrayList<Character> dumbGuesses,
+                                                int playersLife, ArrayList<Integer> usersPoints) {
             if (!letter.isEmpty()) {
                 if (letter.contains("1")) {
                     System.out.println(Color.RED + "You may not guess numbers!" + Color.RESET);
@@ -474,7 +473,10 @@ class Multiplayer {
                 (letter.contains("0"))  // ***************************** SAVE FEATURE *********************************
                 {
                     System.out.println(Color.RED +"Saving and exiting!" + Color.RESET);
+                    SaveGame.saveToFile(allLetters, guessWord, dumbGuesses, playersLife, usersPoints);
+                    System.exit(0);
                 }
+
                 // ****************************************************************************************************
                 else if (letter.contains("!")) {
                     System.out.println(Color.RED +"You may not guess an exclamation point!" + Color.RESET);
