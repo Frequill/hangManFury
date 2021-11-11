@@ -47,7 +47,7 @@ public class LoadGame extends Player {
 
         //ResumeGame.hangMan();
 
-        // FUCK THIS GAME
+        // FUCK THIS GAME!!
 
     }
 
