@@ -1,7 +1,11 @@
 import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Random;
+import java.util.Scanner;
 
-class Multiplayer{
+
+    class ResumeGame extends LoadGame{
 
         public static Scanner in = new Scanner(System.in);
 
@@ -212,14 +216,14 @@ class Multiplayer{
                         System.out.print(Color.RED + "\nThe game is over! The last word was: " + guessWord +
                                 Color.RESET);
                         winnerSelect(usersPoints, users);
-                            highScoreFunction.fileReader(Player.allUsernames.get(Player.modifyX.getPickUserData1()));
-                            highScoreFunction.fileReader(Player.allUsernames.get(Player.modifyX.getPickUserData2()));
-                            if (Player.modifyX.getPickUserData3() != -1){
-                                highScoreFunction.fileReader(Player.allUsernames.get(Player.modifyX.getPickUserData3()));
-                            }
-                            if (Player.modifyX.getPickUserData4() != -1){
-                                highScoreFunction.fileReader(Player.allUsernames.get(Player.modifyX.getPickUserData4()));
-                            }
+                        highScoreFunction.fileReader(Player.allUsernames.get(Player.modifyX.getPickUserData1()));
+                        highScoreFunction.fileReader(Player.allUsernames.get(Player.modifyX.getPickUserData2()));
+                        if (Player.modifyX.getPickUserData3() != -1){
+                            highScoreFunction.fileReader(Player.allUsernames.get(Player.modifyX.getPickUserData3()));
+                        }
+                        if (Player.modifyX.getPickUserData4() != -1){
+                            highScoreFunction.fileReader(Player.allUsernames.get(Player.modifyX.getPickUserData4()));
+                        }
 
 
 
@@ -236,113 +240,113 @@ class Multiplayer{
 
 
 
-            public static void winnerSelect(ArrayList<Integer> usersPoints, String[] users) throws Exception {
-                Integer maxVal = Collections.max(usersPoints);
-                int index = usersPoints.indexOf(maxVal);  // "index" means the index with the highest points aka the Winner
-                String[] splitUser = users[index].split(" ", 6);
+        public static void winnerSelect(ArrayList<Integer> usersPoints, String[] users) throws Exception {
+            Integer maxVal = Collections.max(usersPoints);
+            int index = usersPoints.indexOf(maxVal);  // "index" means the index with the highest points aka the Winner
+            String[] splitUser = users[index].split(" ", 6);
 
-                // If game ends as a draw
+            // If game ends as a draw
 
-                drawChecker(users,index,maxVal,usersPoints,splitUser);
-
-
-                // If there is a single clear winner
+            drawChecker(users,index,maxVal,usersPoints,splitUser);
 
 
-                    // Adds a win to the winner (Duh)
-                //Player.winAdder(index);
+            // If there is a single clear winner
 
-                    int x = 0;
-                    int y = 0;
 
-                    for (int i = 0; i < usersPoints.size(); i++) {
-                        x++;
-                        Player.multiplayerPointAdderCaller(usersPoints.get(i), x);
-                        Player.multiMatchAdderCaller(x);
-                        //System.out.println("Snurr");
-                    }
-                    for (int j = 0; j < usersPoints.size(); j++) {
-                        y++;
-                        Player.multiLossAdderCaller(y, index ,users);
-                    }
-                }
+            // Adds a win to the winner (Duh)
+            //Player.winAdder(index);
 
-            public static void drawChecker (String[] users, int index, Integer maxVal, ArrayList<Integer> usersPoints, String[] splitUser ) throws Exception {
-                boolean run = true;
-                while(run == true) {
-                    if(usersPoints.size() == 4) {
-                        for (int l = 0; l < usersPoints.size(); l++) {
-                            for (int h = 1; h < usersPoints.size(); h++) {
-                                if (h == 4) {
-                                    h = 0;
-                                }
-                                for (int r = 2; r < usersPoints.size(); r++) {
-                                    if (r == 4) {
-                                        r = 0;
-                                    }
-                                    if (users[l] != users[index] && users[h] != users[index] && users[r] != users[index] && users[l] != users[h] && users[r] != users[h] && users[l] != users[r] && run == true) {
-                                        String[] splitL = users[l].split(" ", 6);
-                                        String[] splitH = users[h].split(" ", 6);
-                                        String[] splitR = users[r].split(" ", 6);
-                                        if (maxVal == usersPoints.get(l) && maxVal == usersPoints.get(h) && maxVal == usersPoints.get(h) && run == true) {
-                                            System.out.println("\n\nPlayers " + splitUser[0] + ", " + splitL[0] + ", " + splitH[0]  + " and " + splitR[0]  + " all have " + maxVal + " points!\nThe Game ends as a draw!");
-                                            run = false;
-                                        }
-                                    }
-                                }
+            int x = 0;
+            int y = 0;
+
+            for (int i = 0; i < usersPoints.size(); i++) {
+                x++;
+                Player.multiplayerPointAdderCaller(usersPoints.get(i), x);
+                Player.multiMatchAdderCaller(x);
+                //System.out.println("Snurr");
+            }
+            for (int j = 0; j < usersPoints.size(); j++) {
+                y++;
+                Player.multiLossAdderCaller(y, index ,users);
+            }
+        }
+
+        public static void drawChecker (String[] users, int index, Integer maxVal, ArrayList<Integer> usersPoints, String[] splitUser ) throws Exception {
+            boolean run = true;
+            while(run == true) {
+                if(usersPoints.size() == 4) {
+                    for (int l = 0; l < usersPoints.size(); l++) {
+                        for (int h = 1; h < usersPoints.size(); h++) {
+                            if (h == 4) {
+                                h = 0;
                             }
-                        }
-                    }
-                    if(usersPoints.size() == 3 || usersPoints.size() == 4) {
-                        for (int i = 1; i < usersPoints.size(); i++) {
-                            if (i == 4) {
-                                i = 0;
-                            }
-                            for (int j = 0; j < usersPoints.size(); j++) {
-                                if (users[i] != users[index] && users[j] != users[index] && users[i] != users[j] && run == true) {
-                                    String[] splitI = users[i].split(" ", 6);
-                                    String[] splitJ = users[j].split(" ", 6);
-                                    if (maxVal == usersPoints.get(j) && maxVal == usersPoints.get(i) && run == true) {
-                                        System.out.println("\n\nPlayers " + splitUser[0]+ ", " + splitJ[0] + " and " + splitI[0] + " all have " + maxVal + " points!\nThe Game ends as a draw!");
+                            for (int r = 2; r < usersPoints.size(); r++) {
+                                if (r == 4) {
+                                    r = 0;
+                                }
+                                if (users[l] != users[index] && users[h] != users[index] && users[r] != users[index] && users[l] != users[h] && users[r] != users[h] && users[l] != users[r] && run == true) {
+                                    String[] splitL = users[l].split(" ", 6);
+                                    String[] splitH = users[h].split(" ", 6);
+                                    String[] splitR = users[r].split(" ", 6);
+                                    if (maxVal == usersPoints.get(l) && maxVal == usersPoints.get(h) && maxVal == usersPoints.get(h) && run == true) {
+                                        System.out.println("\n\nPlayers " + splitUser[0] + ", " + splitL[0] + ", " + splitH[0]  + " and " + splitR[0]  + " all have " + maxVal + " points!\nThe Game ends as a draw!");
                                         run = false;
                                     }
                                 }
                             }
                         }
                     }
-                    if(usersPoints.size() == 3 || usersPoints.size() == 4 || usersPoints.size() == 2) {
-                        for (int k = 0; k < usersPoints.size(); k++) {
-                            if (users[index] != users[k] && run == true) {
-                                String[] splitK = users[k].split(" ", 6);
-                                if (maxVal == usersPoints.get(k) && run == true) {
-                                    System.out.println("\n\nPlayers " + splitUser[0] + " and " + splitK[0] + " both have " + maxVal + " points!\nThe Game ends as a draw!");
+                }
+                if(usersPoints.size() == 3 || usersPoints.size() == 4) {
+                    for (int i = 1; i < usersPoints.size(); i++) {
+                        if (i == 4) {
+                            i = 0;
+                        }
+                        for (int j = 0; j < usersPoints.size(); j++) {
+                            if (users[i] != users[index] && users[j] != users[index] && users[i] != users[j] && run == true) {
+                                String[] splitI = users[i].split(" ", 6);
+                                String[] splitJ = users[j].split(" ", 6);
+                                if (maxVal == usersPoints.get(j) && maxVal == usersPoints.get(i) && run == true) {
+                                    System.out.println("\n\nPlayers " + splitUser[0]+ ", " + splitJ[0] + " and " + splitI[0] + " all have " + maxVal + " points!\nThe Game ends as a draw!");
                                     run = false;
                                 }
                             }
                         }
                     }
-                    if (run == true) {
-                        System.out.println("\nThe winner is " + splitUser[0] + " with " + maxVal + " points!");
-                        int x = 0;
-                        for (int i = 0; i < usersPoints.size();i++){
-                            x++;
-                            Player.multiWinAdderCaller(x,index,users);
-
+                }
+                if(usersPoints.size() == 3 || usersPoints.size() == 4 || usersPoints.size() == 2) {
+                    for (int k = 0; k < usersPoints.size(); k++) {
+                        if (users[index] != users[k] && run == true) {
+                            String[] splitK = users[k].split(" ", 6);
+                            if (maxVal == usersPoints.get(k) && run == true) {
+                                System.out.println("\n\nPlayers " + splitUser[0] + " and " + splitK[0] + " both have " + maxVal + " points!\nThe Game ends as a draw!");
+                                run = false;
+                            }
                         }
-                        run = false;
-
                     }
                 }
+                if (run == true) {
+                    System.out.println("\nThe winner is " + splitUser[0] + " with " + maxVal + " points!");
+                    int x = 0;
+                    for (int i = 0; i < usersPoints.size();i++){
+                        x++;
+                        Player.multiWinAdderCaller(x,index,users);
+
+                    }
+                    run = false;
+
+                }
             }
+        }
 
 
-            public static int turn (int amountOfPlayers, String user1, String user2, String user3, String user4) {
+        public static int turn (int amountOfPlayers, String user1, String user2, String user3, String user4) {
 
             if (amountOfPlayers == 1){
                 String[] splitUserName1 = user1.split(" ", 6);
                 System.out.println("\nIt is " + splitUserName1[0] +"'s turn!");
                 amountOfPlayers = 2;
-                }
+            }
 
             else if (amountOfPlayers == 2){
                 String[] splitUserName2 = user2.split(" ", 6);
@@ -566,3 +570,4 @@ class Multiplayer{
             return null;
         }
     }
+
