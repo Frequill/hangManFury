@@ -1,50 +1,84 @@
+import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.File;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Scanner;
 
-class Menu{
+class Menu extends JFrame implements ActionListener {
     public static Scanner in = new Scanner(System.in);
 
     //*************************************** Instance variables and menu object **************************************
 
-    private int num;
-    private String Alpha;
-    private String sentence;
-    private ArrayList<String> menuOptions = new ArrayList<>();
 
+    private final ArrayList<String> menuOptions = new ArrayList<>();
 
-    public Menu(){
+    //GUI
+    JPanel headPanel, bodyPanel;
+    JLabel menuTitle;
+    JButton  button1;
 
-    }
+    private final int SCREEN_WIDTH = 600;
+    private final int SCREEN_HEIGHT = 600;
 
+    //Default constructor
+    Menu(){}
+
+    // Menu Constructor
     public Menu(String name, int Int) {
-        this.num = Int;
-        String greeting = (Color.BLUE + "Welcome to the " + name + " menu!" + Color.RESET);
-        String star = (Color.YELLOW + "*" + Color.RESET);
-        for (int j = 0; j < greeting.length(); j++){
-            System.out.print(star);
-        }
-        System.out.println("\n" + greeting);
-        for (int j = 0; j < greeting.length(); j++){
-            System.out.print(star);
-        }
-        System.out.println( "\nPlease choose one of the following options:\nInput the corresponding number and mark with the Enter key" );
 
-        System.out.println();
+        //frame settings
+
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setSize(SCREEN_WIDTH, SCREEN_HEIGHT);
+        setLocationRelativeTo(null);
+        setLayout(new GridLayout(2,1));
+        setVisible(true);
+
+        //Panels
+        headPanel = new JPanel();
+
+        bodyPanel = new JPanel();
+        GridLayout gridLayout = new GridLayout(5,1);
+        gridLayout.setVgap(10);
+        bodyPanel.setLayout(gridLayout);
+        bodyPanel.setBorder(new EmptyBorder(0,100,0,100));
+
+        //Labels
+        menuTitle = new JLabel("Hangman");
+        menuTitle.setFont(new Font(null, Font.BOLD, 40));
+
+
+        //Buttons
+//        = new JButton();
+
+        //Adds all components
+        add(headPanel);
+        add(bodyPanel);
+        headPanel.add(menuTitle);
+
         for (int i = 0; i < menuOptions.size(); i++){
+
             System.out.print(menuOptions.get(i));
         }
+
     }
-    public void optionPrinter (ArrayList<String> menuOptions){
-        for (int i = 0; i < menuOptions.size(); i++){
-            System.out.println(menuOptions.get(i));
+
+
+    /**
+     * Prints out a menu from the "menuOptions" arraylist
+     */
+    public void menuPrinter(ArrayList<String> menuOptions) throws Exception {
+
+        for(int i = 0; i< getMenuOptions().size(); i++) {
+            bodyPanel.add(new JButton(menuOptions.get(i)));
+
         }
     }
 
-    public ArrayList<java.lang.String> getMenuOptions() {
+    public ArrayList<String> getMenuOptions() {
         return menuOptions;
     }
 
@@ -55,17 +89,7 @@ class Menu{
     public String[] getUserOptions(){return userOptions;}
 
 
-    public int getNum() {
-        return num;
-    }
 
-    public String getAlpha() {
-        return Alpha;
-    }
-
-    public String getSentence() {
-        return sentence;
-    }
 
     //************************************************ Menus ************************************************
 
@@ -77,152 +101,81 @@ class Menu{
         String[] split4 = menu.getUserOptions()[3].split(" ", 6);
 
 
-
         // Splits of stats from usernames
         System.out.println("You can add up to four users to play multiplayer!");
         if (menu.getUserOptions()[3] != "Add user 4") {
-            menu.getMenuOptions().add(0, Color.YELLOW + "4) " + Color.RESET+ split4[0]);
+            menu.getMenuOptions().add(0,  "4) " + split4[0]);
         }
         else{
-            menu.getMenuOptions().add(0, Color.YELLOW + "4) " + Color.RESET+ menu.getUserOptions()[3]);
+            menu.getMenuOptions().add(0,  "4) " + menu.getUserOptions()[3]);
         }
 
         if (menu.getUserOptions()[2] != "Add user 3") {
-            menu.getMenuOptions().add(0, Color.YELLOW + "3) " + Color.RESET+ split3[0]);
+            menu.getMenuOptions().add(0,"3) " + split3[0]);
         }
         else{
-            menu.getMenuOptions().add(0, Color.YELLOW + "3) " + Color.RESET+ menu.getUserOptions()[2]);
+            menu.getMenuOptions().add(0,"3) " + menu.getUserOptions()[2]);
         }
 
         if (menu.getUserOptions()[1] != "Add user 2") {
-            menu.getMenuOptions().add(0, Color.YELLOW + "2) " + Color.RESET+ split2[0]);
+            menu.getMenuOptions().add(0,"2) " + split2[0]);
         }
         else{
-            menu.getMenuOptions().add(0, Color.YELLOW + "2) " + Color.RESET+ menu.getUserOptions()[1]);
+            menu.getMenuOptions().add(0,"2) " +  menu.getUserOptions()[1]);
         }
 
         if (menu.getUserOptions()[0] != "Add user 1") {
-            menu.getMenuOptions().add(0, Color.YELLOW + "1) " + Color.RESET+ split[0]);
+            menu.getMenuOptions().add(0,"1) " + split[0]);
         }
         else{
-            menu.getMenuOptions().add(0, Color.YELLOW + "1) " + Color.RESET+ menu.getUserOptions()[0]);
+            menu.getMenuOptions().add(0,"1) " + menu.getUserOptions()[0]);
         }
 
-        menu.getMenuOptions().add(4, Color.YELLOW + "5) " + Color.RESET+ "Back");
-        menu.optionPrinter(menu.getMenuOptions());
+        menu.getMenuOptions().add(4,"5) " + "Back");
+        menu.menuPrinter(menu.getMenuOptions());
         Menu.selectUsersFunction();
 
     }
     public static void firstMenu() throws Exception {
-        //DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        //LocalDateTime now = LocalDateTime.now();
-        //System.out.println("Datum: " + dtf.format(now));
 
         Menu menu = new Menu("main",4);
-        menu.getMenuOptions().add(0, Color.YELLOW + "1) " + Color.RESET+ "Select user");
-        menu.getMenuOptions().add(1, Color.YELLOW + "2) " + Color.RESET+ "Play");
-        menu.getMenuOptions().add(2, Color.YELLOW + "3) " + Color.RESET+ "High score list ");
-        menu.getMenuOptions().add(3, Color.YELLOW + "4) " + Color.RESET+ "Exit game...");
-        menu.optionPrinter(menu.getMenuOptions());
+        menu.getMenuOptions().add(0,   "Select user");
+        menu.getMenuOptions().add(1,   "Play");
+        menu.getMenuOptions().add(2,   "High score list ");
+        menu.getMenuOptions().add(3,   "Exit game");
+        menu.menuPrinter(menu.getMenuOptions());
         Menu.mainMenuFunction();
     }
     public static String secondMenu(String user) throws Exception{
         String [] splitUser = user.split(" ",4);
         System.out.println("Selected profile: " + splitUser[0]);
         Menu menu = new Menu("main",3);
-        menu.getMenuOptions().add(0, Color.YELLOW + "1) " + Color.RESET+  "Change user ");
-        menu.getMenuOptions().add(1, Color.YELLOW + "2) " + Color.RESET+ "Play");
-        menu.getMenuOptions().add(2, Color.YELLOW + "3) " + Color.RESET+ "High score list ");
-        menu.getMenuOptions().add(3, Color.YELLOW + "4) " + Color.RESET+ "Exit game...");
-        menu.optionPrinter(menu.getMenuOptions());
+        menu.getMenuOptions().add(0,   "Change user ");
+        menu.getMenuOptions().add(1,   "Play");
+        menu.getMenuOptions().add(2,   "High score list ");
+        menu.getMenuOptions().add(3,   "Exit game...");
+        menu.menuPrinter(menu.getMenuOptions());
         return user;
     }
 
     public static String userNameMenu(String user) throws Exception{
         Menu menu = new Menu("user",3);
-        menu.getMenuOptions().add(0, Color.YELLOW + "1) " + Color.RESET+ "Existing user");
-        menu.getMenuOptions().add(1, Color.YELLOW + "2) " + Color.RESET+ "New user ");
-        menu.getMenuOptions().add(2,Color.YELLOW + "3) " + Color.RESET+ "Back");
-        menu.optionPrinter(menu.getMenuOptions());
+        menu.getMenuOptions().add(0,   "Existing user");
+        menu.getMenuOptions().add(1,   "New user ");
+        menu.getMenuOptions().add(2,  "Back");
+        menu.menuPrinter(menu.getMenuOptions());
         user = Player.readUsername(user);
         return user;
     }
 
     //******************************************** Functions ***********************************************
     //   (This is how the menus work)
-
-    public static void selectUsersFunction() throws Exception {
-       Menu menu = new Menu();
-
-        String user1 = null;
-        String user2 = null;
-        String user3 = null;
-        String user4 = null;
-
-
-
-        String[] defultAddUserOptions = menu.getUserOptions();
-        boolean run = true;
-        int choice;
-        while (run) {
-            while(!in.hasNextInt()){
-                System.out.println(Color.RED + "I did not understand that:" + Color.RESET);
-                in.next();
-            }
-            choice = in.nextInt();
-            if (choice == 1) {
-
-                user1 = userNameMenu(user1);
-                defultAddUserOptions[0] = user1;
-                amountOfPlayersMenu();
-            } else if (choice == 2) {
-                if (defultAddUserOptions[0] == "Add user 1") {
-                    System.out.println("Please add user 1 first");
-                } else {
-                    user2 = userNameMenu(user2);
-                    defultAddUserOptions[1] = user2;
-                    amountOfPlayersMenu();
-                }
-            } else if (choice == 3) {
-                if (defultAddUserOptions[1] == "Add user 2") {
-                    System.out.println("Please add user 2 first");
-                } else {
-                    user3 = userNameMenu(user3);
-                    defultAddUserOptions[2] = user3;
-                    amountOfPlayersMenu();
-                }
-            } else if (choice == 4) {
-                if (defultAddUserOptions[2] == "Add user 3") {
-                    System.out.println("Please add user 3 first");
-                } else {
-                    user4 = userNameMenu(user4);
-                    defultAddUserOptions[3] = user4;
-                    amountOfPlayersMenu();
-                }
-            }
-            else if (choice == 5){
-                firstMenu();
-                run = false;
-            }
-            else{
-                if(choice < 1){
-                    System.out.println(Color.RED + "You must select a *integer* greater than 0" + Color.RESET);
-                }
-                else if(choice > 5){
-                    System.out.println(Color.RED + "You must select a *integer* lower than 6" + Color.RED);
-                }
-            }
-        }
-
-    }
-
-
     /**
      This method allows user to make inputs in the various menus. It also makes sure that a user is selected
      before the game itself launches.
      */
 
-    public static void mainMenuFunction() throws Exception {
+    public static void mainMenuFunction() throws Exception  {
         Menu userGetter = new Menu();
         String user1 = userGetter.getUserOptions()[0];
         String user2 = userGetter.getUserOptions()[1];
@@ -235,8 +188,9 @@ class Menu{
 
         while (run) {
             while (!choiceInput.hasNextInt()) {
-                System.out.println(Color.RED + "\nPlease input an integer between 1 - 3:\n" + Color.RESET);
+                System.out.println("\nPlease input an integer between 1 - 3:\n");
                 choiceInput.next();
+
             }
             choice = choiceInput.nextInt();
 
@@ -244,12 +198,14 @@ class Menu{
                 amountOfPlayersMenu();
             } else if (choice == 2) {
                 if (user1 == "Add user 1") {
-                    System.out.println(Color.RED + "\nPlease select a user1 first!!!!!!!" + Color.RESET + "\n(Press Enter to return to menu)");
+                    System.out.println( "\nPlease select a user first!!!!!!!" + "\n(Press Enter to return to menu)");
+                    JOptionPane.showMessageDialog(null,"Please select a user first!!!");
                     choiceInput.nextLine();
                     choiceInput.nextLine();
-                    show();
+
                 } else {
                     if (user2 == "Add user 2") {
+                        new Game();
                         Game.hangMan(user1);
                         secondMenu(user1);
                     } else if (user3 == "Add user 3") {
@@ -271,43 +227,106 @@ class Menu{
                 while (readHighscore.hasNextLine()) {
                     highScoreList.add(readHighscore.nextLine());
                 }
-                System.out.println(Color.YELLOW + "HIGH SCORE LIST" + Color.RESET);
+                System.out.println("HIGH SCORE LIST");
                 for(int i = 0; i < highScoreList.size(); i++){
-                    System.out.println(Color.YELLOW + (i+1) + ") " + Color.RESET + highScoreList.get(i) + ":Points");
+                    System.out.println((i+1) + ") " + highScoreList.get(i) + ":Points");
                 }
-                System.out.println(Color.YELLOW  + "6)" + Color.RESET + Color.GREEN + " Back" + Color.RESET);
+                System.out.println( "6)"  + " Back");
                 boolean run2 = true;
                 while (run2) {
                     while (!in.hasNextInt()) {
-                        System.out.println(Color.RED + "Please input the inger 6:" + Color.RESET);
+                        System.out.println("Please input the inger 6:");
                         in.next();
                     }
                     if (in.nextInt() == 6) {
                         firstMenu();
                         run2 = false;
                     } else {
-                        System.out.println(Color.RED + "Please input the inger 6:" + Color.RESET);
+                        System.out.println("Please input the inger 6:");
                     }
                 }
 
             }
-        else if (choice == 4) {
-                System.out.println( Color.RED + "Shutting down..." + Color.RESET);
-                System.exit(0);
+            else if (choice == 4) {
+                System.out.println("Shutting down...");
+                int quitOption = JOptionPane.showOptionDialog(null, "Are you sure you want to quit?", "Quit", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE, null,null,0);
+                if (quitOption == 0) {
+                    System.exit(0);
+                }
             }
-                else {
-                System.out.println(Color.RED + "\nPlease enter an *integer* greater than 0 and lower than 4:\n" + Color.RESET);
-               }
+            else {
+                System.out.println("\nPlease enter an *integer* greater than 0 and lower than 4:\n");
             }
         }
+    }
+    public static void selectUsersFunction() throws Exception {
+       Menu menu = new Menu();
 
-    /**
-     Shows first menu because Bill says to make it so!
-     */
-    static void show() throws Exception{
-    firstMenu();
+        String user1 = null;
+        String user2 = null;
+        String user3 = null;
+        String user4 = null;
+
+        String[] defaultAddUserOptions = menu.getUserOptions();
+        boolean run = true;
+        int choice;
+        while (run) {
+            while(!in.hasNextInt()){
+                System.out.println( "I did not understand that:");
+                in.next();
+            }
+            choice = in.nextInt();
+            if (choice == 1) {
+
+                user1 = userNameMenu(user1);
+                defaultAddUserOptions[0] = user1;
+                amountOfPlayersMenu();
+            } else if (choice == 2) {
+                if (defaultAddUserOptions[0] == "Add user 1") {
+                    System.out.println("Please add user 1 first");
+                } else {
+                    user2 = userNameMenu(user2);
+                    defaultAddUserOptions[1] = user2;
+                    amountOfPlayersMenu();
+                }
+            } else if (choice == 3) {
+                if (defaultAddUserOptions[1] == "Add user 2") {
+                    System.out.println("Please add user 2 first");
+                } else {
+                    user3 = userNameMenu(user3);
+                    defaultAddUserOptions[2] = user3;
+                    amountOfPlayersMenu();
+                }
+            } else if (choice == 4) {
+                if (defaultAddUserOptions[2] == "Add user 3") {
+                    System.out.println("Please add user 3 first");
+                } else {
+                    user4 = userNameMenu(user4);
+                    defaultAddUserOptions[3] = user4;
+                    amountOfPlayersMenu();
+                }
+            }
+            else if (choice == 5){
+                firstMenu();
+                run = false;
+            }
+            else{
+                if(choice < 1){
+                    System.out.println( "You must select a *integer* greater than 0");
+                }
+                else if(choice > 5){
+                    System.out.println( "You must select a *integer* lower than 6");
+                }
+            }
+        }
     }
-    public static void showData() {
-        System.out.println(Arrays.toString(userOptions));
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if(e.getSource() == menuOptions.get(0)){
+            System.out.println("ggg");
+        }
     }
+
+
 }

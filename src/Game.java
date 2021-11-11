@@ -24,7 +24,7 @@ class Game {
         Player userName = new Player();
         String [] splitUserName = user.split(" ", 5);
 
-        System.out.println(Color.PURPLE + "Welcome " + userName.getInstanceVarUsername(splitUserName[0]) + " guess the word that is " + guessWord.length() + " letters long!"+ Color.RESET);
+        System.out.println("Welcome " + userName.getInstanceVarUsername(splitUserName[0]) + " guess the word that is " + guessWord.length() + " letters long!");
 
         for (int i = 0; i < guessWord.length(); i++) {
             System.out.print("_");

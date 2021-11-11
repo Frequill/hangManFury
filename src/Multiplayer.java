@@ -56,7 +56,7 @@ class Multiplayer {
                 String[] splitUserName1 = user1.split(" ", 6);
                 String[] splitUserName2 = user2.split(" ", 6);
                 playersLife = 20;
-                System.out.println(Color.PURPLE + "Welcome " + /*userName.getInstanceVarUsername(splitUserName1[0])*/ splitUserName1[0] + " and " + splitUserName2[0] + ", get ready for battle!\nThe first word is " + guessWord.length() + " letters long!" + Color.RESET);
+                System.out.println(Color.PURPLE + "Welcome " +  splitUserName1[0] + " and " + splitUserName2[0] + ", get ready for battle!\nThe first word is " + guessWord.length() + " letters long!" + Color.RESET);
 
                 randomNumber.add(0, 1);
                 randomNumber.add(1, 2);
@@ -420,29 +420,6 @@ class Multiplayer {
                 System.out.print(Color.RED + dumbGuesses.get(i) + " " + Color.RESET);
             }
             return dumbGuesses;
-        }
-
-        /**
-         Method randomly changes color of "hangMan-graphic" as to make it stand out from text... and because this way it is less boring!p
-         */
-        public static void hangManWriter (int playerLife) {
-
-            String [] wordHolder = {Color.RED,Color.GREEN,Color.YELLOW,Color.BLUE,Color.PURPLE,Color.CYAN};
-
-            String[] hangManIllus = {"   +--+\n   |  |\n   \uD83D\uDC80 |\n  /|\\ |\n  / \\ |\n      |\n ======\n",
-                    "   +--+\n   |  |\n   0  |\n  /|\\ |\n  /   |\n      |\n ======\n",
-                    "   +--+\n   |  |\n   0  |\n  /|\\ |\n      |\n      |\n ======\n",
-                    "   +--+\n   |  |\n   0  |\n  /|  |\n      |\n      |\n ======\n",
-                    "   +--+\n   |  |\n   0  |\n   |  |\n      |\n      |\n ======\n",
-                    "   +--+\n   |  |\n   0  |\n      |\n      |\n      |\n ======\n",
-                    "   +--+\n   |  |\n      |\n      |\n      |\n      |\n ======\n",
-                    "   +--+\n      |\n      |\n      |\n      |\n      |\n ======\n",
-                    "      +\n      |\n      |\n      |\n      |\n      |\n ======\n",
-                    "       \n       \n       \n       \n       \n       \n ======\n",""};
-
-            for (int i = playerLife; i == playerLife; i++) {
-                System.out.println(wordHolder[randomizer(wordHolder)] + hangManIllus[i] + Color.RESET);
-            }
         }
 
         /**

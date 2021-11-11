@@ -63,6 +63,7 @@ class Player {
         Scanner in = new Scanner(System.in);
         File toUsername = new File("src/username.txt");
 
+
         System.out.println("Please enter your username: (NO SPACES!!)");
         String usersInput = in.next();
 
@@ -78,28 +79,12 @@ class Player {
             modifyX.pickUserData1 = allUsernames.size()-1;
             modifyX.setPickUserData1(modifyX.pickUserData1);
         }
-        else if (modifyX.getPickUserData1() != -1 && modifyX.getPickUserData2() == -1){
-            modifyX.pickUserData2 = allUsernames.size()-1;
-            modifyX.setPickUserData2(modifyX.pickUserData2);
-        }
-        else if (modifyX.getPickUserData1() != -1 && modifyX.getPickUserData2() != -1 && modifyX.getPickUserData3() == -1){
-            modifyX.pickUserData3 = allUsernames.size()-1;
-            modifyX.setPickUserData3(modifyX.pickUserData3);
-        }
-        else if (modifyX.getPickUserData1() != -1 && modifyX.getPickUserData2() != -1 && modifyX.getPickUserData3() != -1 && modifyX.getPickUserData4() == -1){
-            modifyX.pickUserData4 = allUsernames.size()-1;
-            modifyX.setPickUserData4(modifyX.pickUserData4);
-        }
-        else{
-            System.out.println("Edwins röv");
-        }
-
         return newUser;
     }
 
     /**
-     Method stores all "usernames" from username.txt file into an arraylist so that specific indesex (users) can be
-     called upon later for stats increases or decreases...
+     Method stores all "usernames" from username.txt file into an arraylist so that specific indexes (users) can be
+     called upon later for stats increase or decrease...
      */
 
     public static void userArray(String userInput) throws Exception{
@@ -112,7 +97,6 @@ class Player {
                 allUsernames.add(readUsername.nextLine());
             }
         }
-
         else {
             if (allUsernames.contains(userInput)) {
 
@@ -138,8 +122,8 @@ class Player {
         userSplitter[1] = x2;
 
         String finalResult = userSplitter[0] + " " + userSplitter[1] + " " + userSplitter[2] + " " +userSplitter[3] + " " + userSplitter[4] + " " + userSplitter[5];
-        allUsernames.set(userInQuestion, finalResult);
 
+        allUsernames.set(userInQuestion, finalResult);
 
         PrintWriter out = new PrintWriter(usernameFile);
         for (int i = 0; i < allUsernames.size(); i++){
@@ -157,7 +141,6 @@ class Player {
         File usernameFile = new File("src/username.txt");
         String userName = allUsernames.get(userInQuestion);;
         String[] userSplitter = userName.split(" ", 6);
-
         int x = Integer.parseInt(userSplitter[2]);
         x = x + 1;
         String x2 = String.valueOf(x);
@@ -166,15 +149,12 @@ class Player {
         String finalResult = userSplitter[0] + " " + userSplitter[1] + " " + userSplitter[2] + " " +userSplitter[3] + " " + userSplitter[4] + " " + userSplitter[5];
         allUsernames.set(userInQuestion , finalResult);
 
-
         PrintWriter out = new PrintWriter(usernameFile);
         for (int i = 0; i < allUsernames.size(); i++){
             out.print(allUsernames.get(i) + "\n");
         }
         out.close();
     }
-
-
     /**
      This method increases the users overall matches lost :(
      */
@@ -378,7 +358,7 @@ class Player {
 
         while (run) {
             while (!input.hasNextInt()){
-                System.out.println(Color.RED + "\nPlease input an integer between 1 - 3:\n" + Color.RESET);
+                System.out.println( "\nPlease input an integer between 1 - 3:\n");
                 input.next();
             }
             userChoice = input.nextInt();
@@ -398,10 +378,10 @@ class Player {
                 readUsernames.close();
 
                 for (int i = 1; i < aList.size(); i++) {
-                    System.out.println(Color.YELLOW + i + ") " + Color.RESET + aList.get(i));
+                    System.out.println(i + ") " + aList.get(i));
 
                 }
-                System.out.println(Color.YELLOW + aList.size()+ ")" + Color.RESET + " Back");
+                System.out.println(aList.size()+ ")" + " Back");
                 boolean run2 = true;
 
                 int pickUser = 0;
