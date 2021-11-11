@@ -78,6 +78,8 @@ public class LoadGame extends Player {
             dumbGuesses.add(splitDumbGuesses[i]);
         }
 
+        //Bitch
+
 
 
 
