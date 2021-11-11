@@ -265,8 +265,8 @@ public class Player {
     public static void winAdderCaller() throws Exception {
         winAdder(modifyX.getPickUserData1());
     }
-    public static void multiWinAdderCaller(int x, int index, String [] users) throws Exception {
-        String [] splitUsers = users[index].split(" ", 6);
+    public static void multiWinAdderCaller(int x, int index, ArrayList<String> users) throws Exception {
+        String [] splitUsers = users.get(index).split(" ", 6);
         String [] splitAllusernames1 = allUsernames.get(modifyX.getPickUserData1()).split(" ", 6);
         String [] splitAllusernames2 = allUsernames.get(modifyX.getPickUserData2()).split(" ", 6);
 
@@ -276,7 +276,7 @@ public class Player {
         else if (x == 2 && splitAllusernames2[0].equals(splitUsers[0])) {
             winAdder(modifyX.getPickUserData2());
         }
-        else if (users[3] != null){
+        else if (users.get(3) != null){
             String [] splitAllusernames3 = allUsernames.get(modifyX.getPickUserData3()).split(" ", 6);
             String [] splitAllusernames4 = allUsernames.get(modifyX.getPickUserData4()).split(" ", 6);
             if (x==3 && splitAllusernames3[0].equals(splitUsers[0])){
@@ -286,7 +286,7 @@ public class Player {
                 winAdder(modifyX.getPickUserData4());
             }
         }
-        else if (users[2] != null) {
+        else if (users.get(2) != null) {
             String [] splitAllusernames3 = allUsernames.get(modifyX.getPickUserData3()).split(" ", 6);
             if (x==3 && splitAllusernames3[0].equals(splitUsers[0])) {
                 winAdder(modifyX.getPickUserData3());
@@ -315,8 +315,8 @@ public class Player {
         lossAdder(modifyX.getPickUserData1());
     }
 
-    public static void multiLossAdderCaller(int x, int index , String[] users) throws Exception {
-        String [] splitUsers = users[index].split(" ", 6);
+    public static void multiLossAdderCaller(int x, int index , ArrayList<String> users) throws Exception {
+        String [] splitUsers = users.get(index).split(" ", 6);
         String [] splitAllusernames1 = allUsernames.get(modifyX.getPickUserData1()).split(" ", 6);
         String [] splitAllusernames2 = allUsernames.get(modifyX.getPickUserData2()).split(" ", 6);
 
@@ -326,7 +326,7 @@ public class Player {
         else if (x == 2 && !Objects.equals(splitAllusernames2[0], splitUsers[0])) {
             lossAdder(modifyX.getPickUserData2());
         }
-        else if (users[3] != null){
+        else if (users.get(3) != null){
             String [] splitAllusernames3 = allUsernames.get(modifyX.getPickUserData3()).split(" ", 6);
             String [] splitAllusernames4 = allUsernames.get(modifyX.getPickUserData4()).split(" ", 6);
             if (x == 3 && !Objects.equals(splitAllusernames3[0], splitUsers[0])){
@@ -336,7 +336,7 @@ public class Player {
                 lossAdder(modifyX.getPickUserData4());
             }
         }
-        else if ( users[2] != null) {
+        else if ( users.get(2) != null) {
             String [] splitAllusernames3 = allUsernames.get(modifyX.getPickUserData3()).split(" ", 6);
             if ( x == 3 && !Objects.equals(splitAllusernames3[0], splitUsers[0])) {
                 lossAdder(modifyX.getPickUserData3());

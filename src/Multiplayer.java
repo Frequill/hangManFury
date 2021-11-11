@@ -263,7 +263,7 @@ class Multiplayer{
                     }
                     for (int j = 0; j < usersPoints.size(); j++) {
                         y++;
-                        Player.multiLossAdderCaller(y, index ,users);
+                        // Player.multiLossAdderCaller(y, index ,users); Denna rad är viktig
                     }
                 }
 
@@ -326,7 +326,7 @@ class Multiplayer{
                         int x = 0;
                         for (int i = 0; i < usersPoints.size();i++){
                             x++;
-                            Player.multiWinAdderCaller(x,index,users);
+                            // Player.multiWinAdderCaller(x,index,users); Denna rad är jätteviktig
 
                         }
                         run = false;
@@ -482,7 +482,7 @@ class Multiplayer{
                 (letter.contains("0"))  // ***************************** SAVE FEATURE *********************************
                 {
                     System.out.println(Color.RED +"Saving and exiting!" + Color.RESET);
-                    SaveGame.saveToFile(allLetters, guessWord, dumbGuesses, playersLife, usersPoints, amountOfPlayers, users);
+                    //SaveGame.saveToFile(allLetters, guessWord, dumbGuesses, playersLife, usersPoints, amountOfPlayers, users); Denna rad är jätte viktigt
                     System.exit(0);
                 }
 

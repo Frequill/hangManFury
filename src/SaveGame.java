@@ -8,7 +8,7 @@ import java.util.ArrayList;
 public class SaveGame extends Player {
 
 public static void saveToFile(ArrayList<Character> allLetters, String guessWord,
-ArrayList<Character> dumbGuesses, int playersLife, ArrayList<Integer> usersPoints, int amountOfPlayers, String [] users) throws IOException {
+ArrayList<Character> dumbGuesses, int playersLife, ArrayList<Integer> usersPoints, int amountOfPlayers, ArrayList<String> users) throws IOException {
 
        // Player playerClass = new Player();
         File lastSavedGame = new File("src/lastSavedGame.txt");
@@ -47,11 +47,23 @@ ArrayList<Character> dumbGuesses, int playersLife, ArrayList<Integer> usersPoint
         }
 
         ArrayList <String> test = new ArrayList<>();
-        test.add(users[0] + " " + users[1] + " " + users [2] + " " + users[3]); // Users actual full names in strings
-        test.add(allLetters.toString()); // Correct letters guessed in current word
-        test.add (guessWord); // Word
-        test.add(dumbGuesses.toString()); // Incorrect guesses made by the players
-        test.add(usersPoints.toString()); // Users current points
+        test.add(users.get(0) + " " + users.get(1) + " " + users.get(2) + " " + users.get(3)); // Users actual full names in strings
+        out.write("\n");
+        for(int i = 0; i < allLetters.size(); i++){
+            out.write(allLetters.get(i) + " ");
+        }
+        // Word
+        out.write("\n");
+        for(int i = 0; i < dumbGuesses.size(); i++){
+            out.write(dumbGuesses.get(i) + " ");
+        }
+
+        out.write("\n");
+        for(int i = 0; i < usersPoints.size(); i++){
+            out.write(usersPoints.get(i) + " ");
+        }
+        // Incorrect guesses made by the players
+        test.add (guessWord);// Users current points
         test.add(String.valueOf(playersLife)); // amount of life
         test.add(String.valueOf(amountOfPlayers)); // The current users turn
 

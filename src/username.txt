@@ -1,6 +1,9 @@
 PLACHOLDER(Match, win, loss, flawless, invis)
-Julius 1 0 1 0 3
-Edwin 1 1 0 0 4
-Johanna 1 0 1 0 1
+Julius 2 1 1 0 2
+Edwin 2 1 1 0 0
+Johanna 2 0 2 0 0
 Martin 1 0 1 0 2
 Anus69 0 0 0 0 0
+
+GillarInte 0 0 0 0 0
+GillarMycket 0 0 0 0 0

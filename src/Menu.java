@@ -253,13 +253,16 @@ class Menu{
                         Game.hangMan(user1);
                         secondMenu(user1);
                     } else if (user3 == "Add user 3") {
-                        Multiplayer.hangMan(user1, user2, null, null);
+                        ResumeGame.hangMan(user1, user2, null, null);// testsyfte!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                        //Multiplayer.hangMan(user1, user2, null, null);
                         firstMenu();
                     } else if (user4 == "Add user 4") {
-                        Multiplayer.hangMan(user1, user2, user3, null);
+                        ResumeGame.hangMan(user1, user2, user3, null);// testsyfte!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                        //Multiplayer.hangMan(user1, user2, user3, null);
                         firstMenu();
                     } else if (user4 != "Add user 4") {
-                        Multiplayer.hangMan(user1, user2, user3, user4);
+                        ResumeGame.hangMan(user1, user2, user3, user4); // testsyfte!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                        //Multiplayer.hangMan(user1, user2, user3, user4);
                         firstMenu();
                     }
                 }
