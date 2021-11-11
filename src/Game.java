@@ -87,7 +87,9 @@ class Game extends GUI implements ActionListener {
         }
     }
 
-
+    /**
+     * The method disables letter button when clicked and adds the letter to "previously guessed letter"
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() instanceof JButton ) {
