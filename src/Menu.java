@@ -18,7 +18,7 @@ class Menu extends JFrame implements ActionListener {
     //GUI
     JPanel headPanel, bodyPanel;
     JLabel menuTitle;
-    JButton  button1;
+
 
     private final int SCREEN_WIDTH = 600;
     private final int SCREEN_HEIGHT = 600;
@@ -99,7 +99,7 @@ class Menu extends JFrame implements ActionListener {
         String[] split2 = menu.getUserOptions()[1].split(" ", 6);
         String[] split3 = menu.getUserOptions()[2].split(" ", 6);
         String[] split4 = menu.getUserOptions()[3].split(" ", 6);
-
+"main",4
 
         // Splits of stats from usernames
         System.out.println("You can add up to four users to play multiplayer!");
@@ -327,6 +327,5 @@ class Menu extends JFrame implements ActionListener {
             System.out.println("ggg");
         }
     }
-
-
 }
+class
