@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
 
-class Menu{
+class Menu extends ResumeGame{
     public static Scanner in = new Scanner(System.in);
 
     //*************************************** Instance variables and menu object **************************************
@@ -304,7 +304,9 @@ class Menu{
                     firstMenu();
                 }
                 else{
+                    modify.setHasSeenLoadMenu(1);
                     LoadGame.gameLoader();
+                    modify.setHasSeenLoadMenu(0);
                 }
             }
         else if (choice == 5) {

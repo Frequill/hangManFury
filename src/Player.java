@@ -65,11 +65,20 @@ public class Player {
      */
 
     public static String writeUsername(int choice) throws Exception {
-        Scanner in = new Scanner(System.in);
-        File toUsername = new File("src/username.txt");
+            Scanner in = new Scanner(System.in);
+            File toUsername = new File("src/username.txt");
 
-        System.out.println("Please enter your username: (NO SPACES!!)");
-        String usersInput = in.next();
+            System.out.println("Please enter your username: (NO SPACES!!)");
+            String usersInput = in.next();
+
+        boolean nullKiller = true;
+        while (nullKiller) {
+            while (Objects.equals(usersInput, "null") || Objects.equals(usersInput, "Null")) {
+                System.out.println("You may not call yourself null due to technical difficulties...");
+                usersInput = in.next();
+            }
+            nullKiller = false;
+        }
 
         String newUser = usersInput + " 0" + " 0" + " 0" + " 0" + " 0";
         Writer out;
@@ -368,6 +377,18 @@ public class Player {
 
     }
 
+    public static void pickUser1Setter(int data1){
+        modifyX.setPickUserData1(data1);
+    }
+    public static void pickUser2Setter(int data2){
+        modifyX.setPickUserData2(data2);
+    }
+    public static void pickUser3Setter(int data3){
+        modifyX.setPickUserData3(data3);
+    }
+    public static void pickUser4Setter(int data4){
+        modifyX.setPickUserData4(data4);
+    }
 
 
 

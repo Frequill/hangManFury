@@ -5,10 +5,20 @@ import java.util.Random;
 import java.util.Scanner;
 
 
-    class ResumeGame extends LoadGame{
+    class ResumeGame{
 
         public static Scanner in = new Scanner(System.in);
 
+
+        private int hasSeenLoadMenu = 0;
+
+        public int getHasSeenLoadMenu() {
+            return hasSeenLoadMenu;
+        }
+
+        public void setHasSeenLoadMenu(int hasSeenLoadMenu) {
+            this.hasSeenLoadMenu = hasSeenLoadMenu;
+        }
 
 
         private ArrayList<Integer> usersPoints = new ArrayList<>();
@@ -88,7 +98,7 @@ import java.util.Scanner;
 
 
 
-            if (LoadGame.getHasSeenLoadMenu() == 0) {
+            if (modify.getHasSeenLoadMenu() == 0) {
                 //  **********************  This ArrayList keeps track of users SCORE during the game **********************
 
                 if (user3 == null) {
@@ -106,9 +116,7 @@ import java.util.Scanner;
 
                 }
                 // *********************************************************************************************************
-
-          }
-            else if (LoadGame.getHasSeenLoadMenu() == 1);
+             }
 
 
             boolean victory = false;
@@ -119,7 +127,7 @@ import java.util.Scanner;
                     , "JamesGosling", "Kaffe", "ForLoop", "While", "Index", "Double", "Minecraft", "Starcraft", "Warcraft", "Cantcrashthisgame", "Xbox", "Discord", "Git", "Github", "CleanDrink", "Corona",
                     "False", "True", "Stockholm", "CtrlAltDelete", "Syntax"*/};
 
-                if (LoadGame.getHasSeenLoadMenu() == 0){
+                if (modify.getHasSeenLoadMenu() == 0){
                     modify.setGuessWord(wordHolder[randomizer(wordHolder)].toLowerCase());
                 }
 
@@ -132,7 +140,7 @@ import java.util.Scanner;
             ArrayList<Integer> randomNumber = new ArrayList<>();
 
             //int amountOfPlayers;
-            if (LoadGame.getHasSeenLoadMenu() == 0){
+            if (modify.getHasSeenLoadMenu() == 0){
                 if (user3 == null) {
                     String[] splitUserName1 = user1.split(" ", 6);
                     String[] splitUserName2 = user2.split(" ", 6);
@@ -423,7 +431,7 @@ import java.util.Scanner;
             else if (amountOfPlayers == 2){
                 String[] splitUserName2 = user2.split(" ", 6);
                 System.out.println("\nIt is " + splitUserName2[0] +"'s turn!");
-                if (user3 == null){
+                if (user3 == null|| user3.equals("null")){
                     amountOfPlayers = 1;
                 }
                 else {
@@ -434,7 +442,7 @@ import java.util.Scanner;
             else if (amountOfPlayers == 3){
                 String[] splitUserName3 = user3.split(" ", 6);
                 System.out.println("\nIt is " + splitUserName3[0] +"'s turn!");
-                if (user4 == null){
+                if (user4 == null|| user3.equals("null")){
                     amountOfPlayers = 1;
                 }
                 else {
