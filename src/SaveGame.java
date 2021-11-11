@@ -75,8 +75,7 @@ ArrayList<Character> dumbGuesses, int playersLife, ArrayList<Integer> usersPoint
         }
         out.close();
 
-
-        LoadGame.gameLoader();
+        
 
     }
 }

@@ -1,8 +1,8 @@
 1 2 3
+_ i _ _ 
+j 
+2 0 0 
 Julius Edwin Johanna null
-[b, j, _, _, n]
-björn
-[x, y]
-[1, 0, 0]
-1
-1
+bill
+4
+3

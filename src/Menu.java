@@ -118,11 +118,12 @@ class Menu{
         //LocalDateTime now = LocalDateTime.now();
         //System.out.println("Datum: " + dtf.format(now));
 
-        Menu menu = new Menu("main",4);
+        Menu menu = new Menu("main",5);
         menu.getMenuOptions().add(0, Color.YELLOW + "1) " + Color.RESET+ "Select user");
         menu.getMenuOptions().add(1, Color.YELLOW + "2) " + Color.RESET+ "Play");
         menu.getMenuOptions().add(2, Color.YELLOW + "3) " + Color.RESET+ "High score list ");
-        menu.getMenuOptions().add(3, Color.YELLOW + "4) " + Color.RESET+ "Exit game...");
+        menu.getMenuOptions().add(3, Color.YELLOW + "4) " + Color.RESET+ "Load game ");
+        menu.getMenuOptions().add(4, Color.YELLOW + "5) " + Color.RESET+ "Exit game...");
         menu.optionPrinter(menu.getMenuOptions());
         Menu.mainMenuFunction();
     }
@@ -294,7 +295,19 @@ class Menu{
                 }
 
             }
-        else if (choice == 4) {
+            else if(choice == 4){
+                File savedGame = new File("src/lastSavedGame.txt");
+                if (savedGame.length() == 0){
+                    System.out.println("No saved game detected");
+                    System.out.println("(Press Enter to return to main menu)");
+                    in.nextLine();
+                    firstMenu();
+                }
+                else{
+                    LoadGame.gameLoader();
+                }
+            }
+        else if (choice == 5) {
                 System.out.println( Color.RED + "Shutting down..." + Color.RESET);
                 System.exit(0);
             }

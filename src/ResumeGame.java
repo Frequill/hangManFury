@@ -45,7 +45,7 @@ import java.util.Scanner;
             this.guessWord = guessWord;
         }
 
-        private ArrayList<Character> allLetters = new ArrayList<>(modify.getGuessWord().length());
+        private ArrayList<Character> allLetters = new ArrayList();
 
         public ArrayList<Character> getAllLetters() {
             return allLetters;
@@ -114,7 +114,7 @@ import java.util.Scanner;
             boolean victory = false;
 
             // Here is our full wordlist!
-            String[] wordHolder = {"Björn", /* "Bill", "Java", "Edwin", "Julius", "Martin", "Johanna", "String", "Int", "Scanner", "ArrayList", "boolean", "Character", "Placeholder", "null",
+            String[] wordHolder = {"Björn", "Bill"/*, "Java", "Edwin", "Julius", "Martin", "Johanna", "String", "Int", "Scanner", "ArrayList", "boolean", "Character", "Placeholder", "null",
                     "monster", "redbull", "Newton", "Switchbitch", "HANGMAN", "FUCKYOU", "Fury", "Class", "Static", "Void", "GeOssHögtBetygBill", "System", "Exception", "Mupphuvud"
                     , "JamesGosling", "Kaffe", "ForLoop", "While", "Index", "Double", "Minecraft", "Starcraft", "Warcraft", "Cantcrashthisgame", "Xbox", "Discord", "Git", "Github", "CleanDrink", "Corona",
                     "False", "True", "Stockholm", "CtrlAltDelete", "Syntax"*/};
@@ -122,6 +122,7 @@ import java.util.Scanner;
                 if (LoadGame.getHasSeenLoadMenu() == 0){
                     modify.setGuessWord(wordHolder[randomizer(wordHolder)].toLowerCase());
                 }
+
 
                 Player userName = new Player();
 

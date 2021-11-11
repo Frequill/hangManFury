@@ -1,5 +1,6 @@
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -16,7 +17,7 @@ public class LoadGame extends Player {
 
 
 
-    public static void gameLoader () throws FileNotFoundException {
+    public static void gameLoader () throws Exception {
         File savedGame = new File("src/lastSavedGame.txt");
         Scanner read = new Scanner(savedGame);
 
@@ -28,16 +29,16 @@ public class LoadGame extends Player {
 
 
         //********************************PickUsers***********************************
-        String[] splitPickUsers = loadedGame.get(0).split(" ", 4);
+        String[] splitPickUsers = loadedGame.get(0).split(" ", 8);
 
         modifyX.setPickUserData1(Integer.parseInt(splitPickUsers[0]));
         modifyX.setPickUserData2(Integer.parseInt(splitPickUsers[1]));
 
-        if(splitPickUsers[3] != null){
+        if(splitPickUsers.length == 4){
             modifyX.setPickUserData3(Integer.parseInt(splitPickUsers[2]));
             modifyX.setPickUserData4(Integer.parseInt(splitPickUsers[3]));
         }
-        else if (splitPickUsers[2] != null){
+        else if (splitPickUsers.length == 3){
             modifyX.setPickUserData3(Integer.parseInt(splitPickUsers[2]));
         }
 
@@ -72,22 +73,35 @@ public class LoadGame extends Player {
         ResumeGame.modify.setAmountOfPlayers(turnPlayer);
 
         String[] splitDumbGuesses = loadedGame.get(2).split(" ", 9);
-        ArrayList<String> dumbGuesses = new ArrayList<>();
         for(int i = 0; i < splitDumbGuesses.length; i++){
             ResumeGame.modify.getDumbGuesses().add(splitDumbGuesses[i].charAt(0));
-            dumbGuesses.add(splitDumbGuesses[i]);
+        }
+        String[] splitAllLetters = loadedGame.get(1).split(" ", 9);
+        for(int i = 0; i < splitAllLetters.length; i++){
+            ResumeGame.modify.getAllLetters().add(splitAllLetters[i].charAt(0));
         }
 
-        //Bitch
+        String guessWord = loadedGame.get(5);
 
+        ResumeGame.modify.setGuessWord(guessWord);
 
+        PrintWriter clearSavedGame = new PrintWriter(savedGame);
 
-
-
-
-
+        clearSavedGame.print("");
+        clearSavedGame.close();
 
         LoadGame.setHasSeenLoadMenu(hasSeenLoadMenu++);
+
+        ResumeGame.hangMan(users[0],users[1],users[2],users[3]);
+
+
+
+
+
+
+
+
+
 
 
         //ResumeGame.hangMan();
