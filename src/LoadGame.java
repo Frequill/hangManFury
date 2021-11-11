@@ -4,6 +4,17 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class LoadGame extends Player {
+    private static int hasSeenLoadMenu = 0;
+
+    public static int getHasSeenLoadMenu() {
+        return hasSeenLoadMenu;
+    }
+
+    public static void setHasSeenLoadMenu(int hasSeenLoadMenu) {
+        LoadGame.hasSeenLoadMenu = hasSeenLoadMenu;
+    }
+
+
 
     public static void gameLoader () throws FileNotFoundException {
         File savedGame = new File("src/lastSavedGame.txt");
@@ -27,10 +38,16 @@ public class LoadGame extends Player {
             modifyX.setPickUserData3(Integer.parseInt(splitPickUsers[2]));
         }
 
+        String [] usersPoints = loadedGame.get(5).split(",", 9);
+
+        System.out.println(usersPoints[0]);
+
+        LoadGame.setHasSeenLoadMenu(hasSeenLoadMenu++);
 
 
+        //ResumeGame.hangMan();
 
-        loadedGame.get(0);
+        // FUCK THIS GAME
 
     }
 

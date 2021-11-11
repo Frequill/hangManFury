@@ -130,7 +130,7 @@ class Multiplayer{
                         boolean destroyDumbCharacters = true;
                         while (destroyDumbCharacters) {
                             letter = in.nextLine().toLowerCase(); // to lower case kills you capitalized letters *evil laugh*
-                            trueLetter = characterDestroyer(letter, allLetters, guessWord, dumbGuesses, playersLife, usersPoints,amountOfPlayers);
+                            trueLetter = characterDestroyer(letter, allLetters, guessWord, dumbGuesses, playersLife, usersPoints,amountOfPlayers, users);
 
                             if (trueLetter != null) {
                                 destroyDumbCharacters = false;
@@ -458,7 +458,7 @@ class Multiplayer{
          */
 
         public static String characterDestroyer(String letter, ArrayList<Character>allLetters, String guessWord, ArrayList<Character> dumbGuesses,
-                                                int playersLife, ArrayList<Integer> usersPoints, int amountOfPlayers) throws IOException {
+                                                int playersLife, ArrayList<Integer> usersPoints, int amountOfPlayers, String[] users) throws IOException {
             if (!letter.isEmpty()) {
                 if (letter.contains("1")) {
                     System.out.println(Color.RED + "You may not guess numbers!" + Color.RESET);
@@ -482,7 +482,7 @@ class Multiplayer{
                 (letter.contains("0"))  // ***************************** SAVE FEATURE *********************************
                 {
                     System.out.println(Color.RED +"Saving and exiting!" + Color.RESET);
-                    SaveGame.saveToFile(allLetters, guessWord, dumbGuesses, playersLife, usersPoints, amountOfPlayers);
+                    SaveGame.saveToFile(allLetters, guessWord, dumbGuesses, playersLife, usersPoints, amountOfPlayers, users);
                     System.exit(0);
                 }
 

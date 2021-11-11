@@ -49,6 +49,11 @@ public class Player {
     }
 
     public static ArrayList <String> allUsernames = new ArrayList();
+
+    public static ArrayList<String> getAllUsernames() {
+        return allUsernames;
+    }
+
     public static ArrayList <Integer> allUserNumbers = new ArrayList();
 
     public static Player modifyX = new Player();
