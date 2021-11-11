@@ -2,7 +2,7 @@ public class mainFile {
 
     public static void main(String[] args) throws Exception {
         //highScoreFunction.fileReader();
-        Menu.firstMenu();
+        new Menu();
     }
 }
 // hangMan is brought to you by the fantastic group "Fury"

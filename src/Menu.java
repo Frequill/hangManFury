@@ -7,7 +7,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-class Menu extends JFrame implements ActionListener {
+class Menu extends GUI implements ActionListener {
     public static Scanner in = new Scanner(System.in);
 
     //*************************************** Instance variables and menu object **************************************
@@ -15,82 +15,76 @@ class Menu extends JFrame implements ActionListener {
 
     private final ArrayList<String> menuOptions = new ArrayList<>();
 
-    //GUI
-    JPanel headPanel, bodyPanel;
-    JLabel menuTitle;
+
+    public ArrayList<String> getMenuOptions() {return menuOptions;}
+
+    public String[] getUserOptions(){return userOptions;}
+
+    public static String [] userOptions = {"Add user 1", "Add user 2", "Add user 3", "Add user 4"};
 
 
-    private final int SCREEN_WIDTH = 600;
-    private final int SCREEN_HEIGHT = 600;
+
 
     //Default constructor
-    Menu(){}
+    Menu(){
 
-    // Menu Constructor
-    public Menu(String name, int Int) {
+//        GridLayout gridLayout = new GridLayout(5,1);
+//        gridLayout.setVgap(0);
+//        bodyPanel.setLayout(gridLayout);
 
-        //frame settings
-
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(SCREEN_WIDTH, SCREEN_HEIGHT);
-        setLocationRelativeTo(null);
-        setLayout(new GridLayout(2,1));
-        setVisible(true);
-
-        //Panels
-        headPanel = new JPanel();
-
-        bodyPanel = new JPanel();
-        GridLayout gridLayout = new GridLayout(5,1);
-        gridLayout.setVgap(10);
-        bodyPanel.setLayout(gridLayout);
-        bodyPanel.setBorder(new EmptyBorder(0,100,0,100));
+        bodyPanel.setBorder(new EmptyBorder(0,80,0,80));
 
         //Labels
-        menuTitle = new JLabel("Hangman");
-        menuTitle.setFont(new Font(null, Font.BOLD, 40));
+        menuTitle = new JLabel("<html><center><h1>HangMan</h1><br/><font color=#666666>by Group Fury</font></center></html>");
 
 
-        //Buttons
-//        = new JButton();
+
+        menuImage = new JLabel();
+        menuImage.setIcon(new ImageIcon("hangingMan.gif"));
+
 
         //Adds all components
         add(headPanel);
         add(bodyPanel);
         headPanel.add(menuTitle);
+        headPanel.add(menuImage);
 
-        for (int i = 0; i < menuOptions.size(); i++){
-
-            System.out.print(menuOptions.get(i));
-        }
-
+        setLocationRelativeTo(null);
+        setVisible(true);
     }
 
+    // Menu Constructor
+    public Menu(String name, int Int) {
+
+
+    }
 
     /**
      * Prints out a menu from the "menuOptions" arraylist
      */
-    public void menuPrinter(ArrayList<String> menuOptions) throws Exception {
+    public void menuPrinter(ArrayList<String> getMenuOptions) throws Exception {
 
         for(int i = 0; i< getMenuOptions().size(); i++) {
-            bodyPanel.add(new JButton(menuOptions.get(i)));
+
+            bodyPanel.add(new JButton(getMenuOptions.get(i)));
+            button.addActionListener(this);
 
         }
     }
-
-    public ArrayList<String> getMenuOptions() {
-        return menuOptions;
+//    public void menuPrint(){
+//        for(int i = 0; i < menuOptions.length; i++) {
+//            menuOptions[i] = (new JButton(String.valueOf(menuOptions[i]));
+//            buttons[i].addActionListener(this);
+//            bodyPanel.add(buttons[i]);
+//        }
+//    }
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if(e.getSource() == menuOptions.get(0)){
+            String letter = e.getActionCommand();
+            System.out.println(letter);
+        }
     }
-
-
-    public static String [] userOptions = {"Add user 1", "Add user 2", "Add user 3", "Add user 4"};
-
-
-    public String[] getUserOptions(){return userOptions;}
-
-
-
-
     //************************************************ Menus ************************************************
 
     public static void amountOfPlayersMenu() throws Exception {
@@ -99,7 +93,6 @@ class Menu extends JFrame implements ActionListener {
         String[] split2 = menu.getUserOptions()[1].split(" ", 6);
         String[] split3 = menu.getUserOptions()[2].split(" ", 6);
         String[] split4 = menu.getUserOptions()[3].split(" ", 6);
-"main",4
 
         // Splits of stats from usernames
         System.out.println("You can add up to four users to play multiplayer!");
@@ -170,6 +163,16 @@ class Menu extends JFrame implements ActionListener {
 
     //******************************************** Functions ***********************************************
     //   (This is how the menus work)
+
+
+//    @Override
+//    public void actionPerformed(ActionEvent e) {
+//        if(e.getSource() instanceof ArrayList) {
+//            System.out.println("bbbb");
+//            String text = ((JButton) e.getSource()).getText();
+//            JOptionPane.showMessageDialog(null, text);
+//        }
+//    }
     /**
      This method allows user to make inputs in the various menus. It also makes sure that a user is selected
      before the game itself launches.
@@ -320,12 +323,4 @@ class Menu extends JFrame implements ActionListener {
             }
         }
     }
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        if(e.getSource() == menuOptions.get(0)){
-            System.out.println("ggg");
-        }
-    }
 }
-class
