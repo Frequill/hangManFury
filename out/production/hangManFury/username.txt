@@ -1,12 +1,6 @@
 PLACHOLDER(Match, win, loss, flawless, invis)
-Johanna 12 1 11 0 0
-Edwin 30 22 6 7 0
-Julius 11 1 8 0 8
-Martin 7 1 6 0 4
-Homan 5 4 1 0 5
-Hora 5 1 4 0 0
-Gunnar 4 2 2 0 3
-Mammafucker 1 0 1 0 0
-Loses 2 0 2 0 8
-Ladde 2 1 1 0 0
-Jag 1 0 1 0 0
+Julius 1 0 1 0 3
+Edwin 1 1 0 0 4
+Johanna 1 0 1 0 1
+Martin 1 0 1 0 2
+Anus69 0 0 0 0 0
