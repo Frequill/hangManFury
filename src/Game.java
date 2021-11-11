@@ -19,6 +19,8 @@ class Game extends GUI implements ActionListener {
             "False","True","Stockholm","CtrlAltDelete","Syntax"};
     private static String guessWord = wordCollection[randomizer(wordCollection)].toLowerCase();
 
+
+    //Button array
     char[] validLetters ={'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z','å','ä','ö'};
 
     JLabel greetLabel;
@@ -27,7 +29,6 @@ class Game extends GUI implements ActionListener {
     JButton[] buttons = new JButton[validLetters.length];
 
     Game(){
-        String user = null;
 
         //Panels
         headPanel = new JPanel();
@@ -48,7 +49,6 @@ class Game extends GUI implements ActionListener {
         wordTextField.setBorder(BorderFactory.createTitledBorder(null,"Previously guessed letters",0, 0, new Font(null, Font.ITALIC, 10),Color.WHITE));
         wordTextField.setFont(new Font(null, Font.BOLD,30));
         wordTextField.setEditable(false);
-
         wordTextField.setBorder(BorderFactory.createTitledBorder("Word to guess"));
 
         //textArea
@@ -66,16 +66,18 @@ class Game extends GUI implements ActionListener {
         //Add components
         add(headPanel);
         add(bodyPanel);
-
         headPanel.add(wordTextField);
         headPanel.add(guessedWordArea);
-
 
         letterButtonPrint();
 
         setLocationRelativeTo(null);
         setVisible(true);
     }
+
+    /**
+     * Prints out a grid system of letter buttons
+     */
     public void letterButtonPrint(){
         for(int i = 0; i < validLetters.length; i++) {
             buttons[i] = new JButton(String.valueOf(validLetters[i]));
@@ -84,6 +86,7 @@ class Game extends GUI implements ActionListener {
             bodyPanel.add(buttons[i]);
         }
     }
+
 
     @Override
     public void actionPerformed(ActionEvent e) {
