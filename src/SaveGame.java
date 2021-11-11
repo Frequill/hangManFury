@@ -8,7 +8,7 @@ import java.util.ArrayList;
 public class SaveGame extends Player {
 
 public static void saveToFile(ArrayList<Character> allLetters, String guessWord,
-ArrayList<Character> dumbGuesses, int playersLife, ArrayList<Integer> usersPoints, int amountOfPlayers) throws IOException {
+ArrayList<Character> dumbGuesses, int playersLife, ArrayList<Integer> usersPoints, int amountOfPlayers, String [] users) throws IOException {
 
        // Player playerClass = new Player();
         File lastSavedGame = new File("src/lastSavedGame.txt");
@@ -47,6 +47,7 @@ ArrayList<Character> dumbGuesses, int playersLife, ArrayList<Integer> usersPoint
         }
 
         ArrayList <String> test = new ArrayList<>();
+        test.add(users[0] + " " + users[1] + " " + users [2] + " " + users[3]); // Users actual full names in strings
         test.add(allLetters.toString()); // Correct letters guessed in current word
         test.add (guessWord); // Word
         test.add(dumbGuesses.toString()); // Incorrect guesses made by the players
@@ -63,9 +64,7 @@ ArrayList<Character> dumbGuesses, int playersLife, ArrayList<Integer> usersPoint
         out.close();
 
 
-    //LoadGame.gameLoader();
+        LoadGame.gameLoader();
 
     }
-
-
 }

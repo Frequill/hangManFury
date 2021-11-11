@@ -20,22 +20,27 @@ import java.util.Scanner;
             String[] users = {user1, user2, user3, user4};
 
 
-            //  **********************  This ArrayList keeps track of users SCORE during the game **********************
-            ArrayList<Integer> usersPoints = new ArrayList<>();
-            if (user3 == null){
-                usersPoints.add(0, 0);
-                usersPoints.add(1, 0);
-            }else if (user4 == null){
-                usersPoints.add(0, 0);
-                usersPoints.add(1, 0);
-                usersPoints.add(2, 0);
-            }else{
-                usersPoints.add(0, 0);
-                usersPoints.add(1, 0);
-                usersPoints.add(2, 0);
-                usersPoints.add(3, 0);
-            }
-            // *********************************************************************************************************
+            //if (LoadGame.getHasSeenLoadMenu() == 0) {
+                //  **********************  This ArrayList keeps track of users SCORE during the game **********************
+                ArrayList<Integer> usersPoints = new ArrayList<>();
+                if (user3 == null) {
+                    usersPoints.add(0, 0);
+                    usersPoints.add(1, 0);
+                } else if (user4 == null) {
+                    usersPoints.add(0, 0);
+                    usersPoints.add(1, 0);
+                    usersPoints.add(2, 0);
+                } else {
+                    usersPoints.add(0, 0);
+                    usersPoints.add(1, 0);
+                    usersPoints.add(2, 0);
+                    usersPoints.add(3, 0);
+                }
+                // *********************************************************************************************************
+
+          //  }
+
+            //else if (LoadGame.getHasSeenLoadMenu() == 1);
 
 
             boolean victory = false;
@@ -46,10 +51,11 @@ import java.util.Scanner;
                     , "JamesGosling", "Kaffe", "ForLoop", "While", "Index", "Double", "Minecraft", "Starcraft", "Warcraft", "Cantcrashthisgame", "Xbox", "Discord", "Git", "Github", "CleanDrink", "Corona",
                     "False", "True", "Stockholm", "CtrlAltDelete", "Syntax"*/};
 
-            String guessWord = wordHolder[randomizer(wordHolder)].toLowerCase();
-            ArrayList<Character> allLetters = new ArrayList<>(guessWord.length());
-            ArrayList<Character> dumbGuesses = new ArrayList();
-            Player userName = new Player();
+
+                String guessWord = wordHolder[randomizer(wordHolder)].toLowerCase();
+                ArrayList<Character> allLetters = new ArrayList<>(guessWord.length());
+                ArrayList<Character> dumbGuesses = new ArrayList();
+                Player userName = new Player();
 
 
 
@@ -62,12 +68,6 @@ import java.util.Scanner;
                 String[] splitUserName1 = user1.split(" ", 6);
                 String[] splitUserName2 = user2.split(" ", 6);
                 playersLife = 20;
-
-
-
-                LoadGame.gameLoader();
-
-
 
                 System.out.println(Color.PURPLE + "Welcome " + /*userName.getInstanceVarUsername(splitUserName1[0])*/ splitUserName1[0] + " and " + splitUserName2[0] + ", get ready for battle!\nThe first word is " + guessWord.length() + " letters long!" + Color.RESET);
                 System.out.println("Press 0 to save and exit");
@@ -134,7 +134,7 @@ import java.util.Scanner;
                         boolean destroyDumbCharacters = true;
                         while (destroyDumbCharacters) {
                             letter = in.nextLine().toLowerCase(); // to lower case kills you capitalized letters *evil laugh*
-                            trueLetter = characterDestroyer(letter, allLetters, guessWord, dumbGuesses, playersLife, usersPoints,amountOfPlayers);
+                            trueLetter = characterDestroyer(letter, allLetters, guessWord, dumbGuesses, playersLife, usersPoints, amountOfPlayers, users);
 
                             if (trueLetter != null) {
                                 destroyDumbCharacters = false;
@@ -462,7 +462,7 @@ import java.util.Scanner;
          */
 
         public static String characterDestroyer(String letter, ArrayList<Character>allLetters, String guessWord, ArrayList<Character> dumbGuesses,
-                                                int playersLife, ArrayList<Integer> usersPoints, int amountOfPlayers) throws IOException {
+                                                int playersLife, ArrayList<Integer> usersPoints, int amountOfPlayers, String[] users) throws IOException {
             if (!letter.isEmpty()) {
                 if (letter.contains("1")) {
                     System.out.println(Color.RED + "You may not guess numbers!" + Color.RESET);
@@ -486,7 +486,7 @@ import java.util.Scanner;
                 (letter.contains("0"))  // ***************************** SAVE FEATURE *********************************
                 {
                     System.out.println(Color.RED +"Saving and exiting!" + Color.RESET);
-                    SaveGame.saveToFile(allLetters, guessWord, dumbGuesses, playersLife, usersPoints, amountOfPlayers);
+                    SaveGame.saveToFile(allLetters, guessWord, dumbGuesses, playersLife, usersPoints, amountOfPlayers, users);
                     System.exit(0);
                 }
 
