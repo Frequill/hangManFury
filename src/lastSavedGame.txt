@@ -1,0 +1,8 @@
+1 2 17
+_ _ _ _ _ 
+
+0 0 1 
+Julius 2 0 2 0 0,Edwin 2 0 2 0 0,fittHelvete 0 0 0 0 0
+björn
+5
+3

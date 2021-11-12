@@ -59,18 +59,18 @@ ArrayList<Character> dumbGuesses, int playersLife, ArrayList<Integer> usersPoint
         }
 
         ArrayList <String> test = new ArrayList<>();
-        if(pickUser2 == -1){
-            test.add(allUsernames.get(pickUser1));
+        if(modifyX.getPickUserData4() != -1){
+        test.add(allUsernames.get(modifyX.getPickUserData1()) + "," + allUsernames.get(modifyX.getPickUserData2()) + "," + allUsernames.get(modifyX.getPickUserData3()) + "," + allUsernames.get(modifyX.getPickUserData4()));
+        } else if(modifyX.getPickUserData3() != -1){
+            test.add(allUsernames.get(modifyX.getPickUserData1()) + "," + allUsernames.get(modifyX.getPickUserData2()) + "," + allUsernames.get(modifyX.getPickUserData3()));
+        } else if(modifyX.getPickUserData2() != -1){
+            test.add(allUsernames.get(modifyX.getPickUserData1()) + "," + allUsernames.get(modifyX.getPickUserData2()));
+        } else if(modifyX.getPickUserData2() == -1){
+            test.add(allUsernames.get(modifyX.getPickUserData1()));
         }
-        else if(pickUser3 == -1){
-            test.add(allUsernames.get(pickUser1) + "," + allUsernames.get(pickUser2));
-        }
-        else if(pickUser4 == -1){
-            test.add(allUsernames.get(pickUser1) + "," + allUsernames.get(pickUser2) + "," + allUsernames.get(pickUser3));
-        }
-        else if(pickUser4 != -1){
-            test.add(allUsernames.get(pickUser1) + "," + allUsernames.get(pickUser2) + "," + allUsernames.get(pickUser3) + "," + allUsernames.get(pickUser3));
-        }
+
+
+
 
         out.write("\n");
         for(int i = 0; i < allLetters.size(); i++){
@@ -89,7 +89,22 @@ ArrayList<Character> dumbGuesses, int playersLife, ArrayList<Integer> usersPoint
         // Incorrect guesses made by the players
         test.add (guessWord);// Users current points
         test.add(String.valueOf(playersLife)); // amount of life
-        test.add(String.valueOf(amountOfPlayers)); // The current users turn
+
+        if (amountOfPlayers == 2 || amountOfPlayers == 3 || amountOfPlayers == 4){
+            test.add(String.valueOf(amountOfPlayers)); // The current users turn
+        }
+
+        else if (amountOfPlayers == 1){ // amountOfPlayers is an INTEGER, users.get is an INDEX, users is an ARRAYLIST
+            if (users.get(3) != null){
+                test.add(String.valueOf(4));
+            }
+            else if (users.get(3) == null && users.get(2) != null){
+                test.add(String.valueOf(3));
+            }
+            else if (users.get(2) == null && users.get(1) != null){
+                test.add(String.valueOf(2));
+            }
+        }
 
 
         //BufferedWriter out = new BufferedWriter(new FileWriter(lastSavedGame));

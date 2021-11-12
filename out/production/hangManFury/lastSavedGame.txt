@@ -1,8 +1,8 @@
-1 2 3 4
-b j _ _ n 
-q x 
-1 0 0 2 
-Julius Edwin Johanna Martin
+1 2 17
+_ _ _ _ _ 
+
+0 0 1 
+Julius 2 0 2 0 0,Edwin 2 0 2 0 0,fittHelvete 0 0 0 0 0
 björn
-1
-4
+5
+3

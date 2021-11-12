@@ -1,11 +1,9 @@
 import java.io.File;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
 
-class Menu extends ResumeGame{
+class Menu extends Multiplayer {
     public static Scanner in = new Scanner(System.in);
 
     //*************************************** Instance variables and menu object **************************************
@@ -254,16 +252,13 @@ class Menu extends ResumeGame{
                         Game.hangMan(user1);
                         secondMenu(user1);
                     } else if (user3 == "Add user 3") {
-                        ResumeGame.hangMan(user1, user2, null, null);// testsyfte!!!!!!!!!!!!!!!!!!!!!!!!!!!
-                        //Multiplayer.hangMan(user1, user2, null, null);
+                        Multiplayer.hangMan(user1, user2, null, null);
                         firstMenu();
                     } else if (user4 == "Add user 4") {
-                        ResumeGame.hangMan(user1, user2, user3, null);// testsyfte!!!!!!!!!!!!!!!!!!!!!!!!!!!
-                        //Multiplayer.hangMan(user1, user2, user3, null);
+                        Multiplayer.hangMan(user1, user2, user3, null);
                         firstMenu();
                     } else if (user4 != "Add user 4") {
-                        ResumeGame.hangMan(user1, user2, user3, user4); // testsyfte!!!!!!!!!!!!!!!!!!!!!!!!!!!
-                        //Multiplayer.hangMan(user1, user2, user3, user4);
+                        Multiplayer.hangMan(user1, user2, user3, user4);
                         firstMenu();
                     }
                 }

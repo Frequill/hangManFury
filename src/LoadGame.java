@@ -1,10 +1,9 @@
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class LoadGame extends ResumeGame {
+public class LoadGame extends Multiplayer {
 
     public static void gameLoader () throws Exception {
         File savedGame = new File("src/lastSavedGame.txt");
@@ -45,15 +44,20 @@ public class LoadGame extends ResumeGame {
         modify.setPlayerLife(playerLife);
 
 
-
+        // Makes sure that the player whose turn it was gets their turn again upon resume
         int turnPlayer = Integer.parseInt(loadedGame.get(7));
         modify.setAmountOfPlayers(turnPlayer);
 
 
-
-        String[] splitDumbGuesses = loadedGame.get(2).split(" ");
-        for(int i = 0; i < splitDumbGuesses.length; i++){
-            modify.getDumbGuesses().add(splitDumbGuesses[i].charAt(0));
+        //If-case ensures that game will work even if no wrongful guesses has been made
+        if (loadedGame.get(2).equals("")){
+            modify.getDumbGuesses().clear();
+        }
+        else {
+            String[] splitDumbGuesses = loadedGame.get(2).split(" ");
+            for (int i = 0; i < splitDumbGuesses.length; i++) {
+                modify.getDumbGuesses().add(splitDumbGuesses[i].charAt(0));
+            }
         }
 
 
@@ -69,9 +73,9 @@ public class LoadGame extends ResumeGame {
         modify.setGuessWord(guessWord);
 
 
-        PrintWriter clearSavedGame = new PrintWriter(savedGame);
+        /*PrintWriter clearSavedGame = new PrintWriter(savedGame);
         clearSavedGame.print("");
-        clearSavedGame.close();
+        clearSavedGame.close();*/
         modify.setHasSeenLoadMenu(1);
 
         if(users.length == 2){
