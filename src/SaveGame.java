@@ -4,6 +4,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class SaveGame extends Player {
 
@@ -12,10 +13,21 @@ ArrayList<Character> dumbGuesses, int playersLife, ArrayList<Integer> usersPoint
 
        // Player playerClass = new Player();
         File lastSavedGame = new File("src/lastSavedGame.txt");
-        int pickUser1;
-        int pickUser2;
-        int pickUser3;
-        int pickUser4;
+        File userNames = new File("src/username.txt");
+    Scanner scanUserNames = new Scanner(userNames);
+
+    ArrayList<String> allUsernames = new ArrayList<>();
+
+    while (scanUserNames.hasNextLine()) {
+        allUsernames.add(scanUserNames.nextLine());
+    }
+    scanUserNames.close();
+
+
+        int pickUser1 = -1;
+        int pickUser2 = -1;
+        int pickUser3 = -1;
+        int pickUser4 = -1;
 
     BufferedWriter out = new BufferedWriter(new FileWriter(lastSavedGame));
 
@@ -47,7 +59,19 @@ ArrayList<Character> dumbGuesses, int playersLife, ArrayList<Integer> usersPoint
         }
 
         ArrayList <String> test = new ArrayList<>();
-        test.add(users.get(0) + " " + users.get(1) + " " + users.get(2) + " " + users.get(3)); // Users actual full names in strings
+        if(pickUser2 == -1){
+            test.add(allUsernames.get(pickUser1));
+        }
+        else if(pickUser3 == -1){
+            test.add(allUsernames.get(pickUser1) + "," + allUsernames.get(pickUser2));
+        }
+        else if(pickUser4 == -1){
+            test.add(allUsernames.get(pickUser1) + "," + allUsernames.get(pickUser2) + "," + allUsernames.get(pickUser3));
+        }
+        else if(pickUser4 != -1){
+            test.add(allUsernames.get(pickUser1) + "," + allUsernames.get(pickUser2) + "," + allUsernames.get(pickUser3) + "," + allUsernames.get(pickUser3));
+        }
+
         out.write("\n");
         for(int i = 0; i < allLetters.size(); i++){
             out.write(allLetters.get(i) + " ");

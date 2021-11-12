@@ -275,6 +275,17 @@ public class Player {
         winAdder(modifyX.getPickUserData1());
     }
     public static void multiWinAdderCaller(int x, int index, ArrayList<String> users) throws Exception {
+
+        File username = new File("src/username.txt");
+        Scanner readUsername = new Scanner(username);
+
+
+        if (allUsernames.isEmpty()) {
+            while (readUsername.hasNextLine()) {
+                allUsernames.add(readUsername.nextLine());
+            }
+        }
+
         String [] splitUsers = users.get(index).split(" ", 6);
         String [] splitAllusernames1 = allUsernames.get(modifyX.getPickUserData1()).split(" ", 6);
         String [] splitAllusernames2 = allUsernames.get(modifyX.getPickUserData2()).split(" ", 6);
@@ -285,7 +296,7 @@ public class Player {
         else if (x == 2 && splitAllusernames2[0].equals(splitUsers[0])) {
             winAdder(modifyX.getPickUserData2());
         }
-        else if (users.get(3) != null){
+        else if (users.get(3) != null && !users.get(3).equals("null")){
             String [] splitAllusernames3 = allUsernames.get(modifyX.getPickUserData3()).split(" ", 6);
             String [] splitAllusernames4 = allUsernames.get(modifyX.getPickUserData4()).split(" ", 6);
             if (x==3 && splitAllusernames3[0].equals(splitUsers[0])){
@@ -295,7 +306,7 @@ public class Player {
                 winAdder(modifyX.getPickUserData4());
             }
         }
-        else if (users.get(2) != null) {
+        else if (users.get(2) != null && !users.get(2).equals("null")) {
             String [] splitAllusernames3 = allUsernames.get(modifyX.getPickUserData3()).split(" ", 6);
             if (x==3 && splitAllusernames3[0].equals(splitUsers[0])) {
                 winAdder(modifyX.getPickUserData3());

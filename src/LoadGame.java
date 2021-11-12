@@ -34,25 +34,11 @@ public class LoadGame extends ResumeGame {
 
 
         //***************************Users and UsersPoints***********************************
-        String [] users = loadedGame.get(4).split(" ", 9);
+        String [] users = loadedGame.get(4).split(",", 9);
         String [] usersPoints = loadedGame.get(3).split(" ", 9);
 
 
-        if(!users[3].equals("null")){
-            modify.getUsersPoints().add(0,Integer.parseInt(usersPoints[0]));
-            modify.getUsersPoints().add(1,Integer.parseInt(usersPoints[1]));
-            modify.getUsersPoints().add(2,Integer.parseInt(usersPoints[2]));
-            modify.getUsersPoints().add(3,Integer.parseInt(usersPoints[3]));
-        }
-        else if (!users[2].equals("null")) {
-            modify.getUsersPoints().add(0,Integer.parseInt(usersPoints[0]));
-            modify.getUsersPoints().add(1,Integer.parseInt(usersPoints[1]));
-            modify.getUsersPoints().add(2,Integer.parseInt(usersPoints[2]));
-        }
-        else{
-            modify.getUsersPoints().add(0,Integer.parseInt(usersPoints[0]));
-            modify.getUsersPoints().add(1,Integer.parseInt(usersPoints[1]));
-        }
+
 
         //**************************************************************
         int playerLife = Integer.parseInt(loadedGame.get(6));
@@ -83,12 +69,30 @@ public class LoadGame extends ResumeGame {
         modify.setGuessWord(guessWord);
 
 
-        /*PrintWriter clearSavedGame = new PrintWriter(savedGame);
+        PrintWriter clearSavedGame = new PrintWriter(savedGame);
         clearSavedGame.print("");
-        clearSavedGame.close();*/
-
+        clearSavedGame.close();
         modify.setHasSeenLoadMenu(1);
 
-        hangMan(users[0],users[1],users[2],users[3]);
+        if(users.length == 2){
+            modify.getUsersPoints().add(0,Integer.parseInt(usersPoints[0]));
+            modify.getUsersPoints().add(1,Integer.parseInt(usersPoints[1]));
+            hangMan(users[0],users[1],null,null);
+
+        }
+        else if (users.length == 3) {
+            modify.getUsersPoints().add(0,Integer.parseInt(usersPoints[0]));
+            modify.getUsersPoints().add(1,Integer.parseInt(usersPoints[1]));
+            modify.getUsersPoints().add(2,Integer.parseInt(usersPoints[2]));
+            hangMan(users[0],users[1],users[2], null);
+        }
+        else if (users.length == 4){
+            modify.getUsersPoints().add(0,Integer.parseInt(usersPoints[0]));
+            modify.getUsersPoints().add(1,Integer.parseInt(usersPoints[1]));
+            modify.getUsersPoints().add(2,Integer.parseInt(usersPoints[2]));
+            modify.getUsersPoints().add(3,Integer.parseInt(usersPoints[3]));
+            hangMan(users[0],users[1],users[2],users[3]);
+        }
+
     }
 }

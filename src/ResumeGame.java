@@ -1,3 +1,4 @@
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -185,16 +186,26 @@ import java.util.Scanner;
                 }
             }
 
+
             modify.setAmountOfPlayers(turn(modify.getAmountOfPlayers(), user1, user2, user3, user4));
 
 
 
             boolean runMultiplayer = true;
             while (runMultiplayer) {
-                for (int i = 0; i < modify.getGuessWord().length(); i++) {
-                    System.out.print("_");
-                    modify.getAllLetters().add(i, '_');
+                if (modify.getHasSeenLoadMenu() == 0) {
+                    modify.getAllLetters().clear();
+                    for (int i = 0; i < modify.getGuessWord().length(); i++) {
+                        System.out.print("_");
+                        modify.getAllLetters().add(i, '_');
+                    }
                 }
+                else if(modify.getHasSeenLoadMenu() == 1){
+                    for (int i = 0; i < modify.getGuessWord().length(); i++) {
+                        System.out.print(modify.getAllLetters().get(i));
+                    }
+                }
+                //System.out.println(user1 + " " + user2 + " " +  user3 + " " + user4);
 
 
                 // ******************************************** Game Start! ************************************************
@@ -305,6 +316,10 @@ import java.util.Scanner;
                             highScoreFunction.fileReader(Player.allUsernames.get(Player.modifyX.getPickUserData4()));
                         }
 
+                        modify.setHasSeenLoadMenu(0);
+
+                        Menu.firstMenu();
+
 
 
                         //Player.matchAdderCaller();
@@ -410,6 +425,7 @@ import java.util.Scanner;
                     int x = 0;
                     for (int i = 0; i < usersPoints.size();i++){
                         x++;
+                        System.out.println(users);
                         Player.multiWinAdderCaller(x,index,users);
 
                     }
