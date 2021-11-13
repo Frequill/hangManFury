@@ -1,0 +1,8 @@
+4 6
+_ a _ _ _ 
+s l t n b 
+3 0 
+Julius 0 0 0 0 0,Mandy 0 0 0 0 0
+kaffe
+9
+2

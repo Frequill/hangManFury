@@ -196,8 +196,6 @@ import java.util.Scanner;
                         System.out.println(Color.PURPLE + "Welcome back " + splitUserName1[0] + " and " + splitUserName2[0] + "! Prepare for the battle to resume!\nThe word is still " + modify.getGuessWord().length() + " letters long!" + Color.RESET);
                         System.out.println("Press 0 to save and exit");
 
-                    System.out.println("Welcome back " + user1 + "," + user2 + "," + user3 + " and " + user3 + "!");
-
                 }else if (user4 == null){
                     String[] splitUserName1 = user1.split(" ", 6);
                     String[] splitUserName2 = user2.split(" ", 6);
@@ -359,7 +357,6 @@ import java.util.Scanner;
 
                         modify.setHasSeenLoadMenu(0);
 
-                        in.nextLine();
                         in.nextLine();
 
                         victory = true;
