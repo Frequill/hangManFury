@@ -1,8 +1,6 @@
 PLACHOLDER(Match, win, loss, flawless, invis/highScore)
-Edwin 5 0 5 0 0
-Johanna 2 0 2 0 0
+Edwin 6 0 6 0 0
+Johanna 3 0 3 0 0
 Harald 0 0 0 0 0
 Julius 0 0 0 0 0
-Martin 2 0 2 0 0
-Johan 0 0 0 0 0
-Numnum 2 2 0 0 1
+Martin 3 0 3 0 0

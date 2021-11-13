@@ -5,7 +5,7 @@ import java.util.Random;
 import java.util.Scanner;
 
 
-    class Multiplayer {
+    class MultiPlayer {
 
         public static Scanner in = new Scanner(System.in);
 
@@ -77,7 +77,7 @@ import java.util.Scanner;
             this.amountOfPlayers = amountOfPlayers;
         }
 
-        public static Multiplayer modify = new Multiplayer();
+        public static MultiPlayer modify = new MultiPlayer();
 
 
 

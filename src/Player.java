@@ -1,5 +1,6 @@
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Objects;
 import java.util.Scanner;
 
@@ -409,7 +410,7 @@ public class Player {
                 File usernames = new File("src/username.txt");
                 Scanner readUsernames = new Scanner(usernames);
 
-                System.out.println("Profile name, Games played, Matches won, Matches lost, Flawless Victories!");
+                System.out.println("Profile name, Games played, Matches won, Matches lost, Flawless Victories and latest multiplayer score");
                 //This arraylist saves all usernames from username.txt
                 ArrayList<String> aList = new ArrayList<>();
 
@@ -418,10 +419,12 @@ public class Player {
                 }
                 readUsernames.close();
 
+
                 for (int i = 1; i < aList.size(); i++) {
                     System.out.println(Color.YELLOW + i + ") " + Color.RESET + aList.get(i));
-
                 }
+
+
                 System.out.println(Color.YELLOW + aList.size() + ")" + Color.RESET + " Back");
                 boolean run2 = true;
 
@@ -476,72 +479,86 @@ public class Player {
 
         public static void deleteUser () throws Exception {
             Scanner in = new Scanner(System.in);
-            int deleteUserChoice;
+            File savedGame = new File("src/lastSavedGame.txt");
+            System.out.println("WARNING user deletion will also delete the latest saved game!\nAre you sure you want to Delete a user now?\n1) YES\n2) NO");
+            boolean askYesOrNo = true;
+            while (askYesOrNo == true) {
+                int yesOrNo = in.nextInt();
 
-            File usernames = new File("src/username.txt");
-            Scanner readUsernames = new Scanner(usernames);
-            ArrayList<String> deleteAllUsername = new ArrayList<>();
+                if (yesOrNo == 1) {
+                    // This ensures that if users are deleted a saved game can't be reloaded and prevents a hard-crash
+                    PrintWriter clearSavedGame = new PrintWriter(savedGame);
+                    clearSavedGame.print("");
+                    clearSavedGame.close();
+
+                    int deleteUserChoice;
+
+                    File usernames = new File("src/username.txt");
+                    Scanner readUsernames = new Scanner(usernames);
+                    ArrayList<String> deleteAllUsername = new ArrayList<>();
 
 
-            while (readUsernames.hasNextLine()) {
-                deleteAllUsername.add(readUsernames.nextLine());
-            }
+                    while (readUsernames.hasNextLine()) {
+                        deleteAllUsername.add(readUsernames.nextLine());
+                    }
 
-            System.out.println("Which user do you want to delete?");
+                    System.out.println("Which user do you want to delete?");
 
-            for (int i = 1; i < deleteAllUsername.size(); i++) {
-                String[] splitAlist = deleteAllUsername.get(i).split(" ");
-                System.out.println(Color.YELLOW + i + ") " + Color.RESET + splitAlist[0]);
-            }
-            System.out.println(Color.YELLOW + deleteAllUsername.size() + ")" + Color.RESET + " Back");
-            boolean run = true;
-            while (run) {
-                while (!in.hasNextInt()) {
-                    System.out.println(Color.RED + "\nPlease input an integer between 1 - " + allUsernames.size() + ":\n" + Color.RESET);
-                    in.next();
-                }
-                deleteUserChoice = in.nextInt();
+                    for (int i = 1; i < deleteAllUsername.size(); i++) {
+                        String[] splitAlist = deleteAllUsername.get(i).split(" ");
+                        System.out.println(Color.YELLOW + i + ") " + Color.RESET + splitAlist[0]);
+                    }
+                    System.out.println(Color.YELLOW + deleteAllUsername.size() + ")" + Color.RESET + " Back");
+                    boolean run = true;
+                    while (run) {
+                        while (!in.hasNextInt()) {
+                            System.out.println(Color.RED + "\nPlease input an integer between 1 - " + allUsernames.size() + ":\n" + Color.RESET);
+                            in.next();
+                        }
+                        deleteUserChoice = in.nextInt();
 
-                if (deleteUserChoice == allUsernames.size()) {
+                        if (deleteUserChoice == allUsernames.size()) {
+                            Menu.amountOfPlayersMenu();
+                        } else {
+
+
+                            deleteAllUsername.remove(deleteUserChoice);
+
+
+                            PrintWriter out = new PrintWriter(usernames);
+                            for (int i = 0; i < deleteAllUsername.size(); i++) {
+                                out.print(deleteAllUsername.get(i) + "\n");
+                            }
+                            out.close();
+
+                            readUsernames.close();
+
+                            modifyX.setPickUserData1(-1);
+                            modifyX.setPickUserData2(-1);
+                            modifyX.setPickUserData3(-1);
+                            modifyX.setPickUserData4(-1);
+
+                            pickUser1Setter(-1);
+                            pickUser2Setter(-1);
+                            pickUser3Setter(-1);
+                            pickUser4Setter(-1);
+
+                            Menu.firstMenu();
+
+
+                            run = false;
+                            askYesOrNo = false;
+                        }
+                    }
+                } else if (yesOrNo == 2) {
+                    askYesOrNo = false;
                     Menu.amountOfPlayersMenu();
                 } else {
-
-
-                    deleteAllUsername.remove(deleteUserChoice);
-
-
-                    PrintWriter out = new PrintWriter(usernames);
-                    for (int i = 0; i < deleteAllUsername.size(); i++) {
-                        out.print(deleteAllUsername.get(i) + "\n");
-                    }
-                    out.close();
-
-                    readUsernames.close();
-
-                    modifyX.setPickUserData1(-1);
-                    modifyX.setPickUserData2(-1);
-                    modifyX.setPickUserData3(-1);
-                    modifyX.setPickUserData4(-1);
-
-                    pickUser1Setter(-1);
-                    pickUser2Setter(-1);
-                    pickUser3Setter(-1);
-                    pickUser4Setter(-1);
-
-                    Menu.firstMenu();
-
-
-
-
-
-
-                    run = false;
-
+                    System.out.println("Invalid input!!");
                 }
-
-
             }
-        }
+
     }
+}
 
 

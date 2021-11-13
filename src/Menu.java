@@ -3,7 +3,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
 
-class Menu extends Multiplayer {
+class Menu extends MultiPlayer {
     public static Scanner in = new Scanner(System.in);
 
     //*************************************** Instance variables and menu object **************************************
@@ -181,7 +181,7 @@ class Menu extends Multiplayer {
             choice = in.nextInt();
             if (choice == 1) {
 
-                if(Player.modifyX.getPickUserData1() != -1){
+                if(Player.modifyX.getPickUserData1() != -1){ // Just leave this alone!
 
 
                 }
@@ -293,16 +293,16 @@ class Menu extends Multiplayer {
                     show();
                 } else {
                     if (user2 == "Add user 2") {
-                        Game.hangMan(user1);
+                        SinglePlayer.hangMan(user1);
                         secondMenu(user1);
                     } else if (user3 == "Add user 3") {
-                        Multiplayer.hangMan(user1, user2, null, null);
+                        MultiPlayer.hangMan(user1, user2, null, null);
                         firstMenu();
                     } else if (user4 == "Add user 4") {
-                        Multiplayer.hangMan(user1, user2, user3, null);
+                        MultiPlayer.hangMan(user1, user2, user3, null);
                         firstMenu();
                     } else if (user4 != "Add user 4") {
-                        Multiplayer.hangMan(user1, user2, user3, user4);
+                        MultiPlayer.hangMan(user1, user2, user3, user4);
                         firstMenu();
                     }
                 }

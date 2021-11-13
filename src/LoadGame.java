@@ -1,9 +1,8 @@
 import java.io.File;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class LoadGame extends Multiplayer {
+public class LoadGame extends MultiPlayer {
 
     public static void gameLoader () throws Exception {
         File savedGame = new File("src/lastSavedGame.txt");

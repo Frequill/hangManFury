@@ -4,5 +4,3 @@ Johanna 3 0 3 0 0
 Harald 0 0 0 0 0
 Julius 0 0 0 0 0
 Martin 3 0 3 0 0
-Johan 0 0 0 0 0
-Numnum 3 3 0 0 1

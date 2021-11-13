@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 import java.util.Scanner;
-class Game {
+class SinglePlayer {
 
     public static Scanner in = new Scanner(System.in);
 
