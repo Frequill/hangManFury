@@ -1,8 +1,8 @@
 PLACHOLDER(Match, win, loss, flawless, invis/highScore)
-Edwin 3 0 3 0 0
-Johanna 0 0 0 0 0
-Martin 0 0 0 0 0
-Mands 0 0 0 0 0
-Markus 0 0 0 0 0
-Nilsson 0 0 0 0 0
-MinasTirith 0 0 0 0 0
+Edwin 6 0 6 0 0
+Johanna 3 0 3 0 0
+Harald 0 0 0 0 0
+Julius 0 0 0 0 0
+Martin 3 0 3 0 0
+Johan 0 0 0 0 0
+Numnum 3 3 0 0 1

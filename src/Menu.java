@@ -75,6 +75,13 @@ class Menu extends Multiplayer {
         String[] split4 = menu.getUserOptions()[3].split(" ", 6);
 
 
+        if (Player.modifyX.getPickUserData1() == -1){
+            menu.getUserOptions()[0] = "Add user 1";
+            menu.getUserOptions()[1] = "Add user 2";
+            menu.getUserOptions()[2] = "Add user 3";
+            menu.getUserOptions()[3] = "Add user 4";
+        }
+
 
         // Splits of stats from usernames
         System.out.println("You can add up to four users to play multiplayer!");
@@ -106,7 +113,9 @@ class Menu extends Multiplayer {
             menu.getMenuOptions().add(0, Color.YELLOW + "1) " + Color.RESET+ menu.getUserOptions()[0]);
         }
 
-        menu.getMenuOptions().add(4, Color.YELLOW + "5) " + Color.RESET+ "Back");
+        menu.getMenuOptions().add(4,Color.YELLOW + "5) " + Color.RESET+ "Delete user");
+
+        menu.getMenuOptions().add(5, Color.YELLOW + "6) " + Color.RESET+ "Back");
         menu.optionPrinter(menu.getMenuOptions());
         Menu.selectUsersFunction();
 
@@ -132,7 +141,8 @@ class Menu extends Multiplayer {
         menu.getMenuOptions().add(0, Color.YELLOW + "1) " + Color.RESET+  "Change user ");
         menu.getMenuOptions().add(1, Color.YELLOW + "2) " + Color.RESET+ "Play");
         menu.getMenuOptions().add(2, Color.YELLOW + "3) " + Color.RESET+ "High score list ");
-        menu.getMenuOptions().add(3, Color.YELLOW + "4) " + Color.RESET+ "Exit game...");
+        menu.getMenuOptions().add(3, Color.YELLOW + "4) " + Color.RESET+ "load game...");
+        menu.getMenuOptions().add(4, Color.YELLOW + "5) " + Color.RESET+ "Exit game...");
         menu.optionPrinter(menu.getMenuOptions());
         return user;
     }
@@ -141,8 +151,7 @@ class Menu extends Multiplayer {
         Menu menu = new Menu("user",3);
         menu.getMenuOptions().add(0, Color.YELLOW + "1) " + Color.RESET+ "Existing user");
         menu.getMenuOptions().add(1, Color.YELLOW + "2) " + Color.RESET+ "New user ");
-        menu.getMenuOptions().add(2, Color.YELLOW + "3) " + Color.RESET+ "Delete user ");
-        menu.getMenuOptions().add(3,Color.YELLOW + "4) " + Color.RESET+ "Back");
+        menu.getMenuOptions().add(2,Color.YELLOW + "3) " + Color.RESET+ "Back");
         menu.optionPrinter(menu.getMenuOptions());
         user = Player.readUsername(user, choice);
         return user;
@@ -172,6 +181,11 @@ class Menu extends Multiplayer {
             choice = in.nextInt();
             if (choice == 1) {
 
+                if(Player.modifyX.getPickUserData1() != -1){
+
+
+                }
+
                 user1 = userNameMenu(user1, choice);
                 defultAddUserOptions[0] = user1;
                 amountOfPlayersMenu();
@@ -199,8 +213,12 @@ class Menu extends Multiplayer {
                     defultAddUserOptions[3] = user4;
                     amountOfPlayersMenu();
                 }
+
             }
-            else if (choice == 5){
+            else if (choice == 5) {
+                Player.deleteUser();
+            }
+            else if (choice == 6){
                 firstMenu();
                 run = false;
             }
@@ -215,6 +233,31 @@ class Menu extends Multiplayer {
         }
 
     }
+    public static void loadUsersFunction(String user1, String user2, String user3, String user4) throws Exception {
+        Menu menu = new Menu();
+
+
+        String[] defultAddUserOptions = menu.getUserOptions();
+
+        defultAddUserOptions[0] = user1;
+        defultAddUserOptions[1] = user2;
+
+        if(user3 == null){
+
+        }
+        else if (user4 == null){
+            defultAddUserOptions[2] = user3;
+        }
+        else if(user4 != null){
+            defultAddUserOptions[2] = user3;
+            defultAddUserOptions[3] = user4;
+        }
+
+    }
+
+
+
+
 
 
     /**

@@ -434,15 +434,10 @@ public class Player {
                     pickUser = input.nextInt();
                     if (pickUser < 1 || pickUser >= aList.size() + 1) {
                         System.out.println("Choice was out of bounds! ");
-                    } else if (allUserNumbers.contains(pickUser)) {
-                        System.out.println("You can`t reselect a profile that was used earlier!!");
+                    } else if (pickUser == modifyX.getPickUserData1() || pickUser == modifyX.getPickUserData2() || pickUser == modifyX.getPickUserData3() || pickUser == modifyX.getPickUserData4()) {
+                        System.out.println("You can`t select the same user twice!");
                     } else if (pickUser == aList.size()) {
-                        if (user == null) {
-                            Menu.firstMenu();
-                        } else {
-                            Menu.secondMenu(user);
-                            return user;
-                        }
+                        Menu.amountOfPlayersMenu();
                     } else {
                         run2 = false;
                     }
@@ -470,15 +465,8 @@ public class Player {
             } else if (userChoice == 2) {
                 String username = writeUsername(choice);
                 return username;
-            } else if (userChoice == 3) {
-                deleteUser();
-            } else if (userChoice == 4) {
-                if (user == null) {
-                    Menu.firstMenu();
-                } else {
-                    Menu.secondMenu(user);
-                }
-
+            }  else if (userChoice == 3) {
+              Menu.amountOfPlayersMenu();
             } else {
                 System.out.println("\nPlease enter an *integer* greater than 0 and lower than 4:\n");
             }
@@ -521,6 +509,7 @@ public class Player {
 
                     deleteAllUsername.remove(deleteUserChoice);
 
+
                     PrintWriter out = new PrintWriter(usernames);
                     for (int i = 0; i < deleteAllUsername.size(); i++) {
                         out.print(deleteAllUsername.get(i) + "\n");
@@ -529,7 +518,22 @@ public class Player {
 
                     readUsernames.close();
 
+                    modifyX.setPickUserData1(-1);
+                    modifyX.setPickUserData2(-1);
+                    modifyX.setPickUserData3(-1);
+                    modifyX.setPickUserData4(-1);
+
+                    pickUser1Setter(-1);
+                    pickUser2Setter(-1);
+                    pickUser3Setter(-1);
+                    pickUser4Setter(-1);
+
                     Menu.firstMenu();
+
+
+
+
+
 
                     run = false;
 

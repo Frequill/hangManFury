@@ -1,17 +1,8 @@
 PLACHOLDER(Match, win, loss, flawless, invis/highScore)
-Julius 3 0 3 0 0
-Edwin 3 0 3 0 0
-Johanna 0 0 0 0 0
-Martin 0 0 0 0 0
-Mands 0 0 0 0 0
-Markus 0 0 0 0 0
-Nilsson 0 0 0 0 0
-MinasTirith 0 0 0 0 0
-NilssonsKattfan 0 0 0 0 0
-Muppungen 0 0 0 0 0
-Pär 0 0 0 0 0
-spelMakaren 1 1 0 0 2
-Anus2021 1 1 0 0 1
-Fittunge 0 0 0 0 0
-Mandankang 0 0 0 0 0
-fittHelvete 1 1 0 0 2
+Edwin 5 0 5 0 0
+Johanna 2 0 2 0 0
+Harald 0 0 0 0 0
+Julius 0 0 0 0 0
+Martin 2 0 2 0 0
+Johan 0 0 0 0 0
+Numnum 2 2 0 0 1

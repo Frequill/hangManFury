@@ -73,6 +73,9 @@ public class LoadGame extends Multiplayer {
         modify.setGuessWord(guessWord);
 
 
+
+
+
         /*PrintWriter clearSavedGame = new PrintWriter(savedGame);
         clearSavedGame.print("");
         clearSavedGame.close();*/
@@ -81,13 +84,16 @@ public class LoadGame extends Multiplayer {
         if(users.length == 2){
             modify.getUsersPoints().add(0,Integer.parseInt(usersPoints[0]));
             modify.getUsersPoints().add(1,Integer.parseInt(usersPoints[1]));
+            Menu.loadUsersFunction(users[0],users[1],null,null);
             hangMan(users[0],users[1],null,null);
+
 
         }
         else if (users.length == 3) {
             modify.getUsersPoints().add(0,Integer.parseInt(usersPoints[0]));
             modify.getUsersPoints().add(1,Integer.parseInt(usersPoints[1]));
             modify.getUsersPoints().add(2,Integer.parseInt(usersPoints[2]));
+            Menu.loadUsersFunction(users[0],users[1],users[2],null);
             hangMan(users[0],users[1],users[2], null);
         }
         else if (users.length == 4){
@@ -95,6 +101,7 @@ public class LoadGame extends Multiplayer {
             modify.getUsersPoints().add(1,Integer.parseInt(usersPoints[1]));
             modify.getUsersPoints().add(2,Integer.parseInt(usersPoints[2]));
             modify.getUsersPoints().add(3,Integer.parseInt(usersPoints[3]));
+            Menu.loadUsersFunction(users[0],users[1],users[2],users[3]);
             hangMan(users[0],users[1],users[2],users[3]);
         }
 
