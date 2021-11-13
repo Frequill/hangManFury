@@ -122,10 +122,10 @@ import java.util.Scanner;
             boolean victory = false;
 
             // Here is our full wordlist!
-            String[] wordHolder = {"Björn", "Bill"/*, "Java", "Edwin", "Julius", "Martin", "Johanna", "String", "Int", "Scanner", "ArrayList", "boolean", "Character", "Placeholder", "null",
+            String[] wordHolder = {"Björn", "Bill", "Java", "Edwin", "Julius", "Martin", "Johanna", "String", "Int", "Scanner", "ArrayList", "boolean", "Character", "Placeholder", "null",
                     "monster", "redbull", "Newton", "Switchbitch", "HANGMAN", "FUCKYOU", "Fury", "Class", "Static", "Void", "GeOssHögtBetygBill", "System", "Exception", "Mupphuvud"
                     , "JamesGosling", "Kaffe", "ForLoop", "While", "Index", "Double", "Minecraft", "Starcraft", "Warcraft", "Cantcrashthisgame", "Xbox", "Discord", "Git", "Github", "CleanDrink", "Corona",
-                    "False", "True", "Stockholm", "CtrlAltDelete", "Syntax"*/};
+                    "False", "True", "Stockholm", "CtrlAltDelete", "Syntax"};
 
                 if (modify.getHasSeenLoadMenu() == 0){
                     modify.setGuessWord(wordHolder[randomizer(wordHolder)].toLowerCase());
@@ -156,7 +156,7 @@ import java.util.Scanner;
                     String[] splitUserName1 = user1.split(" ", 6);
                     String[] splitUserName2 = user2.split(" ", 6);
                     String[] splitUserName3 = user3.split(" ", 6);
-                    modify.setPlayerLife(5);
+                    modify.setPlayerLife(20);
                     System.out.println(Color.PURPLE + "Welcome " + splitUserName1[0] + ", " + splitUserName2[0] + " and " + splitUserName3[0] + "! Get ready for battle!\nThe first word is " + modify.getGuessWord().length() + " letters long!" + Color.RESET);
                     System.out.println("Press 0 to save and exit");
 
@@ -171,7 +171,7 @@ import java.util.Scanner;
                     String[] splitUserName3 = user3.split(" ", 6);
                     String[] splitUserName4 = user4.split(" ", 6);
 
-                    modify.setPlayerLife(6);
+                    modify.setPlayerLife(30);
                     System.out.println(Color.PURPLE + "Welcome " + splitUserName1[0] + ", " + splitUserName2[0] + ", " + splitUserName3[0] + " and " + splitUserName4[0] + "! Get ready for battle!\nThe first word is " + modify.getGuessWord().length() + " letters long!" + Color.RESET);
                     System.out.println("Press 0 to save and exit");
 
