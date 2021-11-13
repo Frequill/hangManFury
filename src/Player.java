@@ -5,11 +5,11 @@ import java.util.Scanner;
 
 //******************************************* Instance variables and object *******************************************
 public class Player {
-     private String instanceVarUsername;
-     private int pickUserData1 = -1;
-     private int pickUserData2 = -1;
-     private int pickUserData3 = -1;
-     private int pickUserData4 = -1;
+    private String instanceVarUsername;
+    private int pickUserData1 = -1;
+    private int pickUserData2 = -1;
+    private int pickUserData3 = -1;
+    private int pickUserData4 = -1;
 
     public String getInstanceVarUsername(String user) {
         instanceVarUsername = user;
@@ -48,28 +48,28 @@ public class Player {
         return pickUserData4;
     }
 
-    public static ArrayList <String> allUsernames = new ArrayList();
+    public static ArrayList<String> allUsernames = new ArrayList();
 
     public static ArrayList<String> getAllUsernames() {
         return allUsernames;
     }
 
-    public static ArrayList <Integer> allUserNumbers = new ArrayList();
+    public static ArrayList<Integer> allUserNumbers = new ArrayList();
 
     public static Player modifyX = new Player();
 
     //************************************************* Functions *****************************************************
 
     /**
-     This method stores different usernames in a text file for later use
+     * This method stores different usernames in a text file for later use
      */
 
     public static String writeUsername(int choice) throws Exception {
-            Scanner in = new Scanner(System.in);
-            File toUsername = new File("src/username.txt");
+        Scanner in = new Scanner(System.in);
+        File toUsername = new File("src/username.txt");
 
-            System.out.println("Please enter your username: (NO SPACES!!)");
-            String usersInput = in.next();
+        System.out.println("Please enter your username: (NO SPACES!!)");
+        String usersInput = in.next();
 
         boolean nullKiller = true;
         while (nullKiller) {
@@ -82,29 +82,25 @@ public class Player {
 
         String newUser = usersInput + " 0" + " 0" + " 0" + " 0" + " 0";
         Writer out;
-        out = new BufferedWriter(new FileWriter(toUsername,true));
+        out = new BufferedWriter(new FileWriter(toUsername, true));
         out.append("\n" + newUser);
         out.close();
 
         userArray(newUser);
 
-        if (choice == 1){
-            modifyX.pickUserData1 = allUsernames.size()-1;
+        if (choice == 1) {
+            modifyX.pickUserData1 = allUsernames.size() - 1;
             modifyX.setPickUserData1(modifyX.pickUserData1);
-        }
-        else if (choice == 2){
-            modifyX.pickUserData2 = allUsernames.size()-1;
+        } else if (choice == 2) {
+            modifyX.pickUserData2 = allUsernames.size() - 1;
             modifyX.setPickUserData2(modifyX.pickUserData2);
-        }
-        else if (choice == 3){
-            modifyX.pickUserData3 = allUsernames.size()-1;
+        } else if (choice == 3) {
+            modifyX.pickUserData3 = allUsernames.size() - 1;
             modifyX.setPickUserData3(modifyX.pickUserData3);
-        }
-        else if (choice == 4){
-            modifyX.pickUserData4 = allUsernames.size()-1;
+        } else if (choice == 4) {
+            modifyX.pickUserData4 = allUsernames.size() - 1;
             modifyX.setPickUserData4(modifyX.pickUserData4);
-        }
-        else{
+        } else {
             System.out.println("Edwins röv");
         }
 
@@ -112,11 +108,11 @@ public class Player {
     }
 
     /**
-     Method stores all "usernames" from username.txt file into an arraylist so that specific indesex (users) can be
-     called upon later for stats increases or decreases...
+     * Method stores all "usernames" from username.txt file into an arraylist so that specific indesex (users) can be
+     * called upon later for stats increases or decreases...
      */
 
-    public static void userArray(String userInput) throws Exception{
+    public static void userArray(String userInput) throws Exception {
         File username = new File("src/username.txt");
         Scanner readUsername = new Scanner(username);
 
@@ -125,9 +121,7 @@ public class Player {
             while (readUsername.hasNextLine()) {
                 allUsernames.add(readUsername.nextLine());
             }
-        }
-
-        else {
+        } else {
             if (allUsernames.contains(userInput)) {
 
             } else {
@@ -137,7 +131,7 @@ public class Player {
     }
 
     /**
-     This method increases the users overall matches played!
+     * This method increases the users overall matches played!
      */
 
     public static void matchAdder(int userInQuestion) throws Exception {
@@ -151,12 +145,12 @@ public class Player {
         String x2 = String.valueOf(x);
         userSplitter[1] = x2;
 
-        String finalResult = userSplitter[0] + " " + userSplitter[1] + " " + userSplitter[2] + " " +userSplitter[3] + " " + userSplitter[4] + " " + userSplitter[5];
+        String finalResult = userSplitter[0] + " " + userSplitter[1] + " " + userSplitter[2] + " " + userSplitter[3] + " " + userSplitter[4] + " " + userSplitter[5];
         allUsernames.set(userInQuestion, finalResult);
 
 
         PrintWriter out = new PrintWriter(usernameFile);
-        for (int i = 0; i < allUsernames.size(); i++){
+        for (int i = 0; i < allUsernames.size(); i++) {
             out.print(allUsernames.get(i) + "\n");
         }
         out.close();
@@ -164,12 +158,13 @@ public class Player {
 
 
     /**
-     This method increases the users overall matches won!
+     * This method increases the users overall matches won!
      */
 
     public static void winAdder(int userInQuestion) throws Exception {
         File usernameFile = new File("src/username.txt");
-        String userName = allUsernames.get(userInQuestion);;
+        String userName = allUsernames.get(userInQuestion);
+        ;
         String[] userSplitter = userName.split(" ", 6);
 
         int x = Integer.parseInt(userSplitter[2]);
@@ -177,12 +172,12 @@ public class Player {
         String x2 = String.valueOf(x);
         userSplitter[2] = x2;
 
-        String finalResult = userSplitter[0] + " " + userSplitter[1] + " " + userSplitter[2] + " " +userSplitter[3] + " " + userSplitter[4] + " " + userSplitter[5];
-        allUsernames.set(userInQuestion , finalResult);
+        String finalResult = userSplitter[0] + " " + userSplitter[1] + " " + userSplitter[2] + " " + userSplitter[3] + " " + userSplitter[4] + " " + userSplitter[5];
+        allUsernames.set(userInQuestion, finalResult);
 
 
         PrintWriter out = new PrintWriter(usernameFile);
-        for (int i = 0; i < allUsernames.size(); i++){
+        for (int i = 0; i < allUsernames.size(); i++) {
             out.print(allUsernames.get(i) + "\n");
         }
         out.close();
@@ -190,7 +185,7 @@ public class Player {
 
 
     /**
-     This method increases the users overall matches lost :(
+     * This method increases the users overall matches lost :(
      */
 
     public static void lossAdder(int userInQuestion) throws Exception {
@@ -203,18 +198,18 @@ public class Player {
         String x2 = String.valueOf(x);
         userSplitter[3] = x2;
 
-        String finalResult = userSplitter[0] + " " + userSplitter[1] + " " + userSplitter[2] + " " +userSplitter[3] + " " + userSplitter[4] + " " + userSplitter[5];
+        String finalResult = userSplitter[0] + " " + userSplitter[1] + " " + userSplitter[2] + " " + userSplitter[3] + " " + userSplitter[4] + " " + userSplitter[5];
         allUsernames.set(userInQuestion, finalResult);
 
         PrintWriter out = new PrintWriter(usernameFile);
-        for (int i = 0; i < allUsernames.size(); i++){
+        for (int i = 0; i < allUsernames.size(); i++) {
             out.print(allUsernames.get(i) + "\n");
         }
         out.close();
     }
 
     /**
-     This method increases the flawless victories of a noble user!
+     * This method increases the flawless victories of a noble user!
      */
 
     public static void flawlessAdder(int userInQuestion) throws Exception {
@@ -228,19 +223,19 @@ public class Player {
         String x2 = String.valueOf(x);
         userSplitter[4] = x2;
 
-        String finalResult = userSplitter[0] + " " + userSplitter[1] + " " + userSplitter[2] + " " +userSplitter[3] + " " + userSplitter[4] + " " + userSplitter[5];
+        String finalResult = userSplitter[0] + " " + userSplitter[1] + " " + userSplitter[2] + " " + userSplitter[3] + " " + userSplitter[4] + " " + userSplitter[5];
         allUsernames.set(userInQuestion, finalResult);
 
 
         PrintWriter out = new PrintWriter(usernameFile);
-        for (int i = 0; i < allUsernames.size(); i++){
+        for (int i = 0; i < allUsernames.size(); i++) {
             out.print(allUsernames.get(i) + "\n");
         }
         out.close();
     }
 
     /**
-     This method keeps track of the points one attained from the last game multiplayer game, so it can be compared to high-scores
+     * This method keeps track of the points one attained from the last game multiplayer game, so it can be compared to high-scores
      */
 
     public static void multiplayerPointAdder(int userInQuestion, int userPoints) throws Exception {
@@ -254,11 +249,11 @@ public class Player {
         String x2 = String.valueOf(x);
         userSplitter[5] = x2;
 
-        String finalResult = userSplitter[0] + " " + userSplitter[1] + " " + userSplitter[2] + " " +userSplitter[3] + " " + userSplitter[4] + " " + userSplitter[5];
+        String finalResult = userSplitter[0] + " " + userSplitter[1] + " " + userSplitter[2] + " " + userSplitter[3] + " " + userSplitter[4] + " " + userSplitter[5];
         allUsernames.set(userInQuestion, finalResult);
 
         PrintWriter out = new PrintWriter(usernameFile);
-        for (int i = 0; i < allUsernames.size(); i++){
+        for (int i = 0; i < allUsernames.size(); i++) {
             out.print(allUsernames.get(i) + "\n");
         }
         out.close();
@@ -274,6 +269,7 @@ public class Player {
     public static void winAdderCaller() throws Exception {
         winAdder(modifyX.getPickUserData1());
     }
+
     public static void multiWinAdderCaller(int x, int index, ArrayList<String> users) throws Exception {
 
         File username = new File("src/username.txt");
@@ -286,29 +282,25 @@ public class Player {
             }
         }
 
-        String [] splitUsers = users.get(index).split(" ", 6);
-        String [] splitAllusernames1 = allUsernames.get(modifyX.getPickUserData1()).split(" ", 6);
-        String [] splitAllusernames2 = allUsernames.get(modifyX.getPickUserData2()).split(" ", 6);
+        String[] splitUsers = users.get(index).split(" ", 6);
+        String[] splitAllusernames1 = allUsernames.get(modifyX.getPickUserData1()).split(" ", 6);
+        String[] splitAllusernames2 = allUsernames.get(modifyX.getPickUserData2()).split(" ", 6);
 
         if (x == 1 && splitAllusernames1[0].equals(splitUsers[0])) {
             winAdder(modifyX.getPickUserData1());
-        }
-        else if (x == 2 && splitAllusernames2[0].equals(splitUsers[0])) {
+        } else if (x == 2 && splitAllusernames2[0].equals(splitUsers[0])) {
             winAdder(modifyX.getPickUserData2());
-        }
-        else if (users.get(3) != null && !users.get(3).equals("null")){
-            String [] splitAllusernames3 = allUsernames.get(modifyX.getPickUserData3()).split(" ", 6);
-            String [] splitAllusernames4 = allUsernames.get(modifyX.getPickUserData4()).split(" ", 6);
-            if (x==3 && splitAllusernames3[0].equals(splitUsers[0])){
+        } else if (users.get(3) != null && !users.get(3).equals("null")) {
+            String[] splitAllusernames3 = allUsernames.get(modifyX.getPickUserData3()).split(" ", 6);
+            String[] splitAllusernames4 = allUsernames.get(modifyX.getPickUserData4()).split(" ", 6);
+            if (x == 3 && splitAllusernames3[0].equals(splitUsers[0])) {
                 winAdder(modifyX.getPickUserData3());
-            }
-            else if (x==4 && splitAllusernames4[0].equals(splitUsers[0])) {
+            } else if (x == 4 && splitAllusernames4[0].equals(splitUsers[0])) {
                 winAdder(modifyX.getPickUserData4());
             }
-        }
-        else if (users.get(2) != null && !users.get(2).equals("null")) {
-            String [] splitAllusernames3 = allUsernames.get(modifyX.getPickUserData3()).split(" ", 6);
-            if (x==3 && splitAllusernames3[0].equals(splitUsers[0])) {
+        } else if (users.get(2) != null && !users.get(2).equals("null")) {
+            String[] splitAllusernames3 = allUsernames.get(modifyX.getPickUserData3()).split(" ", 6);
+            if (x == 3 && splitAllusernames3[0].equals(splitUsers[0])) {
                 winAdder(modifyX.getPickUserData3());
             }
         }
@@ -318,14 +310,11 @@ public class Player {
     public static void multiMatchAdderCaller(int x) throws Exception {
         if (x == 1) {
             matchAdder(modifyX.getPickUserData1());
-        }
-        else if (x == 2) {
+        } else if (x == 2) {
             matchAdder(modifyX.getPickUserData2());
-        }
-        else if (x == 3){
+        } else if (x == 3) {
             matchAdder(modifyX.getPickUserData3());
-        }
-        else if (x == 4) {
+        } else if (x == 4) {
             matchAdder(modifyX.getPickUserData4());
         }
 
@@ -335,30 +324,26 @@ public class Player {
         lossAdder(modifyX.getPickUserData1());
     }
 
-    public static void multiLossAdderCaller(int x, int index , ArrayList<String> users) throws Exception {
-        String [] splitUsers = users.get(index).split(" ", 6);
-        String [] splitAllusernames1 = allUsernames.get(modifyX.getPickUserData1()).split(" ", 6);
-        String [] splitAllusernames2 = allUsernames.get(modifyX.getPickUserData2()).split(" ", 6);
+    public static void multiLossAdderCaller(int x, int index, ArrayList<String> users) throws Exception {
+        String[] splitUsers = users.get(index).split(" ", 6);
+        String[] splitAllusernames1 = allUsernames.get(modifyX.getPickUserData1()).split(" ", 6);
+        String[] splitAllusernames2 = allUsernames.get(modifyX.getPickUserData2()).split(" ", 6);
 
         if (x == 1 && !Objects.equals(splitAllusernames1[0], splitUsers[0])) {
             lossAdder(modifyX.getPickUserData1());
-        }
-        else if (x == 2 && !Objects.equals(splitAllusernames2[0], splitUsers[0])) {
+        } else if (x == 2 && !Objects.equals(splitAllusernames2[0], splitUsers[0])) {
             lossAdder(modifyX.getPickUserData2());
-        }
-        else if (users.get(3) != null){
-            String [] splitAllusernames3 = allUsernames.get(modifyX.getPickUserData3()).split(" ", 6);
-            String [] splitAllusernames4 = allUsernames.get(modifyX.getPickUserData4()).split(" ", 6);
-            if (x == 3 && !Objects.equals(splitAllusernames3[0], splitUsers[0])){
+        } else if (users.get(3) != null) {
+            String[] splitAllusernames3 = allUsernames.get(modifyX.getPickUserData3()).split(" ", 6);
+            String[] splitAllusernames4 = allUsernames.get(modifyX.getPickUserData4()).split(" ", 6);
+            if (x == 3 && !Objects.equals(splitAllusernames3[0], splitUsers[0])) {
                 lossAdder(modifyX.getPickUserData3());
-            }
-            else if (x == 4 &&!Objects.equals(splitAllusernames4[0], splitUsers[0])){
+            } else if (x == 4 && !Objects.equals(splitAllusernames4[0], splitUsers[0])) {
                 lossAdder(modifyX.getPickUserData4());
             }
-        }
-        else if ( users.get(2) != null) {
-            String [] splitAllusernames3 = allUsernames.get(modifyX.getPickUserData3()).split(" ", 6);
-            if ( x == 3 && !Objects.equals(splitAllusernames3[0], splitUsers[0])) {
+        } else if (users.get(2) != null) {
+            String[] splitAllusernames3 = allUsernames.get(modifyX.getPickUserData3()).split(" ", 6);
+            if (x == 3 && !Objects.equals(splitAllusernames3[0], splitUsers[0])) {
                 lossAdder(modifyX.getPickUserData3());
             }
         }
@@ -374,37 +359,36 @@ public class Player {
         if (x == 1) {
             multiplayerPointAdder(modifyX.getPickUserData1(), userPoints);
 
-        }
-            else if (x == 2) {
+        } else if (x == 2) {
             multiplayerPointAdder(modifyX.getPickUserData2(), userPoints);
 
-        }
-             else if (x == 3){
-                multiplayerPointAdder(modifyX.getPickUserData3(), userPoints);
-        }
-                else if (x == 4) {
-                    multiplayerPointAdder(modifyX.getPickUserData4(), userPoints);
+        } else if (x == 3) {
+            multiplayerPointAdder(modifyX.getPickUserData3(), userPoints);
+        } else if (x == 4) {
+            multiplayerPointAdder(modifyX.getPickUserData4(), userPoints);
         }
 
     }
 
-    public static void pickUser1Setter(int data1){
+    public static void pickUser1Setter(int data1) {
         modifyX.setPickUserData1(data1);
     }
-    public static void pickUser2Setter(int data2){
+
+    public static void pickUser2Setter(int data2) {
         modifyX.setPickUserData2(data2);
     }
-    public static void pickUser3Setter(int data3){
+
+    public static void pickUser3Setter(int data3) {
         modifyX.setPickUserData3(data3);
     }
-    public static void pickUser4Setter(int data4){
+
+    public static void pickUser4Setter(int data4) {
         modifyX.setPickUserData4(data4);
     }
 
 
-
     /**
-     This method shows the user all available usernames and allows user to select an already existing username
+     * This method shows the user all available usernames and allows user to select an already existing username
      */
 
     public static String readUsername(String user, int choice) throws Exception {
@@ -414,7 +398,7 @@ public class Player {
 
 
         while (run) {
-            while (!input.hasNextInt()){
+            while (!input.hasNextInt()) {
                 System.out.println(Color.RED + "\nPlease input an integer between 1 - 3:\n" + Color.RESET);
                 input.next();
             }
@@ -438,55 +422,47 @@ public class Player {
                     System.out.println(Color.YELLOW + i + ") " + Color.RESET + aList.get(i));
 
                 }
-                System.out.println(Color.YELLOW + aList.size()+ ")" + Color.RESET + " Back");
+                System.out.println(Color.YELLOW + aList.size() + ")" + Color.RESET + " Back");
                 boolean run2 = true;
 
                 int pickUser = 0;
-                while(run2) {
-                   while (!input.hasNextInt()) {
-                       System.out.println("Please input an appropriate integer! ");
-                       input.next();
-                   }
-                   pickUser = input.nextInt();
-                   if(pickUser < 1 || pickUser >= aList.size()+1){
-                       System.out.println("Choice was out of bounds! ");
-                   }
-                   else if(allUserNumbers.contains(pickUser)){
-                       System.out.println("You can`t reselect a profile that was used earlier!!");
-                   }
-                   else if(pickUser == aList.size()){
-                       if (user == null) {
-                           Menu.firstMenu();
-                       }
-                       else{
-                           Menu.secondMenu(user);
-                           return user;
-                       }
-                   }
-
-                   else{
-                       run2 = false;
-                   }
-               }
+                while (run2) {
+                    while (!input.hasNextInt()) {
+                        System.out.println("Please input an appropriate integer! ");
+                        input.next();
+                    }
+                    pickUser = input.nextInt();
+                    if (pickUser < 1 || pickUser >= aList.size() + 1) {
+                        System.out.println("Choice was out of bounds! ");
+                    } else if (allUserNumbers.contains(pickUser)) {
+                        System.out.println("You can`t reselect a profile that was used earlier!!");
+                    } else if (pickUser == aList.size()) {
+                        if (user == null) {
+                            Menu.firstMenu();
+                        } else {
+                            Menu.secondMenu(user);
+                            return user;
+                        }
+                    } else {
+                        run2 = false;
+                    }
+                }
                 userArray(aList.get(pickUser));
                 allUserNumbers.add(pickUser);
 
-                if (choice == 1){
+                if (choice == 1) {
                     modifyX.setPickUserData1(pickUser);
-                }
-                else if (choice == 2){
+                } else if (choice == 2) {
                     modifyX.setPickUserData2(pickUser);
-                }
-                else if (choice == 3){
+                } else if (choice == 3) {
                     modifyX.setPickUserData3(pickUser);
-                }
-                else if (choice == 4){
+                } else if (choice == 4) {
                     modifyX.setPickUserData4(pickUser);
                 }
 
 
                 user = aList.get(pickUser);
-                String[]userSplitter = user.split(" ",4);  // Splits username from stats so the two can be showed separately
+                String[] userSplitter = user.split(" ", 4);  // Splits username from stats so the two can be showed separately
                 String fullUser = userSplitter[0];
 
                 return fullUser;
@@ -494,20 +470,74 @@ public class Player {
             } else if (userChoice == 2) {
                 String username = writeUsername(choice);
                 return username;
-            }else if (userChoice == 3) {
-                if (user == null){
+            } else if (userChoice == 3) {
+                deleteUser();
+            } else if (userChoice == 4) {
+                if (user == null) {
                     Menu.firstMenu();
-                }
-                else{
+                } else {
                     Menu.secondMenu(user);
                 }
 
-            }
-            else {
+            } else {
                 System.out.println("\nPlease enter an *integer* greater than 0 and lower than 4:\n");
             }
         }
         return null;
     }
-}
+
+        public static void deleteUser () throws Exception {
+            Scanner in = new Scanner(System.in);
+            int deleteUserChoice;
+
+            File usernames = new File("src/username.txt");
+            Scanner readUsernames = new Scanner(usernames);
+            ArrayList<String> deleteAllUsername = new ArrayList<>();
+
+
+            while (readUsernames.hasNextLine()) {
+                deleteAllUsername.add(readUsernames.nextLine());
+            }
+
+            System.out.println("Which user do you want to delete?");
+
+            for (int i = 1; i < deleteAllUsername.size(); i++) {
+                String[] splitAlist = deleteAllUsername.get(i).split(" ");
+                System.out.println(Color.YELLOW + i + ") " + Color.RESET + splitAlist[0]);
+            }
+            System.out.println(Color.YELLOW + deleteAllUsername.size() + ")" + Color.RESET + " Back");
+            boolean run = true;
+            while (run) {
+                while (!in.hasNextInt()) {
+                    System.out.println(Color.RED + "\nPlease input an integer between 1 - " + allUsernames.size() + ":\n" + Color.RESET);
+                    in.next();
+                }
+                deleteUserChoice = in.nextInt();
+
+                if (deleteUserChoice == allUsernames.size()) {
+                    Menu.amountOfPlayersMenu();
+                } else {
+
+
+                    deleteAllUsername.remove(deleteUserChoice);
+
+                    PrintWriter out = new PrintWriter(usernames);
+                    for (int i = 0; i < deleteAllUsername.size(); i++) {
+                        out.print(deleteAllUsername.get(i) + "\n");
+                    }
+                    out.close();
+
+                    readUsernames.close();
+
+                    Menu.firstMenu();
+
+                    run = false;
+
+                }
+
+
+            }
+        }
+    }
+
 
