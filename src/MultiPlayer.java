@@ -334,7 +334,34 @@ import java.util.Scanner;
 
                     } else if (guessIncorrect) {
                         modify.setPlayerLife(modify.getPlayerLife()-1);
-                        System.out.println("\n" + Color.RED + "Incorrect guess! " + Color.RESET + "\n" + Color.CYAN + modify.getUserInQuestion() + "`s character is getting closer to death..." + Color.RESET + "\n(" + modify.getPlayerLife() + " lives remaining)");
+                        if(user4 != null){
+                            if(modify.getPlayerLife() < 4){
+                                System.out.println("\n" + Color.RED + "Incorrect guess! " + Color.RESET + "\n" + Color.CYAN + modify.getUserInQuestion() + "`s character is dead .." + Color.RESET + "\n(" + modify.getPlayerLife() + " lives remaining)");
+
+                            }
+                            else{
+                                System.out.println("\n" + Color.RED + "Incorrect guess! " + Color.RESET + "\n" + Color.CYAN + modify.getUserInQuestion() + "`s character is getting closer to death..." + Color.RESET + "\n(" + modify.getPlayerLife() + " lives remaining)");
+                            }
+
+                        }
+                        else if(user3 != null){
+                            if(modify.getPlayerLife() < 3){
+                                System.out.println("\n" + Color.RED + "Incorrect guess! " + Color.RESET + "\n" + Color.CYAN + modify.getUserInQuestion() + "`s character is dead .." + Color.RESET + "\n(" + modify.getPlayerLife() + " lives remaining)");
+
+                            }
+                            else{
+                                System.out.println("\n" + Color.RED + "Incorrect guess! " + Color.RESET + "\n" + Color.CYAN + modify.getUserInQuestion() + "`s character is getting closer to death..." + Color.RESET + "\n(" + modify.getPlayerLife() + " lives remaining)");
+                            }
+                        }
+                        else {
+                            if(modify.getPlayerLife() < 2){
+                                System.out.println("\n" + Color.RED + "Incorrect guess! " + Color.RESET + "\n" + Color.CYAN + modify.getUserInQuestion() + "`s character is dead .." + Color.RESET + "\n(" + modify.getPlayerLife() + " lives remaining)");
+
+                            }
+                            else{
+                                System.out.println("\n" + Color.RED + "Incorrect guess! " + Color.RESET + "\n" + Color.CYAN + modify.getUserInQuestion() + "`s character is getting closer to death..." + Color.RESET + "\n(" + modify.getPlayerLife() + " lives remaining)");
+                            }
+                        }
                         hangManWriter(modify.getPlayerLife(), user3, user4);
                         incorrectLetterCollector(trueLetter);
                         System.out.println();

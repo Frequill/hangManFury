@@ -1,7 +1,6 @@
 PLACHOLDER(Match, win, loss, flawless, invis/highScore)
-Edwin 13 2 9 0 0
-Johanna 8 2 5 0 2
-Harald 5 0 5 0 0
+Edwin 15 3 10 0 4
+Johanna 10 2 7 0 0
 Julius 2 1 1 0 1
 Martin 3 0 3 0 0
 Mandy 1 0 1 0 1
