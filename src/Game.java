@@ -129,7 +129,8 @@ class Game extends GUI implements ActionListener {
         for(int i = 0; i < guessWord.length(); i++){
             allLetters.add(i,'_');
         }
-        return allLetters.toString();
+        String text = allLetters.toString().replace("[", "").replace("]", "").replace(",", "");
+        return text;
     }
 
     @Override
@@ -170,7 +171,7 @@ class Game extends GUI implements ActionListener {
     /**
      * The method set the correct letter in place in the array
      */
-    public ArrayList <Character> correctLetter(String letter, String guessWord, ArrayList<Character> allLetters, Player userName, String user) throws Exception {
+    public String correctLetter(String letter, String guessWord, ArrayList<Character> allLetters, Player userName, String user) throws Exception {
         char guess = letter.charAt(0);
 
         for (int i = 0; i < guessWord.length(); i++) {
@@ -178,7 +179,12 @@ class Game extends GUI implements ActionListener {
                 allLetters.set(i, guess);
             }
         }
-        return allLetters;
+        for(int i= 0; i < guessWord.length(); i++){
+            allLetters.get(i);
+        }
+        String text = allLetters.toString().replace("[", "").replace("]", "").replace(",", "");
+        return text;
+
     }
     /**
      This method checks if the game is over
