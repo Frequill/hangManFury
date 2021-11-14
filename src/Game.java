@@ -23,25 +23,28 @@ class Game extends GUI implements ActionListener {
     private ArrayList<Character> allLetters = new ArrayList<>(guessWord.length());
     private int playerLife = 10;
     private boolean guessCorrect = false;
-    private boolean guessIncorrect = false;
     private ArrayList<Character> dumbGuesses = new ArrayList();
     private String letter = null;
-    private String trueLetter = null;
     private boolean victory = false;
 
 
     //Following only for testing
     Player userName = new Player();
     String user = "Martin 0 0 0 0 0";
+
+
+
     String [] splitUserName = user.split(" ", 5);
+
+
 
     //Button array
     char[] buttonLettersArray ={'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z','Å','Ä','Ö'};
 
     //Swing components
     JLabel greetLabel;
-    JTextArea guessedWordArea;
-    JTextField wordTextField, playerStatsField;
+    JTextArea guessedLetterArea;
+    JTextField wordToGuessField, playerStatsField;
     JButton[] buttons;
 
     Game() throws Exception {
@@ -56,16 +59,24 @@ class Game extends GUI implements ActionListener {
         bodyPanel.setLayout(buttonLayout);
         bodyPanel.setBorder(new EmptyBorder(0,80,0,80));
 
-        //TextField
+        //TextArea
 
-        wordTextField = new JTextField(wordEncryptor());
-        wordTextField.setPreferredSize(new Dimension(400,70));
-        wordTextField.setHorizontalAlignment(SwingConstants.CENTER);
-        wordTextField.setBackground(Color.gray);
-        wordTextField.setForeground(Color.WHITE);
-        wordTextField.setBorder(BorderFactory.createTitledBorder(null,"Word to guess",0, 0, new Font(null, Font.ITALIC, 14),Color.WHITE));
-        wordTextField.setFont(new Font(null, Font.BOLD,25));
-        wordTextField.setEditable(false);
+        wordToGuessField = new JTextField(wordEncryptor());
+        wordToGuessField.setPreferredSize(new Dimension(400,70));
+        wordToGuessField.setHorizontalAlignment(SwingConstants.CENTER);
+        wordToGuessField.setBackground(Color.gray);
+        wordToGuessField.setForeground(Color.WHITE);
+        wordToGuessField.setBorder(BorderFactory.createTitledBorder(null,"Word to guess",0, 0, new Font(null, Font.ITALIC, 14),Color.WHITE));
+        wordToGuessField.setFont(new Font(null, Font.BOLD,25));
+        wordToGuessField.setEditable(false);
+
+        guessedLetterArea = new JTextArea();
+        guessedLetterArea.setBackground(Color.gray);
+        guessedLetterArea.setForeground(Color.WHITE);
+        guessedLetterArea.setPreferredSize(wordToGuessField.getPreferredSize());
+        guessedLetterArea.setBorder(BorderFactory.createTitledBorder(null,"Previously guessed letters",0, 0, new Font(null, Font.PLAIN, 14),Color.WHITE));
+        guessedLetterArea.setFont(new Font(null, Font.BOLD,20));
+        guessedLetterArea.setEditable(false);
 
         playerStatsField = new JTextField("");
         playerStatsField.setPreferredSize(new Dimension(600,40));
@@ -75,18 +86,7 @@ class Game extends GUI implements ActionListener {
         playerStatsField.setForeground(new Color(0xFFFFFF));
         playerStatsField.setEditable(false);
         playerStatsField.setBorder(new LineBorder(Color.WHITE, 3, false));
-
-
         playerStatsField.setText("Welcome " + userName.getInstanceVarUsername(splitUserName[0]) +" guess the word that is " + guessWord.length() + " letters long!");
-
-        //textArea
-        guessedWordArea = new JTextArea();
-        guessedWordArea.setBackground(Color.gray);
-        guessedWordArea.setForeground(Color.WHITE);
-        guessedWordArea.setPreferredSize(wordTextField.getPreferredSize());
-        guessedWordArea.setBorder(BorderFactory.createTitledBorder(null,"Previously guessed letters",0, 0, new Font(null, Font.PLAIN, 14),Color.WHITE));
-        guessedWordArea.setFont(new Font(null, Font.BOLD,20));
-        guessedWordArea.setEditable(false);
 
         //Labels
 
@@ -101,24 +101,14 @@ class Game extends GUI implements ActionListener {
         add(headPanel);
         add(bodyPanel);
 //        headPanel.add(greetLabel);
-        headPanel.add(wordTextField);
-        headPanel.add(guessedWordArea);
+        headPanel.add(wordToGuessField);
+        headPanel.add(guessedLetterArea);
         headPanel.add(playerStatsField);
 
         letterButtons();
         setLocationRelativeTo(null);
         setVisible(true);
     }
-
-
-    private String wordEncryptor() {
-        for(int i = 0; i < guessWord.length(); i++){
-            allLetters.add(i,'_');
-        }
-        return allLetters.toString();
-    }
-
-
 
     /**
      * Creates letter buttons
@@ -130,6 +120,16 @@ class Game extends GUI implements ActionListener {
             buttons[i].setFocusable(false);
             bodyPanel.add(buttons[i]);
         }
+    }
+
+    /**
+     * Creates the fully encrypted word to guess in the beginning of the game.
+     */
+    private String wordEncryptor() {
+        for(int i = 0; i < guessWord.length(); i++){
+            allLetters.add(i,'_');
+        }
+        return allLetters.toString();
     }
 
     @Override
@@ -150,13 +150,13 @@ class Game extends GUI implements ActionListener {
             }
             try {
 
-                wordTextField.setText(String.valueOf(correctLetter(letter,guessWord,allLetters,userName,user)));
+                wordToGuessField.setText(String.valueOf(correctLetter(letter,guessWord,allLetters,userName,user)));
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
             if (!guessWord.contains(letter)) {
                 playerLife = playerLife - 1;
-                guessedWordArea.append(letter);
+                guessedLetterArea.append(letter);
                 playerStatsField.setText("No " + letter + "! You have lost one life!" + "\n(" + playerLife + " lives remaining)");
             }
             try {
@@ -165,10 +165,21 @@ class Game extends GUI implements ActionListener {
                 ex.printStackTrace();
             }
         }
-
     }
 
+    /**
+     * The method set the correct letter in place in the array
+     */
+    public ArrayList <Character> correctLetter(String letter, String guessWord, ArrayList<Character> allLetters, Player userName, String user) throws Exception {
+        char guess = letter.charAt(0);
 
+        for (int i = 0; i < guessWord.length(); i++) {
+            if (guess == guessWord.charAt(i)) {
+                allLetters.set(i, guess);
+            }
+        }
+        return allLetters;
+    }
     /**
      This method checks if the game is over
      */
@@ -183,13 +194,13 @@ class Game extends GUI implements ActionListener {
 
                     playerStatsField.setText("Congratulations " + userName.getInstanceVarUsername(splitUserName[0]) + ". You are victorious!");
                     JOptionPane.showMessageDialog(this, "Congratulations " + userName.getInstanceVarUsername(splitUserName[0]) + ". You are victorious!","Game Over", JOptionPane.OK_OPTION);
-                    Player.matchAdderCaller();
-                    Player.winAdderCaller();
+//                    Player.matchAdderCaller();
+//                    Player.winAdderCaller();
                     if (playerLife == 10){
-                        Player.flawlessAdderCaller();
-                        JOptionPane.showMessageDialog(this, "NO LIVES LOST! FLAWLESS VICTORY ARCHIVED!!!!!!" + userName.getInstanceVarUsername(splitUserName[0]) + "is a legend!","Game Over", JOptionPane.OK_OPTION);
+//                        Player.flawlessAdderCaller();
+                        JOptionPane.showMessageDialog(this, "NO LIVES LOST! FLAWLESS VICTORY ACHIEVED!!!!!!" + userName.getInstanceVarUsername(splitUserName[0]) + " is a legend!","Game Over", JOptionPane.OK_OPTION);
                         System.out.println(Color.YELLOW + "\nNO LIVES LOST! FLAWLESS VICTORY ARCHIVED!!!!!!\n" + userName.getInstanceVarUsername(splitUserName[0]) + " is a legend!");
-                        playerStatsField.setText("NO LIVES LOST! FLAWLESS VICTORY ARCHIVED!!!!!!" + userName.getInstanceVarUsername(splitUserName[0]) + " is a legend!");
+                        playerStatsField.setText("NO LIVES LOST! FLAWLESS VICTORY ARCHIVED!!!!!! " + userName.getInstanceVarUsername(splitUserName[0]) + " is a legend!");
                     }
                     dispose();
                     allLetters.clear();
@@ -204,8 +215,8 @@ class Game extends GUI implements ActionListener {
                 JOptionPane.showMessageDialog(this, "You have been defeated! The word in question was: " + guessWord,"Game Over", JOptionPane.OK_OPTION);
                 dispose();
                 allLetters.clear();
-                Player.matchAdderCaller();
-                Player.lossAdderCaller();
+//                Player.matchAdderCaller();
+//                Player.lossAdderCaller();
 //
                 victory = true;
 
@@ -223,19 +234,7 @@ class Game extends GUI implements ActionListener {
         return rand;
     }
 
-    /**
-     * The method set the correct letter in place in the array
-     */
-    public ArrayList <Character> correctLetter(String letter, String guessWord, ArrayList<Character> allLetters, Player userName, String user) throws Exception {
-        char guess = letter.charAt(0);
 
-        for (int i = 0; i < guessWord.length(); i++) {
-            if (guess == guessWord.charAt(i)) {
-                allLetters.set(i, guess);
-            }
-        }
-        return allLetters;
-    }
 
 
     public static void main(String[] args) throws Exception {
