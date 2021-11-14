@@ -132,10 +132,6 @@ class Game extends GUI implements ActionListener {
         }
     }
 
-
-    /**
-     * The method
-     */
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() instanceof JButton ) {
@@ -227,7 +223,9 @@ class Game extends GUI implements ActionListener {
         return rand;
     }
 
-
+    /**
+     * The method set the correct letter in place in the array
+     */
     public ArrayList <Character> correctLetter(String letter, String guessWord, ArrayList<Character> allLetters, Player userName, String user) throws Exception {
         char guess = letter.charAt(0);
 
@@ -239,20 +237,6 @@ class Game extends GUI implements ActionListener {
         return allLetters;
     }
 
-    /**
-     Method collects all user inputted letters that were incorrect guesses! These letters are later printed out
-     to remind user what he or she previously guessed as to not make same mistake twice.
-     */
-    public static ArrayList<Character> incorrectLetterCollector(String trueLetter, ArrayList<Character> dumbGuesses) {
-        dumbGuesses.add(trueLetter.charAt(0));
-        System.out.println("\nPreviously guessed letters: ");
-        for (int i = 0; i < dumbGuesses.size(); i++) {
-            System.out.print(dumbGuesses.get(i) + " ");
-        }
-        return dumbGuesses;
-    }
-
-
 
     public static void main(String[] args) throws Exception {
         new Game();
@@ -262,6 +246,7 @@ class Game extends GUI implements ActionListener {
 
     /**
      This monstrosity of a method exists because I wish Java was easier...             //Julius Thomsen
+     .. and it is not useful anymore. // The dude
      */
 
 //    public static String characterDestroyer(String letter,ArrayList<Character>allLetters) {
