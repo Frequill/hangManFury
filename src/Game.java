@@ -148,6 +148,7 @@ class Game extends GUI implements ActionListener {
                 } catch (Exception ex) {
                     ex.printStackTrace();
                 }
+                playerStatsField.setText("Correct guess! You can do it!");
             }
             try {
 
@@ -205,7 +206,7 @@ class Game extends GUI implements ActionListener {
                     if (playerLife == 10){
 //                        Player.flawlessAdderCaller();
                         JOptionPane.showMessageDialog(this, "NO LIVES LOST! FLAWLESS VICTORY ACHIEVED!!!!!!" + userName.getInstanceVarUsername(splitUserName[0]) + " is a legend!","Game Over", JOptionPane.OK_OPTION);
-                        System.out.println(Color.YELLOW + "\nNO LIVES LOST! FLAWLESS VICTORY ARCHIVED!!!!!!\n" + userName.getInstanceVarUsername(splitUserName[0]) + " is a legend!");
+                        System.out.println("\nNO LIVES LOST! FLAWLESS VICTORY ARCHIVED!!!!!!\n" + userName.getInstanceVarUsername(splitUserName[0]) + " is a legend!");
                         playerStatsField.setText("NO LIVES LOST! FLAWLESS VICTORY ARCHIVED!!!!!! " + userName.getInstanceVarUsername(splitUserName[0]) + " is a legend!");
                     }
                     dispose();
