@@ -20,16 +20,16 @@ class Menu extends MultiPlayer {
 
     public Menu(String name, int Int) {
         this.num = Int;
-        String greeting = (Color.BLUE + "Welcome to the " + name + " menu!" + Color.RESET);
+        String greeting = "Welcome to the " + name + " menu!";
         String star = (Color.YELLOW + "*" + Color.RESET);
         for (int j = 0; j < greeting.length(); j++){
             System.out.print(star);
         }
-        System.out.println("\n" + greeting);
+        System.out.println("\n" + Color.GREEN + Color.BLACKGROUND + greeting + Color.RESET);
         for (int j = 0; j < greeting.length(); j++){
             System.out.print(star);
         }
-        System.out.println( "\nPlease choose one of the following options:\nInput the corresponding number and mark with the Enter key" );
+        System.out.println( "\n" + Color.BLACKGROUND + Color.BLUE + "Please choose one of the following options:" + Color.RESET + "\n" + Color.BLACKGROUND + Color.BLUE + "Input the corresponding number," + Color.RESET + "\n" + Color.BLACKGROUND + Color.BLUE + "mark with the Enter key" + Color.RESET );
 
         System.out.println();
         for (int i = 0; i < menuOptions.size(); i++){
@@ -84,7 +84,7 @@ class Menu extends MultiPlayer {
 
 
         // Splits of stats from usernames
-        System.out.println("You can add up to four users to play multiplayer!");
+        System.out.println(Color.YELLOW + "You can add up to four users to play multiplayer!" + Color.RESET);
         if (menu.getUserOptions()[3] != "Add user 4") {
             menu.getMenuOptions().add(0, Color.YELLOW + "4) " + Color.RESET+ split4[0]);
         }
@@ -113,9 +113,9 @@ class Menu extends MultiPlayer {
             menu.getMenuOptions().add(0, Color.YELLOW + "1) " + Color.RESET+ menu.getUserOptions()[0]);
         }
 
-        menu.getMenuOptions().add(4,Color.YELLOW + "5) " + Color.RESET+ "Delete user");
+        menu.getMenuOptions().add(4,Color.YELLOW + "5) " + Color.RESET+ Color.RED +"Delete user" + Color.RESET);
 
-        menu.getMenuOptions().add(5, Color.YELLOW + "6) " + Color.RESET+ "Back");
+        menu.getMenuOptions().add(5, Color.YELLOW + "6) " + Color.RESET+ Color.CYAN + "Back" + Color.RESET);
         menu.optionPrinter(menu.getMenuOptions());
         Menu.selectUsersFunction();
 
@@ -127,28 +127,28 @@ class Menu extends MultiPlayer {
 
         Menu menu = new Menu("main",5);
         menu.getMenuOptions().add(0, Color.YELLOW + "1) " + Color.RESET+ "Select user");
-        menu.getMenuOptions().add(1, Color.YELLOW + "2) " + Color.RESET+ "Play");
-        menu.getMenuOptions().add(2, Color.YELLOW + "3) " + Color.RESET+ "High score list ");
-        menu.getMenuOptions().add(3, Color.YELLOW + "4) " + Color.RESET+ "Load game ");
-        menu.getMenuOptions().add(4, Color.YELLOW + "5) " + Color.RESET+ "Exit game...");
+        menu.getMenuOptions().add(1, Color.YELLOW + "2) " + Color.RESET+ "New game");
+        menu.getMenuOptions().add(2, Color.YELLOW + "3) " + Color.RESET+ "Load game ");
+        menu.getMenuOptions().add(3, Color.YELLOW + "4) " + Color.RESET+ "High score list ");
+        menu.getMenuOptions().add(4, Color.YELLOW + "5) " + Color.RESET+ Color.RED+"Exit game..." + Color.RESET);
         menu.optionPrinter(menu.getMenuOptions());
         Menu.mainMenuFunction();
     }
     public static String secondMenu(String user) throws Exception{
         String [] splitUser = user.split(" ",4);
         System.out.println("Selected profile: " + splitUser[0]);
-        Menu menu = new Menu("main",3);
+        Menu menu = new Menu("main",5);
         menu.getMenuOptions().add(0, Color.YELLOW + "1) " + Color.RESET+  "Change user ");
-        menu.getMenuOptions().add(1, Color.YELLOW + "2) " + Color.RESET+ "Play");
-        menu.getMenuOptions().add(2, Color.YELLOW + "3) " + Color.RESET+ "High score list ");
-        menu.getMenuOptions().add(3, Color.YELLOW + "4) " + Color.RESET+ "load game...");
-        menu.getMenuOptions().add(4, Color.YELLOW + "5) " + Color.RESET+ "Exit game...");
+        menu.getMenuOptions().add(1, Color.YELLOW + "2) " + Color.RESET+ "New game");
+        menu.getMenuOptions().add(2, Color.YELLOW + "3) " + Color.RESET+ "load game...");
+        menu.getMenuOptions().add(3, Color.YELLOW + "4) " + Color.RESET+ "High score list ");
+        menu.getMenuOptions().add(4, Color.YELLOW + "5) " + Color.RESET+ Color.RED+ "Exit game..." + Color.RESET);
         menu.optionPrinter(menu.getMenuOptions());
         return user;
     }
 
     public static String userNameMenu(String user, int choice) throws Exception{
-        Menu menu = new Menu("user",3);
+        Menu menu = new Menu();
         menu.getMenuOptions().add(0, Color.YELLOW + "1) " + Color.RESET+ "Existing user");
         menu.getMenuOptions().add(1, Color.YELLOW + "2) " + Color.RESET+ "New user ");
         menu.getMenuOptions().add(2,Color.YELLOW + "3) " + Color.RESET+ "Back");
@@ -278,7 +278,7 @@ class Menu extends MultiPlayer {
 
         while (run) {
             while (!choiceInput.hasNextInt()) {
-                System.out.println(Color.RED + "\nPlease input an integer between 1 - 3:\n" + Color.RESET);
+                System.out.println(Color.RED + "\nPlease input an integer between 1 - 5:\n" + Color.RESET);
                 choiceInput.next();
             }
             choice = choiceInput.nextInt();
@@ -290,7 +290,7 @@ class Menu extends MultiPlayer {
                     System.out.println(Color.RED + "\nPlease select a user1 first!!!!!!!" + Color.RESET + "\n(Press Enter to return to menu)");
                     choiceInput.nextLine();
                     choiceInput.nextLine();
-                    show();
+                    Menu.firstMenu();
                 } else {
                     if (user2 == "Add user 2") {
                         SinglePlayer.hangMan(user1);
@@ -306,7 +306,22 @@ class Menu extends MultiPlayer {
                         firstMenu();
                     }
                 }
-            } else if (choice == 3) {
+            }
+            else if(choice == 3){
+                File savedGame = new File("src/lastSavedGame.txt");
+                if (savedGame.length() == 0){
+                    System.out.println("No saved game detected");
+                    System.out.println("(Press Enter to return to main menu)");
+                    in.nextLine();
+                    firstMenu();
+                }
+                else{
+                    modify.setHasSeenLoadMenu(1);
+                    LoadGame.gameLoader();
+                    modify.setHasSeenLoadMenu(0);
+                }
+            }
+            else if (choice == 4) {
                 File highScorePath = new File("src/highScoreList.txt");
                 Scanner readHighscore = new Scanner(highScorePath);
 
@@ -318,7 +333,7 @@ class Menu extends MultiPlayer {
                 for(int i = 0; i < highScoreList.size(); i++){
                     System.out.println(Color.YELLOW + (i+1) + ") " + Color.RESET + highScoreList.get(i) + ":Points");
                 }
-                System.out.println(Color.YELLOW  + "6)" + Color.RESET + Color.GREEN + " Back" + Color.RESET);
+                System.out.println(Color.YELLOW  + "6)" + Color.RESET + Color.BLUE + " Back" + Color.RESET);
                 boolean run2 = true;
                 while (run2) {
                     while (!in.hasNextInt()) {
@@ -334,37 +349,14 @@ class Menu extends MultiPlayer {
                 }
 
             }
-            else if(choice == 4){
-                File savedGame = new File("src/lastSavedGame.txt");
-                if (savedGame.length() == 0){
-                    System.out.println("No saved game detected");
-                    System.out.println("(Press Enter to return to main menu)");
-                    in.nextLine();
-                    firstMenu();
-                }
-                else{
-                    modify.setHasSeenLoadMenu(1);
-                    LoadGame.gameLoader();
-                    modify.setHasSeenLoadMenu(0);
-                }
-            }
+
         else if (choice == 5) {
                 System.out.println( Color.RED + "Shutting down..." + Color.RESET);
                 System.exit(0);
             }
                 else {
-                System.out.println(Color.RED + "\nPlease enter an *integer* greater than 0 and lower than 4:\n" + Color.RESET);
+                System.out.println(Color.RED + "\nPlease enter an *integer* greater than 0 and lower than 6:\n" + Color.RESET);
                }
             }
         }
-
-    /**
-     Shows first menu because Bill says to make it so!
-     */
-    static void show() throws Exception{
-    firstMenu();
-    }
-    public static void showData() {
-        System.out.println(Arrays.toString(userOptions));
-    }
 }

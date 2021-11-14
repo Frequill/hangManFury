@@ -1,8 +1,8 @@
-4 6
-_ a _ _ _ 
-s l t n b 
-3 0 
-Julius 0 0 0 0 0,Mandy 0 0 0 0 0
-kaffe
-9
+1 2 3
+_ _ _ _ h _ _ _ d 
+f g y j r s a w e i l k t ö 
+0 0 0 
+Edwin 11 1 8 0 1,Johanna 6 1 4 0 2,Harald 4 0 4 0 0
+mupphuvud
+16
 2

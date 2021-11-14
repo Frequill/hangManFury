@@ -79,7 +79,15 @@ import java.util.Scanner;
 
         public static MultiPlayer modify = new MultiPlayer();
 
+        private String userInQuestion;
 
+        public String getUserInQuestion() {
+            return userInQuestion;
+        }
+
+        public void setUserInQuestion(String userInQuestion) {
+            this.userInQuestion = userInQuestion;
+        }
 
         /**
          This method launches and plays the entire game, this is the most important class. It picks out a word and makes player guess the various letters
@@ -146,7 +154,7 @@ import java.util.Scanner;
                     modify.setPlayerLife(20);
 
                     System.out.println(Color.PURPLE + "Welcome " + /*userName.getInstanceVarUsername(splitUserName1[0])*/ splitUserName1[0] + " and " + splitUserName2[0] + ", get ready for battle!\nThe first word is " + modify.getGuessWord().length() + " letters long!" + Color.RESET);
-                    System.out.println("Press 0 to save and exit");
+                    System.out.println(Color.GREEN_BACKGROUND + Color.BLACK + "Press 0 to save and exit game" + Color.RESET);
 
                     randomNumber.add(0, 1);
                     randomNumber.add(1, 2);
@@ -156,9 +164,9 @@ import java.util.Scanner;
                     String[] splitUserName1 = user1.split(" ", 6);
                     String[] splitUserName2 = user2.split(" ", 6);
                     String[] splitUserName3 = user3.split(" ", 6);
-                    modify.setPlayerLife(20);
+                    modify.setPlayerLife(30);
                     System.out.println(Color.PURPLE + "Welcome " + splitUserName1[0] + ", " + splitUserName2[0] + " and " + splitUserName3[0] + "! Get ready for battle!\nThe first word is " + modify.getGuessWord().length() + " letters long!" + Color.RESET);
-                    System.out.println("Press 0 to save and exit");
+                    System.out.println(Color.GREEN_BACKGROUND + Color.BLACK + "Press 0 to save and exit game" + Color.RESET);
 
                     randomNumber.add(0, 1);
                     randomNumber.add(1, 2);
@@ -171,9 +179,9 @@ import java.util.Scanner;
                     String[] splitUserName3 = user3.split(" ", 6);
                     String[] splitUserName4 = user4.split(" ", 6);
 
-                    modify.setPlayerLife(30);
+                    modify.setPlayerLife(40);
                     System.out.println(Color.PURPLE + "Welcome " + splitUserName1[0] + ", " + splitUserName2[0] + ", " + splitUserName3[0] + " and " + splitUserName4[0] + "! Get ready for battle!\nThe first word is " + modify.getGuessWord().length() + " letters long!" + Color.RESET);
-                    System.out.println("Press 0 to save and exit");
+                    System.out.println(Color.GREEN_BACKGROUND + Color.BLACK + "Press 0 to save and exit game" + Color.RESET);
 
                     randomNumber.add(0, 1);
                     randomNumber.add(1, 2);
@@ -194,14 +202,14 @@ import java.util.Scanner;
                         String[] splitUserName2 = user2.split(" ", 6);
 
                         System.out.println(Color.PURPLE + "Welcome back " + splitUserName1[0] + " and " + splitUserName2[0] + "! Prepare for the battle to resume!\nThe word is still " + modify.getGuessWord().length() + " letters long!" + Color.RESET);
-                        System.out.println("Press 0 to save and exit");
+                        System.out.println(Color.GREEN_BACKGROUND + Color.BLACK + "Press 0 to save and exit game" + Color.RESET);
 
                 }else if (user4 == null){
                     String[] splitUserName1 = user1.split(" ", 6);
                     String[] splitUserName2 = user2.split(" ", 6);
                     String[] splitUserName3 = user3.split(" ", 6);
                     System.out.println(Color.PURPLE + "Welcome back " + splitUserName1[0] + ", " + splitUserName2[0] + " and " + splitUserName3[0] + "! Prepare for the battle to resume!\nThe word is still " + modify.getGuessWord().length() + " letters long!" + Color.RESET);
-                    System.out.println("Press 0 to save and exit");
+                    System.out.println(Color.GREEN_BACKGROUND + Color.BLACK + "Press 0 to save and exit game" + Color.RESET);
 
                 }else{
                     String[] splitUserName1 = user1.split(" ", 6);
@@ -211,7 +219,7 @@ import java.util.Scanner;
 
 
                     System.out.println(Color.PURPLE + "Welcome back " + splitUserName1[0] + ", " + splitUserName2[0] + ", " + splitUserName3[0] + " and " + splitUserName4[0] + "! Prepare for the battle to resume!\nThe word is still " + modify.getGuessWord().length() + " letters long!" + Color.RESET);
-                    System.out.println("Press 0 to save and exit");
+                    System.out.println(Color.GREEN_BACKGROUND + Color.BLACK + "Press 0 to save and exit game" + Color.RESET);
                 }
             }
 
@@ -220,9 +228,9 @@ import java.util.Scanner;
             }
             else if (modify.hasSeenLoadMenu == 1){
                 turn(user1, user2, user3, user4);
-                System.out.println("Previously guessed letters: ");
+                System.out.println(Color.CYAN + "Previously guessed letters: " + Color.RESET);
                 for (int i = 0; i < modify.dumbGuesses.size(); i++){
-                    System.out.print(modify.dumbGuesses.get(i) + " ");
+                    System.out.print(Color.RED + modify.dumbGuesses.get(i) + Color.RESET + " ");
                 }
                 System.out.println();
             }
@@ -242,7 +250,6 @@ import java.util.Scanner;
                         System.out.print(modify.getAllLetters().get(i));
                     }
                 }
-                //System.out.println(user1 + " " + user2 + " " +  user3 + " " + user4);
 
 
                 // ******************************************** Game Start! ************************************************
@@ -307,16 +314,15 @@ import java.util.Scanner;
 
 
                     if (guessCorrect) {
-                        correctLetter(trueLetter, modify.getGuessWord(), modify.getAllLetters(), userName, user1);
+                        correctLetter(trueLetter, modify.getGuessWord(), modify.getAllLetters());
                         if (modify.getAllLetters().contains('_')) {
                         } else {
                             String[] userSpliter = modify.getUsers().get(currentPlayer).split(" ",6);
                             System.out.println(Color.GREEN + "\n\nCongratulations " + userSpliter[0] + ". You get a point!\n(It's still " + userSpliter[0] + "'s turn)" + Color.RESET);
                             modify.getUsersPoints().set(currentPlayer,modify.getUsersPoints().get(currentPlayer) + 1) ;
-                            System.out.println(modify.getUsersPoints().get(currentPlayer));
                             modify.setGuessWord(wordHolder[randomizer(wordHolder)].toLowerCase());
-                            System.out.println("The next word to be guessed is " + modify.getGuessWord().length() + " letters long!");
-                            System.out.println("Press 0 to save and exit");
+                            System.out.println(Color.BLUE + "The next word to be guessed is " + modify.getGuessWord().length() + " letters long!" + Color.RESET);
+                            System.out.println(Color.GREEN_BACKGROUND + Color.BLACK + "Press 0 to save and exit game" + Color.RESET);
                             //Här ska den spelare som skrev ut ordet få ett poäng
                             modify.getDumbGuesses().removeAll(modify.getDumbGuesses());
                             modify.getAllLetters().clear();
@@ -328,8 +334,8 @@ import java.util.Scanner;
 
                     } else if (guessIncorrect) {
                         modify.setPlayerLife(modify.getPlayerLife()-1);
-                        //hangManWriter(playersLife);
-                        System.out.println(Color.RED + "Incorrect guess! Your collective life has gone down by 1!" + "\n(" + modify.getPlayerLife() + " lives remaining)" + Color.RESET);
+                        System.out.println("\n" + Color.RED + "Incorrect guess! " + Color.RESET + "\n" + Color.CYAN + modify.getUserInQuestion() + "`s character is getting closer to death..." + Color.RESET + "\n(" + modify.getPlayerLife() + " lives remaining)");
+                        hangManWriter(modify.getPlayerLife(), user3, user4);
                         incorrectLetterCollector(trueLetter);
                         System.out.println();
                         for (int j = 0; j < modify.getAllLetters().size(); j++) {
@@ -392,7 +398,6 @@ import java.util.Scanner;
                 x++;
                 Player.multiplayerPointAdderCaller(usersPoints.get(i), x);
                 Player.multiMatchAdderCaller(x);
-                //System.out.println("Snurr");
             }
             for (int j = 0; j < usersPoints.size(); j++) {
                 y++;
@@ -418,7 +423,7 @@ import java.util.Scanner;
                                     String[] splitH = users.get(h).split(" ", 6);
                                     String[] splitR = users.get(r).split(" ", 6);
                                     if (maxVal == usersPoints.get(l) && maxVal == usersPoints.get(h) && maxVal == usersPoints.get(h) && run == true) {
-                                        System.out.println("\n\nPlayers " + splitUser[0] + ", " + splitL[0] + ", " + splitH[0]  + " and " + splitR[0]  + " all have " + maxVal + " points!\nThe Game ends as a draw!");
+                                        System.out.println(Color.YELLOW + "\n\nPlayers " + splitUser[0] + ", " + splitL[0] + ", " + splitH[0]  + " and " + splitR[0]  + " all have " + maxVal + " points!\nThe Game ends as a draw!" + Color.RESET);
                                         run = false;
                                     }
                                 }
@@ -436,7 +441,7 @@ import java.util.Scanner;
                                 String[] splitI = users.get(i).split(" ", 6);
                                 String[] splitJ = users.get(j).split(" ", 6);
                                 if (maxVal == usersPoints.get(j) && maxVal == usersPoints.get(i) && run == true) {
-                                    System.out.println("\n\nPlayers " + splitUser[0]+ ", " + splitJ[0] + " and " + splitI[0] + " all have " + maxVal + " points!\nThe Game ends as a draw!");
+                                    System.out.println(Color.YELLOW + "\n\nPlayers " + splitUser[0]+ ", " + splitJ[0] + " and " + splitI[0] + " all have " + maxVal + " points!\nThe Game ends as a draw!" + Color.RESET);
                                     run = false;
                                 }
                             }
@@ -448,14 +453,14 @@ import java.util.Scanner;
                         if (users.get(index) != users.get(k) && run == true) {
                             String[] splitK = users.get(k).split(" ", 6);
                             if (maxVal == usersPoints.get(k) && run == true) {
-                                System.out.println("\n\nPlayers " + splitUser[0] + " and " + splitK[0] + " both have " + maxVal + " points!\nThe Game ends as a draw!");
+                                System.out.println(Color.YELLOW + "\n\nPlayers " + splitUser[0] + " and " + splitK[0] + " both have " + maxVal + " points!\nThe Game ends as a draw!" + Color.RESET);
                                 run = false;
                             }
                         }
                     }
                 }
                 if (run == true) {
-                    System.out.println("\nThe winner is " + splitUser[0] + " with " + maxVal + " points!");
+                    System.out.println(Color.GREEN + "\nThe winner is " + splitUser[0] + " with " + maxVal + " points!" + Color.RESET);
                     int x = 0;
                     for (int i = 0; i < usersPoints.size();i++){
                         x++;
@@ -469,39 +474,48 @@ import java.util.Scanner;
         }
 
 
-        public static void turn (String user1, String user2, String user3, String user4) {
-            if (modify.getAmountOfPlayers() == 1){
-                String[] splitUserName1 = user1.split(" ", 6);
-                System.out.println("\nIt is " + splitUserName1[0] +"'s turn!");
-                modify.setAmountOfPlayers(2);
-            }
+        public static void turn ( String user1, String user2, String user3, String user4) {
+            if (modify.getPlayerLife() != 0) {
+                if (modify.getAmountOfPlayers() == 1) {
+                    String[] splitUserName1 = user1.split(" ", 6);
 
-            else if (modify.getAmountOfPlayers() == 2){
-                String[] splitUserName2 = user2.split(" ", 6);
-                System.out.println("\nIt is " + splitUserName2[0] +"'s turn!");
-                if (user3 == null|| user3.equals("null")){
+
+                    System.out.println("\nIt is " + splitUserName1[0] + "'s turn!");
+                    modify.setAmountOfPlayers(2);
+                    modify.setUserInQuestion(splitUserName1[0]);
+
+
+                } else if (modify.getAmountOfPlayers() == 2) {
+                    String[] splitUserName2 = user2.split(" ", 6);
+
+                    System.out.println("\nIt is " + splitUserName2[0] + "'s turn!");
+                    if (user3 == null || user3.equals("null")) {
+                        modify.setAmountOfPlayers(1);
+                    } else {
+                        modify.setAmountOfPlayers(3);
+                    }
+
+                    modify.setUserInQuestion(splitUserName2[0]);
+                } else if (modify.getAmountOfPlayers() == 3) {
+                    String[] splitUserName3 = user3.split(" ", 6);
+
+
+                    System.out.println("\nIt is " + splitUserName3[0] + "'s turn!");
+                    if (user4 == null || user3.equals("null")) {
+                        modify.setAmountOfPlayers(1);
+                    } else {
+                        modify.setAmountOfPlayers(4);
+                    }
+                    modify.setUserInQuestion(splitUserName3[0]);
+                } else if (modify.getAmountOfPlayers() == 4) {
+                    String[] splitUserName4 = user4.split(" ", 6);
+
+
+                    System.out.println("\nIt is " + splitUserName4[0] + "'s turn!");
                     modify.setAmountOfPlayers(1);
-                }
-                else {
-                    modify.setAmountOfPlayers(3);
-                }
-            }
+                    modify.setUserInQuestion(splitUserName4[0]);
 
-            else if (modify.getAmountOfPlayers() == 3){
-                String[] splitUserName3 = user3.split(" ", 6);
-                System.out.println("\nIt is " + splitUserName3[0] +"'s turn!");
-                if (user4 == null|| user3.equals("null")){
-                    modify.setAmountOfPlayers(1);
                 }
-                else {
-                    modify.setAmountOfPlayers(4);
-                }
-            }
-
-            else if (modify.getAmountOfPlayers() == 4){
-                String[] splitUserName4 = user4.split(" ", 6);
-                System.out.println("\nIt is " + splitUserName4[0] +"'s turn!");
-                modify.setAmountOfPlayers(1);
             }
         }
 
@@ -530,7 +544,7 @@ import java.util.Scanner;
         /**
          Checks if inputted letter is correct.
          */
-        public static void correctLetter(String trueLetter, String placeholder, ArrayList<Character> allLetters, Player userName, String user) throws Exception {
+        public static void correctLetter(String trueLetter, String placeholder, ArrayList<Character> allLetters) throws Exception {
             char guess = trueLetter.charAt(0);
 
             if (Character.isDigit(guess)) {
@@ -542,10 +556,11 @@ import java.util.Scanner;
                     allLetters.set(i, guess);
                 }
             }
-            for (int j = 0; j < allLetters.size(); j++) {
-                System.out.print(allLetters.get(j));
+            if(modify.getPlayerLife() != 0) {
+                for (int j = 0; j < allLetters.size(); j++) {
+                    System.out.print(allLetters.get(j));
+                }
             }
-
         }
 
         /**
@@ -563,7 +578,7 @@ import java.util.Scanner;
         /**
          Method randomly changes color of "hangMan-graphic" as to make it stand out from text... and because this way it is less boring!p
          */
-        public static void hangManWriter (int playerLife) {
+        public static void hangManWriter (int playerLife, String user3, String user4) {
 
             String [] wordHolder = {Color.RED,Color.GREEN,Color.YELLOW,Color.BLUE,Color.PURPLE,Color.CYAN};
 
@@ -578,9 +593,24 @@ import java.util.Scanner;
                     "      +\n      |\n      |\n      |\n      |\n      |\n ======\n",
                     "       \n       \n       \n       \n       \n       \n ======\n",""};
 
-            for (int i = playerLife; i == playerLife; i++) {
-                System.out.println(wordHolder[randomizer(wordHolder)] + hangManIllus[i] + Color.RESET);
+            if(user3 == null){
+                for (int i = playerLife; i == playerLife; i++) {
+                    System.out.println(wordHolder[randomizer(wordHolder)] + hangManIllus[i/2] + Color.RESET);
+                }
             }
+            else if(user4 == null){
+                for (int i = playerLife; i == playerLife; i++) {
+                    System.out.println(wordHolder[randomizer(wordHolder)] + hangManIllus[i/3] + Color.RESET);
+                }
+            }
+            else if(user4 != null){
+                for (int i = playerLife; i == playerLife; i++) {
+                    System.out.println(wordHolder[randomizer(wordHolder)] + hangManIllus[i/4] + Color.RESET);
+                }
+            }
+
+
+
         }
 
         /**
@@ -588,7 +618,7 @@ import java.util.Scanner;
          */
 
         public static String characterDestroyer(String letter, ArrayList<Character>allLetters, String guessWord, ArrayList<Character> dumbGuesses,
-                                                int playersLife, ArrayList<Integer> usersPoints, int amountOfPlayers, ArrayList<String> users) throws IOException {
+                                                int playersLife, ArrayList<Integer> usersPoints, int amountOfPlayers, ArrayList<String> users) throws Exception {
             if (!letter.isEmpty()) {
                 if (letter.contains("1")) {
                     System.out.println(Color.RED + "You may not guess numbers!" + Color.RESET);
@@ -611,9 +641,12 @@ import java.util.Scanner;
                 } else if
                 (letter.contains("0"))  // ***************************** SAVE FEATURE *********************************
                 {
-                    System.out.println(Color.RED +"Saving and exiting!" + Color.RESET);
+                    System.out.println(Color.RED +"Saving and exiting game!" + Color.RESET);
                     SaveGame.saveToFile(allLetters, guessWord, dumbGuesses, playersLife, usersPoints, amountOfPlayers, users);
-                    System.exit(0);
+                    dumbGuesses.clear(); // This fixes the stupid bug
+                    allLetters.clear();
+                    usersPoints.clear();
+                    Menu.firstMenu();
                 }
 
                 // ****************************************************************************************************

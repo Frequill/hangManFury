@@ -77,7 +77,7 @@ class SinglePlayer {
                 correctLetter(trueLetter, guessWord, allLetters, userName, user);
                  if (allLetters.contains('_')) {
                  } else {
-            System.out.println(Color.GREEN + "\n\nCongratulations " + userName.getInstanceVarUsername(splitUserName[0]) + ". You are victorious! :)" + Color.RESET + "\n (Press Enter to return to main menu)");
+            System.out.println(Color.GREEN + "\n\nCongratulations " + userName.getInstanceVarUsername(splitUserName[0]) + ". You are victorious! :)" + Color.RESET + "\n(Press Enter to return to main menu)");
             Player.matchAdderCaller();
             Player.winAdderCaller();
             if (playerLife == 10){

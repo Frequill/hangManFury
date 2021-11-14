@@ -410,7 +410,7 @@ public class Player {
                 File usernames = new File("src/username.txt");
                 Scanner readUsernames = new Scanner(usernames);
 
-                System.out.println("Profile name, Games played, Matches won, Matches lost, Flawless Victories and latest multiplayer score");
+                System.out.println("Profile name, Games played, Matches won, Matches lost and Flawless Victories");
                 //This arraylist saves all usernames from username.txt
                 ArrayList<String> aList = new ArrayList<>();
 
@@ -419,9 +419,10 @@ public class Player {
                 }
                 readUsernames.close();
 
-
+                // Prints the names and every stat except for score, because we saved it for high score list
                 for (int i = 1; i < aList.size(); i++) {
-                    System.out.println(Color.YELLOW + i + ") " + Color.RESET + aList.get(i));
+                    String[] splitAList = aList.get(i).split(" ", 9);
+                    System.out.println(Color.YELLOW + i + ") " + Color.RESET + splitAList[0] + " " + splitAList[1] + " " + splitAList[2] + " " + splitAList[3] + " " + splitAList[4]);
                 }
 
 
@@ -480,10 +481,15 @@ public class Player {
         public static void deleteUser () throws Exception {
             Scanner in = new Scanner(System.in);
             File savedGame = new File("src/lastSavedGame.txt");
-            System.out.println("WARNING user deletion will also delete the latest saved game!\nAre you sure you want to Delete a user now?\n1) YES\n2) NO");
+            System.out.println(Color.RED_BACKGROUND + Color.BLACK + "WARNING!" + Color.RESET + " User deletion will also delete the latest saved game!\nAre you sure you want to Delete a user now?\n" + Color.YELLOW + "1) " + Color.RESET  + Color.GREEN + "YES" + Color.RESET+ "\n" + Color.YELLOW + "2) " + Color.RESET  + Color.RED+ "NO" + Color.RESET);
+            int yesOrNo;
             boolean askYesOrNo = true;
             while (askYesOrNo == true) {
-                int yesOrNo = in.nextInt();
+                while (!in.hasNextInt()) {
+                    System.out.println(Color.RED + "Please input an appropriate integer! " + Color.RESET);
+                    in.next();
+                }
+                yesOrNo = in.nextInt();
 
                 if (yesOrNo == 1) {
                     // This ensures that if users are deleted a saved game can't be reloaded and prevents a hard-crash
@@ -502,24 +508,24 @@ public class Player {
                         deleteAllUsername.add(readUsernames.nextLine());
                     }
 
-                    System.out.println("Which user do you want to delete?");
+                    System.out.println(Color.YELLOW_BACKGROUND + Color.BLACK + "Which user would you like to delete?" + Color.RESET);
 
                     for (int i = 1; i < deleteAllUsername.size(); i++) {
                         String[] splitAlist = deleteAllUsername.get(i).split(" ");
                         System.out.println(Color.YELLOW + i + ") " + Color.RESET + splitAlist[0]);
                     }
-                    System.out.println(Color.YELLOW + deleteAllUsername.size() + ")" + Color.RESET + " Back");
+                    System.out.println(Color.YELLOW + deleteAllUsername.size() + ")" + Color.RESET + Color.CYAN + " Back" + Color.RESET);
                     boolean run = true;
                     while (run) {
                         while (!in.hasNextInt()) {
-                            System.out.println(Color.RED + "\nPlease input an integer between 1 - " + allUsernames.size() + ":\n" + Color.RESET);
+                            System.out.println(Color.RED + "Please input an integer between 1 - " + deleteAllUsername.size() + ":\n" + Color.RESET);
                             in.next();
                         }
                         deleteUserChoice = in.nextInt();
 
-                        if (deleteUserChoice == allUsernames.size()) {
+                        if (deleteUserChoice == deleteAllUsername.size()) {
                             Menu.amountOfPlayersMenu();
-                        } else {
+                        } else if (deleteUserChoice > 0 && deleteUserChoice < deleteAllUsername.size()){
 
 
                             deleteAllUsername.remove(deleteUserChoice);
@@ -549,12 +555,15 @@ public class Player {
                             run = false;
                             askYesOrNo = false;
                         }
+                        else{
+                            System.out.println(Color.RED + "\nPlease input an integer between 1 - " + deleteAllUsername.size() + ":\n" + Color.RESET);
+                        }
                     }
                 } else if (yesOrNo == 2) {
                     askYesOrNo = false;
                     Menu.amountOfPlayersMenu();
                 } else {
-                    System.out.println("Invalid input!!");
+                    System.out.println(Color.RED + "Invalid input!!" + Color.RESET);
                 }
             }
 
