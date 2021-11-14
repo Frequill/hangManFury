@@ -26,7 +26,7 @@ class Menu extends GUI implements ActionListener {
 
 
     //Default constructor
-    Menu(){
+    Menu() throws Exception {
 
 //        GridLayout gridLayout = new GridLayout(5,1);
 //        gridLayout.setVgap(0);
@@ -49,6 +49,8 @@ class Menu extends GUI implements ActionListener {
         headPanel.add(menuTitle);
         headPanel.add(menuImage);
 
+
+
         setLocationRelativeTo(null);
         setVisible(true);
     }
@@ -67,7 +69,6 @@ class Menu extends GUI implements ActionListener {
         for(int i = 0; i< getMenuOptions().size(); i++) {
 
             bodyPanel.add(new JButton(getMenuOptions.get(i)));
-            button.addActionListener(this);
 
         }
     }
@@ -80,10 +81,10 @@ class Menu extends GUI implements ActionListener {
 //    }
     @Override
     public void actionPerformed(ActionEvent e) {
-        if(e.getSource() == menuOptions.get(0)){
-            String letter = e.getActionCommand();
-            System.out.println(letter);
-        }
+//        if(e.getSource() == menuOptions.get(0)){
+//            String letter = e.getActionCommand();
+//            System.out.println(letter);
+//        }
     }
     //************************************************ Menus ************************************************
 
@@ -130,7 +131,6 @@ class Menu extends GUI implements ActionListener {
 
     }
     public static void firstMenu() throws Exception {
-
         Menu menu = new Menu("main",4);
         menu.getMenuOptions().add(0,   "Select user");
         menu.getMenuOptions().add(1,   "Play");
@@ -208,8 +208,8 @@ class Menu extends GUI implements ActionListener {
 
                 } else {
                     if (user2 == "Add user 2") {
-                        new Game();
-                        Game.hangMan(user1);
+                        Game game = new Game();
+//                        game.hangMan(user1);
                         secondMenu(user1);
                     } else if (user3 == "Add user 3") {
                         Multiplayer.hangMan(user1, user2, null, null);

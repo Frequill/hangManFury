@@ -1,4 +1,5 @@
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
 
 public class GUI extends JFrame{
@@ -18,12 +19,15 @@ public class GUI extends JFrame{
         setTitle("HangMan by Group Fury");
         setLayout(new GridLayout(2,1));
         setResizable(false);
-
+        setLocationRelativeTo(null);
+        setVisible(true);
 
         //Panels
         headPanel = new JPanel();
         headPanel.setLayout(new FlowLayout());
 
+
         bodyPanel = new JPanel();
+
     }
 }
