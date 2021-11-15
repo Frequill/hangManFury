@@ -484,7 +484,7 @@ public class Player {
             } else if (userChoice == 2) {
                 String username = writeUsername(choice);
                 return username;
-            }  else if (userChoice == 3) {
+            } else if (userChoice == 3) {
               Menu.amountOfPlayersMenu();
             } else {
                 System.out.println("\nPlease enter an *integer* greater than 0 and lower than 4:\n");

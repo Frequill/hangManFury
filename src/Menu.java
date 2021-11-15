@@ -53,10 +53,11 @@ class Menu extends MultiPlayer {
         return menuOptions;
     }
 
-    //Thanks, Bill
     public static String [] userOptions = {"Add user 1", "Add user 2", "Add user 3", "Add user 4"};
     public String[] getUserOptions(){return userOptions;}
 
+
+    //Thanks, Bill
     // ****************************************** Bill's bad ideas *****************************************
     public int getNum() {
         return num;
@@ -124,9 +125,11 @@ class Menu extends MultiPlayer {
             menu.getMenuOptions().add(0, Color.YELLOW + "1) " + Color.RESET+ menu.getUserOptions()[0]);
         }
 
-        menu.getMenuOptions().add(4,Color.YELLOW + "5) " + Color.RESET+ Color.RED +"Delete user" + Color.RESET);
+        menu.getMenuOptions().add(4,Color.YELLOW + "5) " + Color.RESET+ Color.PURPLE +"Clear selected users" + Color.RESET);
 
-        menu.getMenuOptions().add(5, Color.YELLOW + "6) " + Color.RESET+ Color.CYAN + "Back" + Color.RESET);
+        menu.getMenuOptions().add(5,Color.YELLOW + "6) " + Color.RESET+ Color.RED +"Delete user" + Color.RESET);
+
+        menu.getMenuOptions().add(6, Color.YELLOW + "7) " + Color.RESET+ Color.CYAN + "Back" + Color.RESET);
         menu.optionPrinter(menu.getMenuOptions());
         Menu.selectUsersFunction();
 
@@ -223,11 +226,16 @@ class Menu extends MultiPlayer {
                     amountOfPlayersMenu();
                 }
 
+            // Allows user to clear all selected players with one button
+            } else if (choice == 5){
+                defultAddUserOptions[0] = "Add user 1"; defultAddUserOptions[1] = "Add user 2";
+                defultAddUserOptions[2] = "Add user 3"; defultAddUserOptions[3] = "Add user 4";
+                amountOfPlayersMenu();
             }
-            else if (choice == 5) {
+            else if (choice == 6) {
                 Player.deleteUser();
             }
-            else if (choice == 6){
+            else if (choice == 7){
                 firstMenu();
                 run = false;
             }
@@ -306,7 +314,6 @@ class Menu extends MultiPlayer {
                 } else {
                     if (user2 == "Add user 2") {
                         modify.setHasSeenLoadMenu(0);
-                        System.out.println(user1);
                         SinglePlayer.startGame(user1);
                         secondMenu(user1);
                     } else if (user3 == "Add user 3") {
