@@ -1,5 +1,5 @@
 PLACHOLDER(Match, win, loss, flawless, invis/highScore)
-Julius 4 1 2 0 2
+Julius 10 6 3 5 2
 Edwin 4 2 2 0 0
 Martin 1 0 1 0 2
 Johanna 0 0 0 0 0

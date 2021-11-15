@@ -1,295 +1,364 @@
+import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+import javax.swing.border.LineBorder;
+import java.awt.*;
+import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Scanner;
-class SinglePlayer {
+
+
+class SinglePlayer extends GUI implements ActionListener {
 
     public static Scanner in = new Scanner(System.in);
 
+    // Here is our full wordlist!
+    private static String [] wordCollection = {
+            "Björn"/*,"Bill","Java","Edwin","Julius","Martin","Johanna","String","Int","Scanner","ArrayList","boolean","Character","Placeholder","null", "monster","redbull","Newton",
+            "Switchbitch","HANGMAN","FUCKYOU","Fury","Class","Static","Void","GeOssHögtBetygBill","System","Exception","Mupphuvud" ,"JamesGosling","Kaffe", "ForLoop","While","Index",
+            "Double","Minecraft","Starcraft","Warcraft","Cantcrashthisgame","Xbox","Discord","Git","Github","CleanDrink","Corona", "False","True","Stockholm", "CtrlAltDelete","Syntax"*/};
+
+    private String guessWord = wordCollection[randomizer(wordCollection)].toUpperCase();
+    private ArrayList<Character> allLetters = new ArrayList<>(guessWord.length());
+    private int playerLife = 10;
+    private boolean guessCorrect = false;
+    private ArrayList<Character> dumbGuesses = new ArrayList();
+    private String letter = null;
+    private boolean victory = false;
+
+
+    public static void userFetcher(String user) throws Exception {
+
+        userName.setUser(user);
+
+    }
+
+
+//    String [] splitUserName = user.split(" ", 5);
+
+
+
+    //Button array
+    char[] buttonLettersArray ={'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z','Å','Ä','Ö'};
+
+    //Swing components
+    JLabel greetLabel;
+    JTextArea guessedLetterArea;
+    JTextField wordToGuessField, playerStatsField;
+    JButton[] buttons;
+
+    SinglePlayer() throws Exception {
+
+        //Panels
+        headPanel = new JPanel();
+        headPanel.setLayout(new FlowLayout());
+        bodyPanel = new JPanel();
+        FlowLayout buttonLayout = new FlowLayout();
+        buttonLayout.setVgap(5);
+        buttonLayout.setHgap(5);
+        bodyPanel.setLayout(buttonLayout);
+        bodyPanel.setBorder(new EmptyBorder(0,80,0,80));
+
+        //TextArea
+
+        wordToGuessField = new JTextField(wordEncryptor());
+        wordToGuessField.setPreferredSize(new Dimension(400,70));
+        wordToGuessField.setHorizontalAlignment(SwingConstants.CENTER);
+        wordToGuessField.setBackground(Color.gray);
+        wordToGuessField.setForeground(Color.WHITE);
+        wordToGuessField.setBorder(BorderFactory.createTitledBorder(null,"Word to guess",0, 0, new Font(null, Font.ITALIC, 14),Color.WHITE));
+        wordToGuessField.setFont(new Font(null, Font.BOLD,25));
+        wordToGuessField.setEditable(false);
+
+        guessedLetterArea = new JTextArea();
+        guessedLetterArea.setBackground(Color.gray);
+        guessedLetterArea.setForeground(Color.WHITE);
+        guessedLetterArea.setPreferredSize(wordToGuessField.getPreferredSize());
+        guessedLetterArea.setBorder(BorderFactory.createTitledBorder(null,"Previously guessed letters",0, 0, new Font(null, Font.PLAIN, 14),Color.WHITE));
+        guessedLetterArea.setFont(new Font(null, Font.BOLD,20));
+        guessedLetterArea.setEditable(false);
+
+        playerStatsField = new JTextField("");
+        playerStatsField.setPreferredSize(new Dimension(600,40));
+        playerStatsField.setHorizontalAlignment(SwingConstants.CENTER);
+        playerStatsField.setFont(new Font(null, Font.BOLD,14));
+        playerStatsField.setBackground(new Color(94,80,250));
+        playerStatsField.setForeground(new Color(0xFFFFFF));
+        playerStatsField.setEditable(false);
+        playerStatsField.setBorder(new LineBorder(Color.WHITE, 3, false));
+        playerStatsField.setText("Welcome " + userName.getUser() + " guess the word that is " + guessWord.length() + " letters long!");
+
+        //Labels
+
+        greetLabel = new JLabel();
+        greetLabel.setFont(new Font(null,Font.BOLD, 13));
+
+        //Buttons
+//yyhhh
+        buttons = new JButton[buttonLettersArray.length];
+
+        //Add components
+        frame.add(headPanel);
+        frame.add(bodyPanel);
+//        headPanel.add(greetLabel);
+        headPanel.add(wordToGuessField);
+        headPanel.add(guessedLetterArea);
+        headPanel.add(playerStatsField);
+
+        letterButtons();
+        frame.setLocationRelativeTo(null);
+        frame.setVisible(true);
+    }
+
+
     /**
-     This method launches and plays the entire game, this is the most important class. It picks out a word and makes player guess the various letters
-     in said word until the player either wins or loses!
+     * Creates letter buttons
      */
-
-    public static void hangMan(String user) throws Exception {
-        boolean victory = false;
-        int playerLife = 10;
-        // Here is our full wordlist!
-        String [] wordHolder = {"Björn", "Bill", "Java", "Edwin", "Julius", "Martin", "Johanna", "String", "Int", "Scanner", "ArrayList", "boolean", "Character", "Placeholder", "null",
-                "monster", "redbull", "Newton", "Switchbitch", "HANGMAN", "Fury", "Class", "Static", "Void", "System", "Exception", "Kaffe", "ForLoop", "While", "Index",
-                "Double", "Minecraft", "Starcraft", "Warcraft", "Xbox", "Discord", "Git", "Github", "Corona","StarWars","Lunch","Kanelbulle","ParkeringsPlats","Diabetes",
-                "False", "True", "Stockholm", "Syntax", "Multiplayer", "SingelPlayer", "SwitchCase", "Dator", "html", "Color", "IFCase" , "Variable","Stenart","Anus","Dyslexi","Kungen","Spagetti",
-                "Player", "Playstation","Nintendo","Wii","Diablo", "Snapchat", "Runescape", "Samsung", "Apple", "Google", "Legend", "TangentBord", "Ryssland", "Sverige","Tyskland","Brasilien",
-                "Teams", "AtomBomb", "Uppsala", "Järfälla", "Gärdet", "Östermalm", "Medborgarplatsen", "Tunnelbana", "Motorväg","Hemläxa","Julafton", "Midsommar", "Screen", "Skandinavien",
-                "Full", "Bakis", "Bakfull", "Riksdagsval", "Nyårsafton", "Ordlista", "Lägenhet", "School","DanskJävel", "IntelliJ", "JetBrains", "Add","Remove","Clear", "Sushi", "Helvetet",
-                "Lounge", "Grupprum", "Spotify", "Huawei", "GTA", "Kalkylator", "Kalender", "GräsMatta", "HashPlanta", "Vodka", "Arlanda","Öl","Torsdag","Tisdag","Distans", "Fifa","Organ",
-                "Instagram", "Metod","Jultomten", "Username", "Password", "HighScore", "Main", "Laptop","SkyRim", "Irrelevant", "Allmänt","Video", "Mamma", "Pappa", "Windows", "Macbook","Program",
-                "Programmering"};
-
-        String guessWord = wordHolder[randomizer(wordHolder)].toLowerCase();
-        ArrayList<Character> allLetters = new ArrayList<>(guessWord.length());
-        ArrayList<Character> dumbGuesses = new ArrayList();
-        Player userName = new Player();
-        String [] splitUserName = user.split(" ", 5);
-
-        System.out.println(Color.PURPLE + "Welcome " + userName.getInstanceVarUsername(splitUserName[0]) + " guess the word that is " + guessWord.length() + " letters long!"+ Color.RESET);
-
-        for (int i = 0; i < guessWord.length(); i++) {
-            System.out.print("_");
-
-            allLetters.add(i,  '_');
+    public void letterButtons(){
+        for(int i = 0; i < buttonLettersArray.length; i++) {
+            buttons[i] = new JButton(String.valueOf(buttonLettersArray[i]));
+            buttons[i].addActionListener(this);
+            buttons[i].setFocusable(false);
+            bodyPanel.add(buttons[i]);
         }
+    }
 
-        // "Victory" and "playerLife" checks weather the player wins or looses throughout the game.
-        while (victory == false && playerLife > 0) {
-            boolean guessCorrect = false;
-            boolean guessIncorrect = false;
-            boolean doubleGuess = true;
-            System.out.println();
-            String letter = null;
-            String trueLetter = null;
+    /**
+     * Creates the fully encrypted word to guess in the beginning of the game.
+     */
+    private String wordEncryptor() {
+        for(int i = 0; i < guessWord.length(); i++){
+            allLetters.add(i,'_');
+        }
+        String text = allLetters.toString().replace("[", "").replace("]", "").replace(",", "");
+        return text;
+    }
 
-            // doubleGuess ensures player does not guess same letter twice! You're welcome <3
-            while(doubleGuess) {
-                boolean destroyDumbCharacters = true;
-                while (destroyDumbCharacters) {
-                    letter = in.nextLine().toLowerCase(); // to lower case kills you capitalized letters *evil laugh*
-                    trueLetter = characterDestroyer(letter, allLetters);
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource() instanceof JButton ) {
+            String letter = e.getActionCommand();
+            JButton pressedButton = (JButton)e.getSource();
+            pressedButton.setText(letter);
+            pressedButton.setEnabled(false);
 
-                    if (trueLetter != null) {
-                        destroyDumbCharacters = false;
-                    }
+            for(int i = 0; i < guessWord.length(); i++) {
+                guessCorrect = false;
+                try {
+                    correctLetter(letter,guessWord,allLetters, userName.getUser());
+                } catch (Exception ex) {
+                    ex.printStackTrace();
                 }
-                if (dumbGuesses.contains(trueLetter.charAt(0)) || allLetters.contains(trueLetter.charAt(0))) {
-                    System.out.println(Color.RED + "Letter has already been guessed!"+ Color.RESET);
-                    for (int j = 0; j < allLetters.size(); j++) {
-                        System.out.print(allLetters.get(j));
-                    }
-
-                } else {
-                    doubleGuess = false;
-                }
+                playerStatsField.setText("Correct guess! You can do it!");
             }
-                for (int i = 0; i < guessWord.length(); i++) {
-                    if (trueLetter.charAt(0) == guessWord.charAt(i)) {
-                        guessCorrect = true;
-                    } else if (trueLetter.charAt(0) != guessWord.charAt(i)) {
-                        guessIncorrect = true;
-                    }
-                }
+            try {
 
-                /* "guessCorrect" and "guessIncorrect" makes the game react to your choices as a player.
-                    incorrect guesses result in a loss of life, correct guesses reveals letter in arrayList!*/
-
-            if (guessCorrect) {
-                correctLetter(trueLetter, guessWord, allLetters, userName, user);
-                 if (allLetters.contains('_')) {
-                 } else {
-            System.out.println(Color.GREEN + "\n\nCongratulations " + userName.getInstanceVarUsername(splitUserName[0]) + ". You are victorious! :)" + Color.RESET + "\n(Press Enter to return to main menu)");
-            Player.matchAdderCaller();
-            Player.winAdderCaller();
-            if (playerLife == 10){
-                Player.flawlessAdderCaller();
-                System.out.println(Color.YELLOW + "\nNO LIVES LOST! FLAWLESS VICTORY ARCHIVED!!!!!!\n" + userName.getInstanceVarUsername(splitUserName[0]) + " is a legend!" + Color.RESET);
+                wordToGuessField.setText(String.valueOf(correctLetter(letter,guessWord,allLetters,userName.getUser())));
+            } catch (Exception ex) {
+                ex.printStackTrace();
             }
-            in.nextLine();
-            victory = true;
-                 }
-            } else if (guessIncorrect) {
+            if (!guessWord.contains(letter)) {
                 playerLife = playerLife - 1;
-                hangManWriter(playerLife);
-                System.out.println(Color.RED + "Incorrect guess! You have lost one life!" + "\n(" + playerLife + " lives remaining)" + Color.RESET);
-                incorrectLetterCollector(trueLetter, dumbGuesses);
-                System.out.println();
-                for (int j = 0; j < allLetters.size(); j++) {
-                    System.out.print(allLetters.get(j));
-                }
-
+                guessedLetterArea.append(letter);
+                playerStatsField.setText("No " + letter + "! You have lost one life!" + "\n(" + playerLife + " lives remaining)");
             }
-            // You already know what "playerLife" does...
-            if (playerLife == 0) {
-                System.out.println();
-                hangManWriter(playerLife);
-                System.out.print(Color.RED + "\nYou have been defeated! The word in question was: " + guessWord + "\n\nPress the Enter key to return to the main menu in shame" + Color.RESET);
-                Player.matchAdderCaller();
-                Player.lossAdderCaller();
-                in.nextLine();
-                victory = true;
+            try {
+                gameStatusController(userName.getUser(),letter);
+            } catch (Exception ex) {
+                ex.printStackTrace();
             }
         }
     }
 
     /**
+     * The method set the correct letter in place in the array
+     */
+    public String correctLetter(String letter, String guessWord, ArrayList<Character> allLetters,  String user) throws Exception {
+        char guess = letter.charAt(0);
+
+        for (int i = 0; i < guessWord.length(); i++) {
+            if (guess == guessWord.charAt(i)) {
+                allLetters.set(i, guess);
+            }
+        }
+        for(int i= 0; i < guessWord.length(); i++){
+            allLetters.get(i);
+        }
+        String text = allLetters.toString().replace("[", "").replace("]", "").replace(",", "");
+        return text;
+
+    }
+    /**
+     This method checks if the game is over
+     */
+    private void gameStatusController(String user, String letter) throws Exception {
+
+
+        if(victory == false && playerLife > 0){
+            if (allLetters.contains('_')) {
+
+
+            } else {
+
+                playerStatsField.setText("Congratu1lations " + userName.getUser() + ". You are victorious!");
+                JOptionPane.showMessageDialog(frame, "Congratulations " + user + ". You are victorious!","Game Over", JOptionPane.OK_OPTION);
+                    Player.matchAdderCaller();
+                    Player.winAdderCaller();
+                if (playerLife == 10){
+                        Player.flawlessAdderCaller();
+                    JOptionPane.showMessageDialog(frame, "NO LIVES LOST! FLAWLESS VICTORY ACHIEVED!!!!!!" + user + " is a legend!","Game Over", JOptionPane.OK_OPTION);
+                    System.out.println("\nNO LIVES LOST! FLAWLESS VICTORY ARCHIVED!!!!!!\n"  + userName.getUser() + " is a legend!");
+                    playerStatsField.setText("NO LIVES LOST! FLAWLESS VICTORY ARCHIVED!!!!!! " + userName.getUser() + " is a legend!");
+                }
+                allLetters.clear();
+                victory = true;
+                frame.dispose();
+
+                Menu.secondMenu(userName.getUser());
+            }
+        }
+
+        if (playerLife == 0) {
+
+//                System.out.print(Color.RED + "\nYou have been defeated! The word in question was: " + guessWord + "\n\nPress the Enter key to return to the main menu in shame");
+            playerStatsField.setText("");
+            JOptionPane.showMessageDialog(frame, "You have been defeated! The word in question was: " + guessWord,"Game Over", JOptionPane.OK_OPTION);
+
+            allLetters.clear();
+                Player.matchAdderCaller();
+                Player.lossAdderCaller();
+//
+            victory = true;
+
+            frame.dispose();
+            Menu.secondMenu(userName.getUser());
+        }
+
+
+    }
+    /**
      Randomizer uses a Math-random function to pick out a word from our "wordlist" at the top of "hangMan" method.
-     It's also used to randomize colors for our "hangMan-graph"!
      */
     public static int randomizer(String [] randomArray){
         int rand = (int) (Math.random()*randomArray.length);
         return rand;
     }
+    public static void startGame(String user) throws Exception {
+        userName.setUser(user);
 
-    /**
-     Checks if inputted letter is correct.
-     */
-    public static void correctLetter(String trueLetter, String placeholder, ArrayList<Character> allLetters, Player userName, String user) throws Exception {
-        char guess = trueLetter.charAt(0);
-
-        if (Character.isDigit(guess)) {
-            System.out.println(Color.RED + "Wrongful input!"+ Color.RESET +  "\nPlease enter a CHARACTER!");
-        }
-
-        for (int i = 0; i < placeholder.length(); i++) {
-            if (guess == placeholder.charAt(i)) {
-                allLetters.set(i, guess);
-            }
-        }
-        for (int j = 0; j < allLetters.size(); j++) {
-            System.out.print(allLetters.get(j));
-        }
+        new SinglePlayer();
 
     }
 
-    /**
-     Method collects all user inputted letters that were incorrect guesses! These letters are later printed out
-     to remind user what he or she previously guessed as to not make same mistake twice.
-     */
-    public static ArrayList<Character> incorrectLetterCollector(String trueLetter, ArrayList<Character> dumbGuesses) {
-        dumbGuesses.add(trueLetter.charAt(0));
-        System.out.println(Color.CYAN + "\nPreviously guessed letters: " + Color.RESET);
-        for (int i = 0; i < dumbGuesses.size(); i++) {
-            System.out.print(Color.RED + dumbGuesses.get(i) + " " + Color.RESET);
-        }
-        return dumbGuesses;
+    public static void main(String[] args) throws Exception {
+        new SinglePlayer();
     }
 
-    /**
-     Method randomly changes color of "hangMan-graphic" as to make it stand out from text... and because this way it is less boring!p
-     */
-    public static void hangManWriter (int playerLife) {
-
-        String [] wordHolder = {Color.RED,Color.GREEN,Color.YELLOW,Color.BLUE,Color.PURPLE,Color.CYAN};
-
-        String[] hangManIllus = {"   +--+\n   |  |\n   \uD83D\uDC80 |\n  /|\\ |\n  / \\ |\n      |\n ======\n",
-                "   +--+\n   |  |\n   0  |\n  /|\\ |\n  /   |\n      |\n ======\n",
-                "   +--+\n   |  |\n   0  |\n  /|\\ |\n      |\n      |\n ======\n",
-                "   +--+\n   |  |\n   0  |\n  /|  |\n      |\n      |\n ======\n",
-                "   +--+\n   |  |\n   0  |\n   |  |\n      |\n      |\n ======\n",
-                "   +--+\n   |  |\n   0  |\n      |\n      |\n      |\n ======\n",
-                "   +--+\n   |  |\n      |\n      |\n      |\n      |\n ======\n",
-                "   +--+\n      |\n      |\n      |\n      |\n      |\n ======\n",
-                "      +\n      |\n      |\n      |\n      |\n      |\n ======\n",
-                "       \n       \n       \n       \n       \n       \n ======\n",""};
-
-        for (int i = playerLife; i == playerLife; i++) {
-                    System.out.println(wordHolder[randomizer(wordHolder)] + hangManIllus[i] + Color.RESET);
-        }
-
-
-    }
 
     /**
      This monstrosity of a method exists because I wish Java was easier...             //Julius Thomsen
+     .. and it is not useful anymore. // The dude
      */
 
-    public static String characterDestroyer(String letter,ArrayList<Character>allLetters) {
-    if (!letter.isEmpty()) {
-        if (letter.contains("1")) {
-            System.out.println(Color.RED + "You may not guess numbers!" + Color.RESET);
-        } else if (letter.contains("2")) {
-            System.out.println(Color.RED +"You may not guess numbers!" + Color.RESET);
-        } else if (letter.contains("3")) {
-            System.out.println(Color.RED +"You may not guess numbers!" + Color.RESET);
-        } else if (letter.contains("4")) {
-            System.out.println(Color.RED +"You may not guess numbers!" + Color.RESET);
-        } else if (letter.contains("5")) {
-            System.out.println(Color.RED +"You may not guess numbers!" + Color.RESET);
-        } else if (letter.contains("6")) {
-            System.out.println(Color.RED +"You may not guess numbers!" + Color.RESET);
-        } else if (letter.contains("7")) {
-            System.out.println(Color.RED +"You may not guess numbers!" + Color.RESET);
-        } else if (letter.contains("8")) {
-            System.out.println(Color.RED +"You may not guess numbers!" + Color.RESET);
-        } else if (letter.contains("9")) {
-            System.out.println(Color.RED +"You may not guess numbers!" + Color.RESET);
-        } else if (letter.contains("0")) {
-            System.out.println(Color.RED +"You may not guess numbers!" + Color.RESET);
-        } else if (letter.contains("!")) {
-            System.out.println(Color.RED +"You may not guess an exclamation point!" + Color.RESET);
-        } else if (letter.contains("?")) {
-            System.out.println(Color.RED +"You may not guess a question mark!" + Color.RESET);
-        } else if (letter.contains("#")) {
-            System.out.println(Color.RED +"You may not guess a non-alphabetical character!" + Color.RESET);
-        } else if (letter.contains("¤")) {
-            System.out.println(Color.RED +"You may not guess a non-alphabetical character!" + Color.RESET);
-        } else if (letter.contains("%")) {
-            System.out.println(Color.RED +"You may not guess a non-alphabetical character!" + Color.RESET);
-        } else if (letter.contains("&")) {
-            System.out.println(Color.RED +"You may not guess a non-alphabetical character!" + Color.RESET);
-        } else if (letter.contains("/")) {
-            System.out.println(Color.RED +"You may not guess a non-alphabetical character!" + Color.RESET);
-        } else if (letter.contains("(")) {
-            System.out.println(Color.RED +"You may not guess a non-alphabetical character!" + Color.RESET);
-        } else if (letter.contains(")")) {
-            System.out.println(Color.RED +"You may not guess a non-alphabetical character!" + Color.RESET);
-        } else if (letter.contains("=")) {
-            System.out.println(Color.RED +"You may not guess a non-alphabetical character!" + Color.RESET);
-        } else if (letter.contains("*")) {
-            System.out.println(Color.RED +"You may not guess a non-alphabetical character!" + Color.RESET);
-        } else if (letter.contains("-")) {
-            System.out.println(Color.RED +"You may not guess a non-alphabetical character!" + Color.RESET);
-        } else if (letter.contains("+")) {
-            System.out.println(Color.RED +"You may not guess a non-alphabetical character!" + Color.RESET);
-        } else if (letter.contains(",")) {
-            System.out.println(Color.RED +"You may not guess a non-alphabetical character!" + Color.RESET);
-        } else if (letter.contains(".")) {
-            System.out.println(Color.RED +"You may not guess a non-alphabetical character!" + Color.RESET);
-        } else if (letter.contains("<")) {
-            System.out.println(Color.RED +"You may not guess a non-alphabetical character!" + Color.RESET);
-        } else if (letter.contains(">")) {
-            System.out.println(Color.RED +"You may not guess a non-alphabetical character!" + Color.RESET);
-        } else if (letter.contains("|")) {
-            System.out.println(Color.RED +"You may not guess a non-alphabetical character!" + Color.RESET);
-        } else if (letter.contains("@")) {
-            System.out.println(Color.RED +"You may not guess a non-alphabetical character!" + Color.RESET);
-        } else if (letter.contains("£")) {
-            System.out.println(Color.RED +"You may not guess a non-alphabetical character!" + Color.RESET);
-        } else if (letter.contains("$")) {
-            System.out.println(Color.RED +"You may not guess a non-alphabetical character!" + Color.RESET);
-        } else if (letter.contains("€")) {
-            System.out.println(Color.RED +"You may not guess a non-alphabetical character!" + Color.RESET);
-        } else if (letter.contains("{")) {
-            System.out.println(Color.RED +"You may not guess a non-alphabetical character!" + Color.RESET);
-        } else if (letter.contains("[")) {
-            System.out.println(Color.RED +"You may not guess a non-alphabetical character!" + Color.RESET);
-        } else if (letter.contains("]")) {
-            System.out.println(Color.RED +"You may not guess a non-alphabetical character!" + Color.RESET);
-        } else if (letter.contains("}")) {
-            System.out.println(Color.RED +"You may not guess a non-alphabetical character!" + Color.RESET);
-        } else if (letter.contains("´´")) {
-            System.out.println(Color.RED +"You may not guess a non-alphabetical character!" + Color.RESET);
-        } else if (letter.contains("\"")) {
-            System.out.println(Color.RED +"You may not guess a non-alphabetical character!" + Color.RESET);
-        } else if (letter.contains("\\")) {
-            System.out.println(Color.RED +"You may not guess a non-alphabetical character!" + Color.RESET);
-        } else if (letter.contains(" ")) {
-            System.out.println(Color.RED +"No whitespace!" + Color.RESET);
-        } else if (letter.isEmpty()) {
-            System.out.println(Color.RED +"No input was given!" + Color.RESET);
-        } else if (letter.contains("æ")) {
-            System.out.println(Color.RED +"Inga danskjävlar i spelet!" + Color.RESET);
-            System.exit(0);
-        } else if (letter.contains("ø")) {
-            System.out.println(Color.RED +"Inga danskjävlar i spelet!" + Color.RESET);
-            System.exit(0);
-        } else {
-            return letter;
-        }
-        for (int j = 0; j < allLetters.size(); j++) {
-            System.out.print(allLetters.get(j));
-        }
-
-    }
-        return null;
-    }
+//    public static String characterDestroyer(String letter,ArrayList<Character>allLetters) {
+//    if (!letter.isEmpty()) {
+//        if (letter.contains("1")) {
+//            System.out.println("You may not guess numbers!");
+//        } else if (letter.contains("2")) {
+//            System.out.println("You may not guess numbers!");
+//        } else if (letter.contains("3")) {
+//            System.out.println("You may not guess numbers!");
+//        } else if (letter.contains("4")) {
+//            System.out.println(Color.RED +"You may not guess numbers!");
+//        } else if (letter.contains("5")) {
+//            System.out.println(Color.RED +"You may not guess numbers!");
+//        } else if (letter.contains("6")) {
+//            System.out.println(Color.RED +"You may not guess numbers!");
+//        } else if (letter.contains("7")) {
+//            System.out.println(Color.RED +"You may not guess numbers!");
+//        } else if (letter.contains("8")) {
+//            System.out.println(Color.RED +"You may not guess numbers!");
+//        } else if (letter.contains("9")) {
+//            System.out.println(Color.RED +"You may not guess numbers!");
+//        } else if (letter.contains("0")) {
+//            System.out.println(Color.RED +"You may not guess numbers!");
+//        } else if (letter.contains("!")) {
+//            System.out.println(Color.RED +"You may not guess an exclamation point!");
+//        } else if (letter.contains("?")) {
+//            System.out.println(Color.RED +"You may not guess a question mark!");
+//        } else if (letter.contains("#")) {
+//            System.out.println(Color.RED +"You may not guess a non-alphabetical character!");
+//        } else if (letter.contains("¤")) {
+//            System.out.println(Color.RED +"You may not guess a non-alphabetical character!");
+//        } else if (letter.contains("%")) {
+//            System.out.println(Color.RED +"You may not guess a non-alphabetical character!");
+//        } else if (letter.contains("&")) {
+//            System.out.println(Color.RED +"You may not guess a non-alphabetical character!");
+//        } else if (letter.contains("/")) {
+//            System.out.println(Color.RED +"You may not guess a non-alphabetical character!");
+//        } else if (letter.contains("(")) {
+//            System.out.println(Color.RED +"You may not guess a non-alphabetical character!");
+//        } else if (letter.contains(")")) {
+//            System.out.println(Color.RED +"You may not guess a non-alphabetical character!");
+//        } else if (letter.contains("=")) {
+//            System.out.println(Color.RED +"You may not guess a non-alphabetical character!");
+//        } else if (letter.contains("*")) {
+//            System.out.println(Color.RED +"You may not guess a non-alphabetical character!");
+//        } else if (letter.contains("-")) {
+//            System.out.println(Color.RED +"You may not guess a non-alphabetical character!");
+//        } else if (letter.contains("+")) {
+//            System.out.println(Color.RED +"You may not guess a non-alphabetical character!");
+//        } else if (letter.contains(",")) {
+//            System.out.println(Color.RED +"You may not guess a non-alphabetical character!");
+//        } else if (letter.contains(".")) {
+//            System.out.println(Color.RED +"You may not guess a non-alphabetical character!");
+//        } else if (letter.contains("<")) {
+//            System.out.println(Color.RED +"You may not guess a non-alphabetical character!");
+//        } else if (letter.contains(">")) {
+//            System.out.println(Color.RED +"You may not guess a non-alphabetical character!");
+//        } else if (letter.contains("|")) {
+//            System.out.println(Color.RED +"You may not guess a non-alphabetical character!");
+//        } else if (letter.contains("@")) {
+//            System.out.println(Color.RED +"You may not guess a non-alphabetical character!");
+//        } else if (letter.contains("£")) {
+//            System.out.println(Color.RED +"You may not guess a non-alphabetical character!");
+//        } else if (letter.contains("$")) {
+//            System.out.println(Color.RED +"You may not guess a non-alphabetical character!");
+//        } else if (letter.contains("€")) {
+//            System.out.println(Color.RED +"You may not guess a non-alphabetical character!");
+//        } else if (letter.contains("{")) {
+//            System.out.println(Color.RED +"You may not guess a non-alphabetical character!");
+//        } else if (letter.contains("[")) {
+//            System.out.println(Color.RED +"You may not guess a non-alphabetical character!");
+//        } else if (letter.contains("]")) {
+//            System.out.println(Color.RED +"You may not guess a non-alphabetical character!");
+//        } else if (letter.contains("}")) {
+//            System.out.println(Color.RED +"You may not guess a non-alphabetical character!");
+//        } else if (letter.contains("´´")) {
+//            System.out.println(Color.RED +"You may not guess a non-alphabetical character!");
+//        } else if (letter.contains("\"")) {
+//            System.out.println(Color.RED +"You may not guess a non-alphabetical character!");
+//        } else if (letter.contains("\\")) {
+//            System.out.println(Color.RED +"You may not guess a non-alphabetical character!");
+//        } else if (letter.contains(" ")) {
+//            System.out.println(Color.RED +"No whitespace!");
+//        } else if (letter.isEmpty()) {
+//            System.out.println(Color.RED +"No input was given!");
+//        } else if (letter.contains("æ")) {
+//            System.out.println(Color.RED +"Inga danskjävlar i spelet!");
+//            System.exit(0);
+//        } else if (letter.contains("ø")) {
+//            System.out.println(Color.RED +"Inga danskjävlar i spelet!");
+//            System.exit(0);
+//        } else {
+//            return letter;
+//        }
+//        for (int j = 0; j < allLetters.size(); j++) {
+//            System.out.print(allLetters.get(j));
+//        }
+//
+//    }
+//        return null;
+//    }
 }
-
-
-

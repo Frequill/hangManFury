@@ -306,7 +306,8 @@ class Menu extends MultiPlayer {
                 } else {
                     if (user2 == "Add user 2") {
                         modify.setHasSeenLoadMenu(0);
-                        SinglePlayer.hangMan(user1);
+                        System.out.println(user1);
+                        SinglePlayer.startGame(user1);
                         secondMenu(user1);
                     } else if (user3 == "Add user 3") {
                         modify.setHasSeenLoadMenu(0);
