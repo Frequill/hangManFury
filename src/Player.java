@@ -6,21 +6,24 @@ import java.util.Scanner;
 
 //******************************************* Instance variables and object *******************************************
 public class Player {
-    private String instanceVarUsername;
+    // Global variables
+    private String instanceVarUsername; //This variable is older than my grandma...
+
+    // pickUserData 1,2,3 and 4 keeps track of what users are selected during multiplayer
     private int pickUserData1 = -1;
     private int pickUserData2 = -1;
     private int pickUserData3 = -1;
     private int pickUserData4 = -1;
 
-    public String getInstanceVarUsername(String user) {
+    public String getInstanceVarUsername(String user) {  //You don't need this. Move on.
         instanceVarUsername = user;
         return instanceVarUsername;
     }
 
+
     public void setPickUserData1(int pickUserDataArgument) {
         this.pickUserData1 = pickUserDataArgument;
     }
-
     public int getPickUserData1() {
         return pickUserData1;
     }
@@ -28,7 +31,6 @@ public class Player {
     public void setPickUserData2(int pickUserDataArgument) {
         this.pickUserData2 = pickUserDataArgument;
     }
-
     public int getPickUserData2() {
         return pickUserData2;
     }
@@ -36,7 +38,6 @@ public class Player {
     public void setPickUserData3(int pickUserDataArgument) {
         this.pickUserData3 = pickUserDataArgument;
     }
-
     public int getPickUserData3() {
         return pickUserData3;
     }
@@ -44,25 +45,24 @@ public class Player {
     public void setPickUserData4(int pickUserDataArgument) {
         this.pickUserData4 = pickUserDataArgument;
     }
-
     public int getPickUserData4() {
         return pickUserData4;
     }
 
     public static ArrayList<String> allUsernames = new ArrayList();
-
     public static ArrayList<String> getAllUsernames() {
         return allUsernames;
     }
-
     public static ArrayList<Integer> allUserNumbers = new ArrayList();
+
+
 
     public static Player modifyX = new Player();
 
     //************************************************* Functions *****************************************************
 
     /**
-     * This method stores different usernames in a text file for later use
+     * This method stores different usernames (and their stats) in a text file for later use
      */
 
     public static String writeUsername(int choice) throws Exception {
@@ -84,7 +84,7 @@ public class Player {
         String newUser = usersInput + " 0" + " 0" + " 0" + " 0" + " 0";
         Writer out;
         out = new BufferedWriter(new FileWriter(toUsername, true));
-        out.append("\n" + newUser);
+        out.append("\n").append(newUser);
         out.close();
 
         userArray(newUser);
@@ -109,7 +109,7 @@ public class Player {
     }
 
     /**
-     * Method stores all "usernames" from username.txt file into an arraylist so that specific indesex (users) can be
+     * Method stores all "usernames" from username.txt file into an arraylist so that specific indexes (users) can be
      * called upon later for stats increases or decreases...
      */
 
@@ -261,7 +261,11 @@ public class Player {
     }
 
 
-    // Three basic "callers" that allows us to access instance variables of the "Player" class from other classes
+    /* Many basic "callers" that allowed us to access instance variables of the "Player" class from other classes
+    (before we managed to figure out the concept of inheritance)
+
+    The purpose of a "caller" is to call upon a method in the player class while also giving it an instance variable
+    from the player class. */
 
     public static void matchAdderCaller() throws Exception {
         matchAdder(modifyX.getPickUserData1());
@@ -286,6 +290,9 @@ public class Player {
         String[] splitUsers = users.get(index).split(" ", 6);
         String[] splitAllusernames1 = allUsernames.get(modifyX.getPickUserData1()).split(" ", 6);
         String[] splitAllusernames2 = allUsernames.get(modifyX.getPickUserData2()).split(" ", 6);
+
+
+
 
         if (x == 1 && splitAllusernames1[0].equals(splitUsers[0])) {
             winAdder(modifyX.getPickUserData1());
@@ -332,17 +339,25 @@ public class Player {
 
         if (x == 1 && !Objects.equals(splitAllusernames1[0], splitUsers[0])) {
             lossAdder(modifyX.getPickUserData1());
-        } else if (x == 2 && !Objects.equals(splitAllusernames2[0], splitUsers[0])) {
+        }
+
+        else if (x == 2 && !Objects.equals(splitAllusernames2[0], splitUsers[0])) {
             lossAdder(modifyX.getPickUserData2());
-        } else if (users.get(3) != null) {
+        }
+
+        else if (users.get(3) != null) {
             String[] splitAllusernames3 = allUsernames.get(modifyX.getPickUserData3()).split(" ", 6);
             String[] splitAllusernames4 = allUsernames.get(modifyX.getPickUserData4()).split(" ", 6);
             if (x == 3 && !Objects.equals(splitAllusernames3[0], splitUsers[0])) {
                 lossAdder(modifyX.getPickUserData3());
-            } else if (x == 4 && !Objects.equals(splitAllusernames4[0], splitUsers[0])) {
+            }
+
+            else if (x == 4 && !Objects.equals(splitAllusernames4[0], splitUsers[0])) {
                 lossAdder(modifyX.getPickUserData4());
             }
-        } else if (users.get(2) != null) {
+        }
+
+        else if (users.get(2) != null) {
             String[] splitAllusernames3 = allUsernames.get(modifyX.getPickUserData3()).split(" ", 6);
             if (x == 3 && !Objects.equals(splitAllusernames3[0], splitUsers[0])) {
                 lossAdder(modifyX.getPickUserData3());
@@ -478,9 +493,16 @@ public class Player {
         return null;
     }
 
+    /**
+     "deleteUser" method allows the user to remove a user from the "userNames" text file. Effectively allowing you
+     to remove users that you no longer want to keep in your game.
+     */
         public static void deleteUser () throws Exception {
             Scanner in = new Scanner(System.in);
             File savedGame = new File("src/lastSavedGame.txt");
+
+            /* yesOrNo int, loop and bool warns the user that deleting a character will also delete the latest saved game
+            (this had to be done to prevent some bugs, crashes and other errors) */
             System.out.println(Color.RED_BACKGROUND + Color.BLACK + "WARNING!" + Color.RESET + " User deletion will also delete the latest saved game!\nAre you sure you want to Delete a user now?\n" + Color.YELLOW + "1) " + Color.RESET  + Color.GREEN + "YES" + Color.RESET+ "\n" + Color.YELLOW + "2) " + Color.RESET  + Color.RED+ "NO" + Color.RESET);
             int yesOrNo;
             boolean askYesOrNo = true;

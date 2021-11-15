@@ -13,11 +13,14 @@ class Menu extends MultiPlayer {
     private String sentence;
     private ArrayList<String> menuOptions = new ArrayList<>();
 
+    /**
+     Menu object that allows us to call menu without having to build a whole new menu
+     */
+    public Menu(){}
 
-    public Menu(){
-
-    }
-
+    /**
+     Menu object that allows the user to make a menu from an object. Thanks, Bill.
+     */
     public Menu(String name, int Int) {
         this.num = Int;
         String greeting = "Welcome to the " + name + " menu!";
@@ -36,6 +39,10 @@ class Menu extends MultiPlayer {
             System.out.print(menuOptions.get(i));
         }
     }
+
+    /**
+     Prints options of menu to user
+     */
     public void optionPrinter (ArrayList<String> menuOptions){
         for (int i = 0; i < menuOptions.size(); i++){
             System.out.println(menuOptions.get(i));
@@ -46,13 +53,11 @@ class Menu extends MultiPlayer {
         return menuOptions;
     }
 
-
+    //Thanks, Bill
     public static String [] userOptions = {"Add user 1", "Add user 2", "Add user 3", "Add user 4"};
-
-
     public String[] getUserOptions(){return userOptions;}
 
-
+    // ****************************************** Bill's bad ideas *****************************************
     public int getNum() {
         return num;
     }
@@ -64,9 +69,15 @@ class Menu extends MultiPlayer {
     public String getSentence() {
         return sentence;
     }
+    //******************************************************************************************************
 
-    //************************************************ Menus ************************************************
 
+
+
+
+
+
+    //***************************************** Menus that we use ******************************************
     public static void amountOfPlayersMenu() throws Exception {
         Menu menu = new Menu("add user",5);
         String[] split = menu.getUserOptions()[0].split(" ", 6);
@@ -121,10 +132,6 @@ class Menu extends MultiPlayer {
 
     }
     public static void firstMenu() throws Exception {
-        //DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        //LocalDateTime now = LocalDateTime.now();
-        //System.out.println("Datum: " + dtf.format(now));
-
         Menu menu = new Menu("main",5);
         menu.getMenuOptions().add(0, Color.YELLOW + "1) " + Color.RESET+ "Select user");
         menu.getMenuOptions().add(1, Color.YELLOW + "2) " + Color.RESET+ "New game");
@@ -146,7 +153,6 @@ class Menu extends MultiPlayer {
         menu.optionPrinter(menu.getMenuOptions());
         return user;
     }
-
     public static String userNameMenu(String user, int choice) throws Exception{
         Menu menu = new Menu();
         menu.getMenuOptions().add(0, Color.YELLOW + "1) " + Color.RESET+ "Existing user");
@@ -157,17 +163,20 @@ class Menu extends MultiPlayer {
         return user;
     }
 
-    //******************************************** Functions ***********************************************
-    //   (This is how the menus work)
+    /* ******************************************* Functions ***********************************************
+    This is how the menus work                                                                            */
 
+    /**
+     Allows the player or players to select how many users they want and which users they want.
+     */
     public static void selectUsersFunction() throws Exception {
        Menu menu = new Menu();
 
+        // user1, 2, 3 and 4 are initially set to NULL and are later changed based on how many users are selected
         String user1 = null;
         String user2 = null;
         String user3 = null;
         String user4 = null;
-
 
 
         String[] defultAddUserOptions = menu.getUserOptions();
@@ -181,11 +190,11 @@ class Menu extends MultiPlayer {
             choice = in.nextInt();
             if (choice == 1) {
 
-                if(Player.modifyX.getPickUserData1() != -1){ // Just leave this alone!
+                if(Player.modifyX.getPickUserData1() != -1){} //Just leave this alone!
 
 
-                }
-
+                /* Actual menu where every option changes from "Add user1, 2, 3 or 4" to the actual username
+                that the user choose. Really cool idea!                                                   */
                 user1 = userNameMenu(user1, choice);
                 defultAddUserOptions[0] = user1;
                 amountOfPlayersMenu();
@@ -233,9 +242,13 @@ class Menu extends MultiPlayer {
         }
 
     }
+
+    /**
+     Loads in previously saved users when a game is loaded so that you don't have to reselect the same users
+     again if you want to play one more time afterwards
+     */
     public static void loadUsersFunction(String user1, String user2, String user3, String user4) throws Exception {
         Menu menu = new Menu();
-
 
         String[] defultAddUserOptions = menu.getUserOptions();
 
@@ -252,7 +265,6 @@ class Menu extends MultiPlayer {
             defultAddUserOptions[2] = user3;
             defultAddUserOptions[3] = user4;
         }
-
     }
 
 
