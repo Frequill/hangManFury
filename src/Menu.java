@@ -157,7 +157,7 @@ class Menu extends MultiPlayer {
         Menu menu = new Menu();
         menu.getMenuOptions().add(0, Color.YELLOW + "1) " + Color.RESET+ "Existing user");
         menu.getMenuOptions().add(1, Color.YELLOW + "2) " + Color.RESET+ "New user ");
-        menu.getMenuOptions().add(2,Color.YELLOW + "3) " + Color.RESET+ "Back");
+        menu.getMenuOptions().add(2,Color.YELLOW + "3) " + Color.RESET+ Color.CYAN + "Back" + Color.RESET);
         menu.optionPrinter(menu.getMenuOptions());
         user = Player.readUsername(user, choice);
         return user;

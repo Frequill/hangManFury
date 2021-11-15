@@ -75,7 +75,7 @@ public class Player {
         boolean nullKiller = true;
         while (nullKiller) {
             while (Objects.equals(usersInput, "null") || Objects.equals(usersInput, "Null")) {
-                System.out.println("You may not call yourself null due to technical difficulties...");
+                System.out.println(Color.RED + "You may not call yourself null due to technical difficulties..." + Color.RESET);
                 usersInput = in.next();
             }
             nullKiller = false;
@@ -425,7 +425,7 @@ public class Player {
                 File usernames = new File("src/username.txt");
                 Scanner readUsernames = new Scanner(usernames);
 
-                System.out.println("Profile name, Games played, Matches won, Matches lost and Flawless Victories");
+                System.out.println( Color.YELLOW +"Profile name, Games played, Matches won, Matches lost and Flawless Victories" + Color.RESET);
                 //This arraylist saves all usernames from username.txt
                 ArrayList<String> aList = new ArrayList<>();
 
@@ -441,7 +441,7 @@ public class Player {
                 }
 
 
-                System.out.println(Color.YELLOW + aList.size() + ")" + Color.RESET + " Back");
+                System.out.println(Color.YELLOW + aList.size() + ")" + Color.RESET + Color.CYAN + " Back" + Color.RESET);
                 boolean run2 = true;
 
                 int pickUser = 0;

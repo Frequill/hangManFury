@@ -13,10 +13,16 @@ class SinglePlayer {
         boolean victory = false;
         int playerLife = 10;
         // Here is our full wordlist!
-        String [] wordHolder = {"Björn","Bill","Java","Edwin","Julius","Martin","Johanna","String","Int","Scanner","ArrayList","boolean","Character","Placeholder","null",
-               "monster","redbull","Newton","Switchbitch","HANGMAN","FUCKYOU","Fury","Class","Static","Void","GeOssHögtBetygBill","System","Exception","Mupphuvud"
-        ,"JamesGosling","Kaffe","ForLoop","While","Index","Double","Minecraft","Starcraft","Warcraft","Cantcrashthisgame","Xbox","Discord","Git","Github","CleanDrink","Corona",
-        "False","True","Stockholm","CtrlAltDelete","Syntax"};
+        String [] wordHolder = {"Björn", "Bill", "Java", "Edwin", "Julius", "Martin", "Johanna", "String", "Int", "Scanner", "ArrayList", "boolean", "Character", "Placeholder", "null",
+                "monster", "redbull", "Newton", "Switchbitch", "HANGMAN", "Fury", "Class", "Static", "Void", "System", "Exception", "Kaffe", "ForLoop", "While", "Index",
+                "Double", "Minecraft", "Starcraft", "Warcraft", "Xbox", "Discord", "Git", "Github", "Corona","StarWars","Lunch","Kanelbulle","ParkeringsPlats","Diabetes",
+                "False", "True", "Stockholm", "Syntax", "Multiplayer", "SingelPlayer", "SwitchCase", "Dator", "html", "Color", "IFCase" , "Variable","Stenart","Anus","Dyslexi","Kungen","Spagetti",
+                "Player", "Playstation","Nintendo","Wii","Diablo", "Snapchat", "Runescape", "Samsung", "Apple", "Google", "Legend", "TangentBord", "Ryssland", "Sverige","Tyskland","Brasilien",
+                "Teams", "AtomBomb", "Uppsala", "Järfälla", "Gärdet", "Östermalm", "Medborgarplatsen", "Tunnelbana", "Motorväg","Hemläxa","Julafton", "Midsommar", "Screen", "Skandinavien",
+                "Full", "Bakis", "Bakfull", "Riksdagsval", "Nyårsafton", "Ordlista", "Lägenhet", "School","DanskJävel", "IntelliJ", "JetBrains", "Add","Remove","Clear", "Sushi", "Helvetet",
+                "Lounge", "Grupprum", "Spotify", "Huawei", "GTA", "Kalkylator", "Kalender", "GräsMatta", "HashPlanta", "Vodka", "Arlanda","Öl","Torsdag","Tisdag","Distans", "Fifa","Organ",
+                "Instagram", "Metod","Jultomten", "Username", "Password", "HighScore", "Main", "Laptop","SkyRim", "Irrelevant", "Allmänt","Video", "Mamma", "Pappa", "Windows", "Macbook","Program",
+                "Programmering"};
 
         String guessWord = wordHolder[randomizer(wordHolder)].toLowerCase();
         ArrayList<Character> allLetters = new ArrayList<>(guessWord.length());

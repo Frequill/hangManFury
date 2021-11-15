@@ -118,9 +118,15 @@ import java.util.Scanner;
 
             // Here is our full wordlist!
             String[] wordHolder = {"Björn", "Bill", "Java", "Edwin", "Julius", "Martin", "Johanna", "String", "Int", "Scanner", "ArrayList", "boolean", "Character", "Placeholder", "null",
-                    "monster", "redbull", "Newton", "Switchbitch", "HANGMAN", "FUCKYOU", "Fury", "Class", "Static", "Void", "GeOssHögtBetygBill", "System", "Exception", "Mupphuvud"
-                    , "JamesGosling", "Kaffe", "ForLoop", "While", "Index", "Double", "Minecraft", "Starcraft", "Warcraft", "Cantcrashthisgame", "Xbox", "Discord", "Git", "Github", "CleanDrink", "Corona",
-                    "False", "True", "Stockholm", "CtrlAltDelete", "Syntax"};
+                    "monster", "redbull", "Newton", "Switchbitch", "HANGMAN", "Fury", "Class", "Static", "Void", "System", "Exception", "Kaffe", "ForLoop", "While", "Index",
+                    "Double", "Minecraft", "Starcraft", "Warcraft", "Xbox", "Discord", "Git", "Github", "Corona","StarWars","Lunch","Kanelbulle","ParkeringsPlats","Diabetes",
+                    "False", "True", "Stockholm", "Syntax", "Multiplayer", "SingelPlayer", "SwitchCase", "Dator", "html", "Color", "IFCase" , "Variable","Stenart","Anus","Dyslexi","Kungen","Spagetti",
+                    "Player", "Playstation","Nintendo","Wii","Diablo", "Snapchat", "Runescape", "Samsung", "Apple", "Google", "Legend", "TangentBord", "Ryssland", "Sverige","Tyskland","Brasilien",
+                    "Teams", "AtomBomb", "Uppsala", "Järfälla", "Gärdet", "Östermalm", "Medborgarplatsen", "Tunnelbana", "Motorväg","Hemläxa","Julafton", "Midsommar", "Screen", "Skandinavien",
+                    "Full", "Bakis", "Bakfull", "Riksdagsval", "Nyårsafton", "Ordlista", "Lägenhet", "School","DanskJävel", "IntelliJ", "JetBrains", "Add","Remove","Clear", "Sushi", "Helvetet",
+                    "Lounge", "Grupprum", "Spotify", "Huawei", "GTA", "Kalkylator", "Kalender", "GräsMatta", "HashPlanta", "Vodka", "Arlanda","Öl","Torsdag","Tisdag","Distans", "Fifa","Organ",
+                    "Instagram", "Metod","Jultomten", "Username", "Password", "HighScore", "Main", "Laptop","SkyRim", "Irrelevant", "Allmänt","Video", "Mamma", "Pappa", "Windows", "Macbook","Program",
+                    "Programmering"};
 
                 // If this is a new game, randomize a new word to be guessed by players
                 if (modify.getHasSeenLoadMenu() == 0){
@@ -137,7 +143,7 @@ import java.util.Scanner;
                     String[] splitUserName2 = user2.split(" ", 6);
                     modify.setPlayerLife(20);
 
-                    System.out.println(Color.PURPLE + "Welcome " + splitUserName1[0] + " and " + splitUserName2[0] + ", get ready for battle!\nThe first word is " + modify.getGuessWord().length() + " letters long!" + Color.RESET);
+                    System.out.println(Color.PURPLE + "Welcome " + splitUserName1[0] + " and " + splitUserName2[0] + ", Get ready for a battle to the death!\nThe first word is " + modify.getGuessWord().length() + " letters long!" + Color.RESET);
                     System.out.println(Color.GREEN_BACKGROUND + Color.BLACK + "Press 0 to save and exit game" + Color.RESET);
 
                     /* "amountOfPlayers" Arraylist is modified based on how many users are playing,
@@ -151,7 +157,7 @@ import java.util.Scanner;
                     String[] splitUserName2 = user2.split(" ", 6);
                     String[] splitUserName3 = user3.split(" ", 6);
                     modify.setPlayerLife(30);
-                    System.out.println(Color.PURPLE + "Welcome " + splitUserName1[0] + ", " + splitUserName2[0] + " and " + splitUserName3[0] + "! Get ready for battle!\nThe first word is " + modify.getGuessWord().length() + " letters long!" + Color.RESET);
+                    System.out.println(Color.PURPLE + "Welcome " + splitUserName1[0] + ", " + splitUserName2[0] + " and " + splitUserName3[0] + "! Get ready for a battle to the death!\nThe first word is " + modify.getGuessWord().length() + " letters long!" + Color.RESET);
                     System.out.println(Color.GREEN_BACKGROUND + Color.BLACK + "Press 0 to save and exit game" + Color.RESET);
 
                     amountOfPlayers.add(0, 1);
@@ -166,7 +172,7 @@ import java.util.Scanner;
                     String[] splitUserName4 = user4.split(" ", 6);
 
                     modify.setPlayerLife(40);
-                    System.out.println(Color.PURPLE + "Welcome " + splitUserName1[0] + ", " + splitUserName2[0] + ", " + splitUserName3[0] + " and " + splitUserName4[0] + "! Get ready for battle!\nThe first word is " + modify.getGuessWord().length() + " letters long!" + Color.RESET);
+                    System.out.println(Color.PURPLE + "Welcome " + splitUserName1[0] + ", " + splitUserName2[0] + ", " + splitUserName3[0] + " and " + splitUserName4[0] + "! Get ready for a battle to the death!\nThe first word is " + modify.getGuessWord().length() + " letters long!" + Color.RESET);
                     System.out.println(Color.GREEN_BACKGROUND + Color.BLACK + "Press 0 to save and exit game" + Color.RESET);
 
                     amountOfPlayers.add(0, 1);
@@ -220,12 +226,12 @@ import java.util.Scanner;
             /* If this is a loaded game, the game will start letter players take turns, but also shows them their
             previous guesses from the start */
             else if (modify.hasSeenLoadMenu == 1){
-                turn(user1, user2, user3, user4);
-                System.out.println(Color.CYAN + "Previously guessed letters: " + Color.RESET);
-                for (int i = 0; i < modify.dumbGuesses.size(); i++){
-                    System.out.print(Color.RED + modify.dumbGuesses.get(i) + Color.RESET + " ");
-                }
-                System.out.println();
+                    turn(user1, user2, user3, user4);
+                    System.out.println(Color.CYAN + "Previously guessed letters: " + Color.RESET);
+                    for (int i = 0; i < modify.dumbGuesses.size(); i++) {
+                        System.out.print(Color.RED + modify.dumbGuesses.get(i) + Color.RESET + " ");
+                    }
+                    System.out.println();
             }
 
 
@@ -635,10 +641,12 @@ import java.util.Scanner;
          to remind user what he or she previously guessed as to not make same mistake twice.
          */
         public static void incorrectLetterCollector(String trueLetter) {
-            modify.getDumbGuesses().add(trueLetter.charAt(0));
-            System.out.println(Color.CYAN + "\nPreviously guessed letters: " + Color.RESET);
-            for (int i = 0; i < modify.getDumbGuesses().size(); i++) {
-                System.out.print(Color.RED + modify.getDumbGuesses().get(i) + " " + Color.RESET);
+            if(modify.getPlayerLife() != 0) {
+                modify.getDumbGuesses().add(trueLetter.charAt(0));
+                System.out.println(Color.CYAN + "\nPreviously guessed letters: " + Color.RESET);
+                for (int i = 0; i < modify.getDumbGuesses().size(); i++) {
+                    System.out.print(Color.RED + modify.getDumbGuesses().get(i) + " " + Color.RESET);
+                }
             }
         }
 
