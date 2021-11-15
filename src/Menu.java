@@ -230,6 +230,8 @@ class Menu extends MultiPlayer {
             } else if (choice == 5){
                 defultAddUserOptions[0] = "Add user 1"; defultAddUserOptions[1] = "Add user 2";
                 defultAddUserOptions[2] = "Add user 3"; defultAddUserOptions[3] = "Add user 4";
+                Player.pickUser1Setter(-1); Player.pickUser2Setter(-1);
+                Player.pickUser3Setter(-1); Player.pickUser4Setter(-1);
                 amountOfPlayersMenu();
             }
             else if (choice == 6) {

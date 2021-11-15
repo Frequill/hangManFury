@@ -370,7 +370,7 @@ import java.util.Scanner;
                         modify.setPlayerLife(modify.getPlayerLife()-1);
                         if(user4 != null){
                             if(modify.getPlayerLife() < 4){
-                                System.out.println("\n" + Color.RED + "Incorrect guess! " + Color.RESET + "\n" + Color.CYAN + modify.getUserInQuestion() + "`s character is dead .." + Color.RESET + "\n(" + modify.getPlayerLife() + " lives remaining)");
+                                System.out.println("\n" + Color.RED + "Incorrect guess! " + Color.RESET + "\n" + Color.CYAN + modify.getUserInQuestion() + "`s character is dead..." + Color.RESET + "\n(" + modify.getPlayerLife() + " lives remaining)");
                             }
                             else{
                                 System.out.println("\n" + Color.RED + "Incorrect guess! " + Color.RESET + "\n" + Color.CYAN + modify.getUserInQuestion() + "`s character is getting closer to death..." + Color.RESET + "\n(" + modify.getPlayerLife() + " lives remaining)");
@@ -378,7 +378,7 @@ import java.util.Scanner;
                         }
                         else if(user3 != null){
                             if(modify.getPlayerLife() < 3){
-                                System.out.println("\n" + Color.RED + "Incorrect guess! " + Color.RESET + "\n" + Color.CYAN + modify.getUserInQuestion() + "`s character is dead .." + Color.RESET + "\n(" + modify.getPlayerLife() + " lives remaining)");
+                                System.out.println("\n" + Color.RED + "Incorrect guess! " + Color.RESET + "\n" + Color.CYAN + modify.getUserInQuestion() + "`s character is dead..." + Color.RESET + "\n(" + modify.getPlayerLife() + " lives remaining)");
                             }
                             else{
                                 System.out.println("\n" + Color.RED + "Incorrect guess! " + Color.RESET + "\n" + Color.CYAN + modify.getUserInQuestion() + "`s character is getting closer to death..." + Color.RESET + "\n(" + modify.getPlayerLife() + " lives remaining)");
@@ -386,7 +386,7 @@ import java.util.Scanner;
                         }
                         else {
                             if(modify.getPlayerLife() < 2){
-                                System.out.println("\n" + Color.RED + "Incorrect guess! " + Color.RESET + "\n" + Color.CYAN + modify.getUserInQuestion() + "`s character is dead .." + Color.RESET + "\n(" + modify.getPlayerLife() + " lives remaining)");
+                                System.out.println("\n" + Color.RED + "Incorrect guess! " + Color.RESET + "\n" + Color.CYAN + modify.getUserInQuestion() + "`s character is dead..." + Color.RESET + "\n(" + modify.getPlayerLife() + " lives remaining)");
                             }
                             else{
                                 System.out.println("\n" + Color.RED + "Incorrect guess! " + Color.RESET + "\n" + Color.CYAN + modify.getUserInQuestion() + "`s character is getting closer to death..." + Color.RESET + "\n(" + modify.getPlayerLife() + " lives remaining)");
