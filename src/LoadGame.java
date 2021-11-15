@@ -1,4 +1,5 @@
 import java.io.File;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -45,7 +46,7 @@ public class LoadGame extends MultiPlayer {
 
         // Makes sure that the player whose turn it was gets their turn again upon resume
         int turnPlayer = Integer.parseInt(loadedGame.get(7));
-        modify.setAmountOfPlayers(turnPlayer);
+        modify.setAmountOfPlayers(turnPlayer-1); // -1 is important to fix a stupid bug
 
 
         //If-case ensures that game will work even if no wrongful guesses has been made
@@ -75,9 +76,10 @@ public class LoadGame extends MultiPlayer {
 
 
 
-        /*PrintWriter clearSavedGame = new PrintWriter(savedGame);
+        PrintWriter clearSavedGame = new PrintWriter(savedGame);
         clearSavedGame.print("");
-        clearSavedGame.close();*/
+        clearSavedGame.close();
+
         modify.setHasSeenLoadMenu(1);
 
         if(users.length == 2){

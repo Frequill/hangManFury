@@ -293,15 +293,19 @@ class Menu extends MultiPlayer {
                     Menu.firstMenu();
                 } else {
                     if (user2 == "Add user 2") {
+                        modify.setHasSeenLoadMenu(0);
                         SinglePlayer.hangMan(user1);
                         secondMenu(user1);
                     } else if (user3 == "Add user 3") {
+                        modify.setHasSeenLoadMenu(0);
                         MultiPlayer.hangMan(user1, user2, null, null);
                         firstMenu();
                     } else if (user4 == "Add user 4") {
+                        modify.setHasSeenLoadMenu(0);
                         MultiPlayer.hangMan(user1, user2, user3, null);
                         firstMenu();
                     } else if (user4 != "Add user 4") {
+                        modify.setHasSeenLoadMenu(0);
                         MultiPlayer.hangMan(user1, user2, user3, user4);
                         firstMenu();
                     }
@@ -318,7 +322,7 @@ class Menu extends MultiPlayer {
                 else{
                     modify.setHasSeenLoadMenu(1);
                     LoadGame.gameLoader();
-                    modify.setHasSeenLoadMenu(0);
+                    //modify.setHasSeenLoadMenu(0);
                 }
             }
             else if (choice == 4) {

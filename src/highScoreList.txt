@@ -1,5 +1,5 @@
 Edwin 4
-Johanna 0
-Julius 0
-Martin 0
-Gunnar 0
+Julius 3
+Julius 2
+Johanna 1
+Johanna 1

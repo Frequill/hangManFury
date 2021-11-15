@@ -376,6 +376,7 @@ import java.util.Scanner;
                         System.out.println();
                         System.out.print(Color.RED + "\nThe game is over! The last word was: " + modify.getGuessWord() + Color.RESET);
                         System.out.println(Color.BLUE + "\nPress Enter to return to the main menu..." + Color.RESET);
+                        modify.hasSeenLoadMenu = 0;
                         winnerSelect(modify.getUsersPoints(), modify.getUsers());
 
                         highScoreFunction.fileReader(Player.allUsernames.get(Player.modifyX.getPickUserData1()));
@@ -501,8 +502,9 @@ import java.util.Scanner;
         }
 
 
-        public static void turn ( String user1, String user2, String user3, String user4) {
+        public static void turn( String user1, String user2, String user3, String user4){
             if (modify.getPlayerLife() != 0) {
+
                 if (modify.getAmountOfPlayers() == 1) {
                     String[] splitUserName1 = user1.split(" ", 6);
 
@@ -521,27 +523,24 @@ import java.util.Scanner;
                     } else {
                         modify.setAmountOfPlayers(3);
                     }
-
                     modify.setUserInQuestion(splitUserName2[0]);
+
                 } else if (modify.getAmountOfPlayers() == 3) {
                     String[] splitUserName3 = user3.split(" ", 6);
-
-
                     System.out.println("\nIt is " + splitUserName3[0] + "'s turn!");
+
                     if (user4 == null || user3.equals("null")) {
                         modify.setAmountOfPlayers(1);
                     } else {
                         modify.setAmountOfPlayers(4);
                     }
                     modify.setUserInQuestion(splitUserName3[0]);
+
                 } else if (modify.getAmountOfPlayers() == 4) {
                     String[] splitUserName4 = user4.split(" ", 6);
-
-
                     System.out.println("\nIt is " + splitUserName4[0] + "'s turn!");
                     modify.setAmountOfPlayers(1);
                     modify.setUserInQuestion(splitUserName4[0]);
-
                 }
             }
         }
