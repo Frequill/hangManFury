@@ -14,12 +14,18 @@ class SinglePlayer extends GUI implements ActionListener {
     public static Scanner in = new Scanner(System.in);
 
     // Here is our full wordlist!
-    private static String [] wordCollection = {
-            "Björn"/*,"Bill","Java","Edwin","Julius","Martin","Johanna","String","Int","Scanner","ArrayList","boolean","Character","Placeholder","null", "monster","redbull","Newton",
-            "Switchbitch","HANGMAN","FUCKYOU","Fury","Class","Static","Void","GeOssHögtBetygBill","System","Exception","Mupphuvud" ,"JamesGosling","Kaffe", "ForLoop","While","Index",
-            "Double","Minecraft","Starcraft","Warcraft","Cantcrashthisgame","Xbox","Discord","Git","Github","CleanDrink","Corona", "False","True","Stockholm", "CtrlAltDelete","Syntax"*/};
+    private static String[] wordHolder = {"Björn", "Bill", "Java", "Edwin", "Julius", "Martin", "Johanna", "String", "Int", "Scanner", "ArrayList", "boolean", "Character", "Placeholder", "null",
+            "monster", "redbull", "Newton", "Switchbitch", "HANGMAN", "Fury", "Class", "Static", "Void", "System", "Exception", "Kaffe", "ForLoop", "While", "Index",
+            "Double", "Minecraft", "Starcraft", "Warcraft", "Xbox", "Discord", "Git", "Github", "Corona","StarWars","Lunch","Kanelbulle","ParkeringsPlats","Diabetes",
+            "False", "True", "Stockholm", "Syntax", "Multiplayer", "SingelPlayer", "SwitchCase", "Dator", "html", "Color", "IFCase" , "Variable","Stenart","Anus","Dyslexi","Kungen","Spagetti",
+            "Player", "Playstation","Nintendo","Wii","Diablo", "Snapchat", "Runescape", "Samsung", "Apple", "Google", "Legend", "TangentBord", "Ryssland", "Sverige","Tyskland","Brasilien",
+            "Teams", "AtomBomb", "Uppsala", "Järfälla", "Gärdet", "Östermalm", "Medborgarplatsen", "Tunnelbana", "Motorväg","Hemläxa","Julafton", "Midsommar", "Screen", "Skandinavien",
+            "Full", "Bakis", "Bakfull", "Riksdagsval", "Nyårsafton", "Ordlista", "Lägenhet", "School","DanskJävel", "IntelliJ", "JetBrains", "Add","Remove","Clear", "Sushi", "Helvetet",
+            "Lounge", "Grupprum", "Spotify", "Huawei", "GTA", "Kalkylator", "Kalender", "GräsMatta", "HashPlanta", "Vodka", "Arlanda","Öl","Torsdag","Tisdag","Distans", "Fifa","Organ",
+            "Instagram", "Metod","Jultomten", "Username", "Password", "HighScore", "Main", "Laptop","SkyRim", "Irrelevant", "Allmänt","Video", "Mamma", "Pappa", "Windows", "Macbook","Program",
+            "Programmering"};
 
-    private String guessWord = wordCollection[randomizer(wordCollection)].toUpperCase();
+    private String guessWord = wordHolder[randomizer(wordHolder)].toUpperCase();
     private ArrayList<Character> allLetters = new ArrayList<>(guessWord.length());
     private int playerLife = 10;
     private boolean guessCorrect = false;
@@ -36,20 +42,40 @@ class SinglePlayer extends GUI implements ActionListener {
 
 
 //    String [] splitUserName = user.split(" ", 5);
-
+    private final int SCREEN_WIDTH = 600;
+    private final int SCREEN_HEIGHT = 600;
 
 
     //Button array
     char[] buttonLettersArray ={'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z','Å','Ä','Ö'};
 
     //Swing components
+    JFrame frame = new JFrame();
+    JPanel headPanel, bodyPanel;
+    JLabel menuTitle, menuImage;
+    JButton button;
     JLabel greetLabel;
     JTextArea guessedLetterArea;
     JTextField wordToGuessField, playerStatsField;
     JButton[] buttons;
 
     SinglePlayer() throws Exception {
+//frame settings
 
+        frame.setDefaultCloseOperation(frame.EXIT_ON_CLOSE);
+        frame.setSize(SCREEN_WIDTH, SCREEN_HEIGHT);
+        frame.setTitle("HangMan by Group Fury");
+        frame.setLayout(new GridLayout(2,1));
+        frame.setResizable(false);
+        frame.setLocationRelativeTo(null);
+        frame.setVisible(true);
+
+        //Panels
+        headPanel = new JPanel();
+        headPanel.setLayout(new FlowLayout());
+
+
+        bodyPanel = new JPanel();
         //Panels
         headPanel = new JPanel();
         headPanel.setLayout(new FlowLayout());
