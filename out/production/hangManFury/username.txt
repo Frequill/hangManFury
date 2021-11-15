@@ -1,7 +1,5 @@
 PLACHOLDER(Match, win, loss, flawless, invis/highScore)
-Edwin 17 3 12 0 0
-Johanna 12 2 9 0 1
-Julius 4 3 1 0 3
+Julius 0 0 0 0 0
+Edwin 0 0 0 0 0
 Martin 0 0 0 0 0
-TuttKnull 0 0 0 0 0
-JävlaFan 0 0 0 0 0
+Johanna 0 0 0 0 0

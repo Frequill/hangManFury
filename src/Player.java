@@ -84,7 +84,7 @@ public class Player {
         String newUser = usersInput + " 0" + " 0" + " 0" + " 0" + " 0";
         Writer out;
         out = new BufferedWriter(new FileWriter(toUsername, true));
-        out.append("\n").append(newUser);
+        out.append(newUser + "\n");
         out.close();
 
         userArray(newUser);
@@ -453,10 +453,10 @@ public class Player {
                     pickUser = input.nextInt();
                     if (pickUser < 1 || pickUser >= aList.size() + 1) {
                         System.out.println("Choice was out of bounds! ");
-                    } else if (pickUser == modifyX.getPickUserData1() || pickUser == modifyX.getPickUserData2() || pickUser == modifyX.getPickUserData3() || pickUser == modifyX.getPickUserData4()) {
-                        System.out.println("You can`t select the same user twice!");
                     } else if (pickUser == aList.size()) {
                         Menu.amountOfPlayersMenu();
+                    } else if (pickUser == modifyX.getPickUserData1() || pickUser == modifyX.getPickUserData2() || pickUser == modifyX.getPickUserData3() || pickUser == modifyX.getPickUserData4()) {
+                            System.out.println("You can`t select the same user twice!");
                     } else {
                         run2 = false;
                     }
