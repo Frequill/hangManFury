@@ -432,8 +432,10 @@ import java.util.Scanner;
                         "wins" to your users stats!
 
                          "Cheaters are beaters" -Sun Tzu    (probably)                                        */
-                        modify.setHasSeenLoadMenu(0);
 
+
+                        modify.setHasSeenLoadMenu(0);
+                        modify.dumbGuesses.clear();  //Forget all wrongful input when game is completed.
 
                         in.nextLine();
 
