@@ -1,4 +1,5 @@
 import java.io.*;
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Objects;
@@ -68,18 +69,50 @@ public class Player {
     public static String writeUsername(int choice) throws Exception {
         Scanner in = new Scanner(System.in);
         File toUsername = new File("src/username.txt");
+        Scanner scanFile = new Scanner(toUsername);
+        ArrayList<String> everyUser = new ArrayList<>();
+        ArrayList<String> splitEvery = new ArrayList<>();
 
-        System.out.println("Please enter your username: (NO SPACES!!)");
+        System.out.println("Please enter your username:" + Color.RED_BACKGROUND + Color.BLACK + "(NO SPACES!!)" + Color.RESET);
+        System.out.println(Color.PURPLE_BACKGROUND + Color.BLACK + "You can also write Back to gå back to add user menu" + Color.RESET);
         String usersInput = in.next();
+
+        while (scanFile.hasNextLine()){
+            everyUser.add(scanFile.nextLine());
+        }
+        for(int i = 0; i < everyUser.size(); i++){
+            String[] splitEveryUser = everyUser.get(i).split(" ");
+            splitEvery.add(splitEveryUser[0]);
+
+        }
+
 
         boolean nullKiller = true;
         while (nullKiller) {
             while (Objects.equals(usersInput, "null") || Objects.equals(usersInput, "Null")) {
                 System.out.println(Color.RED + "You may not call yourself null due to technical difficulties..." + Color.RESET);
+
+               usersInput = in.next();
+
+            }
+            if (splitEvery.contains(usersInput)){
+                System.out.println(Color.RED + "This user already exist!" + Color.RESET + "\n(Please enter a new user!)");
                 usersInput = in.next();
             }
-            nullKiller = false;
+            else if(usersInput.equals("Back")||usersInput.equals("back")){
+                Menu.amountOfPlayersMenu();
+                nullKiller = false;
+            }
+            else {
+                nullKiller = false;
+            }
+
+
+
+
+
         }
+
 
         String newUser = usersInput + " 0" + " 0" + " 0" + " 0" + " 0";
         Writer out;
