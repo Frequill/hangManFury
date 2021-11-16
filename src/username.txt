@@ -2,6 +2,6 @@ PLACHOLDER(Match, win, loss, flawless, invis/highScore)
 Edwin 14 8 4 2 0
 Martin 3 0 3 0 1
 Johanna 1 0 1 0 0
-Julius 2 0 2 0 0
+Julius 5 3 2 0 0
 Muppis 1 0 1 0 0
 Micke 1 1 0 0 0
