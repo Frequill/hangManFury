@@ -1,6 +1,6 @@
 public class mainFile {
     public static void main(String[] args) throws Exception {
-        System.out.println(Color.CYAN  + "\nhangManFury 2!" + Color.RESET);
+        System.out.println(Color.CYAN + "\nhangManFury 2!" + Color.RESET);
         Menu.firstMenu();
     }
 }

@@ -73,8 +73,8 @@ public class Player {
         ArrayList<String> everyUser = new ArrayList<>();
         ArrayList<String> splitEvery = new ArrayList<>();
 
-        System.out.println("Please enter your username:" + Color.RED_BACKGROUND + Color.BLACK + "(NO SPACES!!)" + Color.RESET);
-        System.out.println(Color.PURPLE_BACKGROUND + Color.BLACK + "You can also write Back to gå back to add user menu" + Color.RESET);
+        System.out.println("Please enter your username:" + Color.RED + " (NO SPACES ALLOWED)" + Color.RESET);
+        System.out.println(Color.YELLOW_BACKGROUND + Color.BLACK + "Type \"Back\" to return to user menu" + Color.RESET);
         String usersInput = in.next();
 
         while (scanFile.hasNextLine()){
@@ -106,11 +106,6 @@ public class Player {
             else {
                 nullKiller = false;
             }
-
-
-
-
-
         }
 
 

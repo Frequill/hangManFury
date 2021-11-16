@@ -3,6 +3,10 @@ Edwin 12 8 4 2 10
 Martin 3 0 3 0 1
 Johanna 1 0 1 0 0
 Julius 0 0 0 0 0
-Johan 0 0 0 0 0
-T 0 0 0 0 0
-martin 0 0 0 0 0
+Muppis 1 0 1 0 0
+Micke 1 1 0 0 0
+Anus 0 0 0 0 0
+Anus2 1 0 1 0 0
+Margush 0 0 0 0 0
+LickelBack 0 0 0 0 0
+pisseNisse 0 0 0 0 0

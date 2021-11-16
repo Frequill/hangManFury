@@ -56,6 +56,8 @@ class SinglePlayer extends SinglePlayerGUIHelper implements ActionListener {
      Basic setup and settings for Single player GUI
      */
     SinglePlayer() throws Exception {
+        //Splits username to hide stats during gameplay
+        String[] splitUserName = userName.getUser().split(" ");
 
         //Frame
         frame.setDefaultCloseOperation(frame.EXIT_ON_CLOSE);
@@ -107,7 +109,7 @@ class SinglePlayer extends SinglePlayerGUIHelper implements ActionListener {
         playerStatsField.setForeground(new Color(0xFFFFFF));
         playerStatsField.setEditable(false);
         playerStatsField.setBorder(new LineBorder(Color.WHITE, 3, false));
-        playerStatsField.setText("Welcome " + userName.getUser() + " guess the word that is " + guessWord.length() + " letters long!");
+        playerStatsField.setText("Welcome " + splitUserName[0] + "! Guess the word that is " + guessWord.length() + " letters long!");
 
 
         //Button
@@ -180,7 +182,7 @@ class SinglePlayer extends SinglePlayerGUIHelper implements ActionListener {
             if (!guessWord.contains(letter)) {
                 playerLife = playerLife - 1;
                 guessedLetterArea.append(letter);
-                playerStatsField.setText("No " + letter + "! You have lost one life!" + "\n(" + playerLife + " lives remaining)");
+                playerStatsField.setText("No, " + "\"" + letter + "\"" + " ! You have lost one life!" + "\n(" + playerLife + " lives remaining)");
             }
             try {
                 gameStatusController(userName.getUser(),letter);
@@ -217,6 +219,7 @@ class SinglePlayer extends SinglePlayerGUIHelper implements ActionListener {
      This method checks if the game is over
      */
     private void gameStatusController(String user, String letter) throws Exception {
+        String[] splitUserName = userName.getUser().split(" ");
         if(victory == false && playerLife > 0){
             if (allLetters.contains('_')) {
 
@@ -224,15 +227,15 @@ class SinglePlayer extends SinglePlayerGUIHelper implements ActionListener {
 
             //Lets player win the game if the word has been fully revealed
             else {
-                playerStatsField.setText("Congratu1lations " + userName.getUser() + ". You are victorious!");
-                JOptionPane.showMessageDialog(frame, "Congratulations " + user + ". You are victorious!","Game Over", JOptionPane.OK_OPTION);
+                playerStatsField.setText("Congratulations " + splitUserName[0] + ". You are victorious!");
+                JOptionPane.showMessageDialog(frame, "Congratulations " + splitUserName[0] + ". You are victorious!","Game Over", JOptionPane.OK_OPTION);
                     Player.matchAdderCaller();
                     Player.winAdderCaller();
                 if (playerLife == 10){
                         Player.flawlessAdderCaller();
-                    JOptionPane.showMessageDialog(frame, "NO LIVES LOST! FLAWLESS VICTORY ACHIEVED!!!!!!" + user + " is a legend!","Game Over", JOptionPane.OK_OPTION);
-                    System.out.println("\nNO LIVES LOST! FLAWLESS VICTORY ARCHIVED!!!!!!\n"  + userName.getUser() + " is a legend!");
-                    playerStatsField.setText("NO LIVES LOST! FLAWLESS VICTORY ARCHIVED!!!!!! " + userName.getUser() + " is a legend!");
+                    JOptionPane.showMessageDialog(frame, "NO LIVES LOST! FLAWLESS VICTORY ACHIEVED!!!!!!" + splitUserName[0] + " is a legend!","Game Over", JOptionPane.OK_OPTION);
+                    System.out.println("\nNO LIVES LOST! FLAWLESS VICTORY ARCHIVED!!!!!!\n"  + splitUserName[0] + " is a legend!");
+                    playerStatsField.setText("NO LIVES LOST! FLAWLESS VICTORY ARCHIVED!!!!!! " + splitUserName[0] + " is a legend!");
                 }
                 allLetters.clear();
                 victory = true;
